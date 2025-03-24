@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.email = ["sina.eftekhar@mainiotech.fi"]
   s.license = "AGPL-3.0"
   s.homepage = "https://github.com/mainio/decidim-module-ptp"
-  s.required_ruby_version = ">= 3.0"
+  s.required_ruby_version = ">= 3.1"
 
   s.name = "decidim-smsauth"
   s.summary = "A decidim smsauth module"
