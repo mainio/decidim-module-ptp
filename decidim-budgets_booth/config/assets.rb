@@ -9,4 +9,5 @@ Decidim::Webpacker.register_entrypoints(
   decidim_budgets_booth_budgets: "#{base_path}/app/packs/entrypoints/decidim_budgets_booth_budgets.js",
   decidim_handle_voting_complete: "#{base_path}/app/packs/entrypoints/decidim_handle_voting_complete.js"
 )
-Decidim::Webpacker.register_stylesheet_import("stylesheets/decidim/budgets_booth/budgets_booth")
+# TODO: - UPDATE SCSS
+# Decidim::Webpacker.register_stylesheet_import("stylesheets/decidim/budgets_booth/budgets_booth")

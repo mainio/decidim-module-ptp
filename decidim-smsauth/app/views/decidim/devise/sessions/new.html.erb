@@ -1,8 +1,8 @@
 <% add_decidim_page_title(t("devise.sessions.new.sign_in")) %>
 
 <div class="wrapper">
-  <div class="row collapse">
-    <div class="row collapse">
+  <div class="row">
+    <div class="row">
       <div class="columns large-8 large-centered text-center page-title">
 
         <h1><%= t("devise.sessions.new.sign_in") %></h1>
@@ -30,7 +30,7 @@
       <div class="columns large-4 mediumlarge-6 medium-8 medium-centered">
         <%= button_tag class: "columns small-12 button button--social button--email", data: { toggle: "form-wrapper" } do %>
           <span class="button--social__icon">
-            <%= icon("envelope-closed") %>
+            <%= icon("mail-line") %>
           </span>
           <span class="button--social__text">
             <%= t(".email") %>

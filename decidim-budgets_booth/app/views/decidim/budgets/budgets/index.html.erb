@@ -6,4 +6,4 @@
 
 <%= render partial: "decidim/budgets/voting/thanks_message_modal" if vote_success_content.present? && !voted_all_budgets? %>
 <% handle_thanks_popup %>
-<%= javascript_pack_tag("decidim_budgets_booth_budgets") %>
+<%= append_javascript_pack_tag("decidim_budgets_booth_budgets") %>

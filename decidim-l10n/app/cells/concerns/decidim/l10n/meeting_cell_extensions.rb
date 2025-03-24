@@ -2,7 +2,7 @@
 
 module Decidim
   module L10n
-    module DebateMCellExtensions
+    module MeetingCellExtensions
       extend ActiveSupport::Concern
 
       included do

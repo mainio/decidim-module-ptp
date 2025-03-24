@@ -18,7 +18,7 @@
               </strong>
               <% unless current_order_checked_out? %>
                 <%= button_to budget_order_line_item_path(project_id: project), method: :delete, remote: true, data: { disable: true }, form: { style: "display: inline" } do %>
-                  <%= icon("trash", aria_label: t(".remove"), role: "img") %>
+                  <%= icon("delete-bin-line", aria_label: t(".remove"), role: "img") %>
                 <% end %>
               <% end %>
             </li>

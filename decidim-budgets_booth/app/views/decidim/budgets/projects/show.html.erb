@@ -23,7 +23,7 @@ edit_link(
 
     <div class="row columns m-bottom">
       <%= link_to budget_projects_path(budget), class: "link js-back-to-list" do %>
-        <%= icon "chevron-left", class: "icon--small", role: "img", "aria-hidden": true %>
+        <%= icon "arrow-left-line", class: "icon--small", role: "img", "aria-hidden": true %>
         <%= t(".view_all_projects") %>
       <% end %>
       <h2 class="heading2"><%= translated_attribute project.title %></h2>
@@ -74,4 +74,4 @@ edit_link(
 
 <%= comments_for project, polymorphic: [project.budget] %>
 
-<%= javascript_pack_tag("decidim_budgets") %>
+<%= append_javascript_pack_tag("decidim_budgets") %>

@@ -26,12 +26,12 @@
       <div class="m-bottom">
         <% if current_order_checked_out? %>
           <%= link_to budget_projects_path(budget), class: "link" do %>
-            <%= icon "chevron-left", class: "icon--small", role: "img", "aria-hidden": true %>
+            <%= icon "arrow-left-line", class: "icon--small", role: "img", "aria-hidden": true %>
             <%= t(".back") %>
           <% end %>
         <% else %>
           <%= link_to budget_voting_index_path, class: "link" do %>
-              <%= icon "chevron-left", class: "icon--small", role: "img", "aria-hidden": true %>
+              <%= icon "arrow-left-line", class: "icon--small", role: "img", "aria-hidden": true %>
               <%= t(".return_voting") %>
           <% end %>
         <% end %>
@@ -78,7 +78,7 @@
               <div class="column large-6 large-push-6">
                 <%= button_to checkout_budget_order_path(budget), class: "button expanded" do %>
                   <%= t(".cast_vote") %>
-                  <%= icon "chevron-right", class: "icon--small", role: "img", "aria-hidden": true %>
+                  <%= icon "arrow-right-line", class: "icon--small", role: "img", "aria-hidden": true %>
                 <% end %>
               </div>
 

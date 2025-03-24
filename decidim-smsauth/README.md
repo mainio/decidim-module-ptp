@@ -38,7 +38,7 @@ Add the following to your secrets.yml file:
     # Add this after other available authentication options:
     sms:
       enabled: true
-      icon: phone
+      icon: phone-line
 ```
 
 ## Testing

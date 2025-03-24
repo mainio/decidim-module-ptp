@@ -62,7 +62,7 @@ module Decidim
       # the secrets and configuration of the application.
       if Rails.env.test?
         initializer "decidim_smsauth.tests", before: :add_routing_paths do
-          Rails.application.secrets[:omniauth][:sms] = { enabled: true, icon: "phone" }
+          Rails.application.secrets[:omniauth][:sms] = { enabled: true, icon: "phone-line" }
         end
       end
     end

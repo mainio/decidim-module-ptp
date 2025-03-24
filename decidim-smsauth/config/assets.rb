@@ -8,4 +8,6 @@ Decidim::Webpacker.register_entrypoints(
   decidim_select_country: "#{base_path}/app/packs/entrypoints/decidim_select_country.js",
   decidim_newsletter_checkbox: "#{base_path}/app/packs/entrypoints/decidim_newsletter_checkbox.js"
 )
-Decidim::Webpacker.register_stylesheet_import("stylesheets/decidim/smsauth/smsauth")
+
+# TODO: - UPDATE SCSS
+# Decidim::Webpacker.register_stylesheet_import("stylesheets/decidim/smsauth/smsauth")
