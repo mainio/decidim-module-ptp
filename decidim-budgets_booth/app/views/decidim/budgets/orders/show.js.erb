@@ -9,6 +9,4 @@ if (!modalWrapper) {
 
 modalWrapper.innerHTML = '<%= j(render partial: "decidim/budgets/orders/modal", locals: { budget: budget, projects: current_order.projects }).strip.html_safe %>'
 
-var $reveal = $(".reveal", modalWrapper);
-$(modalWrapper).foundation();
-$reveal.foundation("open");
+window.Decidim.Dialogs("#budget-votes-<% budget.id %>").open

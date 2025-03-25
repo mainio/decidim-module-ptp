@@ -1,4 +1,4 @@
-<div class="reveal" id="confirm-voting" data-reveal data-session="<%= thanks_popup? %>" aria-labelledby="confirm-voting-notification-label" aria-live="polite">
+<%= decidim_modal id: "confirm-voting" do %>
   <div class="reveal__header text-center">
     <h4 id="exit-voting-notification-label"><%= t(".title") %></h4>
     <button class="close-button" data-close aria-label="<%= t(".close") %>" type="button">
@@ -18,7 +18,7 @@
       </button>
     </div>
   </div>
-</div>
+<% end %>
 
 <% if current_order.present? %>
   <div class="row margin-top-3">

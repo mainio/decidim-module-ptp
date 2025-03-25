@@ -1,14 +1,12 @@
-<div class="reveal" id="cancel-voting" role="dialog" data-reveal aria-modal="true" aria-labelledby="exit-voting-notification-label" aria-live="polite">
-  <div class="reveal__header text-center">
-    <h4 id="exit-voting-notification-label" class="reveal__title"><%= t(".title") %></h4>
-    <button class="close-button" data-close aria-label="<%= t(".label") %>" type="button">
-      <span aria-hidden="true">&times;</span>
-    </button>
+<%= decidim_modal id: "cancel-voting" do %>
+  <div data-dialog-container>
+    <h4 id="exit-voting-notification-label" class="h4"><%= t(".title") %></h4>
+
+    <div class="row text-left">
+      <p><%= t(".description") %></p>
+    </div>
   </div>
-  <div class="row text-left">
-    <p><%= t(".description") %></p>
-  </div>
-  <div class="row">
+  <div data-dialog-actions>
     <div class="columns medium-8 medium-offset-2">
       <button class="button expanded" data-close type="button">
         <%= t(".continue") %>
@@ -16,4 +14,4 @@
       <%= link_to t(".exit"), voting_booth_forced? ? cancel_redirect_path : decidim_budgets.budgets_path, id: "exit-notification-link", class: "button hollow expanded" %>
     </div>
   </div>
-</div>
+<% end %>

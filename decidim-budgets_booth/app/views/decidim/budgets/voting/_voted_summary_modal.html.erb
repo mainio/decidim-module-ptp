@@ -1,4 +1,4 @@
-<div class="reveal" id="voted-summary" role="dialog" data-reveal aria-modal="true" aria-labelledby="voted-summary-modal" aria-live="polite">
+<%= decidim_modal id: "voted-summary" do %>
   <div class="reveal__header text-center">
     <h4 id="exit-voting-notification-label" class="reveal__title"><%= t(".title") %></h4>
     <button class="close-button" data-close aria-label="<%= t(".label") %>" type="button">
@@ -22,4 +22,4 @@
       </button>
     </div>
   </div>
-</div>
+<% end %>

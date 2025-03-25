@@ -1,0 +1,5 @@
+<% projects.each do |project| %>
+  <%= render partial: "project", locals: { project: } %>
+  <%= render partial: "project_modal", locals: { project: project } %>
+<% end %>
+<%= render partial: "project_modal", locals: { project: @select_project } if @select_project.present? %>
