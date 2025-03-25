@@ -1,6 +1,6 @@
 <% add_decidim_meta_tags(
-  title: translated_attribute(project.title),
-  description: translated_attribute(project.description)
+  title: decidim_sanitize(translated_attribute(project.title)),
+  description: decidim_sanitize(translated_attribute(project.description))
 ) %>
 
 <%
@@ -34,7 +34,7 @@ edit_link(
       <%= cell("decidim/budgets/limit_announcement", budget) %>
       <%= cell("decidim/budgets/project_selected_status", project, as_label: true) %>
       <h1 class="h1 decorator budget__definition-project__title editor-content">
-        <%= decidim_sanitize translated_attribute project.title %>
+        <%= decidim_sanitize(translated_attribute(project.title)) %>
       </h1>
     </section>
     <section class="layout-main__section">

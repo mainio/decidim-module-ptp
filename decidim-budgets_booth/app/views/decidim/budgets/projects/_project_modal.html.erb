@@ -1,24 +1,17 @@
-<%= decidim_modal id: "project-modal-<%= project.id %>" do %>
+<%= decidim_modal id: "project-modal-#{project.id}" do %>
   <div data-dialog-container class="exit-notification-label">
-    <h3 id="exit-notification-label" class="reveal__title"><%= translated_attribute(project.title) %></h3>
-    <button class="close-button" data-close aria-label="<%= t(".close_project") %>" type="button">
-      <span aria-hidden="true">&times;</span>
-    </button>
+    <h3 id="exit-notification-label" class="h3"><%= decidim_sanitize(translated_attribute(project.title)) %></h3>
 
     <div class="row text-left">
       <% if project.category %>
-        <p><strong><%= t ".category" %></strong><%= translated_attribute(project.category.try(:name)) %></p>
+        <p><strong><%= t ".category" %></strong><%= decidim_sanitize(translated_attribute(project.category.try(:name))) %></p>
       <% end %>
+
       <% if project.scope %>
-        <p><strong><%= t ".scope" %></strong><%= translated_attribute(project.scope.try(:name)) || t("decidim.scopes.global") %></p>
+        <p><strong><%= t ".scope" %></strong><%= decidim_sanitize(translated_attribute(project.scope.try(:name))) || t("decidim.scopes.global") %></p>
       <% end %>
       <p><strong><%= t ".budget_amount" %></strong><%= budget_to_currency(project.budget_amount) %></p>
-      <%= raw translated_attribute(project.description) %>
-    </div>
-    <div class="row attachments">
-      <div class="large-12">
-        <%= render partial: "decidim/application/photos", locals: { photos: project.photos }, formats: [:html] %>
-      </div>
+      <%= raw decidim_sanitize(translated_attribute(project.description)) %>
     </div>
   </div>
 

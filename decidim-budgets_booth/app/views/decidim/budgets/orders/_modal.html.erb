@@ -2,7 +2,7 @@
 
   <% if projects.present? %>
     <div data-dialog-container>
-      <h3><%= t(".title", budget_title: translated_attribute(budget.title)) %></h3>
+      <h3><%= t(".title", budget_title: decidim_sanitize(translated_attribute(budget.title))) %></h3>
       <p><%= t(".description") %></p>
       <div class="budget-summary__total" data-total-allocation="<%= current_order.available_allocation %>" data-total-budget="<%= budget.total_budget %>">
         <span class="mini-title"><%= t(".total_budget") %>
@@ -22,7 +22,7 @@
         <ul class="card__content">
           <% projects.each do |project| %>
             <li class="budget-summary__selected-item">
-              <%= translated_attribute(project.title) %>
+              <%= decidim_sanitize(translated_attribute(project.title)) %>
               <strong class="budget-summary__selected-number">
                 <%= budget_to_currency project.budget_amount %>
               </strong>

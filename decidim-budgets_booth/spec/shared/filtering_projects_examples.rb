@@ -24,7 +24,7 @@ shared_examples "filtering projects" do
 
       visit_budget
 
-      within ".filters__section.with_any_scope_check_boxes_tree_filter" do
+      within "#dropdown-menu-filters" do
         uncheck "All"
         check translated(scope.name)
       end
@@ -41,7 +41,7 @@ shared_examples "filtering projects" do
       project.save
 
       visit_budget
-      within ".filters__section.with_any_category_check_boxes_tree_filter" do
+      within "#dropdown-menu-filters" do
         uncheck "All"
         check translated(category.name)
       end
@@ -59,13 +59,13 @@ shared_examples "filtering projects" do
 
       visit_budget
 
-      within ".filters__section.with_any_category_check_boxes_tree_filter" do
+      within "#dropdown-menu-filters" do
         uncheck "All"
-        check translated(category.name)
+        check("filter[with_any_category][]", option: category.id)
       end
 
       within "#projects" do
-        expect(page).to have_css(".budget-list__item", count: 1)
+        expect(page).to have_css(".project-item", count: 1)
         expect(page).to have_content(translated(project.title))
       end
 
@@ -73,7 +73,7 @@ shared_examples "filtering projects" do
       click_link "View all projects"
 
       within "#projects" do
-        expect(page).to have_css(".budget-list__item", count: 1)
+        expect(page).to have_css(".project-item", count: 1)
         expect(page).to have_content(translated(project.title))
       end
     end

@@ -21,7 +21,7 @@
       <%= link_to resource_path, class: "link" do %>
         <h3 class="text-left margin-bottom-0">
           <%= cell("decidim/budgets/project_selected_status", model) %>
-          <%= resource_title %>
+          <%= decidim_sanitize(resource_title) %>
         </h3>
       <% end %>
     <% end %>

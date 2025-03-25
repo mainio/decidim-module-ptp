@@ -11,7 +11,7 @@
       <ul class="card__content">
         <% current_order.projects.each do |project| %>
           <li class="budget-summary__selected-item">
-            <%= translated_attribute(project.title) %>
+            <%= decidim_sanitize(translated_attribute(project.title)) %>
             <strong class="budget-summary__selected-number">
               <%= budget_to_currency project.budget_amount %>
             </strong>
@@ -49,14 +49,14 @@
     </h3>
     <div class="my-8" id="budget-confirm-current-order">
       <% if current_order.present? %>
-        <h4 class="h4 mb-4"><%= translated_attribute(budget.title) %></h4>
+        <h4 class="h4 mb-4"><%= decidim_sanitize(translated_attribute(budget.title)) %></h4>
         <p class="mb-4"><%= t(".description") %></p>
         <div class="card card--secondary">
           <% current_order.projects.each do |project| %>
             <div class="card__list card__list__project-voted">
               <div class="card__list__content">
                 <div class="card__list-text">
-                  <%= link_to translated_attribute(project.title), resource_locator([budget, project]).path, class: "card__list-title" %>
+                  <%= link_to decidim_sanitize(translated_attribute(project.title)), resource_locator([budget, project]).path, class: "card__list-title" %>
                 </div>
               </div>
               <div class="budget__card__list-project">

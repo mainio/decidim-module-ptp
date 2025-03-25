@@ -5,7 +5,7 @@ require "spec_helper"
 describe "Budgets view", type: :system do
   let(:projects_count) { 1 }
   let(:decidim_budgets) { Decidim::EngineRouter.main_proxy(component) }
-  let(:user) { create(:user, :confirmed, organization: organization) }
+  let(:user) { create(:user, :confirmed, organization:) }
 
   before do
     switch_to_host(organization.host)
@@ -19,7 +19,7 @@ describe "Budgets view", type: :system do
 
       it "shows the normal layout" do
         expect(page).to have_link(translated(budgets.first.title), href: decidim_budgets.budget_path(budgets.first))
-        expect(page).to have_selector("a", text: /show/i, count: 3)
+        expect(page).to have_css("a", text: /show/i, count: 3)
         expect(page).to have_content("€100,000")
       end
     end
@@ -45,7 +45,7 @@ describe "Budgets view", type: :system do
         end
 
         context "with user zip_code exist" do
-          let!(:user_data) { create(:user_data, component: component, user: user, metadata: { zip_code: "dummy_1234" }) }
+          let!(:user_data) { create(:user_data, component:, user:, metadata: { zip_code: "dummy_1234" }) }
 
           context "when no budgets to vote" do
             before { visit decidim_budgets.budgets_path }
@@ -71,7 +71,7 @@ describe "Budgets view", type: :system do
               expect(page).to have_content "You are now in the voting booth."
               within "#budgets" do
                 expect(page).to have_css(".card.card--list.budget-list", count: 2)
-                expect(page).to have_selector("a", text: "More info", count: 2)
+                expect(page).to have_css("a", text: "More info", count: 2)
                 expect(page).to have_link(text: /TAKE PART/, href: decidim_budgets.budget_voting_index_path(first_budget))
                 expect(page).to have_link(text: /TAKE PART/, href: decidim_budgets.budget_voting_index_path(second_budget))
                 expect(page).to have_link(translated(first_budget.title), href: decidim_budgets.budget_voting_index_path(budgets.first))
@@ -108,7 +108,7 @@ describe "Budgets view", type: :system do
               let(:landing_page_content) { Decidim::Faker::Localized.sentence(word_count: 5) }
 
               before do
-                component.update(settings: component_settings.merge(workflow: "zip_code", landing_page_content: landing_page_content))
+                component.update(settings: component_settings.merge(workflow: "zip_code", landing_page_content:))
                 visit current_path
               end
 
@@ -140,9 +140,9 @@ describe "Budgets view", type: :system do
 
             describe "vote all budgets" do
               # We add another budget to the list of budgets where use is eligible to vote
-              let!(:extra_budget) { create(:budget, component: component, scope: extra_scope, total_budget: 100_000) }
-              let!(:extra_scope) { create(:scope, parent: parent_scope, organization: organization) }
-              let!(:extra_postal) { create(:scope, name: { en: "10004" }, code: "EXTRA_10004", parent: extra_scope, organization: organization) }
+              let!(:extra_budget) { create(:budget, component:, scope: extra_scope, total_budget: 100_000) }
+              let!(:extra_scope) { create(:scope, parent: parent_scope, organization:) }
+              let!(:extra_postal) { create(:scope, name: { en: "10004" }, code: "EXTRA_10004", parent: extra_scope, organization:) }
               let!(:extra_project) { create(:project, budget: extra_budget, budget_amount: 75_000) }
 
               before do
@@ -154,7 +154,7 @@ describe "Budgets view", type: :system do
                   create_order(bdg)
                 end
                 visit current_path
-                expect(page).to have_selector("div.card.card--list.budget-list", count: 3)
+                expect(page).to have_css("div.card.card--list.budget-list", count: 3)
               end
 
               it "shows only voted budgets when maximum_budgets_to_vote_on is set" do
@@ -163,7 +163,7 @@ describe "Budgets view", type: :system do
                   create_order(bdg)
                 end
                 visit current_path
-                expect(page).to have_selector("div.card.card--list.budget-list", count: 2)
+                expect(page).to have_css("div.card.card--list.budget-list", count: 2)
               end
             end
 
@@ -179,7 +179,7 @@ describe "Budgets view", type: :system do
                   expect(page).to have_link("Show my vote")
                   click_link "Show my vote"
                 end
-                expect(page).to have_selector("div", id: "budget-votes-#{first_budget.id}")
+                expect(page).to have_css("div", id: "budget-votes-#{first_budget.id}")
                 order = Decidim::Budgets::Order.last
                 project = order.projects.first
                 within "#budget-votes-#{first_budget.id}" do
@@ -199,7 +199,7 @@ describe "Budgets view", type: :system do
 
   context "with single budget" do
     include_context "with single scoped budget"
-    let!(:user_data) { create(:user_data, component: component, user: user, metadata: { zip_code: "10004" }) }
+    let!(:user_data) { create(:user_data, component:, user:, metadata: { zip_code: "10004" }) }
 
     before do
       sign_in user
@@ -212,7 +212,7 @@ describe "Budgets view", type: :system do
       expect(page).to have_content "You are now in the voting booth."
       within "#budgets" do
         expect(page).to have_css(".card.card--list.budget-list", count: 1)
-        expect(page).to have_selector("a", text: "More info", count: 1)
+        expect(page).to have_css("a", text: "More info", count: 1)
         expect(page).to have_link(text: /TAKE PART/, href: decidim_budgets.budget_voting_index_path(budget))
         expect(page).to have_link(translated(budget.title), href: decidim_budgets.budget_voting_index_path(budget))
         expect(page).to have_content("Eius officiis expedita. 55")
@@ -222,8 +222,8 @@ describe "Budgets view", type: :system do
     it "does not show the budgets header in voting booth when go to the booth" do
       visit decidim_budgets.budget_voting_index_path(budget)
       expect(page).to have_current_path(decidim_budgets.budget_voting_index_path(budget))
-      expect(page).not_to have_content("Based on your ZIP code - 10004. Not the right one?")
-      expect(page).not_to have_link("Change it here", href: decidim_budgets.new_zip_code_path)
+      expect(page).to have_no_content("Based on your ZIP code - 10004. Not the right one?")
+      expect(page).to have_no_link("Change it here", href: decidim_budgets.new_zip_code_path)
     end
   end
 
@@ -238,7 +238,7 @@ describe "Budgets view", type: :system do
   end
 
   def create_order(budget)
-    order = create(:order, user: user, budget: budget)
+    order = create(:order, user:, budget:)
     order.projects << budget.projects.first
     order.checked_out_at = Time.current
     order.save!

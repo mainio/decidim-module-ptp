@@ -8,7 +8,7 @@
             <%= t("name", scope: "decidim.components.budgets") %>
           </span>
           /
-          <%= translated_attribute(budget.title) %>
+          <%= decidim_sanitize(translated_attribute(budget.title)) %>
           <p class="budget-summary__content__header--description">
             <%= t("description", scope: "decidim.budgets.projects.budget_summary.checked_out") %>
           </p>

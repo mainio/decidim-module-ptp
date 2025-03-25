@@ -1,11 +1,11 @@
-<% add_decidim_page_title t("decidim.budgets.projects.projects_for", name: translated_attribute(budget.title)) %>
+<% add_decidim_page_title t("decidim.budgets.projects.projects_for", name: decidim_sanitize(translated_attribute(budget.title))) %>
 <%= append_javascript_pack_tag "decidim_budgets" %>
 <%= append_stylesheet_pack_tag "decidim_budgets" %>
 <%= append_javascript_pack_tag("decidim_budgets_booth_voting") %>
 
 <% if voting_finished? %>
   <h2 class="heading2">
-    <%= t("decidim.budgets.projects.projects_for", name: translated_attribute(budget.title)) %>
+    <%= t("decidim.budgets.projects.projects_for", name: decidim_sanitize(translated_attribute(budget.title))) %>
   </h2>
 <% else %>
   <%= render partial: "budget_summary", locals: { include_heading: true, project_item: false, responsive: true } %>
@@ -20,7 +20,7 @@
     </h2>
   </div>
 
-  <h1 class="h3 decorator"><%= t("decidim.budgets.projects.projects_for", name: translated_attribute(budget.title)) %></h1>
+  <h1 class="h3 decorator"><%= t("decidim.budgets.projects.projects_for", name: decidim_sanitize(translated_attribute(budget.title))) %></h1>
 
   <%= render layout: "decidim/shared/filters", locals: { filter_sections: , search_variable: :search_text_cont, skip_to_id: "projects" } do %>
     <%= hidden_field_tag :order, order, id: nil, class: "order_filter" %>
