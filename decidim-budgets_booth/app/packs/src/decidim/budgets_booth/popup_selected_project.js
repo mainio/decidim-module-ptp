@@ -1,8 +1,17 @@
 $(() => {
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-  const selectedProject = $(`#project-modal-${urlParams.get("select_project")}`);
-  if (selectedProject.length === 1) {
-    selectedProject.foundation("open");
-  }
+  document.querySelectorAll(".project-item .card__list-content").forEach((link) => {
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+
+      const projectItem = event.target.closest(".project-item");
+      if (!projectItem) return;
+
+      const projectId = projectItem.id.replace("project-", "").replace("-item", "");
+
+      const modal = window.Decidim.currentDialogs[`project-modal-${projectId}`];
+      if (modal) {
+        modal.open();
+      }
+    });
+  });
 });

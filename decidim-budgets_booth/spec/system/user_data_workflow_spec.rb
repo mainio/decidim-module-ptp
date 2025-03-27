@@ -7,7 +7,7 @@ describe "user data workflow", type: :system do
 
   let(:projects_count) { 4 }
   let(:decidim_budgets) { Decidim::EngineRouter.main_proxy(component) }
-  let(:user) { create(:user, :confirmed, organization: organization) }
+  let(:user) { create(:user, :confirmed, organization:) }
   let(:first_budget) { budgets.first }
 
   before do
@@ -32,8 +32,8 @@ describe "user data workflow", type: :system do
   end
 
   context "when voted" do
-    let!(:order) { create(:order, user: user, budget: first_budget) }
-    let!(:user_data) { create(:user_data, component: component, user: user, metadata: { zip_code: "10004" }) }
+    let!(:order) { create(:order, user:, budget: first_budget) }
+    let!(:user_data) { create(:user_data, component:, user:, metadata: { zip_code: "10004" }) }
 
     before do
       component.update(settings: component_settings.merge(workflow: "zip_code"))
@@ -128,13 +128,13 @@ describe "user data workflow", type: :system do
           expect(page).to have_button("Cancel")
           click_button "Cancel"
           expect(page).to have_content("Are you sure you want to exit?")
-          click_link("OK")
+          click_on("OK")
           expect(page).to have_current_path("/")
         end
       end
 
       context "when user data exists" do
-        let!(:user_data) { create(:user_data, component: component, user: user, metadata: { zip_code: "10004" }) }
+        let!(:user_data) { create(:user_data, component:, user:, metadata: { zip_code: "10004" }) }
 
         before do
           visit decidim_budgets.new_zip_code_path
@@ -144,7 +144,7 @@ describe "user data workflow", type: :system do
           expect(page).to have_button("Cancel")
           click_button "Cancel"
           expect(page).to have_content("Are you sure you want to exit?")
-          click_link("OK")
+          click_on("OK")
           expect(page).to have_current_path(decidim_budgets.budgets_path)
         end
       end
@@ -169,7 +169,7 @@ describe "user data workflow", type: :system do
     end
 
     context "when userdata exists" do
-      let!(:user_data) { create(:user_data, component: component, user: user, metadata: { zip_code: "quox" }) }
+      let!(:user_data) { create(:user_data, component:, user:, metadata: { zip_code: "quox" }) }
 
       before do
         check "By checking this box, I affirm that these stamenets are true, and that I meet the voting eligibility requirements."
@@ -213,7 +213,7 @@ describe "user data workflow", type: :system do
           within ".zip-code-errors" do
             expect(page).to have_content("Only letters and digits are allowed.")
           end
-          expect(page).to have_selector(".is-invalid-input", count: 5)
+          expect(page).to have_css(".is-invalid-input", count: 5)
         end
       end
 
