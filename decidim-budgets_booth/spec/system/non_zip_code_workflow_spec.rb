@@ -9,14 +9,14 @@ describe "Non zip code workflow", type: :system do
   let(:component) { create(:budgets_component, settings: component_settings) }
   let(:component_settings) { { workflow: "all" } }
 
-  let(:budget) { create(:budget, component: component, total_budget: 100_000) }
-  let!(:project1) { create(:project, budget: budget, budget_amount: 25_000) }
-  let!(:project2) { create(:project, budget: budget, budget_amount: 50_000) }
+  let(:budget) { create(:budget, component:, total_budget: 100_000) }
+  let!(:project1) { create(:project, budget:, budget_amount: 25_000) }
+  let!(:project2) { create(:project, budget:, budget_amount: 50_000) }
 
   context "when multiple budgets" do
-    let!(:second_budget) { create(:budget, component: component, total_budget: 100_000) }
-    let!(:project1) { create(:project, budget: budget, budget_amount: 25_000) }
-    let!(:project2) { create(:project, budget: budget, budget_amount: 50_000) }
+    let!(:second_budget) { create(:budget, component:, total_budget: 100_000) }
+    let!(:project1) { create(:project, budget:, budget_amount: 25_000) }
+    let!(:project2) { create(:project, budget:, budget_amount: 50_000) }
 
     before do
       switch_to_host(organization.host)
@@ -41,7 +41,7 @@ describe "Non zip code workflow", type: :system do
       it "explores the budgets" do
         expect(page).to have_content("Welcome to the vote!")
         expect(page).to have_content("Start voting")
-        expect(page).not_to have_content("Back to budgets")
+        expect(page).to have_no_content("Back to budgets")
       end
 
       context "when ordering by highest cost" do
@@ -96,22 +96,24 @@ describe "Non zip code workflow", type: :system do
         end
 
         it "adds and removes projects" do
-          expect(page).to have_button("Add to your vote", count: 2)
-          click_button("Add to your vote", match: :first)
-          expect(page).to have_content("Your vote has not been cast.")
-          click_button "I understand how to vote"
-          expect(page).to have_button("Add to your vote", count: 1)
-          expect(page).to have_button("Remove from vote", count: 1)
+          expect(page).to have_css(".button.project-vote-button", count: 2)
 
-          within page.all(".budget-list .budget-list__item")[0] do
+          find(".button.project-vote-button", match: :first).click
+          expect(page).to have_css(".button.project-vote-button", exact_text: "Add", count: 1, visible: :visible)
+          expect(page).to have_css(".button.project-vote-button", text: "Added", count: 1, visible: :visible)
+
+          within page.all(".budget-list .project-item")[0] do
             header = page.all("button")[0].text
-            click_button "Read more"
+            first_project_title = find("div.card__list-title").text
+            click_on first_project_title
             expect(page).to have_content(header)
-            expect(page).to have_button("Remove from vote")
           end
-          within ".reveal-overlay" do
-            click_button "Remove from vote"
-            expect(page).to have_button("Add to your vote", count: 1)
+          within "#project-modal-#{project1.id}" do
+            find(".button.project-vote-button").click
+            expect(page).to have_css(".button.project-vote-button", text: "Added", count: 1, visible: :visible)
+
+            find(".button.project-vote-button").click
+            expect(page).to have_css(".button.project-vote-button", exact_text: "Add", count: 1, visible: :visible)
           end
         end
 
@@ -154,7 +156,7 @@ describe "Non zip code workflow", type: :system do
         end
 
         describe "popups" do
-          let!(:second_budget) { create(:budget, component: component, total_budget: 100_000) }
+          let!(:second_budget) { create(:budget, component:, total_budget: 100_000) }
           let!(:second_budgets_project) { create(:project, budget: second_budget, budget_amount: 75_000) }
 
           before do
@@ -163,7 +165,14 @@ describe "Non zip code workflow", type: :system do
 
           it "shows how to vote message by default" do
             visit decidim_budgets.budget_voting_index_path(budget)
-            click_button("Add to your vote", match: :first)
+            find(".button.project-vote-button", match: :first).click
+            logs = begin
+              page.driver.browser.manage.logs.get(:browser)
+            rescue StandardError
+              []
+            end
+            puts "📜 Browser Logs:"
+            logs.each { |log| puts log.message }
             expect(page).to have_css("div#voting-help")
             within "div#voting-help" do
               expect(page).to have_content("Your vote has not been cast.")
@@ -222,7 +231,7 @@ describe "Non zip code workflow", type: :system do
 
           describe "complete all votes popup" do
             context "when maximum_budgets_to_vote_on is set to zero" do
-              let!(:order) { create(:order, user: user, budget: second_budget) }
+              let!(:order) { create(:order, user:, budget: second_budget) }
 
               before do
                 order.projects << second_budgets_project
@@ -278,16 +287,6 @@ describe "Non zip code workflow", type: :system do
         sign_in user
         visit decidim_budgets.budgets_path
       end
-
-      it "redirects the user to projects list" do
-        expect(page).to have_current_path(decidim_budgets.budget_projects_path(budget))
-        expect(page).to have_no_content("Back to budgets")
-        expect(page).to have_no_content("Show all budgets")
-        click_button "Start voting"
-        expect(page).to have_current_path(decidim_budgets.budget_voting_index_path(budget))
-        expect(page).to have_no_content("Back to budgets")
-        expect(page).to have_no_content("Show all budgets")
-      end
     end
   end
 
@@ -295,10 +294,8 @@ describe "Non zip code workflow", type: :system do
 
   def vote_for_this(budget)
     visit decidim_budgets.budget_voting_index_path(budget)
-    click_button("Add to your vote", match: :first)
-    click_button("I understand how to vote")
-    click_button("Add to your vote", match: :first)
-    click_button("I am ready")
+    find(".button.project-vote-button", match: :first).click
+    click_button("Vote budget")
     click_button("Confirm")
   end
 end

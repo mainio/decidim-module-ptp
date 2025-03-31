@@ -1,4 +1,4 @@
-<%= decidim_modal id: "budget-votes-<%= budget.id %>" do %>
+<%= decidim_modal id:"budget-votes-#{budget.id}" do %>
 
   <% if projects.present? %>
     <div data-dialog-container>
@@ -11,7 +11,6 @@
           </strong>
         </span>
       </div>
-      <%= render partial: "decidim/budgets/projects/order_progress", locals: { checkout?: true } %>
       <div class="m-bottom">
         <span class="mini-title">
           <%= t(".assigned") %>
@@ -34,7 +33,7 @@
 
     <div data-dialog-actions>
       <div class="text-center">
-        <button class="button primary expanded" data-close><%= t(".ok") %></button>
+        <button class="button primary expanded" type="button" data-dialog-close="budget-votes-<%= budget.id %>"><%= t(".ok") %></button>
       </div>
     </div>
   <% end %>

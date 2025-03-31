@@ -54,10 +54,9 @@ module Decidim
             Decidim::BudgetsBooth::ProjectVoteButtonCellExtensions
           )
 
-          # TODO: CHANGE THIS FOR 28
-          # Decidim::Budgets::ProjectListItemCell.include(
-          #   Decidim::BudgetsBooth::ProjectListItemExtensions
-          # )
+          Decidim::Budgets::ProjectLCell.include(
+            Decidim::BudgetsBooth::ProjectLCellExtensions
+          )
 
           Decidim::Budgets::BudgetListItemCell.include(
             Decidim::BudgetsBooth::BudgetListItemCellExtensions

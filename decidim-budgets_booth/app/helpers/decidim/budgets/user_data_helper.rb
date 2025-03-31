@@ -17,7 +17,7 @@ module Decidim
       # to this view if they dont have a zip code.
       def cancel_redirect_path
         if user_zip_code
-          decidim_budgets.budgets_path
+          budgets_path
         else
           decidim.root_path
         end

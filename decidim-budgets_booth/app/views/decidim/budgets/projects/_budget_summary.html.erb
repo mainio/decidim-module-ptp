@@ -1,0 +1,25 @@
+<div id="order-progress<%= "-responsive" if responsive %>" class="budget-summary <%= responsive ? "block md:hidden" : "hidden md:block" %>" data-progress-reference data-safe-url="<%= budget_url(budget) %>">
+  <%= render partial: "order_progress_summary_content", locals: { responsive: , include_heading: } %>
+</div>
+
+<div class="row column voting-rules">
+  <% if voting_mode? %>
+    <div class="row">
+      <div class="columns medium-8 large-9">
+        <button class="link m-bottom" data-dialog-open="cancel-voting">
+          <%= icon "arrow-left-line", class: "icon--small", role: "img", "aria-hidden": true %>
+          <%= t(".cancel_voting") %>
+        </button>
+      </div>
+    </div>
+  <% elsif budgets.count > 1 %>
+    <div class="row">
+      <div class="columns medium-8 large-9">
+        <%= button_to(decidim_budgets.budgets_path, class: "link m-bottom", method: :get) do %>
+          <%= icon "arrow-left-line", class: "icon--small", role: "img", "aria-hidden": true %>
+          <%= t(".back_to_budgets") %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -368,19 +368,30 @@ describe "Voting index page", type: :system do
     context "when maximum budget exceeds" do
       before do
         first_budget.update!(total_budget: 24_999)
-        visit current_path
+        refresh
+        find("button.project-vote-button", match: :first).click
       end
 
       it "popups maximum error notice" do
-        click_button "Add to your vote", match: :first
+        expect(page).to have_css("#budget-excess")
+        within ".budget-summary__progressbar-marks" do
+          expect(page).to have_content("€24,999")
+        end
         expect(page).to have_content("Maximum budget exceeded")
         click_button "OK"
-        within all(".budget-list .budget-list__item")[0] do
-          click_button "Read more"
+
+        within page.all(".budget-list .project-item")[1] do
+          second_project_title = find("div.card__list-title").text
+          click_on second_project_title
         end
-        within ".reveal-overlay" do
-          click_button "Add to your vote"
+
+        second_modal_id = page.all(".budget-list .project-item")[1][:id].gsub(/\D/, "")
+        expect(page).to have_css("#project-modal-#{second_modal_id}")
+
+        within "#project-modal-#{second_modal_id}" do
+          find(".button.project-vote-button").click
         end
+
         expect(page).to have_content("Maximum budget exceeded")
       end
     end
@@ -449,7 +460,7 @@ describe "Voting index page", type: :system do
           visit current_path
         end
 
-        it "does not shows complete description by default" do
+        it "does not show complete description by default" do
           within("#project-#{project.id}-item") do
             expect(page).to have_no_selector("button", text: translated(project.title))
             expect(page).to have_no_button("Read more")

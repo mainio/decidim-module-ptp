@@ -5,14 +5,14 @@ shared_examples "filtering projects" do
   let!(:categories) { create_list(:category, 3, participatory_space: current_component.participatory_space) }
   context "when filtering" do
     it "allows searching by text" do
-      within ".filters__search" do
+      within ".filter-search" do
         fill_in "filter[search_text_cont]", with: translated(project.title)
 
-        find(".button").click
+        find("button[type='submit']").click
       end
 
       within "#projects" do
-        expect(page).to have_css(".budget-list__item", count: 1)
+        expect(page).to have_css(".project-item", count: 1)
         expect(page).to have_content(translated(project.title))
       end
     end
@@ -24,13 +24,13 @@ shared_examples "filtering projects" do
 
       visit_budget
 
-      within "#dropdown-menu-filters" do
+      within "#panel-dropdown-menu-scope" do
         uncheck "All"
         check translated(scope.name)
       end
 
       within "#projects" do
-        expect(page).to have_css(".budget-list__item", count: 1)
+        expect(page).to have_css(".project-item", count: 1)
         expect(page).to have_content(translated(project.title))
       end
     end
@@ -41,13 +41,13 @@ shared_examples "filtering projects" do
       project.save
 
       visit_budget
-      within "#dropdown-menu-filters" do
+      within "#panel-dropdown-menu-category" do
         uncheck "All"
-        check translated(category.name)
+        find(:css, "input[type='checkbox'][value='#{category.id}']").set(true)
       end
 
       within "#projects" do
-        expect(page).to have_css(".budget-list__item", count: 1)
+        expect(page).to have_css(".project-item", count: 1)
         expect(page).to have_content(translated(project.title))
       end
     end
@@ -59,7 +59,7 @@ shared_examples "filtering projects" do
 
       visit_budget
 
-      within "#dropdown-menu-filters" do
+      within "#panel-dropdown-menu-category" do
         uncheck "All"
         check("filter[with_any_category][]", option: category.id)
       end
@@ -69,8 +69,9 @@ shared_examples "filtering projects" do
         expect(page).to have_content(translated(project.title))
       end
 
-      find("a", text: "Read more", match: :first).click
-      click_link "View all projects"
+      within page.all(".budget-list .project-item")[0] do
+        click_on translated(project.title), match: :first
+      end
 
       within "#projects" do
         expect(page).to have_css(".project-item", count: 1)

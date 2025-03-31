@@ -3,13 +3,14 @@
 module Decidim
   module BudgetsBooth
     # Customizes the project card cell
-    module ProjectListItemExtensions
+    module ProjectLCellExtensions
       extend ActiveSupport::Concern
-      delegate :current_workflow, to: :controller
 
       included do
+        delegate :current_workflow, :voting_open?, to: :controller
+
         def resource_text
-          return translated_attribute(model.description) if show_full_description? && voting_open?
+          return decidim_sanitize(translated_attribute(model.description)) if show_full_description? && voting_open?
 
           decidim_sanitize_editor html_truncate(translated_attribute(model.description), length: 65, separator: "...")
         end
@@ -27,7 +28,7 @@ module Decidim
         private
 
         def show_full_description?
-          current_component.settings.show_full_description_on_listing_page == true
+          current_workflow.budgets_component["settings"]["global"]["show_full_description_on_listing_page"] == true
         end
       end
     end

@@ -39,7 +39,22 @@ if ($projectModal.length > 0 && $projectModal.attr("aria-hidden") === "false") {
 }
 
 <% if @show_help_modal %>
-  $("#voting-help").foundation("open");
-<% end %>
+  <script>
+      (function() {
+        console.log("Aja tää showhelpmodal")
+        var $modal = $("#voting-help");
 
-window.DecidimBudgets.checkProgressPosition();
+        if ($modal.length < 1) {
+          console.log("Alle 1")
+          $modal = $('<%= j(render partial: "decidim/budgets/partials/voting_help_modal").strip.html_safe %>');
+          $("body").append($modal);
+          console.log("Laita body")
+          let dialog = new window.Decidim.Dialogs("#voting-help");
+          console.log("Tee dialog")
+          $modal.data("votingHelpModal", dialog);
+        }
+
+        $modal.data("votingHelpModal").open();
+      })();
+  </script>
+<% end %>

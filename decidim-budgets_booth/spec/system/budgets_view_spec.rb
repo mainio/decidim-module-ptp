@@ -72,19 +72,19 @@ describe "Budgets view", type: :system do
               within "#budgets" do
                 expect(page).to have_css(".card.card--list.budget-list", count: 2)
                 expect(page).to have_css("a", text: "More info", count: 2)
-                expect(page).to have_link(text: /TAKE PART/, href: decidim_budgets.budget_voting_index_path(first_budget))
-                expect(page).to have_link(text: /TAKE PART/, href: decidim_budgets.budget_voting_index_path(second_budget))
-                expect(page).to have_link(translated(first_budget.title), href: decidim_budgets.budget_voting_index_path(budgets.first))
-                expect(page).to have_link(translated(second_budget.title), href: decidim_budgets.budget_voting_index_path(second_budget))
+                expect(page).to have_link(text: /Take part/, href: decidim_budgets.budget_voting_index_path(first_budget))
+                expect(page).to have_link(text: /Take part/, href: decidim_budgets.budget_voting_index_path(second_budget))
+                expect(page).to have_link(decidim_sanitize(translated(first_budget.title)), href: decidim_budgets.budget_voting_index_path(budgets.first))
+                expect(page).to have_link(decidim_sanitize(translated(second_budget.title)), href: decidim_budgets.budget_voting_index_path(second_budget))
                 expect(page).to have_content("Eius officiis expedita. 55")
                 expect(page).to have_content("Eius officiis expedita. 56")
               end
               expect(page).to have_no_css(".callout.warning.font-customizer")
               expect(page).to have_button("Cancel voting")
               click_button "Cancel voting"
-              within ".small.reveal.confirm-reveal" do
+              within "#confirm-modal" do
                 expect(page).to have_content("Are you sure you want to exit the voting booth?")
-                click_link "OK"
+                click_on "OK"
               end
               expect(page).to have_link(href: "/")
             end
@@ -130,9 +130,9 @@ describe "Budgets view", type: :system do
               it "redirects to correct url" do
                 expect(page).to have_button("Cancel voting")
                 click_button "Cancel voting"
-                within ".small.reveal.confirm-reveal" do
+                within "#confirm-modal" do
                   expect(page).to have_content("Are you sure you want to exit the voting booth?")
-                  click_link "OK"
+                  click_on "OK"
                 end
                 expect(page).to have_current_path(main_component_path(surveys_component))
               end
@@ -183,9 +183,9 @@ describe "Budgets view", type: :system do
                 order = Decidim::Budgets::Order.last
                 project = order.projects.first
                 within "#budget-votes-#{first_budget.id}" do
-                  expect(page).to have_content("Your vote in #{translated(first_budget.title)}")
+                  expect(page).to have_content("Your vote in #{decidim_sanitize(translated(first_budget.title))}")
                   expect(page).to have_content("These are the projects you have chosen to be part of the budget.")
-                  expect(page).to have_content(translated(project.title))
+                  expect(page).to have_content(decidim_sanitize(translated(project.title)))
                   click_button "OK"
                 end
                 expect(page).to have_no_selector("div", id: "budget-votes-#{first_budget.id}")
@@ -213,8 +213,8 @@ describe "Budgets view", type: :system do
       within "#budgets" do
         expect(page).to have_css(".card.card--list.budget-list", count: 1)
         expect(page).to have_css("a", text: "More info", count: 1)
-        expect(page).to have_link(text: /TAKE PART/, href: decidim_budgets.budget_voting_index_path(budget))
-        expect(page).to have_link(translated(budget.title), href: decidim_budgets.budget_voting_index_path(budget))
+        expect(page).to have_link(text: /Take part/, href: decidim_budgets.budget_voting_index_path(budget))
+        expect(page).to have_link(decidim_sanitize(translated(budget.title)), href: decidim_budgets.budget_voting_index_path(budget))
         expect(page).to have_content("Eius officiis expedita. 55")
       end
     end
