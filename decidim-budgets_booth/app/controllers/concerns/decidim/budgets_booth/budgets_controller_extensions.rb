@@ -5,6 +5,7 @@ module Decidim
     module BudgetsControllerExtensions
       extend ActiveSupport::Concern
       include ::Decidim::BudgetsBooth::VotingSupport
+      include ::Decidim::Budgets::NeedsCurrentOrder
 
       included do
         layout :determine_layout

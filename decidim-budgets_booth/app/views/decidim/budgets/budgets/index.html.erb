@@ -24,6 +24,10 @@
 
   <%= render partial: "decidim/budgets/voting/thanks_message_modal" if vote_success_content.present? && !voted_all_budgets? %>
   <% handle_thanks_popup %>
+
+  <% budgets.each do |budget| %>
+    <%= render partial: "decidim/budgets/orders/modal", locals: {budget: budget, projects: budget.projects } if voted_this?(budget) %>
+  <% end %>
 <% end %>
 
 

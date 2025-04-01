@@ -177,7 +177,7 @@ describe "Budgets view", type: :system do
               it "shows the popups" do
                 within "div.card.card--list.budget-list", match: :first do
                   expect(page).to have_link("Show my vote")
-                  click_link "Show my vote"
+                  click_on "Show my vote"
                 end
                 expect(page).to have_css("div", id: "budget-votes-#{first_budget.id}")
                 order = Decidim::Budgets::Order.last
@@ -186,7 +186,7 @@ describe "Budgets view", type: :system do
                   expect(page).to have_content("Your vote in #{decidim_sanitize(translated(first_budget.title))}")
                   expect(page).to have_content("These are the projects you have chosen to be part of the budget.")
                   expect(page).to have_content(decidim_sanitize(translated(project.title)))
-                  click_button "OK"
+                  click_on "OK"
                 end
                 expect(page).to have_no_selector("div", id: "budget-votes-#{first_budget.id}")
               end

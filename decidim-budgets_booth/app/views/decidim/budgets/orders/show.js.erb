@@ -1,14 +1,5 @@
 var $modal = $("#budget-votes-<%= budget.id %>");
 
-if ($modal.length < 1) {
-  $modal = $('<%= j(render partial: "modal", locals: {budget: budget, projects: current_order.projects }).strip.html_safe %>')
-  $("body").append($modal);
-
-  let dialog = new window.Decidim.Dialogs("#budget-votes-<%= budget.id %>");
-  $modal.data("budget-votes-<%= budget.id %>", dialog);
-  var dialogInstance = dialog;
+if ($modal.length > 0) {
+  window.Decidim.currentDialogs["budget-votes-<%= budget.id %>"].open();
 }
-
-dialogInstance.open();
-
-

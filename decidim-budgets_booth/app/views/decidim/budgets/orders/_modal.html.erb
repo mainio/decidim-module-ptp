@@ -1,5 +1,4 @@
 <%= decidim_modal id:"budget-votes-#{budget.id}" do %>
-
   <% if projects.present? %>
     <div data-dialog-container>
       <h3><%= t(".title", budget_title: decidim_sanitize(translated_attribute(budget.title))) %></h3>
