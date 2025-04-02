@@ -2,6 +2,7 @@ var $orderSelectedProjectsCount = $('#order-selected-projects-count');
 var $orderProgress = document.querySelectorAll('[id^=order-progress] .budget-summary__content');
 var $projectItem = $('#project-<%= project.id %>-item');
 var $budgetConfirm = $('#budget-confirm');
+var $projectBudgetButton = $('#project-<%= project.id %>-budget-button');
 var $projectModal = $('#project-modal-<%= project.id %>');
 
 $orderProgress.forEach((orderProgress) => {
@@ -39,22 +40,9 @@ if ($projectModal.length > 0 && $projectModal.attr("aria-hidden") === "false") {
 }
 
 <% if @show_help_modal %>
-  <script>
-      (function() {
-        console.log("Aja tää showhelpmodal")
-        var $modal = $("#voting-help");
+  var $modal = $("#voting-help");
 
-        if ($modal.length < 1) {
-          console.log("Alle 1")
-          $modal = $('<%= j(render partial: "decidim/budgets/partials/voting_help_modal").strip.html_safe %>');
-          $("body").append($modal);
-          console.log("Laita body")
-          let dialog = new window.Decidim.Dialogs("#voting-help");
-          console.log("Tee dialog")
-          $modal.data("votingHelpModal", dialog);
-        }
-
-        $modal.data("votingHelpModal").open();
-      })();
-  </script>
+  if ($modal.length > 0) {
+    window.Decidim.currentDialogs["voting-help"].open();
+  }
 <% end %>

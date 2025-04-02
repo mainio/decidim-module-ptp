@@ -6,16 +6,16 @@ shared_examples "cancel voting" do
   end
 
   it "redirects the user to root" do
-    click_button "Cancel voting"
-    within ".reveal" do
+    find(".voting-rules [data-dialog-open='cancel-voting']", match: :first).click
+    within "#cancel-voting" do
       expect(page).to have_content "Are you sure you don't want to cast your vote?"
       expect(page).to have_css("button.button.expanded", text: "Continue voting")
       expect(page).to have_css("a.button.hollow.expanded", text: "I don't want to vote right now")
-      click_button "Continue voting"
+      click_on "Continue voting"
     end
-    click_button "Cancel voting"
-    within ".reveal" do
-      click_link "I don't want to vote right now"
+    find(".voting-rules [data-dialog-open='cancel-voting']", match: :first).click
+    within "#cancel-voting" do
+      click_on "I don't want to vote right now"
     end
     expect(page).to have_current_path("/")
   end
@@ -27,16 +27,16 @@ shared_examples "cancel voting" do
     end
 
     it "redirects to the correct location" do
-      click_button "Cancel voting"
-      within ".reveal" do
+      find(".voting-rules [data-dialog-open='cancel-voting']", match: :first).click
+      within "#cancel-voting" do
         expect(page).to have_content "Are you sure you don't want to cast your vote?"
         expect(page).to have_css("button.button.expanded", text: "Continue voting")
         expect(page).to have_css("a.button.hollow.expanded", text: "I don't want to vote right now")
-        click_button "Continue voting"
+        click_on "Continue voting"
       end
-      click_button "Cancel voting"
-      within ".reveal" do
-        click_link "I don't want to vote right now"
+      find(".voting-rules [data-dialog-open='cancel-voting']", match: :first).click
+      within "#cancel-voting" do
+        click_on "I don't want to vote right now"
       end
       expect(page).to have_current_path(decidim_budgets.budgets_path)
     end

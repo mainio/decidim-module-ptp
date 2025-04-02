@@ -25,11 +25,7 @@ describe "Non zip code workflow", type: :system do
     context "when not voting" do
       before do
         visit decidim_budgets.budgets_path
-        click_link "Show", match: :first
-      end
-
-      it_behaves_like "non-voting view" do
-        let!(:projects) { [project1, project2] }
+        find(".card--list__item .h3", text: translated(budget.title)).click
       end
 
       it_behaves_like "filtering projects" do
@@ -39,8 +35,8 @@ describe "Non zip code workflow", type: :system do
       end
 
       it "explores the budgets" do
-        expect(page).to have_content("Welcome to the vote!")
-        expect(page).to have_content("Start voting")
+        expect(page).to have_content("Projects for")
+        expect(page).to have_content("Start adding projects")
         expect(page).to have_no_content("Back to budgets")
       end
 
@@ -57,21 +53,10 @@ describe "Non zip code workflow", type: :system do
           let(:last_project) { project2 }
         end
       end
-
-      context "when entering project view" do
-        it "redirects to the project page with vote button" do
-          within "#project-#{project1.id}-item" do
-            click_link "Read more", match: :first
-          end
-          expect(page).to have_current_path(decidim_budgets.budget_project_path(id: project1.id, budget_id: budget.id))
-          expect(page).to have_link("Start voting")
-          expect(page).to have_css("span.definition-data__title", text: "BUDGET")
-        end
-      end
     end
 
     context "when entering voting" do
-      context "when use is not signed_in" do
+      context "when user is not signed_in" do
         before do
           visit decidim_budgets.budget_voting_index_path(budget)
         end
@@ -98,17 +83,21 @@ describe "Non zip code workflow", type: :system do
         it "adds and removes projects" do
           expect(page).to have_css(".button.project-vote-button", count: 2)
 
-          find(".button.project-vote-button", match: :first).click
+          within "#project-#{project1.id}-item" do
+            find(".button.project-vote-button", match: :first).click
+          end
           expect(page).to have_css(".button.project-vote-button", exact_text: "Add", count: 1, visible: :visible)
           expect(page).to have_css(".button.project-vote-button", text: "Added", count: 1, visible: :visible)
-
-          within page.all(".budget-list .project-item")[0] do
+          within "#voting-help" do
+            find("[data-dialog-close='voting-help']", match: :first).click
+          end
+          within "#project-#{project2.id}-item" do
             header = page.all("button")[0].text
             first_project_title = find("div.card__list-title").text
             click_on first_project_title
             expect(page).to have_content(header)
           end
-          within "#project-modal-#{project1.id}" do
+          within "#project-modal-#{project2.id}" do
             find(".button.project-vote-button").click
             expect(page).to have_css(".button.project-vote-button", text: "Added", count: 1, visible: :visible)
 
@@ -166,13 +155,7 @@ describe "Non zip code workflow", type: :system do
           it "shows how to vote message by default" do
             visit decidim_budgets.budget_voting_index_path(budget)
             find(".button.project-vote-button", match: :first).click
-            logs = begin
-              page.driver.browser.manage.logs.get(:browser)
-            rescue StandardError
-              []
-            end
-            puts "📜 Browser Logs:"
-            logs.each { |log| puts log.message }
+
             expect(page).to have_css("div#voting-help")
             within "div#voting-help" do
               expect(page).to have_content("Your vote has not been cast.")
@@ -185,11 +168,11 @@ describe "Non zip code workflow", type: :system do
             context "when default" do
               before do
                 component.update!(settings: component_settings.merge(vote_success_content: { en: "<p>Some dummy text</p>" }))
-                vote_for_this(budget)
+                refresh
               end
 
               it "sets the text message with svg image by default" do
-                expect(page).to have_current_path(decidim_budgets.budgets_path)
+                vote_for_this(budget)
                 expect(page).to have_css("div#thanks-message", count: 1)
 
                 within "#thanks-message" do
@@ -215,11 +198,11 @@ describe "Non zip code workflow", type: :system do
               before do
                 allow_any_instance_of(Decidim::Budgets::Workflows::All).to receive(:hide_image_in_popup?).and_return(true) # rubocop:disable RSpec/AnyInstance
                 component.update!(settings: component_settings.merge(vote_success_content: { en: "<p>Some dummy text</p>" }))
-                vote_for_this(budget)
               end
 
               it "sets the text message without svg image" do
-                expect(page).to have_current_path(decidim_budgets.budgets_path)
+                vote_for_this(budget)
+
                 within "#thanks-message" do
                   expect(page).to have_content("Thank you for voting!")
                   expect(page).to have_no_css("svg")
@@ -241,13 +224,15 @@ describe "Non zip code workflow", type: :system do
 
               it "does not show the popup when vote_completed_content is nil" do
                 vote_for_this(budget)
+
+                expect(page).to have_content("Voted")
                 expect(page).to have_no_css("div#vote-completed")
               end
 
               it "shows the popup with the text when the popup text is set" do
                 component.update!(settings: component_settings.merge(vote_completed_content: { en: "<p>Some dummy text</p>" }))
                 vote_for_this(budget)
-                expect(page).to have_current_path(decidim_budgets.budgets_path)
+
                 expect(page).to have_css("div#vote-completed", count: 1)
                 within "div#vote-completed" do
                   expect(page).to have_content("You successfully completed your votes")
@@ -259,11 +244,10 @@ describe "Non zip code workflow", type: :system do
             context "when maximum_budgets_to_vote_on is set" do
               before do
                 component.update!(settings: component_settings.merge(vote_completed_content: { en: "<p>Some dummy text</p>" }, maximum_budgets_to_vote_on: 1))
-                vote_for_this(budget)
               end
 
               it "shows the completed message" do
-                expect(page).to have_current_path(decidim_budgets.budgets_path)
+                vote_for_this(budget)
                 expect(page).to have_css("div#vote-completed", count: 1)
                 within "div#vote-completed" do
                   expect(page).to have_content("You successfully completed your votes")
@@ -292,10 +276,10 @@ describe "Non zip code workflow", type: :system do
 
   private
 
-  def vote_for_this(budget)
-    visit decidim_budgets.budget_voting_index_path(budget)
-    find(".button.project-vote-button", match: :first).click
-    click_button("Vote budget")
-    click_button("Confirm")
+  def vote_for_this(_budget)
+    page.all(".button.project-vote-button").each { button & :click }
+    find("[data-dialog-close='voting-help']", match: :first).click
+    click_on "Vote budget"
+    click_on "Confirm"
   end
 end

@@ -20,13 +20,14 @@ module Decidim
         return unless component_id
 
         component = Decidim::Component.find(component_id)
+        @append_voting_script = true
+
         snippets.add(:head, <<~HTML
           <script type="text/template" id="vote-completed-snippet">
             #{cell("decidim/budgets_booth/vote_completed", component)}
           </script>
         HTML
         )
-        # helpers.append_javascript_pack_tag("decidim_handle_voting_complete")
       end
     end
   end

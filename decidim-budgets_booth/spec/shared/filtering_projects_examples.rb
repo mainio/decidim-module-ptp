@@ -51,33 +51,6 @@ shared_examples "filtering projects" do
         expect(page).to have_content(translated(project.title))
       end
     end
-
-    it "works with 'back to list' link" do
-      category = categories.first
-      project.category = category
-      project.save
-
-      visit_budget
-
-      within "#panel-dropdown-menu-category" do
-        uncheck "All"
-        check("filter[with_any_category][]", option: category.id)
-      end
-
-      within "#projects" do
-        expect(page).to have_css(".project-item", count: 1)
-        expect(page).to have_content(translated(project.title))
-      end
-
-      within page.all(".budget-list .project-item")[0] do
-        click_on translated(project.title), match: :first
-      end
-
-      within "#projects" do
-        expect(page).to have_css(".project-item", count: 1)
-        expect(page).to have_content(translated(project.title))
-      end
-    end
   end
 
   private

@@ -1,0 +1,17 @@
+<div class="budget__list--header">
+  <div>
+    <%= render partial: "addition_selector" %>
+  </div>
+
+  <div class="collection-sort-controls">
+    <%= render partial: "order" %>
+  </div>
+</div>
+
+<div class="budget-list">
+  <%= render partial: "projects_list", locals: { project: } %>
+</div>
+
+<%= decidim_paginate projects %>
+<%= render partial: "cancel_voting_modal" %>
+<%= render partial: "decidim/budgets/partials/voting_help_modal" %>

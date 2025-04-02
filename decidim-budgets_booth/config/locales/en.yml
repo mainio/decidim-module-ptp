@@ -155,7 +155,7 @@ en:
               on (default is 0, which means user can vote on all available budgets)
             show_full_description_on_listing_page: Show full project descriptions
               on the listing page and disable the details popup
-            vote_cancel_url: URL to redirect user when canceling voting (defaullt
+            vote_cancel_url: URL to redirect user when canceling voting (default
               to the root path)
             vote_completed_content: Popup text after voting in all available budgets
             vote_success_content: Popup text after each vote

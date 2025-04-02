@@ -18,7 +18,7 @@ module Decidim
             if current_workflow.try(:disable_voting_instructions?)
               false
             else
-              Decidim::Budgets::Order.find_by(user: current_user, budget: budget).blank?
+              Decidim::Budgets::Order.find_by(user: current_user, budget:).blank?
             end
         end
       end

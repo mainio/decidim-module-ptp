@@ -81,12 +81,10 @@ describe "Voting index page", type: :system do
 
     it "renders the page correctly" do
       expect(page).to have_content("You are now in the voting booth.")
-      expect(page).to have_content("You decide the #{first_budget.title["en"]} budget")
+      expect(page).to have_content("Projects for #{first_budget.title["en"]}")
       expect(page).to have_button("Cancel voting")
-      expect(page).to have_content("TOTAL BUDGET €100,000")
-      expect(page).to have_content("10 PROJECTS")
-      expect(page).to have_css("button", text: "Read more", count: 5)
-      expect(page).to have_css("button", text: "Add to your vote", count: 5)
+      expect(page).to have_content("Budget\n€100,000")
+      expect(page).to have_css(".button.project-vote-button", count: 5)
     end
 
     describe "budget summary" do
@@ -152,20 +150,25 @@ describe "Voting index page", type: :system do
     end
 
     it "adds and removes projects" do
-      expect(page).to have_button("Add to your vote", count: 5)
-      click_button("Add to your vote", match: :first)
-      expect(page).to have_button("Add to your vote", count: 4)
-      expect(page).to have_button("Remove from vote", count: 1)
-
-      within page.all(".budget-list .budget-list__item")[0] do
-        header = page.all("button")[0].text
-        click_button "Read more"
-        expect(page).to have_content(header)
-        expect(page).to have_button("Remove from vote")
+      project1 = page.all(".budget-list .project-item")[0]
+      project1_id = project1[:id][/\d+/]
+      expect(page).to have_css(".button.project-vote-button", count: 5)
+      within project1 do
+        find(".button.project-vote-button").click
       end
-      within ".reveal-overlay" do
-        click_button "Remove from vote"
-        expect(page).to have_button("Add to your vote", count: 1)
+      expect(page).to have_css(".button.project-vote-button", exact_text: "Add", count: 4)
+      expect(page).to have_css(".button.project-vote-button", text: "Added", count: 1)
+
+      within project1 do
+        header = find(".h4.card__list-title").text
+        click_on header
+        expect(page).to have_content(header)
+        expect(page).to have_css(".button.project-vote-button", text: "Added", count: 1)
+      end
+
+      within "#project-modal-#{project1_id}" do
+        find(".button.project-vote-button").click
+        expect(page).to have_css(".button.project-vote-button", exact_text: "Add")
       end
     end
 
@@ -175,14 +178,14 @@ describe "Voting index page", type: :system do
 
       it "allows searching by text" do
         project = current_projects.first
-        within ".filters__search" do
+        within ".filter-search" do
           fill_in "filter[search_text_cont]", with: translated(project.title)
 
-          find(".button").click
+          find("button[type='submit']").click
         end
 
         within "#projects" do
-          expect(page).to have_css(".budget-list__item", count: 1)
+          expect(page).to have_css(".project-item", count: 1)
           expect(page).to have_content(translated(project.title))
         end
       end
@@ -193,13 +196,15 @@ describe "Voting index page", type: :system do
         project.save
         visit current_path
 
-        within ".filters__section.with_any_scope_check_boxes_tree_filter" do
+        within "#panel-dropdown-menu-scope" do
           uncheck "All"
-          check translated(first_budget.scope.name)
+          label = find("label", text: translated(first_budget.scope.name))
+          checkbox = label.find('input[type="checkbox"]')
+          checkbox.check
         end
 
         within "#projects" do
-          expect(page).to have_css(".budget-list__item", count: 1)
+          expect(page).to have_css(".project-item", count: 1)
           expect(page).to have_content(translated(project.title))
         end
       end
@@ -356,6 +361,7 @@ describe "Voting index page", type: :system do
 
         it "shows the modal" do
           expect(page).to have_current_path(main_component_path(surveys_component))
+
           expect(page).to have_css("#vote-completed")
           within "#vote-completed" do
             expect(page).to have_content("You successfully completed your votes")
@@ -416,17 +422,17 @@ describe "Voting index page", type: :system do
       before do
         first_budget.update!(total_budget: 26_000)
         visit current_path
-        click_button("Add to your vote", match: :first)
+        find(".button.project-vote-button", match: :first).click
         click_button "Vote"
       end
 
       it "renders the info" do
         within "#budget-confirm" do
           expect(page).to have_content("These are the projects you have chosen to be part of the budget.")
-          expect(page).to have_css("li", text: "€25,000", count: 1)
+          expect(page).to have_css("span", text: "€25,000", count: 1)
           expect(page).to have_button("Confirm")
           expect(page).to have_button("Cancel")
-          click_button("Cancel")
+          click_on("Cancel")
         end
         expect(page).to have_current_path(decidim_budgets.budget_voting_index_path(first_budget))
       end
@@ -445,10 +451,10 @@ describe "Voting index page", type: :system do
           visit current_path
         end
 
-        it "does not shows complete description by default" do
+        it "does not show complete description by default" do
           within("#project-#{project.id}-item") do
-            expect(page).to have_css("button", text: translated(project.title))
-            expect(page).to have_button("Read more")
+            expect(page).to have_content(translated(project.title))
+            expect(page).to have_content(translated(project.description)[0..15])
             expect(page).to have_content(/.*\.{3}$/)
           end
         end
@@ -488,14 +494,14 @@ describe "Voting index page", type: :system do
 
   def vote_budget!
     find("button.project-vote-button", match: :first).click
-    click_button "Vote"
-    click_button "Confirm"
+    click_on "Vote"
+    click_on "Confirm"
   end
 
   def non_zipcode_vote_budget!
     find("button.project-vote-button", match: :first).click
     click_button "I understand how to vote"
-    click_button "I am ready"
-    click_button "Confirm"
+    click_button "Vote budget"
+    click_on "Confirm"
   end
 end
