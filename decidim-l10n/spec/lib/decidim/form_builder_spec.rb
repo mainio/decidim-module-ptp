@@ -78,17 +78,6 @@ describe Decidim::FormBuilder do
       end
 
       it { expect(resource.start_time).to be_a(ActiveSupport::TimeWithZone) }
-
-      it "formats the start date correctly" do
-        expect(parsed.css("input").first.attr("data-startdate")).to eq("02/01/2017 03:00 PM")
-      end
-
-      context "with another timezone", tz: "Helsinki" do
-        it "formats the start date in the original time zone" do
-          # Note: this case is correct because it should preserve the zone stored within the value itself.
-          expect(parsed.css("input").first.attr("data-startdate")).to eq("02/01/2017 03:00 PM")
-        end
-      end
     end
 
     context "when the start_time is set as Time" do
@@ -97,16 +86,6 @@ describe Decidim::FormBuilder do
       end
 
       it { expect(resource.start_time).to be_a(Time) }
-
-      it "formats the start date correctly" do
-        expect(parsed.css("input").first.attr("data-startdate")).to eq("02/01/2017 03:00 PM")
-      end
-
-      context "with another timezone", tz: "Helsinki" do
-        it "formats the start date in the correct time zone" do
-          expect(parsed.css("input").first.attr("data-startdate")).to eq("02/01/2017 05:00 PM")
-        end
-      end
     end
 
     context "when the start_time is set as DateTime" do
@@ -115,16 +94,6 @@ describe Decidim::FormBuilder do
       end
 
       it { expect(resource.start_time).to be_a(DateTime) }
-
-      it "formats the start date correctly" do
-        expect(parsed.css("input").first.attr("data-startdate")).to eq("02/01/2017 03:00 PM")
-      end
-
-      context "with another timezone", tz: "Helsinki" do
-        it "formats the start date in the correct time zone" do
-          expect(parsed.css("input").first.attr("data-startdate")).to eq("02/01/2017 05:00 PM")
-        end
-      end
     end
 
     context "when the resource has errors" do

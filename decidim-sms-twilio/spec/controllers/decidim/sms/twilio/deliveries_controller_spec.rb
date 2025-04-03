@@ -5,7 +5,7 @@ require "spec_helper"
 module Decidim
   module Sms
     module Twilio
-      describe DeliveriesController, type: :controller do
+      describe DeliveriesController do
         routes { Decidim::Sms::Twilio::Engine.routes }
         include Decidim::Sms::Twilio::TokenGenerator
 
@@ -17,7 +17,8 @@ module Decidim
 
           before do
             request.env["decidim.current_organization"] = organization
-            post :update, params: { token: token }
+            post :update, params: { token: }
+            puts response.headers.inspect
           end
 
           it "raises error" do
@@ -28,12 +29,12 @@ module Decidim
         context "when token is valid" do
           let(:token) { generate_token(organization.host) }
           let(:sid) { "Dummysid" }
-          let!(:delivery) { Decidim::Sms::Twilio::Delivery.create(sid: sid, status: "") }
+          let!(:delivery) { Decidim::Sms::Twilio::Delivery.create(sid:, status: "") }
 
           before do
             allow(JSON).to receive(:parse).and_return({ sid: "Dummysid", status: "Foo" })
             request.env["decidim.current_organization"] = organization
-            post :update, params: { token: token }
+            post :update, params: { token: }
           end
 
           it "updates delivery" do

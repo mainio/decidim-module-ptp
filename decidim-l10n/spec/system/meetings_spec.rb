@@ -2,13 +2,13 @@
 
 require "spec_helper"
 
-describe "Explore meetings", :slow, type: :system do
+describe "ExploreMeetings", :slow do
   include_context "with a component"
   let(:manifest_name) { "meetings" }
 
   let(:start_time) { Time.zone.local(2017, 1, 13, 8, 0, 0) }
   let(:end_time) { Time.zone.local(2017, 12, 20, 15, 0, 0) }
-  let!(:meeting) { create(:meeting, :not_official, :published, component: component, start_time: start_time, end_time: end_time) }
+  let!(:meeting) { create(:meeting, :not_official, :published, component:, start_time:, end_time:) }
 
   # before do
   #   # Required for the link to be pointing to the correct URL with the server
@@ -29,9 +29,23 @@ describe "Explore meetings", :slow, type: :system do
     end
 
     it "shows the meeting date correctly on the card" do
-      within("#meeting_#{meeting.id} .card .card__icondata .card-data__item--multiple") do
-        expect(page).to have_content("JANUARY 13, 2017 08:00 AM")
-        expect(page).to have_content("DECEMBER 20, 2017 03:00 PM")
+      within("#meetings__meeting_#{meeting.id}") do
+        within ".card__calendar" do
+          within ".card__calendar-month" do
+            expect(page).to have_content("JAN")
+          end
+
+          within ".card__calendar-day" do
+            expect(page).to have_content("13")
+          end
+
+          within ".card__calendar-year" do
+            expect(page).to have_content("2017")
+          end
+        end
+        within ".card__list-metadata" do
+          expect(page).to have_content("08:00 AM UTC")
+        end
       end
     end
   end
@@ -42,13 +56,22 @@ describe "Explore meetings", :slow, type: :system do
     end
 
     it "shows all meeting info" do
-      within(".section.view-side") do
-        expect(page).to have_css(".extra__date", text: "13")
-        expect(page).to have_css(".extra__date .extra__month", text: "January 2017")
-        expect(page).to have_css(".extra__time", text: "08:00 AM")
-        expect(page).to have_css(".extra__date", text: "20")
-        expect(page).to have_css(".extra__date .extra__month", text: "December 2017")
-        expect(page).to have_css(".extra__time", text: "03:00 PM")
+      within(".meeting__calendar-container") do
+        within ".meeting__calendar-month" do
+          expect(page).to have_content("JAN")
+          expect(page).to have_css(".meeting__calendar-separator", text: "-")
+          expect(page).to have_content("DEC")
+        end
+
+        within ".meeting__calendar-day" do
+          expect(page).to have_content("13")
+          expect(page).to have_css(".meeting__calendar-separator", text: "-")
+          expect(page).to have_content("20")
+        end
+
+        within ".meeting__calendar-year" do
+          expect(page).to have_content("2017")
+        end
       end
     end
   end

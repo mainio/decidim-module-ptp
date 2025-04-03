@@ -5,7 +5,7 @@ US:
       decidim_short_with_month_name_short: "%b %d %Y"
       decidim_with_day_and_month_name: "%A %d %b %Y"
       decidim_with_month_name: "%B %d, %Y"
-      decidim_with_month_name_short: "%d %b"
+      decidim_with_month_name_short: "%b %d"
       default: "%m/%d/%Y"
       long: "%B %d, %Y"
       short: "%b %d"

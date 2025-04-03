@@ -2,26 +2,32 @@
 
 require "spec_helper"
 
-describe "Explore blogs", versioning: true, type: :system do
+describe "Explore blogs", type: :system, versioning: true do
   include_context "with a component"
   let(:manifest_name) { "blogs" }
 
-  let(:post1_date) { Time.zone.local(2017, 1, 13, 8, 0, 0) }
-  let(:post2_date) { Time.zone.local(2017, 12, 20, 15, 0, 0) }
-  # 0.27: Add published_at
-  let!(:post1) { create(:post, component: component, created_at: post1_date) }
-  let!(:post2) { create(:post, component: component, created_at: post2_date) }
+  let(:first_post_date) { Time.zone.local(2017, 1, 13, 8, 0, 0) }
+  let(:second_post_date) { Time.zone.local(2017, 12, 20, 15, 0, 0) }
+  let!(:first_post) { create(:post, component:, created_at: first_post_date, published_at: first_post_date) }
+  let!(:second_post) { create(:post, component:, created_at: second_post_date, published_at: second_post_date) }
 
-  let!(:comment1) { create(:comment, commentable: post1) }
-  let!(:comment2) { create(:comment, commentable: post2) }
+  let!(:first_comment) { create(:comment, commentable: first_post) }
+  let!(:second_comment) { create(:comment, commentable: second_post) }
 
   describe "index" do
     it "shows all posts for the given process" do
       visit_component
 
-      within("#most-commented") do
-        expect(page).to have_content("01/13/2017")
-        expect(page).to have_content("12/20/2017")
+      within "#blogs__post_#{first_post.id}" do
+        within(".card__list-metadata") do
+          expect(page).to have_content("Jan 13 2017")
+        end
+      end
+
+      within "#blogs__post_#{second_post.id}" do
+        within(".card__list-metadata") do
+          expect(page).to have_content("Dec 20 2017")
+        end
       end
     end
   end

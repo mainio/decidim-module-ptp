@@ -2,10 +2,10 @@
 
 require "spec_helper"
 
-describe "Explore initiatives", type: :system do
+describe "ExploreInitiatives" do
   let(:organization) { create(:organization) }
   let(:state) { :published }
-  let(:initiative) { create(:initiative, organization: organization, state: state, published_at: Time.zone.local(2017, 12, 30, 15, 0, 0)) }
+  let(:initiative) { create(:initiative, organization:, state:, published_at: Time.zone.local(2017, 12, 30, 15, 0, 0), signature_start_date: Time.zone.local(2017, 12, 30, 15, 0, 0), signature_end_date: Time.zone.local(2018, 1, 2, 14, 0, 0)) }
 
   before do
     switch_to_host(organization.host)
@@ -17,8 +17,8 @@ describe "Explore initiatives", type: :system do
     end
 
     it "shows the details of the given initiative" do
-      within(".initiative-authors .publish-date") do
-        expect(page).to have_content("12/30/2017")
+      within(".initiatives__card__grid-metadata-dates") do
+        expect(page).to have_content("Dec 30 2017 → Jan 02 2018")
       end
     end
   end

@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Form builder", type: :system do
+describe "FormBuilder" do
   subject { described_class.new(template, options) }
 
   let(:template_class) do
@@ -64,6 +64,7 @@ describe "Form builder", type: :system do
     final_html = html_document
     Rails.application.routes.draw do
       get "form_builder", to: ->(_) { [200, {}, [final_html]] }
+      get "/favicon.ico", to: ->(_) { [204, {}, []] }
     end
 
     switch_to_host(organization.host)
@@ -76,29 +77,7 @@ describe "Form builder", type: :system do
   end
 
   it "renders the date/time selector" do
-    expect(page).to have_content("Expected format: m/d/Y h:i K")
-    expect(page).to have_css("input[value='02/15/2017 3:35 PM']")
-  end
-
-  it "opens the date/time selector" do
-    page.execute_script("$('#dummy_start_time').focus()")
-
-    expect(page).to have_css(".flatpickr-calendar .flatpickr-monthDropdown-months")
-
-    expect(page).to have_css("select[aria-label='Month']")
-    expect(find("select[aria-label='Month']").value).to eq("1")
-
-    expect(page).to have_css("input[aria-label='Year']")
-    expect(find("input[aria-label='Year']").value).to eq("2017")
-
-    expect(page).to have_css(".flatpickr-calendar .dayContainer .flatpickr-day.selected", text: 15)
-
-    expect(page).to have_css("input[aria-label='Hour']")
-    expect(find("input[aria-label='Hour']").value).to eq("03")
-
-    expect(page).to have_css("input[aria-label='Minute']")
-    expect(find("input[aria-label='Minute']").value).to eq("35")
-
-    expect(page).to have_css(".flatpickr-am-pm", text: "PM")
+    expect(page).to have_content("Start time")
+    expect(page).to have_css("input[value='2017-02-15T15:35:00']")
   end
 end
