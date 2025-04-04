@@ -26,7 +26,8 @@ RSpec.configure do |config|
         # :email_included_in_password?,
         :domain_included_in_password?,
         :password_too_common?,
-        :blacklisted?
+        :denied?,
+        :password_repeated?
       ].freeze
     )
   end

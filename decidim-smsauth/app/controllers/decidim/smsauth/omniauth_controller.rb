@@ -96,7 +96,7 @@ module Decidim
       end
 
       def user_registry
-        @form = UserRegistrationForm.from_params(user_params.merge(current_locale: current_locale))
+        @form = UserRegistrationForm.from_params(user_params.merge(current_locale:))
         RegisterByPhone.call(@form) do
           on(:ok) do |user|
             flash[:notice] = I18n.t(".success", scope: "decidim.smsauth.omniauth.registration")
@@ -300,7 +300,7 @@ module Decidim
 
       def find_authorization(user)
         Decidim::Authorization.find_or_initialize_by(
-          user: user,
+          user:,
           name: "smsauth_id"
         )
       end
