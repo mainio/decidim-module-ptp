@@ -18,7 +18,6 @@ module Decidim
           before do
             request.env["decidim.current_organization"] = organization
             post :update, params: { token: }
-            puts response.headers.inspect
           end
 
           it "raises error" do
