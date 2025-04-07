@@ -6,11 +6,11 @@ module Decidim
     #
     module RegistrationHelper
       def terms_page_path
-        "/pages/terms-and-conditions"
+        "/pages/terms-of-service"
       end
 
-      def terms_and_conditions_page
-        @terms_and_conditions_page ||= Decidim::StaticPage.find_by(slug: "terms-and-conditions", organization: current_organization)
+      def terms_of_service_page
+        @terms_and_conditions_page ||= Decidim::StaticPage.find_by(slug: "terms-of-service", organization: current_organization)
       end
     end
   end

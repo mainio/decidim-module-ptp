@@ -11,9 +11,9 @@ shared_examples "phone authorization process" do
       end
       fill_in "Phone number", with: "45887874"
       click_button "Send code via SMS"
-      expect(Decidim::Authorization.where(user: user).count).to eq(1)
+      expect(Decidim::Authorization.where(user:).count).to eq(1)
       within_flash_messages do
-        expect(page).to have_content(/Thanks! We've sent an SMS to your phone./)
+        expect(page).to have_content(/Thanks! We have sent an SMS to your phone./)
       end
       expect(page).to have_content("Introduce the verification code you received")
       click_link("Resend code")
@@ -22,7 +22,7 @@ shared_examples "phone authorization process" do
       end
       allow(Time).to receive(:current).and_return(2.minutes.from_now)
       click_link("Resend code")
-      expect(page).to have_content(/Thanks! We've sent an SMS to your phone./)
+      expect(page).to have_content(/Thanks! We have sent an SMS to your phone./)
       fill_in "Verification code", with: "000000"
       click_button "Verify"
       within_flash_messages do
@@ -31,11 +31,12 @@ shared_examples "phone authorization process" do
       fill_in "Verification code", with: "1234567"
       click_button "Verify"
       expect(page).to have_current_path decidim_verifications.authorizations_path
-      within ".card--list__item" do
-        expect(page).to have_css("svg.icon--lock-locked", count: 1)
+      within ".verification__container" do
+        expect(page).to have_content("SMS")
+        expect(page).to have_css(".verification__text", count: 1)
       end
-      expect(Decidim::Authorization.where(user: user).count).to eq(1)
-      expect(Decidim::Authorization.find_by(user: user).granted_at).not_to be_nil
+      expect(Decidim::Authorization.where(user:).count).to eq(1)
+      expect(Decidim::Authorization.find_by(user:).granted_at).not_to be_nil
     end
 
     # context "with previously registed phone number" do

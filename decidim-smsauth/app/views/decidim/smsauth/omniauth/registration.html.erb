@@ -1,8 +1,8 @@
 <% add_decidim_page_title(t(".welcome_to_platform")) %>
 
 <div class="wrapper">
-<div class="row collapse">
-  <div class="row collapse">
+<div class="row">
+  <div class="row">
     <div class="columns large-8 large-centered text-center page-title">
       <h1 class="text-center"><%= t(".welcome_to_platform") %></h1>
       <h2><%= t(".provide_account_detail") %></h2>
@@ -34,7 +34,7 @@
             <h3><%= t(".tos_title") %></h3>
 
             <p class="tos-text">
-              <%= strip_tags(translated_attribute(terms_and_conditions_page.content)) %>
+              <%= strip_tags(translated_attribute(terms_of_service_page.content)) %>
             </p>
 
             <div class="field">

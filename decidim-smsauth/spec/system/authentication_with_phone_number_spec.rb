@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "authentication with phone number", type: :system do
+describe "authentication with phone number" do
   let(:organization) { create(:organization) }
 
   include_context "with twilio gateway"
@@ -17,19 +17,23 @@ describe "authentication with phone number", type: :system do
     let(:phone) { 4_551_122_334 }
 
     before do
-      find("span", text: "Lithuania (+370)").click
+      within "#select-wrapper" do
+        find(".ss-single-selected").click
+      end
       within ".ss-list" do
         find("div", text: /Finland/).select_option
       end
+
       fill_in "Phone number", with: phone
       click_button "Send code via SMS"
-      code = page.find("#hint").text
+
+      code = page.find_by_id("hint").text
       fill_in "Verification code", with: code
     end
 
     context "when authorized phone number before" do
       let(:phone_country) { "FI" }
-      let!(:user) { create(:user, organization: organization, phone_number: phone, phone_country: phone_country) }
+      let!(:user) { create(:user, organization:, phone_number: phone, phone_country:) }
 
       it "authenticate and redirects the user" do
         click_button "Verify"
@@ -65,12 +69,12 @@ describe "authentication with phone number", type: :system do
           expect(user.phone_number).to eq("4551122334")
           expect(user.phone_country).to eq("FI")
           expect(user.email).to match(/^smsauth-.+@\d+\.lvh\.me$/)
-          expect(Decidim::Authorization.where(user: user).count).to eq(1)
+          expect(Decidim::Authorization.where(user:).count).to eq(1)
         end
       end
 
       context "when provide email addrss" do
-        let!(:user) { create(:user, organization: organization, email: "someone@test.net") }
+        let!(:user) { create(:user, organization:, email: "someone@test.net") }
 
         it "checks its uniqueness" do
           fill_in "Your name", with: "Dummy name"

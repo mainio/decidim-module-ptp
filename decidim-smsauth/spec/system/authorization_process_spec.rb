@@ -3,8 +3,8 @@
 require "spec_helper"
 
 describe "authorization process", type: :system do
-  let!(:organization) { create(:organization, omniauth_settings: omniauth_settings, available_authorizations: available_authorizations) }
-  let!(:user) { create(:user, :confirmed, organization: organization) }
+  let!(:organization) { create(:organization, omniauth_settings:, available_authorizations:) }
+  let!(:user) { create(:user, :confirmed, organization:) }
   let(:available_authorizations) { ["smsauth_id"] }
   let(:omniauth_settings) do
     {
@@ -21,8 +21,8 @@ describe "authorization process", type: :system do
 
   it "Adds the sms login method to authorization methods" do
     visit "/users/sign_in"
-    expect(page).to have_content("Sign in with SMS")
-    within ".register__separator" do
+    expect(page).to have_css(".login__omniauth-button.button--sms", text: "SMS")
+    within ".login__omniauth-separator" do
       expect(page).to have_content "Or"
     end
     expect(page).to have_content("Sign in with Email")
@@ -35,13 +35,15 @@ describe "authorization process", type: :system do
     end
 
     it "shows the available authorizations" do
-      within "#user-settings-tabs" do
+      within "#dropdown-menu-profile" do
         expect(page).to have_css("a", text: "Authorizations")
       end
-      click_link "Authorization"
+      click_link "Authorizations"
       expect(page).to have_content "Participant settings - Authorizations"
-      within ".card--list__item" do
-        expect(page).to have_css("svg.icon--lock-unlocked", count: 1)
+      within ".verification__container" do
+        expect(page).to have_content("SMS")
+        expect(page).to have_content("Verify yourself using an SMS code")
+        expect(page).to have_css(".verification__text", count: 1)
       end
     end
   end
@@ -51,7 +53,7 @@ describe "authorization process", type: :system do
       sign_in user, scope: :user
       visit decidim.account_path
       click_link "Authorization"
-      find(".card--list__item").click
+      find(".h5.text-secondary", text: "SMS").click
     end
 
     it_behaves_like "phone authorization process"
