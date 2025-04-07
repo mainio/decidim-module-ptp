@@ -142,6 +142,8 @@ module Decidim
 
         reset_auth_session
 
+        store_location_for(resource_or_scope, decidim_verifications.authorizations_path) unless stored_location_for(resource_or_scope)
+
         super
       end
 
