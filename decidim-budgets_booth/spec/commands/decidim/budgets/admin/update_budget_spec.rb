@@ -3,12 +3,12 @@
 require "spec_helper"
 
 describe Decidim::Budgets::Admin::UpdateBudget do
-  include ::Decidim::BudgetsBooth::UpdateBudgetExtensions
+  include Decidim::BudgetsBooth::UpdateBudgetExtensions
   subject { described_class.new(form, budget) }
 
-  let(:budget) { create :budget }
-  let(:scope) { create :scope, organization: budget.organization }
-  let(:user) { create :user, :admin, :confirmed, organization: budget.organization }
+  let(:budget) { create(:budget) }
+  let(:scope) { create(:scope, organization: budget.organization) }
+  let(:user) { create(:user, :admin, :confirmed, organization: budget.organization) }
   let(:main_image) do
     ActiveStorage::Blob.create_and_upload!(
       io: File.open(Decidim::Dev.asset("city.jpeg")),
@@ -24,9 +24,9 @@ describe Decidim::Budgets::Admin::UpdateBudget do
       title: { en: "title" },
       description: { en: "description" },
       total_budget: 100_000_000,
-      scope: scope,
+      scope:,
       current_user: user,
-      main_image: main_image,
+      main_image:,
       current_component: budget.component,
       current_organization: budget.organization
     )

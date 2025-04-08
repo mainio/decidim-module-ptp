@@ -6,6 +6,6 @@ shared_examples "rendering new zip code page" do |zip_code_length|
     expect(page).to have_no_selector(".flash")
     expect(page).to have_content("Welcome to the")
     expect(page).to have_content("Please provide your ZIP code to find your Participatory Budgeting ballots.")
-    expect(page).to have_css('input[type="text"]', count: zip_code_length)
+    expect(page).to have_css(".flex-digits-input", count: zip_code_length)
   end
 end

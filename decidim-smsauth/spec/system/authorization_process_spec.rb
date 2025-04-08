@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "authorization process", type: :system do
+describe "AuthorizationProcess" do
   let!(:organization) { create(:organization, omniauth_settings:, available_authorizations:) }
   let!(:user) { create(:user, :confirmed, organization:) }
   let(:available_authorizations) { ["smsauth_id"] }
@@ -38,7 +38,7 @@ describe "authorization process", type: :system do
       within "#dropdown-menu-profile" do
         expect(page).to have_css("a", text: "Authorizations")
       end
-      click_link "Authorizations"
+      click_on "Authorizations"
       expect(page).to have_content "Participant settings - Authorizations"
       within ".verification__container" do
         expect(page).to have_content("SMS")
@@ -52,7 +52,7 @@ describe "authorization process", type: :system do
     before do
       sign_in user, scope: :user
       visit decidim.account_path
-      click_link "Authorization"
+      click_on "Authorization"
       find(".h5.text-secondary", text: "SMS").click
     end
 

@@ -4,7 +4,7 @@ require "spec_helper"
 
 module Decidim
   module Budgets
-    describe VotingController, type: :controller do
+    describe VotingController do
       routes { Decidim::Budgets::Engine.routes }
 
       let(:user) { create(:user, :confirmed, organization: component.organization) }
@@ -16,7 +16,7 @@ module Decidim
       end
       let(:vote) { "enabled" }
       let(:current_settings) { double(:current_settings, votes: vote) }
-      let!(:budgets) { create_list(:budget, 3, component: component, total_budget: 100_000_000) }
+      let!(:budgets) { create_list(:budget, 3, component:, total_budget: 100_000_000) }
       let(:decidim_budgets) { Decidim::EngineRouter.main_proxy(component) }
       let(:projects) { create_list(:project, 3, budget: budgets.first, budget_amount: 45_000_000) }
       let(:current_workflow) { double(:current_workflow, voting_booth_forced?: zip_code?) }
@@ -49,7 +49,7 @@ module Decidim
         end
 
         context "when voted that budget" do
-          let!(:order) { create(:order, :with_projects, user: user, budget: budgets.last) }
+          let!(:order) { create(:order, :with_projects, user:, budget: budgets.last) }
 
           before do
             order.update!(checked_out_at: Time.current)

@@ -4,7 +4,7 @@ require "spec_helper"
 
 module Decidim
   module Smsauth
-    describe OmniauthController, type: :controller do
+    describe OmniauthController do
       routes { Decidim::Smsauth::Engine.routes }
       include_context "when organization present"
       let(:verification_code) { "123456" }
@@ -14,11 +14,11 @@ module Decidim
       let(:verified) { false }
       let(:auth_session) do
         {
-          verification_code: verification_code,
-          sent_at: sent_at,
-          country: country,
-          phone: phone,
-          verified: verified
+          verification_code:,
+          sent_at:,
+          country:,
+          phone:,
+          verified:
         }
       end
 
@@ -74,10 +74,10 @@ module Decidim
               phone_country: country,
               verification: verification_code
             }
-          end.to change(Decidim::Authorization.where(user: user), :count).by(1)
+          end.to change(Decidim::Authorization.where(user:), :count).by(1)
           user.reload
           expect(user.phone_number).to eq(phone)
-          expect(Decidim::Authorization.find_by(user: user).granted_at).not_to be_nil
+          expect(Decidim::Authorization.find_by(user:).granted_at).not_to be_nil
         end
       end
 
@@ -89,7 +89,7 @@ module Decidim
             phone_number: phone,
             phone_country: country
           }
-          expect(session["authentication_attempt"]).to include({ country: country, phone: phone.to_i, verified: false })
+          expect(session["authentication_attempt"]).to include({ country:, phone: phone.to_i, verified: false })
         end
       end
 
@@ -110,7 +110,7 @@ module Decidim
         end
 
         context "when the user has created an account before" do
-          let!(:user) { create(:user, organization: organization, phone_number: phone, phone_country: country) }
+          let!(:user) { create(:user, organization:, phone_number: phone, phone_country: country) }
 
           it "logs in and redirects the user" do
             post :authenticate_user, params: {

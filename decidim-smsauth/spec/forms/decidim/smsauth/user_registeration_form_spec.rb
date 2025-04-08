@@ -19,14 +19,14 @@ module Decidim::Smsauth
 
     let(:attributes) do
       {
-        name: name,
-        email: email,
-        tos_agreement: tos_agreement,
-        phone_number: phone_number,
-        phone_country: phone_country,
-        newsletter: newsletter,
-        current_locale: current_locale,
-        organization: organization
+        name:,
+        email:,
+        tos_agreement:,
+        phone_number:,
+        phone_country:,
+        newsletter:,
+        current_locale:,
+        organization:
       }
     end
 
@@ -78,7 +78,7 @@ module Decidim::Smsauth
       end
 
       context "when not unique" do
-        let!(:user) { create(:user, organization: organization, email: email) }
+        let!(:user) { create(:user, organization:, email:) }
 
         it { is_expected.not_to be_valid }
       end

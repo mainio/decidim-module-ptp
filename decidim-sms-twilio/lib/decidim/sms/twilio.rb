@@ -10,6 +10,7 @@ module Decidim
     module Twilio
       autoload :TokenGenerator, "decidim/sms/twilio/token_generator"
       autoload :Gateway, "decidim/sms/twilio/gateway"
+      autoload :ContentSecurityPolicyExtensions, "decidim/sms/twilio/content_security_policy_extensions"
     end
   end
 end

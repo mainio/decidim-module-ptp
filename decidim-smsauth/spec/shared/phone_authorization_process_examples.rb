@@ -10,26 +10,26 @@ shared_examples "phone authorization process" do
         find("div", text: /Finland/).select_option
       end
       fill_in "Phone number", with: "45887874"
-      click_button "Send code via SMS"
+      click_on "Send code via SMS"
       expect(Decidim::Authorization.where(user:).count).to eq(1)
       within_flash_messages do
         expect(page).to have_content(/Thanks! We have sent an SMS to your phone./)
       end
       expect(page).to have_content("Introduce the verification code you received")
-      click_link("Resend code")
+      click_on("Resend code")
       within_flash_messages do
         expect(page).to have_content("Please wait at least 1 minute to resend the code.")
       end
       allow(Time).to receive(:current).and_return(2.minutes.from_now)
-      click_link("Resend code")
+      click_on("Resend code")
       expect(page).to have_content(/Thanks! We have sent an SMS to your phone./)
       fill_in "Verification code", with: "000000"
-      click_button "Verify"
+      click_on "Verify"
       within_flash_messages do
         expect(page).to have_content("Verification failed. Please try again.")
       end
       fill_in "Verification code", with: "1234567"
-      click_button "Verify"
+      click_on "Verify"
       expect(page).to have_current_path decidim_verifications.authorizations_path
       within ".verification__container" do
         expect(page).to have_content("SMS")

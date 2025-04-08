@@ -6,14 +6,14 @@ describe Decidim::BudgetsBooth::ScopeManager do
   subject { described_class.new(component) }
 
   let(:organization) { create(:organization) }
-  let(:component) { create(:budgets_component, settings: component_settings, organization: organization) }
+  let(:component) { create(:budgets_component, settings: component_settings, organization:) }
   let(:component_settings) { { scopes_enabled: true, scope_id: parent_scope.id } }
 
   describe "#zip_codes_for" do
     include_context "with scopes"
 
-    let!(:first_budget) { create(:budget, component: component, scope: parent_scope) }
-    let!(:second_budget) { create(:budget, component: component, scope: subscopes.first) }
+    let!(:first_budget) { create(:budget, component:, scope: parent_scope) }
+    let!(:second_budget) { create(:budget, component:, scope: subscopes.first) }
 
     it "returns correct zip_codes" do
       expect(subject.zip_codes_for(first_budget)).to match_array(
@@ -29,13 +29,13 @@ describe Decidim::BudgetsBooth::ScopeManager do
       self.use_transactional_tests = false
 
       let(:parent_scope) { city }
-      let!(:city) { create(:scope, organization: organization) }
-      let!(:boroughs) { create_list(:scope, 10, parent: city, organization: organization) }
+      let!(:city) { create(:scope, organization:) }
+      let!(:boroughs) { create_list(:scope, 10, parent: city, organization:) }
       let!(:neighborhoods) do
         [].tap do |list|
           boroughs.each do |parent|
             5.times do
-              list << create(:scope, parent: parent, organization: organization)
+              list << create(:scope, parent:, organization:)
             end
           end
         end
@@ -73,7 +73,7 @@ describe Decidim::BudgetsBooth::ScopeManager do
   end
 
   describe "#user_zip_code" do
-    let(:parent_scope) { create(:scope, organization: organization) }
+    let(:parent_scope) { create(:scope, organization:) }
 
     context "when user does not exist" do
       it "returns flase" do
@@ -84,8 +84,8 @@ describe Decidim::BudgetsBooth::ScopeManager do
     context "when user exist" do
       include_context "with user data"
 
-      let!(:user) { create(:user, organization: organization) }
-      let!(:another_component) { create(:budgets_component, organization: organization) }
+      let!(:user) { create(:user, organization:) }
+      let!(:another_component) { create(:budgets_component, organization:) }
 
       before do
         user_data.update(metadata: { zip_code: "dummy metadata" })
@@ -105,8 +105,8 @@ describe Decidim::BudgetsBooth::ScopeManager do
       let(:file_store) { ActiveSupport::Cache.lookup_store(:file_store, cache_location) }
       let(:cache_location) { Rails.root.join("tmp/test-file-cache-store") }
 
-      let(:user) { create(:user, organization: organization) }
-      let!(:user_data) { create(:user_data, component: component, user: user, metadata: { zip_code: "12345" }) }
+      let(:user) { create(:user, organization:) }
+      let!(:user_data) { create(:user_data, component:, user:, metadata: { zip_code: "12345" }) }
 
       # Disable transactional tests to persist the data over multiple
       # processes.
@@ -149,7 +149,7 @@ describe Decidim::BudgetsBooth::ScopeManager do
         # Give enough time for the other process to do the first expectation
         sleep(2)
         user_data.destroy!
-        create(:user_data, component: component, user: user, metadata: { zip_code: "67890" })
+        create(:user_data, component:, user:, metadata: { zip_code: "67890" })
 
         Process.wait(pid)
         expect($CHILD_STATUS.exitstatus).to eq(0)

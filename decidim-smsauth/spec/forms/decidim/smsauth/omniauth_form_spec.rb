@@ -13,9 +13,9 @@ module Decidim::Smsauth
     let(:organization) { create(:organization) }
     let(:attributes) do
       {
-        phone_number: phone_number,
-        phone_country: phone_country,
-        organization: organization
+        phone_number:,
+        phone_country:,
+        organization:
       }
     end
 

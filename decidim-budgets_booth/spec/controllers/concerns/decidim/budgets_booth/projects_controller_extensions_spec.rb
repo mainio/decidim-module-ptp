@@ -4,7 +4,7 @@ require "spec_helper"
 
 module Decidim
   module BudgetsBooth
-    describe ProjectsControllerExtensions, type: :controller do
+    describe ProjectsControllerExtensions do
       routes { Decidim::Budgets::Engine.routes }
 
       controller(::Decidim::Budgets::ProjectsController) do
@@ -12,23 +12,23 @@ module Decidim
       end
 
       let(:organization) { create(:organization) }
-      let(:participatory_space) { create(:participatory_process, :with_steps, organization: organization) }
-      let(:user) { create(:user, :confirmed, organization: organization) }
+      let(:participatory_space) { create(:participatory_process, :with_steps, organization:) }
+      let(:user) { create(:user, :confirmed, organization:) }
       let(:component) do
         create(
           :budgets_component,
           settings: component_settings,
-          step_settings: step_settings,
-          participatory_space: participatory_space,
-          organization: organization
+          step_settings:,
+          participatory_space:,
+          organization:
         )
       end
-      let(:parent_scope) { create(:scope, organization: organization) }
+      let(:parent_scope) { create(:scope, organization:) }
       let(:component_settings_base) { { scopes_enabled: true, scope_id: parent_scope.id } }
       let(:component_settings) { component_settings_base }
-      let(:step_settings) { { active_step_id => { votes: votes } } }
+      let(:step_settings) { { active_step_id => { votes: } } }
       let(:active_step_id) { participatory_space.active_step.id }
-      let!(:budgets) { create_list(:budget, 3, component: component) }
+      let!(:budgets) { create_list(:budget, 3, component:) }
       let(:project) { create(:project, budget: budgets.last) }
       let(:votes) { "enabled" }
       let(:decidim_budgets) { Decidim::EngineRouter.main_proxy(component) }

@@ -17,7 +17,7 @@ module Decidim
       before_action :ensure_not_voted_this!
 
       def index
-        enforce_permission_to :vote, :project, project: budget.projects.first, budget: budget, workflow: current_workflow
+        enforce_permission_to :vote, :project, project: budget.projects.first, budget:, workflow: current_workflow
       end
 
       private

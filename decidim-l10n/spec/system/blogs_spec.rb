@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Explore blogs", type: :system, versioning: true do
+describe "ExploreBlogs", versioning: true do
   include_context "with a component"
   let(:manifest_name) { "blogs" }
 

@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Voting index page", type: :system do
+describe "VotingIndexPage" do
   include_context "with scoped budgets"
 
   let(:projects_count) { 10 }
@@ -89,7 +89,7 @@ describe "Voting index page", type: :system do
 
     describe "budget summary" do
       before do
-        find("button.project-vote-button", match: :first).click
+        find(".project-vote-button", match: :first).click
       end
 
       it "updates budget summary" do
@@ -181,7 +181,7 @@ describe "Voting index page", type: :system do
         within ".filter-search" do
           fill_in "filter[search_text_cont]", with: translated(project.title)
 
-          find("button[type='submit']").click
+          find("[type='submit']").click
         end
 
         within "#projects" do
@@ -375,7 +375,7 @@ describe "Voting index page", type: :system do
       before do
         first_budget.update!(total_budget: 24_999)
         refresh
-        find("button.project-vote-button", match: :first).click
+        find(".project-vote-button", match: :first).click
       end
 
       it "popups maximum error notice" do
@@ -384,7 +384,7 @@ describe "Voting index page", type: :system do
           expect(page).to have_content("€24,999")
         end
         expect(page).to have_content("Maximum budget exceeded")
-        click_button "OK"
+        click_on "OK"
 
         within page.all(".budget-list .project-item")[1] do
           second_project_title = find("div.card__list-title").text
@@ -423,7 +423,7 @@ describe "Voting index page", type: :system do
         first_budget.update!(total_budget: 26_000)
         visit current_path
         find(".button.project-vote-button", match: :first).click
-        click_button "Vote"
+        click_on "Vote"
       end
 
       it "renders the info" do
@@ -468,7 +468,7 @@ describe "Voting index page", type: :system do
 
         it "does not show complete description by default" do
           within("#project-#{project.id}-item") do
-            expect(page).to have_no_selector("button", text: translated(project.title))
+            expect(page).to have_no_button("button", text: translated(project.title))
             expect(page).to have_no_button("Read more")
             expect(page).to have_no_content(/.*\.{3}$/)
             expect(page).to have_content(translated(project.description))
@@ -493,15 +493,15 @@ describe "Voting index page", type: :system do
   end
 
   def vote_budget!
-    find("button.project-vote-button", match: :first).click
+    find(".project-vote-button", match: :first).click
     click_on "Vote"
     click_on "Confirm"
   end
 
   def non_zipcode_vote_budget!
-    find("button.project-vote-button", match: :first).click
-    click_button "I understand how to vote"
-    click_button "Vote budget"
+    find(".project-vote-button", match: :first).click
+    click_on "I understand how to vote"
+    click_on "Vote budget"
     click_on "Confirm"
   end
 end

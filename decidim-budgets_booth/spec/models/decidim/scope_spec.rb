@@ -4,10 +4,10 @@ require "spec_helper"
 
 describe Decidim::Scope do
   let(:organization) { create(:organization) }
-  let(:component) { create(:budgets_component, organization: organization, settings: component_settings) }
+  let(:component) { create(:budgets_component, organization:, settings: component_settings) }
   let(:component_settings) { { scopes_enabled: true, scope_id: parent_scope.id } }
 
-  let(:parent_scope) { create(:scope, organization: organization) }
+  let(:parent_scope) { create(:scope, organization:) }
   let!(:postal_scopes) do
     [].tap do |scopes|
       (10_000..10_005).each do |code|

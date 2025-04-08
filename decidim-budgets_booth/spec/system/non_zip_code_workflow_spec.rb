@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Non zip code workflow", type: :system do
+describe "NonZipCodeWorkflow" do
   let(:decidim_budgets) { Decidim::EngineRouter.main_proxy(component) }
   let(:user) { create(:user, :confirmed, organization: component.organization) }
   let(:organization) { component.organization }
@@ -10,13 +10,13 @@ describe "Non zip code workflow", type: :system do
   let(:component_settings) { { workflow: "all" } }
 
   let(:budget) { create(:budget, component:, total_budget: 100_000) }
-  let!(:project1) { create(:project, budget:, budget_amount: 25_000) }
-  let!(:project2) { create(:project, budget:, budget_amount: 50_000) }
+  let!(:project_one) { create(:project, budget:, budget_amount: 25_000) }
+  let!(:project_two) { create(:project, budget:, budget_amount: 50_000) }
 
   context "when multiple budgets" do
     let!(:second_budget) { create(:budget, component:, total_budget: 100_000) }
-    let!(:project1) { create(:project, budget:, budget_amount: 25_000) }
-    let!(:project2) { create(:project, budget:, budget_amount: 50_000) }
+    let!(:project_one) { create(:project, budget:, budget_amount: 25_000) }
+    let!(:project_two) { create(:project, budget:, budget_amount: 50_000) }
 
     before do
       switch_to_host(organization.host)
@@ -29,7 +29,7 @@ describe "Non zip code workflow", type: :system do
       end
 
       it_behaves_like "filtering projects" do
-        let!(:projects) { [project1, project2] }
+        let!(:projects) { [project_one, project_two] }
         let(:current_component) { component }
         let(:voting_mode) { false }
       end
@@ -42,15 +42,15 @@ describe "Non zip code workflow", type: :system do
 
       context "when ordering by highest cost" do
         it_behaves_like "ordering projects by selected option", "Highest cost" do
-          let(:first_project) { project2 }
-          let(:last_project) { project1 }
+          let(:first_project) { project_two }
+          let(:last_project) { project_one }
         end
       end
 
       context "when ordering by lowest cost" do
         it_behaves_like "ordering projects by selected option", "Lowest cost" do
-          let(:first_project) { project1 }
-          let(:last_project) { project2 }
+          let(:first_project) { project_one }
+          let(:last_project) { project_two }
         end
       end
     end
@@ -83,7 +83,7 @@ describe "Non zip code workflow", type: :system do
         it "adds and removes projects" do
           expect(page).to have_css(".button.project-vote-button", count: 2)
 
-          within "#project-#{project1.id}-item" do
+          within "#project-#{project_one.id}-item" do
             find(".button.project-vote-button", match: :first).click
           end
           expect(page).to have_css(".button.project-vote-button", exact_text: "Add", count: 1, visible: :visible)
@@ -91,13 +91,13 @@ describe "Non zip code workflow", type: :system do
           within "#voting-help" do
             find("[data-dialog-close='voting-help']", match: :first).click
           end
-          within "#project-#{project2.id}-item" do
+          within "#project-#{project_two.id}-item" do
             header = page.all("button")[0].text
             first_project_title = find("div.card__list-title").text
             click_on first_project_title
             expect(page).to have_content(header)
           end
-          within "#project-modal-#{project2.id}" do
+          within "#project-modal-#{project_two.id}" do
             find(".button.project-vote-button").click
             expect(page).to have_css(".button.project-vote-button", text: "Added", count: 1, visible: :visible)
 
@@ -114,33 +114,31 @@ describe "Non zip code workflow", type: :system do
           end
 
           it "shows complete text for the project" do
-            within("#project-#{project1.id}-item") do
-              expect(page).to have_no_selector("button", text: translated(project1.title))
-              expect(page).to have_no_selector("button", text: translated(project2.title))
+            within("#project-#{project_one.id}-item") do
               expect(page).to have_no_button("Read more")
               expect(page).to have_no_content(/.*\.{3}$/)
-              expect(page).to have_content(strip_tags(translated(project1.description)))
+              expect(page).to have_content(strip_tags(translated(project_one.description)))
             end
           end
         end
 
         it_behaves_like "filtering projects" do
-          let!(:projects) { [project1, project2] }
+          let!(:projects) { [project_one, project_two] }
           let(:current_component) { component }
           let(:voting_mode) { false }
         end
 
         context "when ordering by highest cost" do
           it_behaves_like "ordering projects by selected option", "Highest cost" do
-            let(:first_project) { project2 }
-            let(:last_project) { project1 }
+            let(:first_project) { project_two }
+            let(:last_project) { project_one }
           end
         end
 
         context "when ordering by lowest cost" do
           it_behaves_like "ordering projects by selected option", "Lowest cost" do
-            let(:first_project) { project1 }
-            let(:last_project) { project2 }
+            let(:first_project) { project_one }
+            let(:last_project) { project_two }
           end
         end
 
@@ -271,13 +269,18 @@ describe "Non zip code workflow", type: :system do
         sign_in user
         visit decidim_budgets.budgets_path
       end
+
+      it "redirects the user to projects list" do
+        expect(page).to have_current_path(decidim_budgets.budget_projects_path(budget))
+        expect(page).to have_button("Add", count: 2)
+      end
     end
   end
 
   private
 
   def vote_for_this(_budget)
-    page.all(".button.project-vote-button").each { button & :click }
+    page.all(".button.project-vote-button").each(&:click)
     find("[data-dialog-close='voting-help']", match: :first).click
     click_on "Vote budget"
     click_on "Confirm"

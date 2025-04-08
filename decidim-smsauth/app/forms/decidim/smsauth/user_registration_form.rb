@@ -31,8 +31,8 @@ module Decidim
 
       def verify_email_uniqueness
         return true if Decidim::User.where(
-          organization: organization,
-          email: email
+          organization:,
+          email:
         ).empty?
 
         errors.add :email, :taken

@@ -3,7 +3,7 @@
 shared_context "when signed-in" do
   include_context "when organization present"
 
-  let(:user) { create(:user, :confirmed, organization: organization, phone_number: "4578945421", phone_country: "FI") }
+  let(:user) { create(:user, :confirmed, organization:, phone_number: "4578945421", phone_country: "FI") }
 
   before do
     sign_in user, scope: :user
@@ -12,7 +12,7 @@ end
 
 shared_context "with unauthorized user sign in" do
   include_context "when organization present"
-  let(:user) { create(:user, :confirmed, organization: organization) }
+  let(:user) { create(:user, :confirmed, organization:) }
 
   before do
     sign_in user, scope: :user
@@ -51,7 +51,7 @@ shared_context "with twilio gateway" do
 
   before do
     allow(Decidim::Smsauth).to receive(:default_countries).and_return(%w(LT LU LV))
-    allow(Rails.application.secrets).to receive(:twilio).and_return({ twilio_account_sid: account_sid, twilio_auth_token: auth_token, twilio_sender: twilio_sender })
+    allow(Rails.application.secrets).to receive(:twilio).and_return({ twilio_account_sid: account_sid, twilio_auth_token: auth_token, twilio_sender: })
     stub_request(:post, "https://api.twilio.com/#{api_version}/Accounts/#{account_sid}/Messages.json")
       .to_return(body: dummy_response)
     allow(SecureRandom).to receive(:random_number).and_return(1_234_567)

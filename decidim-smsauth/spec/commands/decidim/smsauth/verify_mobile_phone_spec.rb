@@ -14,8 +14,8 @@ module Decidim
     let(:sent_at) { Time.current }
     let(:data) do
       {
-        verification_code: verification_code,
-        sent_at: sent_at,
+        verification_code:,
+        sent_at:,
         country: form.phone_country,
         phone: form.phone_number,
         verified: false
@@ -24,9 +24,9 @@ module Decidim
     let(:form) do
       double(
         invalid?: invalid?,
-        phone_number: phone_number,
-        phone_country: phone_country,
-        verification: verification
+        phone_number:,
+        phone_country:,
+        verification:
       )
     end
 

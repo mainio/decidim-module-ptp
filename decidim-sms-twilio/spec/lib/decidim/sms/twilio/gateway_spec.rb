@@ -7,7 +7,7 @@ module Decidim
     module Twilio
       describe Gateway do
         subject do
-          described_class.new(phone_number, code, organization: organization)
+          described_class.new(phone_number, code, organization:)
         end
 
         let(:organization) { nil }
@@ -38,9 +38,9 @@ module Decidim
           let(:http_status) { 200 }
 
           before do
-            allow(Rails.application.secrets).to receive(:twilio).and_return({ twilio_account_sid: account_sid, twilio_auth_token: auth_token, twilio_sender: twilio_sender })
+            allow(Rails.application.secrets).to receive(:twilio).and_return({ twilio_account_sid: account_sid, twilio_auth_token: auth_token, twilio_sender: })
             req = stub_request(:post, "https://api.twilio.com/#{api_version}/Accounts/#{account_sid}/Messages.json")
-            req.with(body: body) if body
+            req.with(body:) if body
             req.to_return(body: dummy_response, status: http_status)
           end
 

@@ -138,7 +138,7 @@ module Decidim
       # (e.g. the data was deleted or updated at the same process), this will
       # reload the data accordingly.
       def user_data_for(user)
-        user_data = user.budgets_user_data.find_by(component: component)
+        user_data = user.budgets_user_data.find_by(component:)
         user_data&.metadata || {}
       end
 

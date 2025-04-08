@@ -46,7 +46,7 @@ module Decidim
             phone_number = phone_with_country_code(form.phone_country, form.phone_number)
             code = generate_code
             if Decidim.config.sms_gateway_service == "Decidim::Sms::Twilio::Gateway"
-              Decidim.config.sms_gateway_service.constantize.new(phone_number, code, organization: organization)
+              Decidim.config.sms_gateway_service.constantize.new(phone_number, code, organization:)
             else
               Decidim.config.sms_gateway_service.constantize.new(phone_number, code)
             end
@@ -63,7 +63,7 @@ module Decidim
       end
 
       def phone_with_country_code(country_code, phone_number)
-        PhoneNumberFormatter.new(phone_number: phone_number, iso_country_code: country_code).format
+        PhoneNumberFormatter.new(phone_number:, iso_country_code: country_code).format
       end
 
       def add_zeros(code)

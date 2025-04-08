@@ -2,21 +2,21 @@
 
 require "spec_helper"
 
-describe Decidim::BudgetsBooth::ProjectsHelperExtensions, type: :helper do
+describe Decidim::BudgetsBooth::ProjectsHelperExtensions do
   describe "#current_phase" do
     let(:organization) { create(:organization) }
-    let(:participatory_process) { create(:participatory_process, organization: organization) }
-    let!(:step1) do
+    let(:participatory_process) { create(:participatory_process, organization:) }
+    let!(:first_step) do
       create(:participatory_process_step,
              active: true,
              end_date: Time.zone.now.to_date,
-             participatory_process: participatory_process)
+             participatory_process:)
     end
-    let!(:step2) do
+    let!(:second_step) do
       create(:participatory_process_step,
              active: false,
              end_date: 1.month.from_now.to_date,
-             participatory_process: participatory_process)
+             participatory_process:)
     end
 
     before do
@@ -25,12 +25,12 @@ describe Decidim::BudgetsBooth::ProjectsHelperExtensions, type: :helper do
     end
 
     it "returns the title of the active step in the current participatory process" do
-      expect(helper.current_phase).to eq(step1.title)
+      expect(helper.current_phase).to eq(first_step.title)
     end
 
     context "when there is no active step in the current participatory process" do
       before do
-        step1.update(active: false)
+        first_step.update(active: false)
       end
 
       it "returns nil" do

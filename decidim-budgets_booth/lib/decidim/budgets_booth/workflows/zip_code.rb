@@ -45,7 +45,7 @@ module Decidim
         end
 
         def projects(budget)
-          Decidim::Budgets::Project.where(budget: budget)
+          Decidim::Budgets::Project.where(budget:)
         end
       end
     end

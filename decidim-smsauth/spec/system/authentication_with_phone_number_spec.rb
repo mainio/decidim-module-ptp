@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "authentication with phone number" do
+describe "AuthenticationWithPhoneNumber" do
   let(:organization) { create(:organization) }
 
   include_context "with twilio gateway"
@@ -25,7 +25,7 @@ describe "authentication with phone number" do
       end
 
       fill_in "Phone number", with: phone
-      click_button "Send code via SMS"
+      click_on "Send code via SMS"
 
       code = page.find_by_id("hint").text
       fill_in "Verification code", with: code
@@ -36,14 +36,14 @@ describe "authentication with phone number" do
       let!(:user) { create(:user, organization:, phone_number: phone, phone_country:) }
 
       it "authenticate and redirects the user" do
-        click_button "Verify"
+        click_on "Verify"
         expect(page).to have_current_path decidim_verifications.authorizations_path
       end
     end
 
     context "when new user" do
       before do
-        click_button "Verify"
+        click_on "Verify"
       end
 
       context "when no email" do
@@ -53,13 +53,13 @@ describe "authentication with phone number" do
             expect(page).to have_content("Phone number successfully verified.")
           end
           fill_in "Your name", with: "Dummy name"
-          click_button "Sign up"
-          click_button "Check and continue"
+          click_on "Sign up"
+          click_on "Check and continue"
           within_flash_messages do
             expect(page).to have_content("An error occured, please try again")
           end
           check "I agree to the Terms of Service"
-          click_button "Sign up"
+          click_on "Sign up"
           expect(page).to have_current_path decidim_verifications.authorizations_path
           within_flash_messages do
             expect(page).to have_content("You have successfully registered and authorized")
@@ -80,14 +80,14 @@ describe "authentication with phone number" do
           fill_in "Your name", with: "Dummy name"
           fill_in "Your email", with: "someone@test.net"
           check "I agree to the Terms of Service"
-          click_button "Sign up"
-          click_button "Check and continue"
+          click_on "Sign up"
+          click_on "Check and continue"
           within_flash_messages do
             expect(page).to have_content("An error occured, please try again")
           end
           expect(page).to have_content(/has already been taken/)
           fill_in "Your email", with: "another_email@nowhere.net"
-          click_button "Sign up"
+          click_on "Sign up"
           expect(page).to have_current_path decidim_verifications.authorizations_path
           within_flash_messages do
             expect(page).to have_content("You have successfully registered and authorized")

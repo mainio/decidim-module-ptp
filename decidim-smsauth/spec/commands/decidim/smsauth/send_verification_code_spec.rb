@@ -15,10 +15,10 @@ module Decidim
     let(:form) do
       double(
         invalid?: invalid?,
-        organization: organization,
-        phone_number: phone_number,
-        phone_country: phone_country,
-        verification: verification
+        organization:,
+        phone_number:,
+        phone_country:,
+        verification:
       )
     end
 
@@ -31,7 +31,7 @@ module Decidim
     end
 
     context "when form is valid" do
-      let(:gatewayer) { instance_double(Decidim::Sms::Twilio::Gateway, phone_number: "+358#{phone_number}", code: verification, organization: organization) }
+      let(:gatewayer) { instance_double(Decidim::Sms::Twilio::Gateway, phone_number: "+358#{phone_number}", code: verification, organization:) }
 
       before do
         allow(Decidim::Sms::Twilio::Gateway).to receive(:new).and_return(gatewayer)

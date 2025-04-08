@@ -8,7 +8,7 @@ shared_examples "filtering projects" do
       within ".filter-search" do
         fill_in "filter[search_text_cont]", with: translated(project.title)
 
-        find("button[type='submit']").click
+        find('button[aria-label="Search"]').click
       end
 
       within "#projects" do

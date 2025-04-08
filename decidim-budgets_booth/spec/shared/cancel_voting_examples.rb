@@ -9,7 +9,7 @@ shared_examples "cancel voting" do
     find(".voting-rules [data-dialog-open='cancel-voting']", match: :first).click
     within "#cancel-voting" do
       expect(page).to have_content "Are you sure you don't want to cast your vote?"
-      expect(page).to have_css("button.button.expanded", text: "Continue voting")
+      expect(page).to have_button("Continue voting")
       expect(page).to have_css("a.button.hollow.expanded", text: "I don't want to vote right now")
       click_on "Continue voting"
     end
@@ -30,7 +30,7 @@ shared_examples "cancel voting" do
       find(".voting-rules [data-dialog-open='cancel-voting']", match: :first).click
       within "#cancel-voting" do
         expect(page).to have_content "Are you sure you don't want to cast your vote?"
-        expect(page).to have_css("button.button.expanded", text: "Continue voting")
+        expect(page).to have_button("Continue voting")
         expect(page).to have_css("a.button.hollow.expanded", text: "I don't want to vote right now")
         click_on "Continue voting"
       end

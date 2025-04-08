@@ -40,21 +40,21 @@ describe Decidim::BudgetsBooth::VotingSupport do
     create(
       :budgets_component,
       settings: component_settings.merge(workflow: "zip_code"),
-      step_settings: step_settings,
-      organization: organization
+      step_settings:,
+      organization:
     )
   end
-  let(:step_settings) { { active_step_id => { votes: votes } } }
+  let(:step_settings) { { active_step_id => { votes: } } }
   let(:votes) { "enabled" }
   let(:active_step_id) { component.participatory_space.active_step.id }
-  let!(:user) { create(:user, :confirmed, organization: organization) }
+  let!(:user) { create(:user, :confirmed, organization:) }
   let(:decidim_budgets) { Decidim::EngineRouter.main_proxy(component) }
   let(:projects_count) { 5 }
   let(:projects) { create_list(:project, 3, budget: budgets.first, budget_amount: 75_000) }
   let(:second_projects) { create_list(:project, 3, budget: budgets.second, budget_amount: 75_000) }
-  let!(:user_data) { create(:user_data, component: component, user: user, metadata: { zip_code: "10004" }) }
-  let!(:order) { create(:order, user: user, budget: budgets.first) }
-  let!(:second_order) { create(:order, user: user, budget: budgets.second) }
+  let!(:user_data) { create(:user_data, component:, user:, metadata: { zip_code: "10004" }) }
+  let!(:order) { create(:order, user:, budget: budgets.first) }
+  let!(:second_order) { create(:order, user:, budget: budgets.second) }
 
   include_context "with scoped budgets"
 
@@ -160,7 +160,7 @@ describe Decidim::BudgetsBooth::VotingSupport do
       let(:votes) { "disabled" }
 
       before do
-        component.update!(settings: component_settings.merge(workflow: "zip_code", maximum_budgets_to_vote_on: 1), step_settings: step_settings)
+        component.update!(settings: component_settings.merge(workflow: "zip_code", maximum_budgets_to_vote_on: 1), step_settings:)
         vote_this(order, projects.first)
 
         allow(dummy).to receive(:current_settings).and_return(component.current_settings)

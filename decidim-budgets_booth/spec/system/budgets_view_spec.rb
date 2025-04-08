@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Budgets view", type: :system do
+describe "BudgetsView" do
   let(:projects_count) { 1 }
   let(:decidim_budgets) { Decidim::EngineRouter.main_proxy(component) }
   let(:user) { create(:user, :confirmed, organization:) }
@@ -81,7 +81,7 @@ describe "Budgets view", type: :system do
               end
               expect(page).to have_no_css(".callout.warning.font-customizer")
               expect(page).to have_button("Cancel voting")
-              click_button "Cancel voting"
+              click_on "Cancel voting"
               within "#confirm-modal" do
                 expect(page).to have_content("Are you sure you want to exit the voting booth?")
                 click_on "OK"
@@ -129,7 +129,7 @@ describe "Budgets view", type: :system do
 
               it "redirects to correct url" do
                 expect(page).to have_button("Cancel voting")
-                click_button "Cancel voting"
+                click_on "Cancel voting"
                 within "#confirm-modal" do
                   expect(page).to have_content("Are you sure you want to exit the voting booth?")
                   click_on "OK"

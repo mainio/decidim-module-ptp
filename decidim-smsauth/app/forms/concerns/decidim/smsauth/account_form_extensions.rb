@@ -22,7 +22,7 @@ module Decidim
         def phone_instance
           return unless phone_number.present? && phone_country.present?
 
-          Decidim::Smsauth::PhoneNumberFormatter.new(phone_number: phone_number, iso_country_code: phone_country)
+          Decidim::Smsauth::PhoneNumberFormatter.new(phone_number:, iso_country_code: phone_country)
         end
       end
     end

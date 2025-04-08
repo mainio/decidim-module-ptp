@@ -3,14 +3,14 @@
 require "spec_helper"
 
 describe Decidim::Budgets::Admin::CreateBudget do
-  include ::Decidim::BudgetsBooth::CreateBudgetExtensions
+  include Decidim::BudgetsBooth::CreateBudgetExtensions
   subject { described_class.new(form) }
 
-  let(:organization) { create :organization, available_locales: [:en, :ca, :es], default_locale: :en }
-  let(:participatory_process) { create :participatory_process, organization: organization }
-  let!(:current_component) { create :component, participatory_space: participatory_process, manifest_name: "budgets" }
-  let(:user) { create :user, :admin, :confirmed, organization: organization }
-  let(:scope) { create :scope, organization: organization }
+  let(:organization) { create(:organization, available_locales: [:en, :ca, :es], default_locale: :en) }
+  let(:participatory_process) { create(:participatory_process, organization:) }
+  let!(:current_component) { create(:component, participatory_space: participatory_process, manifest_name: "budgets") }
+  let(:user) { create(:user, :admin, :confirmed, organization:) }
+  let(:scope) { create(:scope, organization:) }
   let(:main_image) do
     ActiveStorage::Blob.create_and_upload!(
       io: File.open(Decidim::Dev.asset("city.jpeg")),
@@ -26,10 +26,10 @@ describe Decidim::Budgets::Admin::CreateBudget do
       title: { en: "title" },
       description: { en: "description" },
       total_budget: 100_000_000,
-      scope: scope,
+      scope:,
       current_user: user,
-      main_image: main_image,
-      current_component: current_component,
+      main_image:,
+      current_component:,
       current_organization: organization
     )
   end

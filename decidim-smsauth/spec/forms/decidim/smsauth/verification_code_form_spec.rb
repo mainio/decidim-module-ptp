@@ -12,9 +12,9 @@ module Decidim::Smsauth
 
     let(:attributes) do
       {
-        phone_number: phone_number,
-        phone_country: phone_country,
-        verification: verification
+        phone_number:,
+        phone_country:,
+        verification:
       }
     end
 

@@ -20,15 +20,15 @@ module Decidim
     let(:form) do
       double(
         valid?: valid?,
-        name: name,
-        email: email,
-        phone_number: phone_number,
-        phone_country: phone_country,
-        newsletter: newsletter,
-        organization: organization,
-        tos_agreement: tos_agreement,
-        newsletter_at: newsletter_at,
-        current_locale: current_locale
+        name:,
+        email:,
+        phone_number:,
+        phone_country:,
+        newsletter:,
+        organization:,
+        tos_agreement:,
+        newsletter_at:,
+        current_locale:
       )
     end
 

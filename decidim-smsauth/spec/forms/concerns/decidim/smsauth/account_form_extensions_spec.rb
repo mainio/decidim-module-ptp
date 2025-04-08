@@ -6,8 +6,8 @@ module Decidim::Smsauth
   describe AccountFormExtensions do
     subject do
       Decidim::AccountForm.new(
-        phone_number: phone_number,
-        phone_country: phone_country
+        phone_number:,
+        phone_country:
       )
     end
 

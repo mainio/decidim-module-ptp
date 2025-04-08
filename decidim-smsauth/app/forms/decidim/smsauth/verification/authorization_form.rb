@@ -33,15 +33,15 @@ module Decidim
         # The verification metadata to validate in the next step.
         def verification_metadata
           {
-            verification_code: verification_code,
+            verification_code:,
             code_sent_at: Time.current
           }
         end
 
         def metadata
           {
-            phone_number: phone_number,
-            phone_country: phone_country
+            phone_number:,
+            phone_country:
           }
         end
 
@@ -52,7 +52,7 @@ module Decidim
             begin
               mobile_number = phone_with_country_code(phone_country, phone_number)
               if Decidim.config.sms_gateway_service == "Decidim::Sms::Twilio::Gateway"
-                Decidim.config.sms_gateway_service.constantize.new(mobile_number, generated_code, organization: organization)
+                Decidim.config.sms_gateway_service.constantize.new(mobile_number, generated_code, organization:)
               else
                 Decidim.config.sms_gateway_service.constantize.new(mobile_number, generated_code)
               end
@@ -64,7 +64,7 @@ module Decidim
         end
 
         def phone_with_country_code(country_code, phone_number)
-          PhoneNumberFormatter.new(phone_number: phone_number, iso_country_code: country_code).format
+          PhoneNumberFormatter.new(phone_number:, iso_country_code: country_code).format
         end
 
         def verification_code

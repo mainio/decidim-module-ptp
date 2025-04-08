@@ -10,15 +10,15 @@ module Decidim
       let(:zip_code) { "dummy metadata" }
       let(:organization) { create(:organization) }
       let(:affirm_statements_are_correct) { true }
-      let(:user) { create(:user, :confirmed, organization: organization) }
+      let(:user) { create(:user, :confirmed, organization:) }
       let(:component) { create(:budgets_component) }
 
       let(:attributes) do
         {
-          zip_code: zip_code,
-          affirm_statements_are_correct: affirm_statements_are_correct,
-          user: user,
-          component: component
+          zip_code:,
+          affirm_statements_are_correct:,
+          user:,
+          component:
         }
       end
 

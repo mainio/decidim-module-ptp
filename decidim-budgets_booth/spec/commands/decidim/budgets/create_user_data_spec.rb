@@ -21,10 +21,10 @@ module Decidim
       let(:form) do
         double(
           invalid?: invalid?,
-          user: user,
-          zip_code: zip_code,
-          affirm_statements_are_correct: affirm_statements_are_correct,
-          component: component
+          user:,
+          zip_code:,
+          affirm_statements_are_correct:,
+          component:
         )
       end
 
@@ -53,7 +53,7 @@ module Decidim
           end
 
           context "when user data exists" do
-            let!(:user_data) { create(:user_data, component: component, user: user, metadata: { zip_code: "quox" }) }
+            let!(:user_data) { create(:user_data, component:, user:, metadata: { zip_code: "quox" }) }
             let(:zip_code) { "foo" }
 
             it "updates the user data" do

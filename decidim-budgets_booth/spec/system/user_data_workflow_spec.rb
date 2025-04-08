@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "user data workflow", type: :system do
+describe "UserDataWorkflow" do
   include_context "with scoped budgets"
 
   let(:projects_count) { 4 }
@@ -97,7 +97,7 @@ describe "user data workflow", type: :system do
     context "when submitting the form" do
       context "when empty" do
         before do
-          click_button "Find my ballots"
+          click_on "Find my ballots"
         end
 
         it "renders errors" do
@@ -108,13 +108,13 @@ describe "user data workflow", type: :system do
             expect(page).to have_content("must be accepted")
           end
           check "By checking this box, I affirm that these stamenets are true, and that I meet the voting eligibility requirements."
-          click_button "Find my ballots"
+          click_on "Find my ballots"
 
           expect(page).to have_no_selector("#affirm-checkbox")
           expect(page).to have_no_content("must be accepted")
 
           fill_in_code(non_existing_zip_code, "digit")
-          click_button "Find my ballots"
+          click_on "Find my ballots"
           within "#zip-code-not-valid" do
             expect(page).to have_content("The ZIP code you provided is not part of the areas that are eligible for voting.")
           end
@@ -126,7 +126,7 @@ describe "user data workflow", type: :system do
       context "when no user data" do
         it "redirects to the root path" do
           expect(page).to have_button("Cancel")
-          click_button "Cancel"
+          click_on "Cancel"
           expect(page).to have_content("Are you sure you want to exit?")
           click_on("OK")
           expect(page).to have_current_path("/")
@@ -142,7 +142,7 @@ describe "user data workflow", type: :system do
 
         it "redirects to the budgets path" do
           expect(page).to have_button("Cancel")
-          click_button "Cancel"
+          click_on "Cancel"
           expect(page).to have_content("Are you sure you want to exit?")
           click_on("OK")
           expect(page).to have_current_path(decidim_budgets.budgets_path)
@@ -154,7 +154,7 @@ describe "user data workflow", type: :system do
       before do
         check "By checking this box, I affirm that these stamenets are true, and that I meet the voting eligibility requirements."
         fill_in_code(existing_zip_code, "digit")
-        click_button "Find my ballots"
+        click_on "Find my ballots"
       end
 
       context "when user data does not exist" do
@@ -174,7 +174,7 @@ describe "user data workflow", type: :system do
       before do
         check "By checking this box, I affirm that these stamenets are true, and that I meet the voting eligibility requirements."
         fill_in_code(existing_zip_code, "digit")
-        click_button "Find my ballots"
+        click_on "Find my ballots"
       end
 
       it "updates existing metadata" do

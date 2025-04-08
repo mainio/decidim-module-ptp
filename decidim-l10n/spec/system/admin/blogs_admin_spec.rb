@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Admin manages accountability" do
+describe "AdminManagesAccountability" do
   let(:manifest_name) { "blogs" }
 
   let(:first_post_date) { Time.zone.local(2017, 1, 13, 8, 0, 0) }

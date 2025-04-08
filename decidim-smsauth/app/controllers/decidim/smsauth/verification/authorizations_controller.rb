@@ -13,7 +13,7 @@ module Decidim
           # We use the :update action here because this is also where the user
           # is redirected to in case they previously started the authorization
           # but did not finish it (i.e. the authorization is "pending").
-          enforce_permission_to :update, :authorization, authorization: authorization
+          enforce_permission_to(:update, :authorization, authorization:)
 
           @form = form(AuthorizationForm).instance
         end
@@ -22,7 +22,7 @@ module Decidim
           # We use the :update action here because this is also where the user
           # is redirected to in case they previously started the authorization
           # but did not finish it (i.e. the authorization is "pending").
-          enforce_permission_to :update, :authorization, authorization: authorization
+          enforce_permission_to(:update, :authorization, authorization:)
 
           @form = AuthorizationForm.from_params(params.merge(user: current_user))
           Decidim::Verifications::PerformAuthorizationStep.call(authorization, @form) do
@@ -40,7 +40,7 @@ module Decidim
         end
 
         def edit
-          enforce_permission_to :update, :authorization, authorization: authorization
+          enforce_permission_to(:update, :authorization, authorization:)
 
           @form = ConfirmationForm.new
           verification_code
@@ -56,7 +56,7 @@ module Decidim
               update_attempt_session
               flash[:notice] = t("authorizations.create.success", scope: "decidim.verifications.sms")
               authorization_method = Decidim::Verifications::Adapter.from_element(authorization.name)
-              redirect_to authorization_method.resume_authorization_path(redirect_url: redirect_url)
+              redirect_to authorization_method.resume_authorization_path(redirect_url:)
             end
             on(:invalid) do
               flash.now[:alert] = I18n.t(".error", scope: "decidim.smsauth.omniauth.sms.authenticate_user")
@@ -66,7 +66,7 @@ module Decidim
         end
 
         def update
-          enforce_permission_to :update, :authorization, authorization: authorization
+          enforce_permission_to(:update, :authorization, authorization:)
 
           @form = ConfirmationForm.from_params(params)
           ::Decidim::Verifications::ConfirmUserAuthorization.call(authorization, @form, session) do
@@ -87,7 +87,7 @@ module Decidim
         end
 
         def destroy
-          enforce_permission_to :destroy, :authorization, authorization: authorization
+          enforce_permission_to(:destroy, :authorization, authorization:)
 
           DestroyAuthorization.call(authorization) do
             on(:ok) do
@@ -143,7 +143,7 @@ module Decidim
 
         def redirect_smsauth
           authorization_method = Decidim::Verifications::Adapter.from_element(authorization.name)
-          authorization_method.resume_authorization_path(redirect_url: redirect_url)
+          authorization_method.resume_authorization_path(redirect_url:)
         end
       end
     end

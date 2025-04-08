@@ -6,13 +6,13 @@ describe Decidim::BudgetsBooth::Workflows::ZipCode do
   subject { described_class.new(component, user) }
 
   let(:organization) { create(:organization) }
-  let(:component) { create(:budgets_component, settings: component_settings, organization: organization) }
+  let(:component) { create(:budgets_component, settings: component_settings, organization:) }
   let(:component_settings) { { scopes_enabled: true, scope_id: parent_scope.id } }
-  let!(:user) { create(:user, organization: organization) }
+  let!(:user) { create(:user, organization:) }
 
   describe "#vote_allowed?" do
-    let!(:allowed_budget) { create(:budget, component: component, scope: subscopes.first) }
-    let!(:not_allowed_budget) { create(:budget, component: component, scope: subscopes.second) }
+    let!(:allowed_budget) { create(:budget, component:, scope: subscopes.first) }
+    let!(:not_allowed_budget) { create(:budget, component:, scope: subscopes.second) }
 
     include_context "with scopes"
     include_context "with user data"
@@ -43,13 +43,13 @@ describe Decidim::BudgetsBooth::Workflows::ZipCode do
   end
 
   describe "#budgets" do
-    let(:parent_scope) { create(:scope, organization: organization) }
-    let!(:budgets) { create_list(:budget, 3, component: component) }
+    let(:parent_scope) { create(:scope, organization:) }
+    let!(:budgets) { create_list(:budget, 3, component:) }
 
     let(:scope_manager) { instance_double(Decidim::BudgetsBooth::ScopeManager) }
 
     before do
-      allow(::Decidim::BudgetsBooth::ScopeManager).to receive(:new).with(component).and_return(scope_manager)
+      allow(Decidim::BudgetsBooth::ScopeManager).to receive(:new).with(component).and_return(scope_manager)
       allow(scope_manager).to receive(:user_zip_code).with(user).and_return("dummy zip_code")
       allow(scope_manager).to receive(:zip_codes_for).with(budgets.first).and_return(["dummy zip_code"])
       allow(scope_manager).to receive(:zip_codes_for).with(budgets.second).and_return(["dummy zip_code"])
@@ -64,8 +64,8 @@ describe Decidim::BudgetsBooth::Workflows::ZipCode do
   end
 
   describe "#highlighted?" do
-    let(:parent_scope) { create(:scope, organization: organization) }
-    let!(:budgets) { create_list(:budget, 3, component: component) }
+    let(:parent_scope) { create(:scope, organization:) }
+    let!(:budgets) { create_list(:budget, 3, component:) }
 
     it "returs false" do
       result = subject.highlighted?(budgets.first)
@@ -74,7 +74,7 @@ describe Decidim::BudgetsBooth::Workflows::ZipCode do
   end
 
   describe "#disable_voting_instructions?" do
-    let(:parent_scope) { create(:scope, organization: organization) }
+    let(:parent_scope) { create(:scope, organization:) }
 
     it "is disabled by default" do
       expect(subject).to be_disable_voting_instructions
@@ -82,7 +82,7 @@ describe Decidim::BudgetsBooth::Workflows::ZipCode do
   end
 
   describe "hide_image_in_popup?" do
-    let(:parent_scope) { create(:scope, organization: organization) }
+    let(:parent_scope) { create(:scope, organization:) }
 
     it "is disabled by default" do
       expect(subject).to be_hide_image_in_popup

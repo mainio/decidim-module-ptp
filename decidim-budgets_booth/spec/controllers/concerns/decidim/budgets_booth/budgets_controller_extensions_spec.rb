@@ -4,7 +4,7 @@ require "spec_helper"
 
 module Decidim
   module BudgetsBooth
-    describe BudgetsControllerExtensions, type: :controller do
+    describe BudgetsControllerExtensions do
       controller(::Decidim::Budgets::BudgetsController) do
         include BudgetsControllerExtensions
       end
@@ -12,24 +12,24 @@ module Decidim
       describe "#index" do
         routes { Decidim::Budgets::Engine.routes }
 
-        let(:user) { create(:user, :confirmed, organization: organization) }
+        let(:user) { create(:user, :confirmed, organization:) }
         let(:organization) { create(:organization) }
-        let(:component) { create(:budgets_component, settings: component_settings, organization: organization) }
+        let(:component) { create(:budgets_component, settings: component_settings, organization:) }
         let(:component_settings_base) { { scopes_enabled: true, scope_id: parent_scope.id } }
         let(:component_settings) { component_settings_base.merge(workflow: "zip_code", votes: "enabled") }
-        let(:parent_scope) { create(:scope, organization: organization) }
+        let(:parent_scope) { create(:scope, organization:) }
         let!(:subscopes) do
           [].tap do |scopes|
-            scopes << create(:scope, name: { en: "123456" }, parent: parent_scope, organization: organization)
-            scopes << create(:scope, name: { en: "789012" }, parent: parent_scope, organization: organization)
-            scopes << create(:scope, name: { en: "345678" }, parent: parent_scope, organization: organization)
+            scopes << create(:scope, name: { en: "123456" }, parent: parent_scope, organization:)
+            scopes << create(:scope, name: { en: "789012" }, parent: parent_scope, organization:)
+            scopes << create(:scope, name: { en: "345678" }, parent: parent_scope, organization:)
           end
         end
         let!(:budgets) do
           [].tap do |list|
-            list << create(:budget, component: component, scope: subscopes[0])
-            list << create(:budget, component: component, scope: subscopes[1])
-            list << create(:budget, component: component, scope: subscopes[2])
+            list << create(:budget, component:, scope: subscopes[0])
+            list << create(:budget, component:, scope: subscopes[1])
+            list << create(:budget, component:, scope: subscopes[2])
           end
         end
         let(:decidim_budgets) { Decidim::EngineRouter.main_proxy(component) }
@@ -61,7 +61,7 @@ module Decidim
             end
 
             context "when user data is set" do
-              let!(:user_data) { create(:user_data, component: component, user: user, metadata: { zip_code: "123456" }) }
+              let!(:user_data) { create(:user_data, component:, user:, metadata: { zip_code: "123456" }) }
 
               before do
                 sign_in user, scope: :user

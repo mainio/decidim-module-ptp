@@ -4,13 +4,13 @@ require "spec_helper"
 
 module Decidim
   module Budgets
-    describe UserDataController, type: :controller do
+    describe UserDataController do
       routes { Decidim::Budgets::Engine.routes }
 
       include_context "with scoped budgets"
 
       let(:projects_count) { 5 }
-      let(:user) { create(:user, :confirmed, organization: organization) }
+      let(:user) { create(:user, :confirmed, organization:) }
       let(:decidim_budgets) { Decidim::EngineRouter.main_proxy(component) }
       let(:votes) { "enabled" }
 
@@ -32,7 +32,7 @@ module Decidim
         let(:active_step_id) { component.participatory_space.active_step.id }
 
         before do
-          component.update!(settings: component_settings.merge(workflow: "zip_code"), step_settings: { active_step_id => { votes: votes } })
+          component.update!(settings: component_settings.merge(workflow: "zip_code"), step_settings: { active_step_id => { votes: } })
         end
 
         context "when not authenticated" do
@@ -43,8 +43,8 @@ module Decidim
         end
 
         context "when voted" do
-          let!(:order) { create(:order, :with_projects, user: user, budget: budgets.first) }
-          let!(:user_data) { create(:user_data, component: component, user: user, metadata: { zip_code: "10004" }) }
+          let!(:order) { create(:order, :with_projects, user:, budget: budgets.first) }
+          let!(:user_data) { create(:user_data, component:, user:, metadata: { zip_code: "10004" }) }
 
           before do
             order.update!(checked_out_at: Time.current)

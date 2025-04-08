@@ -5,7 +5,7 @@ require "spec_helper"
 module Decidim
   module Smsauth
     module Verification
-      describe AuthorizationsController, type: :controller do
+      describe AuthorizationsController do
         routes { Decidim::Smsauth::Verification::Engine.routes }
         let(:phone_country) { "FI" }
         let(:phone_number) { "4577541254" }
@@ -13,9 +13,9 @@ module Decidim
           create(
             :authorization,
             :pending,
-            user: user,
+            user:,
             name: "smsauth_id",
-            metadata: { phone_number: phone_number, phone_country: phone_country },
+            metadata: { phone_number:, phone_country: },
             unique_id: "Dummy unique id",
             verification_metadata: { verification_code: "123456" },
             verification_attachment: nil
@@ -33,11 +33,11 @@ module Decidim
 
             it "does not send the sms" do
               put :resend_code, params: {
-                user: user,
+                user:,
                 handler_name: "smsauth_id",
-                phone_number: phone_number,
-                phone_country: phone_country,
-                organization: organization
+                phone_number:,
+                phone_country:,
+                organization:
               }
               expect(flash[:error]).to be_present
               expect(response).to redirect_to("/smsauth_id/authorizations/edit")
@@ -54,10 +54,10 @@ module Decidim
 
             it "does not send the sms" do
               put :resend_code, params: {
-                user: user,
+                user:,
                 handler_name: "smsauth_id",
-                phone_number: phone_number,
-                phone_country: phone_country
+                phone_number:,
+                phone_country:
               }
               expect(flash[:notice]).to be_present
               expect(response).to redirect_to("/smsauth_id/authorizations/edit")
@@ -70,10 +70,10 @@ module Decidim
           context "with correct code" do
             it "updates authorization" do
               put :update, params: {
-                user: user,
+                user:,
                 handler_name: "smsauth_id",
-                phone_number: phone_number,
-                phone_country: phone_country,
+                phone_number:,
+                phone_country:,
                 verification_code: "123456"
               }
               user.reload

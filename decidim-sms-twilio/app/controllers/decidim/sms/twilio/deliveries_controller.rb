@@ -23,8 +23,8 @@ module Decidim
 
         def update_status
           response = JSON.parse(request.body.read)
-          delivery = Delivery&.find_by(sid: response[:sid])
-          delivery.update(status: response[:status])
+          delivery = Delivery&.find_by(sid: response["sid"])
+          delivery.update(status: response["status"])
         end
       end
     end
