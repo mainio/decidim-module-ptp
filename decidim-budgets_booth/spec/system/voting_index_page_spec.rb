@@ -83,7 +83,7 @@ describe "Voting index page", type: :system do
       expect(page).to have_content("You are now in the voting booth.")
       expect(page).to have_content("You decide the #{first_budget.title["en"]} budget")
       expect(page).to have_button("Cancel voting")
-      expect(page).to have_content("TOTAL BUDGET €100,000")
+      expect(page).to have_content("TOTAL BUDGET: €100,000")
       expect(page).to have_content("10 PROJECTS")
       expect(page).to have_selector("button", text: "Read more", count: 5)
       expect(page).to have_selector("button", text: "Add to your vote", count: 5)
@@ -96,7 +96,7 @@ describe "Voting index page", type: :system do
 
       it "updates budget summary" do
         within ".budget-summary__total" do
-          expect(page).to have_content("TOTAL BUDGET €100,000")
+          expect(page).to have_content("TOTAL BUDGET: €100,000")
         end
         expect(page).to have_content("ASSIGNED: €25,000")
         within "#order-selected-projects" do
