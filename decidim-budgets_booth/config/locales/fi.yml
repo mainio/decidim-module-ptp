@@ -57,6 +57,8 @@ fi:
           cancel_voting: Poistu äänestyksestä
           choose_budget: Voit päättää budjetista alueella %{budget_title}
           choose_description: Valitse sellaiset hankkeet, joista pidät ja anna äänesi sen jälkeen.
+          total_budget: 'Kokonaisbudjetti: '
+          total_projects: 'Käytettävissä olevat äänet: '
         cancel_voting_modal:
           continue: Jatka äänestystä
           description: Jos poistut äänestyksestä, ääntäsi ei lasketa lopulliseen tulokseen. Jos haluat äänesi vaikuttavan lopputulokseen, palaa takaisin äänestämään.
@@ -68,6 +70,7 @@ fi:
         order_progress:
           ready: Olen valmis
           total_budget: 'Kokonaisbudjetti: '
+          total_projects: 'Käytettävissä olevat äänet: '
           vote: Äänestä
         pre_voting_budget_summary:
           are_you_sure: Haluatko varmasti poistaa äänesi?

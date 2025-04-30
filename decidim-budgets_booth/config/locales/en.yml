@@ -59,6 +59,8 @@ en:
           choose_budget: You decide the %{budget_title} budget
           choose_description: Choose the projects you like and cast your vote at the
             end.
+          total_budget: 'Total budget: '
+          total_projects: 'Total votes: '
         cancel_voting_modal:
           continue: Continue voting
           description: If you cancel your vote, it will not be count for the final
@@ -71,6 +73,7 @@ en:
         order_progress:
           ready: I am ready
           total_budget: 'Total budget: '
+          total_projects: 'Votes remaining: '
           vote: Vote
         pre_voting_budget_summary:
           are_you_sure: Are you sure you want to delete your vote?

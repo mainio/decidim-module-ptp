@@ -57,6 +57,8 @@ fr:
           cancel_voting: Annuler le vote
           choose_budget: Vous décidez du budget
           choose_description: Choisissez les projets que vous aimez et votez à la fin.
+          total_budget: 'Total budget: '
+          total_projects: 'Total votes: '
         cancel_voting_modal:
           continue: Continuer le vote
           description: Si vous annulez votre vote, cela ne sera pas pris en compte pour le résultat final. Afin de faire compter votre vote, veuillez revenir en arrière pour le finaliser et le confirmer.
@@ -68,6 +70,7 @@ fr:
         order_progress:
           ready: I am ready
           total_budget: 'Budget total: '
+          total_projects: 'Votes remaining: '
           vote: Vote
         pre_voting_budget_summary:
           are_you_sure: Êtes-vous sûr de vouloir annuler votre vote ?
