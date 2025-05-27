@@ -8,10 +8,11 @@
   </div>
 </div>
 
-<div class="budget-list">
+<div class="budget-list flex flex-col items-center space-y-8 my-8">
   <%= render partial: "projects_list", locals: { project: } %>
 </div>
 
 <%= decidim_paginate projects %>
+<%= render partial: "budget_excess" %>
 <%= render partial: "cancel_voting_modal" %>
 <%= render partial: "decidim/budgets/partials/voting_help_modal" %>

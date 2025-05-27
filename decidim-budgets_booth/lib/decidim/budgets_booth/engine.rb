@@ -54,10 +54,6 @@ module Decidim
             Decidim::BudgetsBooth::ProjectVoteButtonCellExtensions
           )
 
-          Decidim::Budgets::ProjectLCell.include(
-            Decidim::BudgetsBooth::ProjectLCellExtensions
-          )
-
           Decidim::Budgets::BudgetListItemCell.include(
             Decidim::BudgetsBooth::BudgetListItemCellExtensions
           )

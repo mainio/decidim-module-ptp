@@ -44,9 +44,8 @@ en:
           step3: Cast your vote
           subtitle: You need to cast your vote for it to be counted in the final result.
           title: Your vote has not been cast.
-      project_list_item:
-        ordered_item: This item is added to the your vote.
-        read_more: Read more
+      project_l:
+        explore: Open
       project_vote_button:
         add_to_vote: Add to your vote
         remove_from_vote: Remove from vote
@@ -54,11 +53,13 @@ en:
         budget_confirm:
           is_this_correct: Is this correct?
         budget_summary:
+          assigned: "Assigned: "
           back_to_budgets: Show all budgets
           cancel_voting: Cancel voting
           choose_budget: You decide the %{budget_title} budget
           choose_description: Choose the projects you like and cast your vote at the
             end.
+          total_budget: "Total budget: "
         cancel_voting_modal:
           continue: Continue voting
           description: If you cancel your vote, it will not be count for the final
@@ -91,6 +92,7 @@ en:
             start_voting: Start voting
             title: Welcome to the vote!
           ready: I am ready
+          total_budget: "Total budget: %{amount}"
         project:
           you_voted: You voted for this
         project_modal:

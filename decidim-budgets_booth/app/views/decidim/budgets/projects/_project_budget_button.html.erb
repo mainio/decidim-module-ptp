@@ -1,0 +1,11 @@
+<% if current_user.blank? %>
+  <div id="project-<%= project.id %>-budget-button">
+    <button class="button button__lg w-full button__secondary"
+      data-dialog-open="loginModal"
+      aria-label="<%= t(".added_descriptive", resource_name: translated_attribute(project.title)) %>">
+      <%= t("add", scope: "decidim.budgets.projects.project_budget_button") %>
+    </button>
+  </div>
+<% elsif can_have_order? && !current_order_checked_out? %>
+  <%= cell("decidim/budgets/project_vote_button", project, scale_up: true) %>
+<% end %>

@@ -1,3 +1,13 @@
-<div class="voting-booth-banner callout warning text-center lead margin-bottom-0 font-semibold text-xl">
-  <%= t(".notification") %>
+<div class="voting-booth-banner callout warning text-center lead margin-bottom-0 font-semibold text-xl flex justify-between">
+  <div class="w-3/6 text-center">
+    <%= t(".notification") %>
+  </div>
+
+  <div class="w-3/6 flex justify-center">
+    <%= button_to(decidim_budgets.budgets_path, class: "link m-bottom flex", method: :get) do %>
+      <%= icon "arrow-left-s-line", class: "icon--small h-6 w-6 pt-1", role: "img", "aria-hidden": true %>
+      <%= t("decidim.budgets.budgets.index.cancel_voting") %>
+    <% end %>
+  </div>
 </div>
+
