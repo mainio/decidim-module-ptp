@@ -73,6 +73,9 @@ en:
           ready: I am ready
           total_budget: 'Total budget: '
           vote: Vote
+        order_selected_projects:
+          view: View
+          remove: Remove
         order_progress_summary_content:
           total_budget: Total budget
         pre_voting_budget_summary:
@@ -106,6 +109,10 @@ en:
             continue_voting: Continue voting
             introduction: Want to vote this project?
             start_voting: Start voting
+        selected_projects_modal:
+          choices: Your selection for the vote
+          chosen_intro: You have chosen the following proposals for your vote.
+          continue: Continue voting
       user_data:
         error:
           only_letters: Only letters and digits are allowed.

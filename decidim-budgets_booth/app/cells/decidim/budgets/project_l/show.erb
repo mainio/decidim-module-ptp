@@ -16,9 +16,13 @@
           <%= budget_to_currency(project.budget_amount) %>
         </span>
       </div>
-      <%= link_to resource_path, class: "button button__sm button__secondary budget__card__prevote-explore-button" do %>
-        <span><%= t(".explore") %></span>
-        <%= icon "arrow-right-line" %>
+      <% if voting_mode? %>
+        <%= cell("decidim/budgets/project_vote_button", model) %>
+      <% else %>
+        <%= link_to resource_path, class: "button button__sm button__secondary budget__card__prevote-explore-button" do %>
+          <span><%= t(".explore") %></span>
+          <%= icon "arrow-right-line" %>
+        <% end %>
       <% end %>
     </div>
   </div>

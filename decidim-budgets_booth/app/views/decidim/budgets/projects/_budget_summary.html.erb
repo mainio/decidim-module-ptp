@@ -10,18 +10,21 @@
     </div>
   <% end %>
 </div>
+
 <% if voting_mode? %>
-  <div class="card budget-summary" data-progress-reference data-safe-url="<%= budget_url(budget) %>">
-    <div class="card__content">
-      <h2 class="heading3">
+  <div class="card budget-summary flex items-center" data-progress-reference data-safe-url="<%= budget_url(budget) %>">
+    <div class="card__content my-8 flex flex-col space-y-4 text-left w-4/6">
+      <h1 class="h1">
         <%= t(".choose_budget", budget_title: translated_attribute(budget.title)) %>
-      </h2>
-      <p>
+      </h1>
+      <p class="text-lg">
         <%= t(".choose_description") %>
       </p>
+    </div>
 
+    <div class="vote-progress-container p-4 w-4/6">
       <% if current_order.projects_rule? %>
-        <div class="budget-summary__total" data-total-allocation="<%= current_order.available_allocation %>">
+        <div class="budget-summary__total text-left text-lg font-bold" data-total-allocation="<%= current_order.available_allocation %>">
           <span class="mini-title"><%= t(".total_projects") %>
             <strong class="mini-title__strong mini-title__strong--highlight">
               <%= current_order.maximum_projects %>
@@ -29,7 +32,7 @@
           </span>
         </div>
       <% else %>
-        <div class="budget-summary__total" data-total-allocation="<%= current_order.available_allocation %>" data-total-budget="<%= budget.total_budget %>">
+        <div class="budget-summary__total text-left text-lg font-bold my-2" data-total-allocation="<%= current_order.available_allocation %>" data-total-budget="<%= budget.total_budget %>">
           <span class="mini-title"><%= t(".total_budget") %>
             <strong class="mini-title__strong mini-title__strong--highlight">
               <%= budget_to_currency(budget.total_budget) %>
@@ -40,15 +43,15 @@
 
       <%= render partial: "order_progress" %>
 
-      <div>
+      <div class="text-left mt-4 text-lg font-bold">
         <span class="mini-title">
           <%= t(".assigned") %>
           <%= render partial: "order_total_budget" %>
         </span>
       </div>
-    </div>
 
-    <%= render partial: "order_selected_projects" %>
+      <%= render partial: "order_selected_projects" %>
+    </div>
   </div>
 <% else %>
   <% if current_order_checked_out? %>

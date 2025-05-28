@@ -1,8 +1,7 @@
 $(() => {
   const checkProgressPosition = () => {
     let progressFix = document.querySelector("[data-progressbox-fixed]"),
-        progressRef = document.querySelector("[data-progress-reference]"),
-        progressVisibleClass = "is-progressbox-visible";
+        progressRef = document.querySelector("[data-progress-reference]")
 
     if (!progressRef || !progressFix) {
       return;
@@ -10,9 +9,9 @@ $(() => {
 
     let progressPosition = progressRef.getBoundingClientRect().bottom;
     if (progressPosition > 0) {
-      progressFix.classList.remove(progressVisibleClass);
+      progressFix.classList.add("hidden");
     } else {
-      progressFix.classList.add(progressVisibleClass);
+      progressFix.classList.remove("hidden");
     }
   }
 

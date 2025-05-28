@@ -27,5 +27,5 @@
   </div>
 </div>
 <%= render partial: "decidim/budgets/partials/voting_help_modal" unless current_workflow.try(:disable_voting_instructions?) %>
-
+<%= render partial: "decidim/budgets/projects/selected_projects_modal" if voting_mode? && !voting_finished? %>
 <%= append_javascript_pack_tag("decidim_budgets_booth_voting") %>
