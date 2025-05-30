@@ -136,6 +136,14 @@
 
 .budget-list__item {
   @apply w-4/6 border flex justify-between;
+
+  .explore-link {
+    @apply w-48 bg-background;
+  }
+
+  .selected-project {
+    @apply bg-gray-3;
+  }
 }
 
 .budget__card__prevote {
@@ -204,3 +212,8 @@
 .budget-summary__selected-item > div:nth-child(3) {
   @apply w-3/12 h-10;
 }
+
+.project-vote-button-container {
+  @apply fill-[--primary];
+}
+

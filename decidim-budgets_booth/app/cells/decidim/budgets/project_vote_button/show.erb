@@ -1,23 +1,27 @@
 <%= action_authorized_button_to "vote",
-                                budget_order_line_item_path(model.budget, project_id: model, show_only_added: options[:show_only_added]),
-                                method: vote_button_method,
-                                remote: true,
-                                class: "button #{scale_up} customized-budget display-block project-vote-button",
-                                data: {
-                                  add: !resource_added?,
-                                  disable: true,
-                                  budget: model.budget_amount,
-                                  project_id: model.id,
-                                  allocation: resource_allocation,
-                                  "redirect-url": budget_voting_index_path
-                                },
-                                disabled: vote_button_disabled?,
-                                title: vote_button_label do %>
-  <% if resource_added? %>
-     <%= t("added", scope: "decidim.budgets.projects.project_budget_button") %>
-     <%= icon "checkbox-circle-line", class: "inline-block" %>
-  <% else %>
-     <%= t("add", scope: "decidim.budgets.projects.project_budget_button") %>
-     <%= icon "add-fill", class: "inline-block" %>
-  <% end %>
+                              budget_order_line_item_path(model.budget, project_id: model, show_only_added: options[:show_only_added]),
+                              method: vote_button_method,
+                              remote: true,
+                              class: "button button__transparent-secondary px-4 py-2 #{scale_up} customized-budget display-block project-vote-button",
+                              data: {
+                                 add: !resource_added?,
+                                 disable: true,
+                                 budget: model.budget_amount,
+                                 project_id: model.id,
+                                 allocation: resource_allocation,
+                                 "redirect-url": budget_voting_index_path
+                              },
+                              disabled: vote_button_disabled?,
+                              title: vote_button_label do %>
+   <% if resource_added? %>
+      <div class="project-vote-button-container">
+         <%= t("added", scope: "decidim.budgets.projects.project_budget_button") %>
+         <%= icon "delete-bin-line", class: "inline-block" %>
+      </div>
+   <% else %>
+      <div class="project-vote-button-container">
+         <%= t("add", scope: "decidim.budgets.projects.project_budget_button") %>
+         <%= icon "checkbox-circle-line", class: "inline-block" %>
+      </div>
+   <% end %>
 <% end %>

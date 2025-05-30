@@ -6,7 +6,7 @@
     <%= translated_attribute project.description %>
   <% end %>
 
-  <div class="explore-link p-4">
+  <div class="explore-link <%= "selected-project" if (voting_mode? && resource_added?) %> p-4">
     <div class="budget__card__prevote">
       <div class="budget__card__highlight-prevote__header">
         <span class="budget__card__highlight-prevote__text">
@@ -17,7 +17,9 @@
         </span>
       </div>
       <% if voting_mode? %>
-        <%= cell("decidim/budgets/project_vote_button", model) %>
+        <div class="flex justify-center items-center py-2">
+          <%= cell("decidim/budgets/project_vote_button", model) %>
+        </div>
       <% else %>
         <%= link_to resource_path, class: "button button__sm button__secondary budget__card__prevote-explore-button" do %>
           <span><%= t(".explore") %></span>
