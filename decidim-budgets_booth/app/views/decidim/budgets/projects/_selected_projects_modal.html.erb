@@ -8,7 +8,7 @@
   <div data-dialog-container>
     <ul class="budget-summary__selected-list divide-y border">
       <% current_order.projects.each do |project| %>
-        <li class="budget-summary__selected-item h-10 flex justify-center items-center">
+        <li class="budget-summary__selected-item h-12 flex justify-center items-center">
           <div class="border-r text-center flex items-center justify-center font-bold text-lg">
             <%= translated_attribute(project.title) %>
           </div>
@@ -18,8 +18,9 @@
             </strong>
           </div>
           <% unless current_order_checked_out? %>
-            <div class="text-center flex items-center justify-center">
-              <%= button_to budget_order_line_item_path(project_id: project), method: :delete, remote: true, data: { disable: true }, form: { style: "display: inline" } do %>
+            <div class="flex justify-center items-center">
+              <%= button_to budget_order_line_item_path(project_id: project), method: :delete, remote: true, data: { disable: true }, form: { style: "display: inline" }, class: "h-8 w-full flex button button__lg button__transparent-secondary rounded-none" do %>
+                <%= t(".remove") %>
                 <%= icon("delete-bin-line", aria_label: t("decidim.budgets.projects.order_selected_projects.remove"), role: "img") %>
               <% end %>
             </div>
@@ -30,8 +31,9 @@
   </div>
 
   <div data-dialog-actions>
-    <button type="button" class="button button__lg button__secondary" data-dialog-close="selected-projects">
+    <button type="button" class="button button__lg button__secondary rounded-none text-lg" data-dialog-close="selected-projects">
       <%= t(".continue") %>
+      <%= icon("arrow-right-line", class: "h-6 w-6") %>
     </button>
   </div>
 <% end %>

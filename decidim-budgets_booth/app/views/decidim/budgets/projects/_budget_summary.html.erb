@@ -24,11 +24,9 @@
 
     <div class="vote-progress-container p-4 w-4/6">
       <% if current_order.projects_rule? %>
-        <div class="budget-summary__total text-left text-lg font-bold" data-total-allocation="<%= current_order.available_allocation %>">
-          <span class="mini-title"><%= t(".total_projects") %>
-            <strong class="mini-title__strong mini-title__strong--highlight">
-              <%= current_order.maximum_projects %>
-            </strong>
+        <div class="budget-summary__total text-left text-lg" data-total-allocation="<%= current_order.available_allocation %>">
+          <span class="mini-title">
+            <%= t(".total_projects", max_projects: current_order.maximum_projects).html_safe %>
           </span>
         </div>
       <% else %>
@@ -41,16 +39,18 @@
         </div>
       <% end %>
 
-      <%= render partial: "order_progress" %>
-
-      <div class="text-left mt-4 text-lg font-bold">
-        <span class="mini-title">
-          <%= t(".assigned") %>
-          <%= render partial: "order_total_budget" %>
-        </span>
-      </div>
+      <% unless current_order.projects_rule? %>
+        <div class="text-left mt-4 text-lg font-bold">
+          <span class="mini-title">
+            <%= t(".assigned") %>
+            <%= render partial: "order_total_budget" %>
+          </span>
+        </div>
+      <% end %>
 
       <%= render partial: "order_selected_projects" %>
+
+      <%= render partial: "order_progress" %>
     </div>
   </div>
 <% else %>

@@ -7,7 +7,7 @@ $(() => {
       return;
     }
 
-    let progressPosition = progressRef.getBoundingClientRect().bottom;
+    let progressPosition = progressRef.getBoundingClientRect().top + 145;
     if (progressPosition > 0) {
       progressFix.classList.add("hidden");
     } else {

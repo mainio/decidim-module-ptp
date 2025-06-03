@@ -35,14 +35,6 @@ fr:
           ok: OK
           title: Your vote in %{budget_title}
           total_budget: 'Total budget: '
-      partials:
-        voting_help_modal:
-          confirm: C'est compris!
-          step1: Choisir le projet
-          step2: Confirmez votre vote
-          step3: Voter
-          subtitle: Vous devez confirmer votre vote pour qu'il soit compté dans le résultat final.
-          title: Le vote n'a pas été confirmé.
       project_list_item:
         ordered_item: This item is added to the your vote.
         read_more: En savoir plus

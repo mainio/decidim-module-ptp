@@ -1,20 +1,13 @@
 var $orderSelectedProjectsCount = $('#order-selected-projects-count');
-var $orderProgress = document.querySelectorAll('[id^=order-progress] .budget-summary__content');
+var $orderProgress = $('#order-progress');
 var $projectItem = $('#project-<%= project.id %>-item');
 var $budgetConfirm = $('#budget-confirm');
 var $projectBudgetButton = $('#project-<%= project.id %>-budget-button');
 var $projectModal = $('#project-modal-<%= project.id %>');
 
-$orderProgress.forEach((orderProgress) => {
-  var $orderTotalBudget = $(orderProgress).find("[id^=order-total-budget]");
-  $orderTotalBudget.html('<%= j(render partial: "decidim/budgets/projects/order_total_budget").strip.html_safe %>');
-
-  if(orderProgress.dataset.orderProgressResponsive) {
-    morphdom(orderProgress, '<%= j(render partial: "decidim/budgets/projects/order_progress_summary_content", locals: { include_heading: true, responsive: true }).strip.html_safe %>');
-  } else {
-    morphdom(orderProgress, '<%= j(render partial: "decidim/budgets/projects/order_progress_summary_content", locals: { include_heading: true, responsive: false }).strip.html_safe %>');
-  }
-})
+if ($orderProgress) {
+  morphdom($orderProgress[0], '<%= j(render partial: "decidim/budgets/projects/order_progress").strip.html_safe %>');
+}
 morphdom($budgetConfirm[0], '<%= j(render partial: "decidim/budgets/projects/budget_confirm").strip.html_safe %>')
 if ($orderSelectedProjectsCount.length > 0) {
   morphdom($orderSelectedProjectsCount[0], '<%= j(render partial: "decidim/budgets/projects/projects_count", locals: { count: current_order.projects.size }).strip.html_safe %>')
@@ -28,21 +21,10 @@ if ($projectItem.length > 0) {
   <% end %>
 }
 
-if ($projectModal.length > 0) {
-  var $projectModalButtonForm = $(".project-vote-button", $projectModal).parent();
-  morphdom($projectModalButtonForm[0], '<%= j(cell("decidim/budgets/project_vote_button", project, scale_up: true)).strip.html_safe %>');
-}
-
 if ($projectModal.length > 0 && $projectModal.attr("aria-hidden") === "false") {
   $(".project-vote-button", $projectModal).focus();
 } else {
   $(".project-vote-button", $projectItem).focus();
 }
 
-<% if @show_help_modal %>
-  var $modal = $("#voting-help");
-
-  if ($modal.length > 0) {
-    window.Decidim.currentDialogs["voting-help"].open();
-  }
-<% end %>
+window.DecidimBudgets.checkProgressPosition();

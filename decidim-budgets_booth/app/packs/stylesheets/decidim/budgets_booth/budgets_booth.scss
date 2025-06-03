@@ -61,7 +61,7 @@
 
 .budget-list{
   &__item{
-    @apply mb-8 block md:mb-0 md:block;
+    @apply mb-8 block md:mb-0 md:block border-background;
   }
 
   &__data{
@@ -138,11 +138,11 @@
   @apply w-4/6 border flex justify-between;
 
   .explore-link {
-    @apply w-48 bg-background;
+    @apply w-48 bg-[#f2fcfd];
   }
 
   .selected-project {
-    @apply bg-gray-3;
+    @apply w-48 bg-[#e1fae8];
   }
 }
 
@@ -178,6 +178,14 @@
 
 .voting-rules {
   @apply text-xl my-4 w-4/6 mx-auto;
+
+  .link {
+    @apply text-lg font-semibold text-[--primary];
+  }
+
+  svg {
+    @apply pt-0 fill-[--primary];
+  }
 }
 
 .projects-link {
@@ -185,7 +193,7 @@
 }
 
 .project-info {
-  @apply h-72 w-80 mt-24;
+  @apply h-72 w-80 mt-24 bg-[#f2fcfd];
 
   .definition-data__title {
     @apply text-lg text-center;
@@ -201,19 +209,72 @@
 }
 
 .vote-progress-container {
-  @apply bg-background;
+  @apply bg-[#f2fcfd];
 }
 
 .budget-summary__selected-item > div:nth-child(1) {
-  @apply w-6/12 h-10;
+  @apply w-6/12 h-12;
 }
 
 .budget-summary__selected-item > div:nth-child(2),
 .budget-summary__selected-item > div:nth-child(3) {
-  @apply w-3/12 h-10;
+  @apply w-3/12 h-12;
 }
 
 .project-vote-button-container {
   @apply fill-[--primary];
 }
 
+#budget-confirm[data-dialog] [data-dialog-container] > :last-child {
+  @apply col-span-2 col-start-1;
+}
+
+#budgets.card__list-list {
+  .card__highlight {
+    .budget__card__highlight-vote {
+      @apply bg-[#f2fcfd];
+    }
+  }
+}
+
+.progress-meter.budget-progress__meter {
+  @apply bg-[#58a491];
+
+  > span {
+    @apply text-black;
+  }
+}
+
+.progress-meter-text.progress-meter-text--right {
+  @apply right-1/4 pr-20 absolute;
+
+  &--fixed {
+    @apply right-1/4 pr-20 absolute;
+  }
+}
+
+.project-vote-button {
+  @apply rounded-none;
+}
+
+.budget-summary__progressbox--fixed {
+  @apply p-0;
+}
+
+.budget-summary__selected {
+  p {
+    @apply text-[--primary] font-semibold;
+  }
+
+  svg {
+    @apply fill-[--primary];
+  }
+}
+
+.budget-summary__progressbox > button {
+  @apply rounded-none;
+}
+
+.cancel-vote-button-container > * {
+  @apply rounded-none;
+}

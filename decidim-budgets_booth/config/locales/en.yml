@@ -36,14 +36,6 @@ en:
           ok: OK
           title: Your vote in %{budget_title}
           total_budget: 'Total budget: '
-      partials:
-        voting_help_modal:
-          confirm: I understand how to vote
-          step1: Pick the project
-          step2: Confirm your vote
-          step3: Cast your vote
-          subtitle: You need to cast your vote for it to be counted in the final result.
-          title: Your vote has not been cast.
       project_l:
         explore: Open
       project_vote_button:
@@ -60,6 +52,7 @@ en:
           choose_description: Choose the projects you like and cast your vote at the
             end.
           total_budget: "Total budget: "
+          total_projects: "Total projects: "
         cancel_voting_modal:
           continue: Continue voting
           description: If you cancel your vote, it will not be count for the final
@@ -73,6 +66,7 @@ en:
           ready: I am ready
           total_budget: 'Total budget: '
           vote: Vote
+          total_projects: "Total projects: "
         order_selected_projects:
           view: View
           remove: Remove

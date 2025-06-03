@@ -35,14 +35,6 @@ fi:
           ok: OK
           title: Äänesi alueella %{budget_title}
           total_budget: 'Kokonaisbudjetti: '
-      partials:
-        voting_help_modal:
-          confirm: Ymmärrän, kuinka äänestän
-          step1: Valitse hanke
-          step2: Vahvista äänesi
-          step3: Anna äänesi
-          subtitle: Sinun on annettava äänesi, jotta se lasketaan lopullisiin tuloksiin.
-          title: Et ole vielä antanut ääntäsi.
       project_l:
         explore: Tutustu
       project_vote_button:
@@ -57,7 +49,8 @@ fi:
           choose_budget: Voit päättää budjetista alueella %{budget_title}
           choose_description: Valitse sellaiset hankkeet, joista pidät ja anna äänesi sen jälkeen.
           total_budget: "Alueen kokonaisbudjetti: "
-          assigned: "Annettu: "
+          total_projects: "Projektien määrä: "
+          assigned: "Käytetty: "
         cancel_voting_modal:
           continue: Jatka äänestystä
           description: Jos poistut äänestyksestä, ääntäsi ei lasketa lopulliseen tulokseen. Jos haluat äänesi vaikuttavan lopputulokseen, palaa takaisin äänestämään.
@@ -70,6 +63,7 @@ fi:
           ready: Olen valmis
           total_budget: 'Kokonaisbudjetti: '
           vote: Äänestä
+          total_projects: "Projektien määrä: "
         order_selected_projects:
           view: Katso
           remove: Poista

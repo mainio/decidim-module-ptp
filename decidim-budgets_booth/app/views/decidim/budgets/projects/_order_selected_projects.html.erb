@@ -1,11 +1,21 @@
 <div class="my-4" id="order-selected-projects">
   <% if current_order&.projects&.any? %>
-    <div class="card__content budget-summary__selected">
-      <button class="flex gap-2" data-dialog-open="selected-projects">
-        <strong class="text-lg"><%= current_order.projects.size %></strong>
-        <p class="text-lg"> <%= t(".selected_projects", count: current_order.projects.size) %> </p>
-        <%= icon("menu-line", class:"icon--small mt-1", aria_label: t(".view"), role: "img") %>
-      </button>
-    </div>
+    <% if current_order.projects_rule? %>
+      <div class="card__content budget-summary__selected">
+        <button class="flex gap-2" data-dialog-open="selected-projects">
+          <strong class="text-lg pr-6"><%= t(".choices") %><%= current_order.projects.size %></strong>
+          <p class="text-lg"> <%= t(".show_choices") %> </p>
+          <%= icon("menu-line", class:"icon--small mt-1", aria_label: t(".view"), role: "img") %>
+        </button>
+      </div>
+    <% else %>
+      <div class="card__content budget-summary__selected">
+        <button class="flex gap-2" data-dialog-open="selected-projects">
+          <strong class="text-lg"><%= current_order.projects.size %></strong>
+          <p class="text-lg"> <%= t(".selected_projects", count: current_order.projects.size) %> </p>
+          <%= icon("menu-line", class:"icon--small mt-1", aria_label: t(".view"), role: "img") %>
+        </button>
+      </div>
+    <% end %>
   <% end %>
 </div>
