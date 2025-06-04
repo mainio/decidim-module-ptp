@@ -112,10 +112,6 @@ fr:
           not_open_warning: Le vote n'est pas autorisé.
         index:
           sign_in_first: Vous devez vous connecter pour commencer à voter.
-        thanks_message_modal:
-          close: Fermer
-          continue: Continuer
-          title: Merci pour votre vote!
         vote_completed_modal:
           close: Close
           continue: Continue

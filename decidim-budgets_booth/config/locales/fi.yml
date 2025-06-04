@@ -27,6 +27,14 @@ fi:
       budgets_list:
         no_budgets_found: Äänestettäviä budjetteja ei löytynyt postinumerollasi. Voit vaihtaa postinumeroasi, jos se on väärin tai voit yrittää myöhemmin uudestaan.
         vote: Näytä
+      order:
+        status:
+          continue_voting: Jatka äänestämistä muilla alueilla
+          title: "Äänestys onnistui alueella %{budget}"
+          view_votes:
+            one: Näytä ääni
+            other: Näytä äänet
+          votes_info: Äänesi on nyt kirjattu alueella %{budget_name}. Voit halutessasi jatkaa äänestystä muilla alueilla tai kirjautua ulos palvelusta.
       orders:
         modal:
           assigned: 'Käytetty: '
@@ -35,6 +43,9 @@ fi:
           ok: OK
           title: Äänesi alueella %{budget_title}
           total_budget: 'Kokonaisbudjetti: '
+        status_summary_modal:
+          title: Valitut ehdotukset
+          close: Sulje
       project_l:
         explore: Tutustu
       project_vote_button:
@@ -123,10 +134,6 @@ fi:
           not_open_warning: Äänestäminen ei ole sallittua.
         index:
           sign_in_first: Sinun täytyy kirjautua sisään äänestääksesi.
-        thanks_message_modal:
-          close: Sulje
-          continue: Jatka
-          title: Kiitos äänestäsi!
         vote_completed_modal:
           close: Sulje
           continue: Jatka
@@ -151,6 +158,11 @@ fi:
               zip_code: 'Äänestä postinumeron perusteella: mahdollistaa äänestyksen budjeteissa, jotka täsmäävät käyttäjän postinumeron kanssa.'
   layouts:
     decidim:
+      shared:
+        layout_center:
+          selected_projects: Näytä valinnat
+          view: Katso
+          log_out: Kirjaudu ulos
       budgets:
         voting_notification:
           notification: Olet nyt äänestyskopissa.

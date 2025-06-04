@@ -1,7 +1,6 @@
 <% add_decidim_page_title component_name %>
 <%= append_javascript_pack_tag "decidim_budgets" %>
 <%= append_stylesheet_pack_tag "decidim_budgets", media: "all" %>
-<%= append_javascript_pack_tag "decidim_budgets_booth_budgets" %>
 
 <% content_for :aside do %>
   <h1 class="title-decorator"><%= component_name %></h1>
@@ -21,9 +20,6 @@
   <section class="layout-main__section layout-main__heading">
     <%= cell("decidim/budgets/budgets_list", current_workflow) %>
   </section>
-
-  <%= render partial: "decidim/budgets/voting/thanks_message_modal" if vote_success_content.present? && !voted_all_budgets? %>
-  <% handle_thanks_popup %>
 
   <% budgets.each do |budget| %>
     <%= render partial: "decidim/budgets/orders/modal", locals: {budget: budget, projects: budget.projects } if voted_this?(budget) %>

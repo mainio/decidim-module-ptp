@@ -10,10 +10,10 @@
   </div>
   <div data-dialog-actions>
     <div class="columns medium-8 medium-offset-2 cancel-vote-button-container">
-      <button class="button button__sm hollow button__secondary" data-dialog-close="cancel-voting" type="button">
+      <button class="button button__sm button__secondary" data-dialog-close="cancel-voting" type="button">
         <%= t(".continue") %>
       </button>
-      <%= link_to t(".exit"), voting_booth_forced? ? cancel_redirect_path : budgets_path, id: "exit-notification-link", class: "button button__sm hollow button__transparent-secondary" %>
+      <%= link_to t(".exit"), voting_booth_forced? ? cancel_redirect_path : budgets_path, id: "exit-notification-link", class: "button button__sm button__transparent-secondary" %>
     </div>
   </div>
 <% end %>

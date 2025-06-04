@@ -61,7 +61,7 @@ edit_link(
           <%= cell("decidim/budgets/project_voted_hint", project, class: "display-block") %>
         <% elsif voting_open? && !current_order_checked_out? %>
           <span class="text-wrap text-lg mb-4"><%= t(".pre_vote.introduction") %></span>
-          <%= link_to budget_voting_index_path(select_project: project.id), class: "button button__sm hollow button__secondary prevote-start-button" do %>
+          <%= link_to budget_voting_index_path(select_project: project.id), class: "button button__sm button__secondary prevote-start-button" do %>
             <span class="text-wrap"><%= progress?(budget) ? t(".pre_vote.continue_voting") : t(".pre_vote.start_voting") %></span>
           <% end %>
         <% else %>

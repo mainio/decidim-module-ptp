@@ -12,10 +12,10 @@
           <ul class="budget-confirm__selected-list divide-y border w-full">
             <% current_order.projects.each do |project| %>
               <li class="budget-confirm__selected-item h-12 flex">
-                <div class="pl-6 h-12 w-4/6 border-r text-center flex items-center justify-start font-bold text-lg">
+                <div class="pl-6 h-12 w-4/6 border-r text-center flex items-center justify-start font-bold text-xl">
                   <%= translated_attribute(project.title) %>
                 </div>
-                <div class="h-12 w-2/6 text-center flex items-center justify-center text-lg">
+                <div class="h-12 w-2/6 text-center flex items-center justify-center text-xl">
                   <strong class="budget-confirm__selected-number">
                     <%= budget_to_currency project.budget_amount %>
                   </strong>

@@ -1,0 +1,36 @@
+<%= decidim_modal id: "status-summary", class:"verification-modal" do %>
+  <% if current_order.present? %>
+    <div data-dialog-container>
+      <%= icon "check-double-line" %>
+      <h3 class="h3" id="dialog-title-budget-confirm" data-dialog-title>
+        <%= t(".title") %>
+      </h3>
+      <div class="my-8">
+        <% if current_order.present? %>
+          <h4 class="h4 mb-4"><%= translated_attribute(budget.title) %></h4>
+          <ul class="status-summary__selected-list divide-y border w-full">
+            <% current_order.projects.each do |project| %>
+              <li class="status-summary__selected-item h-12 flex">
+                <div class="pl-6 h-12 w-4/6 border-r text-center flex items-center justify-start font-bold text-xl">
+                  <%= translated_attribute(project.title) %>
+                </div>
+                <div class="h-12 w-2/6 text-center flex items-center justify-center text-xl">
+                  <strong class="status-summary__selected-number">
+                    <%= budget_to_currency project.budget_amount %>
+                  </strong>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
+    </div>
+
+    <div data-dialog-actions>
+
+      <button class="button button__sm md:button__lg button__transparent-secondary rounded-none" data-dialog-close="status-summary">
+        <%= t(".close") %>
+      </button>
+    </div>
+  <% end %>
+<% end %>

@@ -3,7 +3,7 @@
     <% if current_order.projects_rule? %>
       <div class="card__content budget-summary__selected">
         <button class="flex gap-2" data-dialog-open="selected-projects">
-          <strong class="text-lg pr-6"><%= t(".choices") %><%= current_order.projects.size %></strong>
+          <strong class="text-lg pr-6"><%= t(".choices") %><%= current_order.maximum_projects - current_order.projects.size %></strong>
           <p class="text-lg"> <%= t(".show_choices") %> </p>
           <%= icon("menu-line", class:"icon--small mt-1", aria_label: t(".view"), role: "img") %>
         </button>

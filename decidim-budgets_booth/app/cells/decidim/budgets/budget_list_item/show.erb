@@ -19,7 +19,7 @@
             <%= decidim_sanitize_editor html_truncate(translated_attribute(budget.description), length: 65, separator: "...") %>
           </div>
 
-          <%= link_to_budget budget, class: "button small hollow show_votes" do %>
+          <%= link_to_budget budget, class: "button small show_votes" do %>
             <span class="text-wrap">
               <%= generate_text_for(budget)%>
             </span>

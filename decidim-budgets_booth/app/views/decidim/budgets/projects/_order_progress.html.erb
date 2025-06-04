@@ -8,7 +8,7 @@
       </div>
     </div>
     <% if !current_order_checked_out? && voting_open? %>
-      <button class="button button__sm hollow button__secondary" data-dialog-open="budget-confirm" <%= budget_confirm_disabled_attr %>>
+      <button class="button button__sm button__secondary" data-dialog-open="budget-confirm" <%= budget_confirm_disabled_attr %>>
         <%= voting_booth_forced? ? t(".vote") : t(".ready") %>
         <%= icon("arrow-right-line") %>
       </button>
@@ -20,11 +20,17 @@
       <div class="budget-summary__progressbox budget-summary__progressbox--fixed">
         <% if current_order.projects_rule? %>
           <div class="card__content budget-summary__selected">
-            <button class="flex gap-2" data-dialog-open="selected-projects">
-              <strong class="text-lg pr-6 pb-4"><%= t(".choices") %><%= current_order.projects.size %></strong>
-              <p class="text-lg"> <%= t(".show_choices") %> </p>
-              <%= icon("menu-line", class:"icon--small mt-1", aria_label: t(".view"), role: "img") %>
-            </button>
+            <% if current_order&.projects&.any? %>
+              <button class="flex gap-2" data-dialog-open="selected-projects">
+                <strong class="text-lg pr-6 pb-4"><%= t(".choices") %><%= current_order.maximum_projects - current_order.projects.size %></strong>
+                <p class="text-lg"> <%= t(".show_choices") %> </p>
+                <%= icon("menu-line", class:"icon--small mt-1", aria_label: t(".view"), role: "img") %>
+              </button>
+            <% else %>
+              <div class="flex items-start justify-start">
+                <strong class="text-lg pr-6 pb-4"><%= t(".choices") %><%= current_order.maximum_projects - current_order.projects.size %></strong>
+              </div>
+            <% end %>
           </div>
         <% else %>
           <div class="budget-summary__total text-left text-lg font-bold my-2" data-total-allocation="<%= current_order.available_allocation %>" data-total-budget="<%= budget.total_budget %>">
@@ -53,10 +59,10 @@
           </div>
         </div>
         <% if !current_order_checked_out? && voting_open? %>
-      <button class="button button__sm hollow button__secondary" data-dialog-open="budget-confirm" <%= budget_confirm_disabled_attr %>>
-        <%= voting_booth_forced? ? t(".vote") : t(".ready") %>
-        <%= icon("arrow-right-line") %>
-      </button>
+          <button class="button button__sm button__secondary" data-dialog-open="budget-confirm" <%= budget_confirm_disabled_attr %>>
+            <%= voting_booth_forced? ? t(".vote") : t(".ready") %>
+            <%= icon("arrow-right-line") %>
+          </button>
         <% end %>
       </div>
     </div>

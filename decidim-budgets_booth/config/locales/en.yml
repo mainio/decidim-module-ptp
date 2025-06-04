@@ -28,6 +28,15 @@ en:
         no_budgets_found: No budgets were found based on your ZIP code. You can change
           your ZIP code if it's not correct, or you can search again later.
         vote: Show
+      order:
+        status:
+          continue_voting: Continue voting
+          title: "You have voted %{budget} successfully"
+          view_votes:
+            one: View vote
+            other: View votes
+          votes_info:
+            one: Your vote for %{budget_name} has been registered. You can continue voting in other budgets or log out.
       orders:
         modal:
           assigned: 'Assigned: '
@@ -36,6 +45,9 @@ en:
           ok: OK
           title: Your vote in %{budget_title}
           total_budget: 'Total budget: '
+        status_summary_modal:
+          title: Valitut ehdotukset
+          close: Sulje
       project_l:
         explore: Open
       project_vote_button:
@@ -137,10 +149,6 @@ en:
           not_open_warning: Voting is not allowed.
         index:
           sign_in_first: You need to sign in to start voting.
-        thanks_message_modal:
-          close: Close
-          continue: Continue
-          title: Thank you for voting!
         vote_completed_modal:
           close: Close
           continue: Continue
@@ -171,6 +179,11 @@ en:
                 matching their entered ZIP code.'
   layouts:
     decidim:
+      shared:
+        layout_center:
+          selected_projects: Show choices
+          view: View
+          log_out: Log out
       budgets:
         voting_notification:
           notification: You are now in the voting booth.

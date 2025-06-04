@@ -5,10 +5,14 @@ module Decidim
   module BudgetsBooth
     module OrdersControllerExtensions
       include ::Decidim::BudgetsBooth::VotingSupport
+
       extend ActiveSupport::Concern
 
       included do
-        helper_method :budget
+        helper_method :budget, :pending_to_vote_budgets
+        helper Decidim::Budgets::BudgetsHelper
+
+        layout "decidim/budgets/voting_layout", only: :status
 
         def checkout
           enforce_permission_to :vote, :project, order: current_order, budget:, workflow: current_workflow
@@ -35,6 +39,8 @@ module Decidim
           end
         end
 
+        def status; end
+
         private
 
         def handle_user_redirect
@@ -43,8 +49,7 @@ module Decidim
             session[:booth_voted_component] = current_component.id
             redirect_to success_redirect_path
           else
-            session[:booth_thanks_message] = true
-            redirect_to decidim_budgets.budgets_path
+            redirect_to status_budget_order_path(budget)
           end
         end
 
