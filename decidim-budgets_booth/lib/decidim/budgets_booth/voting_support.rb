@@ -16,7 +16,6 @@ module Decidim
       def ensure_authenticated
         return true if current_user
 
-        flash[:warning] = t("login_before_access", scope: "decidim.budgets.budgets.index")
         redirect_to decidim.new_user_session_path
       end
 

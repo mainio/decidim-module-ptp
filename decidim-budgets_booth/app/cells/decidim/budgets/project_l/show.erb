@@ -1,33 +1,63 @@
-<div id="project-<%= model.id %>-item" class="budget-list__item">
-  <%= link_to resource_path, class:"p-4" do %>
-    <h3 class="h3 text-secondary inline-block align-middle">
-      <%= decidim_escape_translated(title) %>
-    </h3>
-    <%= translated_attribute project.description %>
-  <% end %>
+<% if voting_mode? %>
+  <div id="project-<%= model.id %>-item" class="budget-list__item">
+    <div class= "p-4 cursor-pointer" data-dialog-open="project-modal-<%= model.id %>">
+      <h3 class="h3 text-secondary inline-block align-middle">
+        <%= decidim_escape_translated(title) %>
+      </h3>
+      <%= translated_attribute project.description %>
+    </div>
 
-  <div class="<%= voting_mode? && resource_added? ? "selected-project" : "explore-link" %> p-4">
-    <div class="budget__card__prevote">
-      <div class="budget__card__highlight-prevote__header">
-        <span class="budget__card__highlight-prevote__text">
-          <%= t("name", scope: "decidim.budgets.admin.models.budget") %>
-        </span>
-        <span class="budget__card__highlight-prevote__number">
-          <%= budget_to_currency(project.budget_amount) %>
-        </span>
-      </div>
-      <% if voting_mode? %>
+    <div class="<%= voting_mode? && resource_added? ? "selected-project" : "explore-link" %> p-4">
+      <div class="budget__card__prevote">
+        <div class="budget__card__highlight-prevote__header">
+          <span class="budget__card__highlight-prevote__text">
+            <%= t("name", scope: "decidim.budgets.admin.models.budget") %>
+          </span>
+          <span class="budget__card__highlight-prevote__number">
+            <%= budget_to_currency(project.budget_amount) %>
+          </span>
+        </div>
+
         <div class="flex justify-center items-center py-2">
           <%= cell("decidim/budgets/project_vote_button", model) %>
         </div>
-      <% else %>
-        <div class="flex justify-center items-center">
-          <%= link_to resource_path, class: "button button__sm button__secondary budget__card__prevote-explore-button" do %>
-            <span><%= t(".explore") %></span>
-            <%= icon "arrow-right-line" %>
-          <% end %>
-        </div>
-      <% end %>
+      </div>
     </div>
   </div>
-</div>
+<% else %>
+  <%= link_to resource_path, class: "w-full" do %>
+    <div id="project-<%= model.id %>-item" class="budget-list__item">
+      <div class= "p-4">
+        <h3 class="h3 text-secondary inline-block align-middle">
+          <%= decidim_escape_translated(title) %>
+        </h3>
+        <%= translated_attribute project.description %>
+      </div>
+
+      <div class="<%= voting_mode? && resource_added? ? "selected-project" : "explore-link" %> p-4">
+        <div class="budget__card__prevote">
+          <div class="budget__card__highlight-prevote__header">
+            <span class="budget__card__highlight-prevote__text">
+              <%= t("name", scope: "decidim.budgets.admin.models.budget") %>
+            </span>
+            <span class="budget__card__highlight-prevote__number">
+              <%= budget_to_currency(project.budget_amount) %>
+            </span>
+          </div>
+          <% if voting_mode? %>
+            <div class="flex justify-center items-center py-2">
+              <%= cell("decidim/budgets/project_vote_button", model) %>
+            </div>
+          <% else %>
+            <div class="flex justify-center items-center">
+              <div class="button button__sm button__secondary budget__card__prevote-explore-button">
+                <span><%= t(".explore") %></span>
+                <%= icon "arrow-right-line" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>

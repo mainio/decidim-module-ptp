@@ -14,14 +14,18 @@
     <% end %>
   </div>
 
-  <div class="row columns w-4/6 mx-auto mt-4">
+  <div id="projects-count" class="row columns w-4/6 mx-auto mt-4 py-6">
     <h2 class="section-heading text-3xl">
       <%= render partial: "count" %>
     </h2>
   </div>
 
-  <div class="row">
-    <div id="projects" class="columns mediumlarge-8 large-9" aria-live="polite">
+  <div class="flex justify-between gap-10 w-4/6 mx-auto mb-6">
+    <div class="border border-background">
+      <%= render partial: "decidim/shared/filters", locals: { filter_sections: , search_variable: :search_text_cont } %>
+    </div>
+
+    <div id="projects" class="columns mediumlarge-8 large-9 w-full pr-4" aria-live="polite">
       <%= render partial: "projects" %>
     </div>
   </div>

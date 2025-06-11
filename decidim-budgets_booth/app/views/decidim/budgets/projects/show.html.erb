@@ -24,8 +24,8 @@ edit_link(
     <% end %>
   </div>
 
-  <div class="flex">
-    <div class="row w-3/6 mx-auto my-4">
+  <div class="flex justify-center gap-8">
+    <div class="row w-3/6 my-4">
       <div class="row columns m-bottom projects-link">
         <%= link_to budget_projects_path(budget), class: "link js-back-to-list flex" do %>
           <%= icon "arrow-left-s-line", class: "icon--small h-6 w-6 pt-1", role: "img", "aria-hidden": true %>
@@ -48,7 +48,7 @@ edit_link(
       <%= comments_for project, polymorphic: [project.budget] %>
     </div>
 
-    <div class="card extra project-info mx-auto flex justify-center items-center">
+    <div class="card extra project-info flex justify-center items-center w-1/6">
       <div class="card__content flex flex-col items-center">
         <div class="m-bottom flex flex-col">
           <span class="definition-data__title"><%= t(".budget") %></span>
@@ -68,7 +68,13 @@ edit_link(
           <%= cell("decidim/budgets/project_voted_hint", project, text_medium: true, class: "success text-m display-block margin-top-1") if current_order_checked_out? && voted_for?(project) %>
         <% end %>
 
-        <%= render partial: "decidim/shared/follow_button", locals: { followable: project, large: false  } %>
+        <div class="border-t w-full mt-4">
+          <div class="flex flex-col w-4/6 gap-2 mx-auto project-action-container">
+            <%= cell "decidim/comments_button", nil %>
+            <%= render partial: "decidim/shared/follow_button", locals: { followable: project, large: false  } %>
+            <%= cell "decidim/share_button", nil, default_classes: false %>
+          </div>
+        </div>
       </div>
     </div>
   </div>

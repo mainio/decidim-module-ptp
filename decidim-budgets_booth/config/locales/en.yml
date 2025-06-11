@@ -86,6 +86,7 @@ en:
           total_budget: Total budget
         pre_voting_budget_summary:
           are_you_sure: Are you sure you want to delete your vote?
+          browse: Browse proposals
           cancel_order: Cancel your vote
           pre_vote:
             casted_description: You have previously voted in this budget. If you want
@@ -177,6 +178,11 @@ en:
             workflow_choices:
               zip_code: 'Vote based on ZIP code: allows participants to vote on budgets
                 matching their entered ZIP code.'
+    shared:
+      filters:
+        search: Search
+        search_bar: Search
+        search_placeholder: Search
   layouts:
     decidim:
       shared:

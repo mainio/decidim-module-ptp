@@ -80,6 +80,7 @@ fi:
           remove: Poista
         pre_voting_budget_summary:
           are_you_sure: Haluatko varmasti poistaa äänesi?
+          browse: Selaa äänestettäviä ehdotuksia
           cancel_order: poistaa äänesi
           pre_vote:
             casted_description: Olet aikaisemmin äänestänyt tästä budjetista. Jos haluat nähdä, kuinka äänestit, paina "Tarkasta äänesi" -painiketta. Voit myös %{cancel_link} ja aloittaa alusta.
@@ -156,6 +157,11 @@ fi:
             voting_terms: Postinumeron syöttämissivulla näytettävät ehdot
             workflow_choices:
               zip_code: 'Äänestä postinumeron perusteella: mahdollistaa äänestyksen budjeteissa, jotka täsmäävät käyttäjän postinumeron kanssa.'
+    shared:
+      filters:
+        search: Hakusana
+        search_bar: Hae
+        search_placeholder: Kirjoita hakusana
   layouts:
     decidim:
       shared:
