@@ -126,6 +126,9 @@ module Decidim
           Decidim::Scope.include(
             Decidim::BudgetsBooth::ScopeExtensions
           )
+          Decidim::Budgets::Order.include(
+            Decidim::BudgetsBooth::OrderExtensions
+          )
 
           # Forms extensions
           Decidim::Budgets::Admin::BudgetForm.include(

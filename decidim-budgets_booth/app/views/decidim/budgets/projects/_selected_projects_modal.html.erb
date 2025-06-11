@@ -9,7 +9,7 @@
     <ul class="budget-summary__selected-list divide-y border">
       <% current_order.projects.each do |project| %>
         <li class="budget-summary__selected-item h-12 flex justify-center items-center">
-          <div class="border-r text-center flex items-center justify-center font-bold text-lg">
+          <div class="border-r pl-2 text-center flex items-center justify-start font-bold text-lg">
             <%= translated_attribute(project.title) %>
           </div>
           <div class="border-r text-center flex items-center justify-center text-lg">
