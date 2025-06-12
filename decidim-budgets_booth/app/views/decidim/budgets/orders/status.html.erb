@@ -8,7 +8,7 @@
     </div>
 
     <h1 class="h1 inline-block mt-12 mb-4">
-      <%= t("title", scope: "decidim.budgets.order.status", budget: translated_attribute(current_order.budget.title)) %>
+      <%= t("title", scope: "decidim.budgets.orders.status", budget: translated_attribute(current_order.budget.title)) %>
     </h1>
 
     <p class="text-lg">
@@ -17,7 +17,7 @@
       <% else %>
         <%= t(
               "votes_info",
-              scope: "decidim.budgets.order.status",
+              scope: "decidim.budgets.orders.status",
               budget_name: translated_attribute(current_order.budget.title)
             ) %>
       <% end %>
@@ -40,9 +40,9 @@
     <%= link_to budgets_path, class: "button button__sm md:button__lg button__secondary" do %>
       <span>
         <% if pending_to_vote_budgets.present? %>
-          <%= t("continue_voting", scope: "decidim.budgets.order.status") %>
+          <%= t("continue_voting", scope: "decidim.budgets.orders.status") %>
         <% else %>
-          <%= t("view_votes", scope: "decidim.budgets.order.status", count: current_order.total_projects) %>
+          <%= t("return", scope: "decidim.budgets.orders.status") %>
         <% end %>
       </span>
       <%= icon "arrow-right-line", class: "fill-current" %>

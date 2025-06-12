@@ -19,6 +19,7 @@ en:
           cancel_voting: Cancel voting
           login_before_access: You need to login first.
           not_allowed: You are not allowed to perform this action.
+          voted: You have already voted for this budget.
       budgets_header:
         based_on_zip_code: Based on your ZIP code - %{zip_code}.
         change_it_here: Change it here
@@ -28,16 +29,13 @@ en:
         no_budgets_found: No budgets were found based on your ZIP code. You can change
           your ZIP code if it's not correct, or you can search again later.
         vote: Show
-      order:
+      orders:
         status:
           continue_voting: Continue voting
           title: "You have voted %{budget} successfully"
-          view_votes:
-            one: View vote
-            other: View votes
+          return: Return to budgets
           votes_info:
             one: Your vote for %{budget_name} has been registered. You can continue voting in other budgets or log out.
-      orders:
         modal:
           assigned: 'Assigned: '
           close: Close window

@@ -19,6 +19,7 @@ fi:
           cancel_voting: Poistu äänestyksestä
           login_before_access: Sinun täytyy kirjautua sisään ensin.
           not_allowed: Tiliäsi ei ole vahvistettu tämän toiminnon suorittamiseen.
+          voted: Olet jo äänestänyt tässä budjetissa.
       budgets_header:
         based_on_zip_code: Perustuen postinumeroosi - %{zip_code}.
         change_it_here: Muuta sitä tästä
@@ -27,15 +28,12 @@ fi:
       budgets_list:
         no_budgets_found: Äänestettäviä budjetteja ei löytynyt postinumerollasi. Voit vaihtaa postinumeroasi, jos se on väärin tai voit yrittää myöhemmin uudestaan.
         vote: Näytä
-      order:
+      orders:
         status:
           continue_voting: Jatka äänestämistä muilla alueilla
           title: "Äänestys onnistui alueella %{budget}"
-          view_votes:
-            one: Näytä ääni
-            other: Näytä äänet
+          return: Palaa aluelistaukseen
           votes_info: Äänesi on nyt kirjattu alueella %{budget_name}. Voit halutessasi jatkaa äänestystä muilla alueilla tai kirjautua ulos palvelusta.
-      orders:
         modal:
           assigned: 'Käytetty: '
           close: Sulje ikkuna

@@ -47,10 +47,9 @@ module Decidim
           if voted_all_budgets?
             session[:booth_vote_completed] = true
             session[:booth_voted_component] = current_component.id
-            redirect_to success_redirect_path
-          else
-            redirect_to status_budget_order_path(budget)
           end
+
+          redirect_to status_budget_order_path(budget)
         end
 
         def reset_workflow
