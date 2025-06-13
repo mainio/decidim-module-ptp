@@ -34,7 +34,9 @@
     </div>
   </div>
 <% else %>
-  <div class="editor-content">
-    <%= decidim_sanitize_editor_admin(landing_page_content) %>
+  <div>
+    <h1 class="h1 text-center">
+      <%= t("decidim.components.budgets.settings.step.votes") %>
+    </h1>
   </div>
 <% end %>

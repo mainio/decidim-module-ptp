@@ -229,9 +229,17 @@
 }
 
 #budgets.card__list-list {
+  @apply mb-40 space-y-40 lg:space-y-8 lg:mb-0;
+
   .card__highlight {
+    @apply flex flex-col space-y-10 lg:space-y-0 lg:flex-row;
+
+    > :not([hidden]) ~ :not([hidden]) {
+      @apply max-[391px]:mt-0 max-[496px]:mt-2.5 mt-10 lg:mt-0;
+    }
+
     .budget__card__highlight-vote {
-      @apply bg-[#f2fcfd];
+      @apply mt-0 bg-[#f2fcfd] w-full min-[1280px]:w-3/12;
     }
   }
 }

@@ -15,11 +15,7 @@
             <% end %>
           <% end%>
 
-          <div class="heading5 margin-bottom-3">
-            <%= decidim_sanitize_editor html_truncate(translated_attribute(budget.description), length: 65, separator: "...") %>
-          </div>
-
-          <%= link_to_budget budget, class: "button small show_votes" do %>
+          <%= link_to_budget budget, class: "button small hollow show_votes" do %>
             <span class="text-wrap">
               <%= generate_text_for(budget)%>
             </span>
@@ -49,25 +45,22 @@
 <% else %>
   <div class="<%= card_class %> card__highlight">
     <div class="card__highlight-text md:w-[70%] p-0">
-      <%= link_to resource_path, class: "p-4" do %>
+      <%= link_to resource_path, class: "max-[391px]:pb-1.5 p-4" do %>
         <h3 class="h3 text-secondary inline-block align-middle">
           <%= decidim_escape_translated(title) %>
         </h3>
         <% if voted? %>
           <%= icon "check-double-line", class: "inline-block align-middle fill-success ml-2 h-[1.5em] w-[1.5em]" %>
         <% end %>
-        <div class="my-2">
-          <%= decidim_sanitize html_truncate(translated_attribute(description), length: 70) %>
-        </div>
         <% unless voted? %>
-          <div class="divide-x-2 divide-gray-3">
+          <div class="divide-x-2 divide-gray-3 pt-2">
             <%= render :projects_count %>
             <%= render :vote_action if voting_context? %>
           </div>
         <% end %>
       <% end %>
       <% if voted? %>
-        <div class="divide-x-2 divide-gray-3 p-4 pt-0">
+        <div class="divide-x-2 divide-gray-3 p-4 pt-2">
           <%= render :projects_count %>
           <%= render :vote_action if voting_context? %>
         </div>
