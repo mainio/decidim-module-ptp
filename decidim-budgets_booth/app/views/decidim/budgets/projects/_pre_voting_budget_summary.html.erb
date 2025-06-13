@@ -1,5 +1,5 @@
 <div class="card budget-summary pre-voting-budget-summary" data-progress-reference data-safe-url="<%= budget_url(budget) %>">
-  <div class="card__content mb-4">
+  <div class="card__content mb-4 px-4 lg:px-0">
     <% if current_order_checked_out? %>
       <h1 class="h1">
         <%= translated_attribute(budget.title) %>
@@ -15,9 +15,9 @@
         <%= translated_attribute(budget.title) %>
       </h1>
       <p class="my-4 font-bold text-2xl"><%= t(".total_budget", amount: budget_to_currency(budget.total_budget)) %></p>
-      <p class="inline-block w-[480px] text-center text-xl">
+      <p class="inline-block text-center text-xl lg:w-[480px]">
         <%= description_text %>
-        <div class="flex justify-center items-center gap-4 mt-4">
+        <div class="flex flex-col mt-4 space-y-4 lg:flex-row lg:justify-center lg:items-center lg:gap-4 lg:space-y-0">
           <button id="show-projects" class="button button__sm button__transparent-secondary h-12 text-xl"><%= t(".browse") %></button>
           <%= button_to budget_voting_index_path, class: "button button__sm button__secondary start-vote-button", method: :get, disabled: !voting_open? do %>
             <%= vote_text %>
