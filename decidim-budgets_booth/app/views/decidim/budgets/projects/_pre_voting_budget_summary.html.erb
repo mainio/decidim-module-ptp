@@ -30,6 +30,6 @@
 </div>
 
 <%= render partial: "decidim/budgets/voting/voted_summary_modal" if current_order_checked_out? %>
-<%= render partial: "decidim/budgets/orders/status_summary_modal" if current_order_checked_out? %>
+<%= render partial: "decidim/budgets/orders/status_summary_modal", locals: { show_delete_button: true } if current_order_checked_out? %>
 
 <%= append_javascript_pack_tag "decidim_budgets_booth_show_projects" %>

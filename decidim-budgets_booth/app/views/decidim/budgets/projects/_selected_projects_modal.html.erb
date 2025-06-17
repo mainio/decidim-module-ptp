@@ -19,8 +19,8 @@
           </div>
           <% unless current_order_checked_out? %>
             <div class="flex justify-center items-center">
-              <%= button_to budget_order_line_item_path(project_id: project), method: :delete, remote: true, data: { disable: true }, form: { style: "display: inline" }, class: "h-8 w-full flex button button__lg button__transparent-secondary rounded-none" do %>
-                <%= t(".remove") %>
+              <%= button_to budget_order_line_item_path(project_id: project), method: :delete, remote: true, data: { disable: true }, form: { style: "display: inline" }, class: "h-8 w-full flex button button__xs button__transparent-secondary rounded-none lg:button__lg" do %>
+                <span class="hidden lg:inline"><%= t(".remove") %></span>
                 <%= icon("delete-bin-line", aria_label: t("decidim.budgets.projects.order_selected_projects.remove"), role: "img") %>
               <% end %>
             </div>

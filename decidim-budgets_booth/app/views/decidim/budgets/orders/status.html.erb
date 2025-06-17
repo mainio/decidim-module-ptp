@@ -32,12 +32,12 @@
   </div>
 
   <div class="form__wrapper-block flex-col-reverse md:flex-row justify-center gap-12 border-t-0">
-    <%= button_to decidim.destroy_user_session_path, method: :delete, class: "button button__sm md:button__lg button__transparent-secondary" do %>
+    <%= button_to decidim.destroy_user_session_path, method: :delete, class: "button button__lg button__transparent-secondary w-full" do %>
       <%= t(".log_out") %>
       <%= icon("logout-box-r-line") %>
     <% end %>
 
-    <%= link_to budgets_path, class: "button button__sm md:button__lg button__secondary" do %>
+    <%= link_to budgets_path, class: "button button__lg button__secondary" do %>
       <span>
         <% if pending_to_vote_budgets.present? %>
           <%= t("continue_voting", scope: "decidim.budgets.orders.status") %>
@@ -50,4 +50,4 @@
   </div>
 <% end %>
 
-<%= render partial: "status_summary_modal" %>
+<%= render partial: "status_summary_modal", locals: { show_delete_button: false } %>

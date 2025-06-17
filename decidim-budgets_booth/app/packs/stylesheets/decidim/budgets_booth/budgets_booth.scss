@@ -253,10 +253,10 @@
 }
 
 .progress-meter-text.progress-meter-text--right {
-  @apply right-1/4 pr-20 absolute;
+  @apply max-[380px]:hidden 2xl:right-1/4 2xl:pr-20 2xl:absolute;
 
   &--fixed {
-    @apply right-1/4 pr-20 absolute;
+    @apply max-[380px]:hidden 2xl:right-1/4 2xl:pr-20 2xl:absolute;
   }
 }
 

@@ -48,7 +48,7 @@ module Decidim
       def ensure_not_voted_this!
         return unless current_order.checked_out?
 
-        flash[:success] = I18n.t("voted", scope: "decidim.budgets.budgets.index")
+        flash[:warning] = I18n.t("voted", scope: "decidim.budgets.budgets.index")
         redirect_to budget_projects_path(budget)
       end
 

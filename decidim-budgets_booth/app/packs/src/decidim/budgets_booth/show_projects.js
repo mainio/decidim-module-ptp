@@ -1,13 +1,20 @@
 $(() => {
   const showProjectsButton = document.getElementById("show-projects");
   const projectsCount = document.getElementById("projects-count");
+  const statusModal = window.Decidim.currentDialogs["status-summary"];
 
-  showProjectsButton.addEventListener("click", (ev) => {
-    ev.preventDefault();
+  if (statusModal) {
+    statusModal.open();
+  }
 
-    projectsCount.scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    });
-  })
+  if (showProjectsButton) {
+    showProjectsButton.addEventListener("click", (ev) => {
+      ev.preventDefault();
+
+      projectsCount.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    })
+  }
 })

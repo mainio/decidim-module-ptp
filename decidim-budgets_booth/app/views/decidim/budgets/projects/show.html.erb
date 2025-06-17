@@ -25,7 +25,7 @@ edit_link(
   </div>
 
   <div class="flex flex-col items-center p-4 lg:p-0 lg:flex-row lg:justify-center lg:items-start lg:gap-8">
-    <div class="row w-full my-4 mx-4 lg:mx-0 lg:w-3/6">
+    <div class="row w-full my-4 mx-4 space-y-8 lg:mx-0 lg:w-3/6">
       <div class="row columns m-bottom projects-link">
         <%= link_to budget_projects_path(budget), class: "link js-back-to-list flex" do %>
           <%= icon "arrow-left-s-line", class: "icon--small h-6 w-6 pt-1", role: "img", "aria-hidden": true %>
@@ -35,8 +35,8 @@ edit_link(
       <div id="project" class="columns section view-side mediumlarge-4 mediumlarge-push-8 large-3 large-push-9 flex justify-between my-8">
         <h2 class="h2"><%= translated_attribute project.title %></h2>
       </div>
-      <div class="columns mediumlarge-8 mediumlarge-pull-4">
-        <div class="section">
+      <div class="columns mediumlarge-8 mediumlarge-pull-4 space-y-8">
+        <div class="section space-y-8">
           <%= cell("decidim/budgets/project_selected_status", project, as_label: true) %>
           <%= decidim_sanitize_editor translated_attribute project.description %>
           <%= cell "decidim/budgets/project_tags", project, context: { extra_classes: ["tags--project"] } %>
@@ -49,7 +49,7 @@ edit_link(
     </div>
 
     <div class="card extra project-info flex justify-center items-center w-1/6">
-      <div class="card__content flex flex-col items-center">
+      <div class="card__content flex flex-col items-center w-full">
         <div class="m-bottom flex flex-col">
           <span class="definition-data__title"><%= t(".budget") %></span>
           <span class="definition-data__number"><%= budget_to_currency project.budget_amount %></span>
@@ -71,7 +71,6 @@ edit_link(
         <div class="border-t w-full mt-4">
           <div class="flex flex-col w-4/6 gap-2 mx-auto project-action-container">
             <%= cell "decidim/comments_button", nil %>
-            <%= render partial: "decidim/shared/follow_button", locals: { followable: project, large: false  } %>
             <%= cell "decidim/share_button", nil, default_classes: false %>
           </div>
         </div>
