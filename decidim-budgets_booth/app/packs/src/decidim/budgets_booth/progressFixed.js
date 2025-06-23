@@ -1,17 +1,25 @@
 $(() => {
+  const progressElement = document.querySelector(".vote-progress-container");
+  const spacer = document.querySelector(".progress-spacer");
+  const summary = document.querySelector(".budget-summary__total");
+  let sticky = false;
+
   const checkProgressPosition = () => {
-    let progressFix = document.querySelector("[data-progressbox-fixed]"),
-        progressRef = document.querySelector("[data-progress-reference]")
+    const top = progressElement.getBoundingClientRect().top;
+    const spacerTop = spacer.getBoundingClientRect().top;
 
-    if (!progressRef || !progressFix) {
-      return;
-    }
+    if (top <= 0 && !sticky) {
+      const height = progressElement.offsetHeight;
 
-    let progressPosition = progressRef.getBoundingClientRect().top + 145;
-    if (progressPosition > 0) {
-      progressFix.classList.add("hidden");
-    } else {
-      progressFix.classList.remove("hidden");
+      progressElement.classList.add("w-full", "fixed", "top-0");
+      summary.classList.add("hidden");
+      spacer.style.height = `${height}px`;
+      sticky = true;
+    } else if (spacerTop > 0 && sticky) {
+      progressElement.classList.remove("w-full", "fixed", "top-0");
+      summary.classList.remove("hidden");
+      spacer.style.height = "0px";
+      sticky = false;
     }
   }
 

@@ -118,6 +118,7 @@ en:
           choices: Your selection for the vote
           chosen_intro: You have chosen the following proposals for your vote.
           continue: Continue voting
+          no_selection: You have no chosen proposals.
       user_data:
         error:
           only_letters: Only letters and digits are allowed.

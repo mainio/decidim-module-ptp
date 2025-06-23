@@ -6,14 +6,22 @@ var $budgetConfirm = $('#budget-confirm');
 var $projectBudgetButton = $('#project-<%= project.id %>-budget-button');
 var $projectModal = $('#project-modal-<%= project.id %>');
 var $selectedProjectsModal = $('#selected-projects');
+var $selectedProject = $('#selected-project-<%= project.id %>');
+var $totalBudget = $('.total-budget');
 
 if ($orderProgress) {
   morphdom($orderProgress[0], '<%= j(render partial: "decidim/budgets/projects/order_progress").strip.html_safe %>');
   morphdom($orderSelectedProjects[0], '<%= j(render partial: "decidim/budgets/projects/order_selected_projects") %>');
 }
 
-if ($selectedProjectsModal) {
-  morphdom($selectedProjectsModal[0], '<%= j(render partial: "decidim/budgets/projects/selected_projects_modal").strip.html_safe %>');
+if ($selectedProject) {
+  $selectedProject.fadeOut(200, function() {
+    $(this).remove()
+  })
+}
+
+if ($totalBudget) {
+  morphdom($totalBudget[0], '<%= j(render partial: "decidim/budgets/projects/order_total_budget") %>');
 }
 
 morphdom($budgetConfirm[0], '<%= j(render partial: "decidim/budgets/projects/budget_confirm").strip.html_safe %>');

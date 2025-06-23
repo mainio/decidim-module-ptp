@@ -14,7 +14,7 @@
       <h1 class="h1">
         <%= translated_attribute(budget.title) %>
       </h1>
-      <p class="my-4 font-bold text-2xl"><%= t(".total_budget", amount: budget_to_currency(budget.total_budget)) %></p>
+      <p class="my-4 font-bold text-xl"><%= t(".total_budget", amount: budget_to_currency(budget.total_budget)) %></p>
       <p class="inline-block text-center text-xl lg:w-[480px]">
         <%= description_text %>
         <div class="flex flex-col mt-4 space-y-4 lg:flex-row lg:justify-center lg:items-center lg:gap-4 lg:space-y-0">

@@ -108,6 +108,7 @@ fi:
           choices: Valintasi ääneesi
           chosen_intro: Olet valinnut seuraavat äänestettävät ehdotukset ääneesi.
           continue: Jatka äänestystä
+          no_selection: Sinulla ei ole valittuja ehdotuksia.
       user_data:
         error:
           only_letters: Vain kirjaimet ja numerot ovat sallittuja.

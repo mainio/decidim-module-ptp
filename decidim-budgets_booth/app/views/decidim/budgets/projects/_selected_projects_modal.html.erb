@@ -2,13 +2,17 @@
   <div class="flex flex-col gap-4 mb-2">
     <h2 class="h2"><%= t(".choices") %></h2>
     <h3 class="h3"><%= translated_attribute(budget.title) %></h3>
-    <p><%= t(".chosen_intro") %></p>
+    <% if current_order.projects.length == 0 %>
+      <p><%= t(".no_selection") %></p>
+    <% else %>
+      <p><%= t(".chosen_intro") %></p>
+    <% end %>
   </div>
 
   <div data-dialog-container>
     <ul class="budget-summary__selected-list divide-y border">
       <% current_order.projects.each do |project| %>
-        <li class="budget-summary__selected-item h-12 flex justify-center items-center">
+        <li id="selected-project-<%= project.id %>" class="budget-summary__selected-item h-12 flex justify-center items-center">
           <div class="border-r pl-2 text-center flex items-center justify-start font-bold text-lg">
             <%= translated_attribute(project.title) %>
           </div>
