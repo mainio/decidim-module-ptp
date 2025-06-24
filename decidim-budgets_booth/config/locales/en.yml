@@ -44,7 +44,8 @@ en:
           title: Your vote in %{budget_title}
           total_budget: 'Total budget: '
         status_summary_modal:
-          title: Valitut ehdotukset
+          title: Picked proposals
+          votes: Your votes
           close: Sulje
       project_l:
         explore: Open

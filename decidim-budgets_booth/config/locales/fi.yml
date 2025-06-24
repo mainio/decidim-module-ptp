@@ -43,6 +43,7 @@ fi:
           total_budget: 'Kokonaisbudjetti: '
         status_summary_modal:
           title: Valitut ehdotukset
+          votes: Äänesi alueella
           close: Sulje
       project_l:
         explore: Tutustu

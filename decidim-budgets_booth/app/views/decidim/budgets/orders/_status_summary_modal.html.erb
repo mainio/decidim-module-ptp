@@ -3,7 +3,7 @@
     <div data-dialog-container>
       <%= icon "check-double-line" %>
       <h3 class="h3" id="dialog-title-budget-confirm" data-dialog-title>
-        <%= t(".title") %>
+        <%= post_vote ? t(".votes") : t(".title") %>
       </h3>
       <div class="my-8">
         <% if current_order.present? %>
@@ -27,7 +27,7 @@
     </div>
 
     <div data-dialog-actions>
-      <% if show_delete_button %>
+      <% if post_vote %>
         <%= link_to(
           budget_order_path(budget),
           method: :delete,
