@@ -117,7 +117,7 @@ en:
             start_voting: Start voting
         selected_projects_modal:
           choices: Your selection for the vote
-          chosen_intro: You have chosen the following proposals for your vote.
+          current_choices: You have chosen the following proposals for your vote.
           continue: Continue voting
           no_selection: You have no chosen proposals.
       user_data:

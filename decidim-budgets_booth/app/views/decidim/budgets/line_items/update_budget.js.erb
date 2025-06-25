@@ -9,19 +9,28 @@ var $selectedProjectsModal = $('#selected-projects');
 var $selectedProject = $('#selected-project-<%= project.id %>');
 var $totalBudget = $('.total-budget');
 
-if ($orderProgress) {
+if ($orderProgress.length > 0) {
   morphdom($orderProgress[0], '<%= j(render partial: "decidim/budgets/projects/order_progress").strip.html_safe %>');
-  morphdom($orderSelectedProjects[0], '<%= j(render partial: "decidim/budgets/projects/order_selected_projects") %>');
+  morphdom($orderSelectedProjects[0], '<%= j(render partial: "decidim/budgets/projects/order_selected_projects").strip.html_safe %>');
 }
 
-if ($selectedProject) {
+if ($selectedProject.length > 0) {
   $selectedProject.fadeOut(200, function() {
     $(this).remove()
   })
+  const $selectedRemaining = $('[id^="selected-project-"]').length;
+
+  if ($selectedRemaining === 1) {
+    const $currentChoices = $("#current-choices");
+    const $selectedProjectsContainer = $("#selected-projects-container");
+
+    $currentChoices[0].textContent = "<%= j t("decidim.budgets.projects.selected_projects_modal.no_selection") %>";
+    $selectedProjectsContainer[0].remove();
+  }
 }
 
-if ($totalBudget) {
-  morphdom($totalBudget[0], '<%= j(render partial: "decidim/budgets/projects/order_total_budget") %>');
+if ($totalBudget.length > 0) {
+  morphdom($totalBudget[0], '<%= j(render partial: "decidim/budgets/projects/order_total_budget").strip.html_safe %>');
 }
 
 morphdom($budgetConfirm[0], '<%= j(render partial: "decidim/budgets/projects/budget_confirm").strip.html_safe %>');
@@ -31,8 +40,9 @@ if ($orderSelectedProjectsCount.length > 0) {
 }
 
 if ($projectItem.length > 0) {
-  <% if params[:action] == "destroy" && params[:show_only_added] == "true" %>
-    $projectItem[0].remove();
+  <% if params[:action] == "create" %>
+    morphdom($projectItem[0], '<%= j(render partial: "decidim/budgets/projects/project", locals: { project: }).strip.html_safe %>');
+    morphdom($selectedProjectsModal[0], '<%= j(render partial: "decidim/budgets/projects/selected_projects_modal").strip.html_safe %>');
   <% else %>
     morphdom($projectItem[0], '<%= j(render partial: "decidim/budgets/projects/project", locals: { project: }).strip.html_safe %>');
   <% end %>
