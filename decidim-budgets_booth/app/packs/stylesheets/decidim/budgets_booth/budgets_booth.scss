@@ -265,13 +265,15 @@
         @apply w-4/6 h-12 text-xl mx-auto;
 
         &.button__secondary:hover {
-          @apply text-[--primary] bg-white #{!important};
+          svg {
+            @apply fill-white;
+          };
         }
 
         &.button__transparent-secondary:hover {
-          @apply border-[--primary] text-white #{!important};
-
-          background: #123aa0 !important;
+          svg {
+            @apply fill-[--primary];
+          }
         }
       }
     }

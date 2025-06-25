@@ -43,9 +43,9 @@
     </div>
   </div>
 <% else %>
-  <div class="<%= card_class %> card__highlight">
+  <%= link_to resource_path, class: "#{card_class} card__highlight" do %>
     <div class="card__highlight-text md:w-[70%] p-0">
-      <%= link_to resource_path, class: "max-[391px]:pb-1.5 p-4" do %>
+      <div class="max-[391px]:pb-1.5 p-4">
         <h3 class="h3 text-secondary inline-block align-middle">
           <%= decidim_escape_translated(title) %>
         </h3>
@@ -57,7 +57,7 @@
             <%= render :projects_count %>
           </div>
         <% end %>
-      <% end %>
+      </div>
       <% if voted? %>
         <div class="divide-x-2 divide-gray-3 px-4 pt-2">
           <%= render :projects_count %>
@@ -65,7 +65,7 @@
       <% end %>
     </div>
     <% if voting_context? %>
-      <%= link_to resource_path, class: "budget__card__highlight-vote" do %>
+      <div class="budget__card__highlight-vote">
         <div class="budget__card__highlight-vote__header">
           <span class="budget__card__highlight-vote__text">
             <%= t("name", scope: "decidim.budgets.admin.models.budget") %>
@@ -78,7 +78,7 @@
           <span><%= button_text %></span>
           <%= icon "arrow-right-line" %>
         </span>
-      <% end %>
+      </div>
     <% end %>
-  </div>
+  <% end %>
 <% end %>

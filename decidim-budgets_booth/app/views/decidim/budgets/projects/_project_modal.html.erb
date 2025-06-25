@@ -22,6 +22,6 @@
   </div>
 
   <div data-dialog-actions class="w-10">
-    <button class="button button__lg button__transparent-secondary"><%= t(".close_project") %></button>
+    <button data-dialog-close="project-modal-<%= project.id %>" class="button button__lg button__transparent-secondary"><%= t(".close_project") %></button>
   </div>
 <% end %>
