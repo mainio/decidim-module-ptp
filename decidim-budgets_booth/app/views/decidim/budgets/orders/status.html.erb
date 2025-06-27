@@ -11,23 +11,21 @@
       <%= t("title", scope: "decidim.budgets.orders.status", budget: translated_attribute(current_order.budget.title)) %>
     </h1>
 
-    <p class="text-lg">
-      <% if vote_success_content %>
-        <%= vote_success_content %>
-      <% else %>
-        <%= t(
-              "votes_info",
-              scope: "decidim.budgets.orders.status",
-              budget_name: translated_attribute(current_order.budget.title)
-            ) %>
-      <% end %>
-    </p>
+    <% if vote_success_content %>
+      <p class="text-md"><%= vote_success_content %></p>
+    <% else %>
+      <p class="text-md"><%= t(
+            "votes_info",
+            scope: "decidim.budgets.orders.status",
+            budget_name: translated_attribute(current_order.budget.title)
+          ) %></p>
+    <% end %>
   </div>
 
   <div class="status-choices">
-    <button class="flex gap-2" data-dialog-open="status-summary">
-      <p class="text-lg"> <%= t(".selected_projects") %> </p>
-      <%= icon("menu-line", class:"icon--small mt-1", aria_label: t(".view"), role: "img") %>
+    <button class="flex gap-2 items-center" data-dialog-open="status-summary">
+      <p class="text-md"> <%= t(".selected_projects") %> </p>
+      <%= icon("menu-line", class:"icon--small", aria_label: t(".view"), role: "img") %>
     </button>
   </div>
 

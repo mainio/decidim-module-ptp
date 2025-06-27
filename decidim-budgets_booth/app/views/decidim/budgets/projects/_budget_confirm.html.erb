@@ -2,13 +2,13 @@
   <% if current_order.present? %>
     <div data-dialog-container>
       <%= icon "check-double-line" %>
-      <h3 class="h3" id="dialog-title-budget-confirm" data-dialog-title>
+      <h2 class="h2" id="dialog-title-budget-confirm" data-dialog-title>
         <%= t("title", scope: "decidim.budgets.projects.budget_confirm") %>
-      </h3>
+      </h2>
       <div class="my-8" id="budget-confirm-current-order">
         <% if current_order.present? %>
           <h4 class="h4 mb-4"><%= translated_attribute(budget.title) %></h4>
-          <p class="mb-4"><%= t(".description") %></p>
+          <p class="mb-4 text-md"><%= t(".description") %></p>
           <ul class="budget-confirm__selected-list divide-y border w-full">
             <% current_order.projects.each do |project| %>
               <li class="budget-confirm__selected-item h-12 flex">

@@ -17,7 +17,7 @@
       <h1 class="h1">
         <%= t(".choose_budget", budget_title: translated_attribute(budget.title)) %>
       </h1>
-      <p class="text-lg">
+      <p class="text-md">
         <%= t(".choose_description") %>
       </p>
     </div>
@@ -26,28 +26,28 @@
       <div class="vote-progress-content mx-auto w-full max-w-6xl">
         <% if current_order.projects_rule? %>
           <div class="budget-summary__total text-left text-lg" data-total-allocation="<%= current_order.available_allocation %>">
-            <span class="mini-title">
+            <span class="mini-title text-md">
               <%= t(".total_projects", max_projects: current_order.maximum_projects).html_safe %>
             </span>
           </div>
         <% else %>
           <div class="budget-summary__total text-left text-lg font-bold my-2" data-total-allocation="<%= current_order.available_allocation %>" data-total-budget="<%= budget.total_budget %>">
-            <span class="mini-title"><%= t(".total_budget") %>
-              <strong class="mini-title__strong mini-title__strong--highlight">
+            <h6 class="h6"><%= t(".total_budget") %>
+              <strong class="mini-title__strong mini-title__strong--highlight h6">
                 <%= budget_to_currency(budget.total_budget) %>
               </strong>
-            </span>
+            </h6>
           </div>
         <% end %>
 
         <% unless current_order.projects_rule? %>
           <div class="text-left mt-4 text-lg font-bold">
-            <span class="mini-title">
+            <h6 class="h6">
               <%= t(".assigned") %>
               <div class="total-budget inline-block">
                 <%= render partial: "order_total_budget" %>
               </div>
-            </span>
+            </h6>
           </div>
         <% end %>
 

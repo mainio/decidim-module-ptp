@@ -154,21 +154,17 @@
     @apply flex flex-col items-center;
 
     .budget__card__highlight-prevote__text {
-      @apply text-lg;
+      @apply text-md;
     }
 
     .budget__card__highlight-prevote__number {
-      @apply font-bold text-2xl;
+      @apply font-bold text-[28px];
     }
   }
 
   .budget__card__prevote-explore-button {
     @apply mt-2 text-lg h-10 ;
   }
-}
-
-.start-vote-button {
-  @apply rounded-none h-12 text-xl;
 }
 
 .pre-voting-budget-summary {
@@ -199,15 +195,11 @@
   @apply h-min py-4 w-80 mt-24 bg-[#f2fcfd];
 
   .definition-data__title {
-    @apply text-lg text-center;
+    @apply text-md text-center;
   }
 
   .definition-data__number {
-    @apply font-bold text-2xl mb-4;
-  }
-
-  .prevote-start-button {
-    @apply h-12 text-xl;
+    @apply font-bold text-[28px] mb-4;
   }
 }
 
@@ -230,6 +222,10 @@
 
 #budget-confirm[data-dialog] [data-dialog-container] > :last-child {
   @apply col-span-2 col-start-1;
+
+  .budget-confirm__selected-number {
+    @apply text-2xl;
+  }
 }
 
 #budgets.card__list-list {
@@ -254,15 +250,15 @@
       }
 
       &__text {
-        @apply text-lg text-black;
+        @apply text-md text-black;
       }
 
       &__number {
-        @apply font-bold text-black text-2xl;
+        @apply font-bold text-black text-[28px];
       }
 
       &__button {
-        @apply w-4/6 h-12 text-xl mx-auto;
+        @apply text-xl mx-auto;
 
         &.button__secondary:hover {
           svg {
@@ -303,7 +299,7 @@
 }
 
 .progress-meter-text.progress-meter-text--right {
-  @apply max-[380px]:hidden 2xl:right-1/4 2xl:pr-20 2xl:absolute;
+  @apply max-[380px]:hidden 2xl:right-1/4 2xl:pr-24 2xl:absolute;
 
   &--fixed {
     @apply max-[380px]:hidden 2xl:right-1/4 2xl:pr-20 2xl:absolute;
@@ -315,12 +311,16 @@
 }
 
 .budget-summary__selected {
-  p {
-    @apply text-[--primary] font-semibold;
+  h6 {
+    @apply text-[--primary];
   }
 
   svg {
     @apply fill-[--primary];
+  }
+
+  &-number {
+    @apply text-2xl;
   }
 }
 

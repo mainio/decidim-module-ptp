@@ -2,18 +2,18 @@
   <% if current_order&.projects&.any? %>
     <% if current_order.projects_rule? %>
       <div class="card__content budget-summary__selected">
-        <button class="flex gap-2" data-dialog-open="selected-projects">
-          <strong class="text-lg pr-6"><%= t(".choices") %><%= current_order.maximum_projects - current_order.projects.size %></strong>
-          <p class="text-lg"> <%= t(".show_choices") %> </p>
-          <%= icon("menu-line", class:"icon--small mt-1", aria_label: t(".view"), role: "img") %>
+        <button class="flex gap-2 items-center" data-dialog-open="selected-projects">
+          <strong class="h6 pr-6"><%= t(".choices") %><%= current_order.maximum_projects - current_order.projects.size %></strong>
+          <h6 class="h6"> <%= t(".show_choices") %> </h6>
+          <%= icon("menu-line", class:"icon--small", aria_label: t(".view"), role: "img") %>
         </button>
       </div>
     <% else %>
       <div class="card__content budget-summary__selected">
-        <button class="flex gap-2" data-dialog-open="selected-projects">
-          <strong class="text-lg"><%= current_order.projects.size %></strong>
-          <p class="text-lg"> <%= t(".selected_projects", count: current_order.projects.size) %> </p>
-          <%= icon("menu-line", class:"icon--small mt-1", aria_label: t(".view"), role: "img") %>
+        <button class="flex gap-2 items-center" data-dialog-open="selected-projects">
+          <h6 class="h6"><%= current_order.projects.size %></h6>
+          <h6 class="h6"> <%= t(".selected_projects", count: current_order.projects.size) %> </h6>
+          <%= icon("menu-line", class:"icon--small", aria_label: t(".view"), role: "img") %>
         </button>
       </div>
     <% end %>

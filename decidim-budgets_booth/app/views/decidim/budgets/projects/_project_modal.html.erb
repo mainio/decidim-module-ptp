@@ -1,21 +1,21 @@
 <%= decidim_modal id: "project-modal-#{project.id}" do %>
   <div class="exit-notification-label ml-2 mb-6">
-    <h1 id="exit-notification-label" class="h1"><%= decidim_sanitize(translated_attribute(project.title)) %></h1>
+    <h2 id="exit-notification-label" class="h2"><%= decidim_sanitize(translated_attribute(project.title)) %></h2>
   </div>
 
   <div data-dialog-container>
     <div class="row text-left space-y-2">
-      <p class="font-semibold"><strong><%= t ".budget_amount" %></strong><%= budget_to_currency(project.budget_amount) %></p>
+      <p class="h6"><strong><%= t ".budget_amount" %></strong><%= budget_to_currency(project.budget_amount) %></p>
 
       <% if project.category %>
-        <p class="font-semibold"><strong><%= t ".category" %></strong><%= decidim_sanitize(translated_attribute(project.category.try(:name))) %></p>
+        <p class="h6"><strong><%= t ".category" %></strong><%= decidim_sanitize(translated_attribute(project.category.try(:name))) %></p>
       <% end %>
 
       <% if project.scope %>
-        <p class="font-semibold"><strong><%= t ".scope" %></strong><%= decidim_sanitize(translated_attribute(project.scope.try(:name))) || t("decidim.scopes.global") %></p>
+        <p class="h6"><strong><%= t ".scope" %></strong><%= decidim_sanitize(translated_attribute(project.scope.try(:name))) || t("decidim.scopes.global") %></p>
       <% end %>
 
-      <div class="row text-left">
+      <div class="row text-left text-md">
         <%= raw decidim_sanitize(translated_attribute(project.description)) %>
       </div>
     </div>

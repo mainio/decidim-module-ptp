@@ -14,12 +14,12 @@
       <h1 class="h1">
         <%= translated_attribute(budget.title) %>
       </h1>
-      <p class="my-4 font-bold text-xl"><%= t(".total_budget", amount: budget_to_currency(budget.total_budget)) %></p>
+      <h5 class="my-4 h5"><%= t(".total_budget", amount: budget_to_currency(budget.total_budget)) %></h5>
       <p class="inline-block text-center text-xl lg:w-[480px]">
         <%= description_text %>
         <div class="flex flex-col mt-4 space-y-4 lg:flex-row lg:justify-center lg:items-center lg:gap-4 lg:space-y-0">
-          <button id="show-projects" class="button button__sm button__transparent-secondary h-12 text-xl"><%= t(".browse") %></button>
-          <%= button_to budget_voting_index_path, class: "button button__sm button__secondary start-vote-button", method: :get, disabled: !voting_open? do %>
+          <button id="show-projects" class="button button__lg button__transparent-secondary"><%= t(".browse") %></button>
+          <%= button_to budget_voting_index_path, class: "button button__lg button__secondary start-vote-button", method: :get, disabled: !voting_open? do %>
             <%= vote_text %>
             <%= icon "arrow-right-line", class:"pt-1 h-6 w-6" %>
           <% end %>
