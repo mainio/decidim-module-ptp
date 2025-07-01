@@ -250,7 +250,7 @@
       }
 
       &__text {
-        @apply text-md text-black;
+        @apply text-md text-black mb-2.5;
       }
 
       &__number {
@@ -396,14 +396,6 @@
 
   svg {
     @apply fill-[--primary] h-6 w-6 mt-0;
-  }
-}
-
-.project-action-container {
-  @apply items-center py-4;
-
-  a {
-    @apply button__lg w-min mt-0;
   }
 }
 

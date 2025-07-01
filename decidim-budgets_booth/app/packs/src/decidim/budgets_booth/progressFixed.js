@@ -23,8 +23,10 @@ $(() => {
     }
   }
 
-  window.addEventListener("scroll", checkProgressPosition);
+  if (progressElement) {
+    window.addEventListener("scroll", checkProgressPosition);
 
-  window.DecidimBudgets = window.DecidimBudgets || {};
-  window.DecidimBudgets.checkProgressPosition = checkProgressPosition;
+    window.DecidimBudgets = window.DecidimBudgets || {};
+    window.DecidimBudgets.checkProgressPosition = checkProgressPosition;
+  }
 });

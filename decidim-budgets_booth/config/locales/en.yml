@@ -29,6 +29,8 @@ en:
         no_budgets_found: No budgets were found based on your ZIP code. You can change
           your ZIP code if it's not correct, or you can search again later.
         vote: Show
+        voting_possible: "You can still vote in these budgets:"
+        voted: "You have already voted in these budgets:"
       orders:
         status:
           continue_voting: Continue voting

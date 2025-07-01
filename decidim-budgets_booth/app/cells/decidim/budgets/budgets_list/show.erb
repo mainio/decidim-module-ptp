@@ -38,19 +38,20 @@
 <% else %>
   <div id="budgets" class="card__list-list">
     <% if budgets.where.not(id: voted.map(&:id)).exists? %>
+      <% if voted? %>
+        <p class="h6"><%= t(".voting_possible") %></p>
+      <% end %>
+
       <%= render :card_list %>
     <% end %>
 
     <% if !voting_finished? && voted? %>
+      <p class="h6"><%= t(".voted") %></p>
       <div id="voted-budgets" class="card__list-list">
         <% voted.each do |budget| %>
           <%= cell("decidim/budgets/budget_list_item", budget) %>
         <% end %>
       </div>
-
-      <% if finished? %>
-        <p><%= t(:finished_message, scope: i18n_scope) %></p>
-      <% end %>
     <% end %>
   </div>
 

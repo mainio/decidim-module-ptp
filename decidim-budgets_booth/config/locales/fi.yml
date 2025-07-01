@@ -28,6 +28,8 @@ fi:
       budgets_list:
         no_budgets_found: Äänestettäviä budjetteja ei löytynyt postinumerollasi. Voit vaihtaa postinumeroasi, jos se on väärin tai voit yrittää myöhemmin uudestaan.
         vote: Näytä
+        voting_possible: "Voit äänestää vielä näillä alueilla:"
+        voted: "Olet jo äänestänyt näillä alueilla:"
       orders:
         status:
           continue_voting: Jatka äänestämistä muilla alueilla
