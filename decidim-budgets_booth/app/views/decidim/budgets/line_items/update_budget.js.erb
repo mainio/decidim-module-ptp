@@ -7,7 +7,6 @@ var $projectBudgetButton = $('#project-<%= project.id %>-budget-button');
 var $projectModal = $('#project-modal-<%= project.id %>');
 var $selectedProjectsModal = $('#selected-projects');
 var $selectedProject = $('#selected-project-<%= project.id %>');
-var $totalBudget = $('.total-budget');
 
 if ($orderProgress.length > 0) {
   morphdom($orderProgress[0], '<%= j(render partial: "decidim/budgets/projects/order_progress").strip.html_safe %>');
@@ -16,21 +15,47 @@ if ($orderProgress.length > 0) {
 
 if ($selectedProject.length > 0) {
   $selectedProject.fadeOut(200, function() {
-    $(this).remove()
+    $(this).remove();
+
+    const $budgetRemaining = $("#budget-remaining");
+    const $choicesRemaining = $("#choices-remaining");
+
+    if ($budgetRemaining.length > 0) {
+      const projectCost = parseFloat($selectedProject.data("cost"));
+
+      const currentBudget = parseCurrency($budgetRemaining.text());
+
+      const newBudget = currentBudget + projectCost;
+
+      $budgetRemaining.text(
+        newBudget.toLocaleString("fi-FI", {
+          style: "currency",
+          currency: "EUR",
+        })
+      );
+    } else if ($choicesRemaining.length > 0) {
+      const maxProjects = parseInt($choicesRemaining.data("max-projects"), 10);
+
+      const selectedCount = $('[id^="selected-project-"]').length;
+      const remaining = maxProjects - selectedCount;
+
+      $choicesRemaining.text(remaining);
+    }
+
+    const $selectedRemaining = $('[id^="selected-project-"]').length;
+
+    if ($selectedRemaining === 0) {
+      const $currentChoices = $("#current-choices");
+      const $selectedProjectsContainer = $("#selected-projects-container");
+
+      if ($currentChoices.length > 0) {
+        $currentChoices.text("<%= j t("decidim.budgets.projects.selected_projects_modal.no_selection") %>");
+      }
+      if ($selectedProjectsContainer.length > 0) {
+        $selectedProjectsContainer[0].remove();
+      }
+    }
   })
-  const $selectedRemaining = $('[id^="selected-project-"]').length;
-
-  if ($selectedRemaining === 1) {
-    const $currentChoices = $("#current-choices");
-    const $selectedProjectsContainer = $("#selected-projects-container");
-
-    $currentChoices[0].textContent = "<%= j t("decidim.budgets.projects.selected_projects_modal.no_selection") %>";
-    $selectedProjectsContainer[0].remove();
-  }
-}
-
-if ($totalBudget.length > 0) {
-  morphdom($totalBudget[0], '<%= j(render partial: "decidim/budgets/projects/order_total_budget").strip.html_safe %>');
 }
 
 morphdom($budgetConfirm[0], '<%= j(render partial: "decidim/budgets/projects/budget_confirm").strip.html_safe %>');
@@ -55,3 +80,11 @@ if ($projectModal.length > 0 && $projectModal.attr("aria-hidden") === "false") {
 }
 
 window.DecidimBudgets.checkProgressPosition();
+
+function parseCurrency(string) {
+  const cleaned = string.replace(/[^\d,.-]/g, "").replace(/\s/g, "");
+
+  const normalized = cleaned.replace(",", ".");
+
+  return parseFloat(normalized);
+}

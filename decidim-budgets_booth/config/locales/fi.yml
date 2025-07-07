@@ -60,9 +60,8 @@ fi:
           cancel_voting: Poistu äänestyksestä
           choose_budget: Voit päättää budjetista alueella %{budget_title}
           choose_description: Valitse sellaiset hankkeet, joista pidät ja anna äänesi sen jälkeen.
-          total_budget: "Alueen kokonaisbudjetti: "
+          total_budget: 'Sinulla on käytettävissäsi <strong>%{budget}</strong>. Valitse ensin äänestettävät ehdotukset alla olevasta listasta. Valintojen jälkeen, paina "Olen valmis" -painiketta.'
           total_projects: "Projektien määrä: "
-          assigned: "Käytetty: "
         cancel_voting_modal:
           continue: Jatka äänestystä
           description: Jos poistut äänestyksestä, ääntäsi ei lasketa lopulliseen tulokseen. Jos haluat äänesi vaikuttavan lopputulokseen, palaa takaisin äänestämään.
@@ -77,6 +76,7 @@ fi:
           vote: Äänestä
           total_projects: "Projektien määrä: "
         order_selected_projects:
+          assigned: "Budjettia jäljellä: "
           view: Katso
           remove: Poista
         pre_voting_budget_summary:
@@ -108,7 +108,9 @@ fi:
             introduction: Haluatko äänestää tätä hanketta?
             start_voting: Aloita äänestys
         selected_projects_modal:
+          assigned: "Budjettia jäljellä: "
           choices: Valintasi ääneesi
+          choices_remaining: "Valintoja jäljellä: "
           current_choices: Olet valinnut seuraavat äänestettävät ehdotukset ääneesi.
           continue: Jatka äänestystä
           no_selection: Et ole vielä valinnut yhtään äänestettävää ehdotusta.

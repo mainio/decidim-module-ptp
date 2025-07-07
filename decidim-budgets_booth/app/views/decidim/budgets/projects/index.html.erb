@@ -2,7 +2,7 @@
 
 <% cell("decidim/budgets/limit_announcement", budget) %>
 
-<div class="voting-wrapper <%="margin-top-3" if voting_booth_forced? %>">
+<main class="voting-wrapper <%="margin-top-3" if voting_booth_forced? %>">
   <div class="row columns">
     <% if voting_finished? %>
       <h2 class="heading2">
@@ -14,12 +14,25 @@
     <% end %>
   </div>
 
-  <div class="row columns w-4/6 mx-auto mt-4 py-6">
+  <div class="row column voting-rules one-col">
+    <% if budgets.count > 1 && !voting_mode? %>
+      <div class="row">
+        <div class="columns medium-8 large-9">
+          <%= button_to(decidim_budgets.budgets_path, class: "link m-bottom flex", method: :get) do %>
+            <%= icon "arrow-left-s-line", class: "icon--small h-6 w-6 pt-1", role: "img", "aria-hidden": true %>
+            <%= t(".back_to_budgets") %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="row columns one-col mx-auto mt-4 py-6">
     <%= render partial: "count" %>
   </div>
 
-  <div class="w-4/6 mx-auto mb-6 lg:flex lg:justify-between lg:gap-10">
-    <div class="border border-background h-min">
+  <div class="double-col_off mx-auto mb-6 lg:flex lg:justify-between lg:gap-10">
+    <div>
       <%= render partial: "decidim/shared/filters", locals: { filter_sections: , search_variable: :search_text_cont } %>
     </div>
 
@@ -27,7 +40,7 @@
       <%= render partial: "projects" %>
     </div>
   </div>
-</div>
+</main>
 
 <%= render partial: "decidim/budgets/projects/selected_projects_modal" if voting_mode? && !voting_finished? %>
 <%= append_javascript_pack_tag("decidim_budgets_booth_voting") %>

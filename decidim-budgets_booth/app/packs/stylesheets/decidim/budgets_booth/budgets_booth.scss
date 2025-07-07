@@ -150,8 +150,10 @@
 }
 
 .budget__card__prevote {
+  @apply flex flex-row justify-between lg:space-y-2 lg:block;
+
   .budget__card__highlight-prevote__header {
-    @apply flex flex-col items-center;
+    @apply flex flex-col items-center space-y-2;
 
     .budget__card__highlight-prevote__text {
       @apply text-md;
@@ -164,6 +166,10 @@
 
   .budget__card__prevote-explore-button {
     @apply mt-2 text-lg h-10 ;
+
+    &-container {
+      @apply flex justify-center items-center;
+    }
   }
 }
 
@@ -192,7 +198,7 @@
 }
 
 .project-info {
-  @apply h-min py-4 w-80 mt-24 bg-[#f2fcfd];
+  @apply h-min py-4 bg-[#f2fcfd];
 
   .definition-data__title {
     @apply text-md text-center;
@@ -228,11 +234,15 @@
   }
 }
 
+.start-vote-button {
+  @apply w-full lg:w-fit;
+}
+
 #budgets.card__list-list {
-  @apply w-3/5 mx-auto lg:space-y-8 lg:mb-0;
+  @apply w-full mx-auto xl:space-y-8 xl:mb-0 xl:w-3/5;
 
   .card__highlight {
-    @apply flex flex-col space-y-10 rounded-none ring-2 hover:ring-background lg:space-y-0 lg:flex-row;
+    @apply flex flex-col space-y-10 rounded-none ring-2 hover:ring-background xl:space-y-0 xl:flex-row;
 
     &-text {
       @apply mt-8;
@@ -243,14 +253,14 @@
     }
 
     .budget__card__highlight-vote {
-      @apply bg-[#f2fcfd] p-0 mt-0 bg-[#f2fcfd] w-full min-[1280px]:w-3/12;
+      @apply bg-[#f2fcfd] p-0 mt-0 bg-[#f2fcfd] w-full flex flex-row justify-between xl:block xl:w-3/12 xl:text-center;
 
       &__header {
         @apply text-center;
       }
 
       &__text {
-        @apply text-md text-black mb-2.5;
+        @apply text-md text-black mb-2.5 mx-auto;
       }
 
       &__number {
@@ -258,7 +268,7 @@
       }
 
       &__button {
-        @apply text-xl mx-auto;
+        @apply text-xl mt-0;
 
         &.button__secondary:hover {
           svg {
@@ -317,6 +327,12 @@
 
   svg {
     @apply fill-[--primary];
+  }
+
+  button {
+    p {
+      @apply text-[--primary];
+    }
   }
 
   &-number {
@@ -406,5 +422,11 @@
     [id^="dropdown-title-with_any_category_"] {
       @apply truncate max-w-[120px] block;
     }
+  }
+}
+
+.card.extra.project-info {
+  span.success {
+    @apply flex items-center text-lg;
   }
 }

@@ -4,16 +4,23 @@
       <div class="card__content budget-summary__selected">
         <button class="flex gap-2 items-center" data-dialog-open="selected-projects">
           <strong class="h6 pr-6"><%= t(".choices") %><%= current_order.maximum_projects - current_order.projects.size %></strong>
-          <h6 class="h6"> <%= t(".show_choices") %> </h6>
+          <p class="h6"> <%= t(".show_choices") %> </p>
           <%= icon("menu-line", class:"icon--small", aria_label: t(".view"), role: "img") %>
         </button>
       </div>
     <% else %>
-      <div class="card__content budget-summary__selected">
+      <div class="card__content budget-summary__selected flex items-center gap-6">
+        <div class="text-left text-lg font-bold flex gap-2 items-center">
+          <p>
+            <%= t(".assigned") %>
+            <div class="total-budget inline-block">
+              <%= budget_to_currency(budget.total_budget - current_order&.total_budget.to_f) %>
+            </div>
+          </p>
+        </div>
         <button class="flex gap-2 items-center" data-dialog-open="selected-projects">
-          <h6 class="h6"><%= current_order.projects.size %></h6>
-          <h6 class="h6"> <%= t(".selected_projects", count: current_order.projects.size) %> </h6>
-          <%= icon("menu-line", class:"icon--small", aria_label: t(".view"), role: "img") %>
+          <p class="text-lg font-bold"> <%= t(".show_choices") %> </p>
+          <%= icon("menu-line", class:"icon--small w-6 h-6", aria_label: t(".view"), role: "img") %>
         </button>
       </div>
     <% end %>

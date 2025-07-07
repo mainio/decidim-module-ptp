@@ -2,11 +2,7 @@
 <%= append_javascript_pack_tag "decidim_budgets" %>
 <%= append_stylesheet_pack_tag "decidim_budgets", media: "all" %>
 
-<% content_for :aside do %>
-  <h1 class="title-decorator"><%= component_name %></h1>
-<% end %>
-
-<%= render layout: "layouts/decidim/shared/layout_two_col" do %>
+<div class="one-col">
   <%= render partial: "decidim/shared/component_announcement" %>
 
   <% if current_workflow.budgets.empty? %>
@@ -24,6 +20,4 @@
   <% budgets.each do |budget| %>
     <%= render partial: "decidim/budgets/orders/modal", locals: {budget: budget, projects: budget.projects } if voted_this?(budget) %>
   <% end %>
-<% end %>
-
-
+</div>

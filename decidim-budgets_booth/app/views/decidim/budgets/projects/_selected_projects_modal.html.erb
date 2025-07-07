@@ -1,14 +1,25 @@
 <%= decidim_modal id: "selected-projects" do %>
-  <div class="flex flex-col gap-4 mb-2">
+  <div class="flex flex-col gap-6 mb-6">
     <h2 class="h2"><%= t(".choices") %></h2>
-    <h3 class="h3"><%= translated_attribute(budget.title) %></h3>
+    <h3 class="text-[28px] font-bold"><%= translated_attribute(budget.title) %></h3>
     <p id="current-choices"><%= t(".current_choices") %></p>
+    <% if current_order.projects_rule? %>
+      <strong class="h6 pr-6">
+        <%= t(".choices_remaining") %>
+        <span id="choices-remaining" data-max-projects="<%= current_order.maximum_projects %>"><%= current_order.maximum_projects - current_order.projects.size %></span>
+      </strong>
+    <% else %>
+      <p class="text-lg font-bold flex gap-2">
+        <%= t(".assigned") %>
+        <span id="budget-remaining"><%= budget_to_currency(budget.total_budget - current_order&.total_budget.to_f) %></span>
+      </p>
+    <% end %>
   </div>
 
   <div id="selected-projects-container" data-dialog-container>
     <ul class="budget-summary__selected-list divide-y border">
       <% current_order.projects.each do |project| %>
-        <li id="selected-project-<%= project.id %>" class="budget-summary__selected-item h-12 flex justify-center items-center">
+        <li id="selected-project-<%= project.id %>" class="budget-summary__selected-item h-12 flex justify-center items-center" data-cost="<%= project.budget_amount %>">
           <div class="border-r pl-2 text-center flex items-center justify-start font-bold text-xl">
             <%= translated_attribute(project.title) %>
           </div>

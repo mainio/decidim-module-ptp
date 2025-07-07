@@ -58,13 +58,12 @@ en:
         budget_confirm:
           is_this_correct: Is this correct?
         budget_summary:
-          assigned: "Assigned: "
           back_to_budgets: Show all budgets
           cancel_voting: Cancel voting
           choose_budget: You decide the %{budget_title} budget
           choose_description: Choose the projects you like and cast your vote at the
             end.
-          total_budget: "Total budget: "
+          total_budget: 'You can allocate %{budget} to different proposals. First choose the proposals to vote from the list below. After selection, press the "I am ready" -button.'
           total_projects: "Total projects: "
         cancel_voting_modal:
           continue: Continue voting
@@ -81,6 +80,7 @@ en:
           vote: Vote
           total_projects: "Total projects: "
         order_selected_projects:
+          assigned: "Budget left: "
           view: View
           remove: Remove
         order_progress_summary_content:
@@ -118,7 +118,9 @@ en:
             introduction: Want to vote this project?
             start_voting: Start voting
         selected_projects_modal:
+          assigned: "Budget left: "
           choices: Your selection for the vote
+          choices_remaining: "Valintoja jäljellä: "
           current_choices: You have chosen the following proposals for your vote.
           continue: Continue voting
           no_selection: You have no chosen proposals.

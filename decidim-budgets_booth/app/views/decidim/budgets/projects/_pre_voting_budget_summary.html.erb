@@ -7,6 +7,9 @@
       <p class="my-4">
         <%= raw t(".pre_vote.casted_description", cancel_link: link_to(t(".cancel_order"), budget_order_path(return_to: "budget"), method: :delete, class: "cancel-order", data: { confirm: t(".are_you_sure") })) %>
       </p>
+      <% if session.delete(:show_status) %>
+        <div id="trigger-status" class="hidden"></div>
+      <% end %>
       <div class="align-right">
         <button data-dialog-open="status-summary", class="button button__lg button__secondary"><%= t(".pre_vote.result_voted") %></button>
       </div>
@@ -14,7 +17,7 @@
       <h1 class="h1">
         <%= translated_attribute(budget.title) %>
       </h1>
-      <h5 class="my-4 h5"><%= t(".total_budget", amount: budget_to_currency(budget.total_budget)) %></h5>
+      <p class="my-4 h5"><%= t(".total_budget", amount: budget_to_currency(budget.total_budget)) %></p>
       <p class="inline-block text-center text-xl lg:w-[480px]">
         <%= description_text %>
         <div class="flex flex-col mt-4 space-y-4 lg:flex-row lg:justify-center lg:items-center lg:gap-4 lg:space-y-0">

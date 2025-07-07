@@ -2,8 +2,9 @@ $(() => {
   const showProjectsButton = document.getElementById("show-projects");
   const projectsCount = document.getElementById("projects-count");
   const statusModal = window.Decidim.currentDialogs["status-summary"];
+  const statusTrigger = document.getElementById("trigger-status");
 
-  if (statusModal) {
+  if (statusModal && statusTrigger) {
     statusModal.open();
   }
 

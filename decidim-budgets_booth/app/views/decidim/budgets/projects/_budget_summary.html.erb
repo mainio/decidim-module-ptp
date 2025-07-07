@@ -1,16 +1,3 @@
-<div class="row column voting-rules">
-  <% if budgets.count > 1 && !voting_mode? %>
-    <div class="row">
-      <div class="columns medium-8 large-9">
-        <%= button_to(decidim_budgets.budgets_path, class: "link m-bottom flex", method: :get) do %>
-          <%= icon "arrow-left-s-line", class: "icon--small h-6 w-6 pt-1", role: "img", "aria-hidden": true %>
-          <%= t(".back_to_budgets") %>
-        <% end %>
-      </div>
-    </div>
-  <% end %>
-</div>
-
 <% if voting_mode? %>
   <div class="card budget-summary flex items-center" data-progress-reference data-safe-url="<%= budget_url(budget) %>">
     <div class="card__content my-8 flex flex-col space-y-4 text-left w-4/6">
@@ -31,23 +18,8 @@
             </span>
           </div>
         <% else %>
-          <div class="budget-summary__total text-left text-lg font-bold my-2" data-total-allocation="<%= current_order.available_allocation %>" data-total-budget="<%= budget.total_budget %>">
-            <h6 class="h6"><%= t(".total_budget") %>
-              <strong class="mini-title__strong mini-title__strong--highlight h6">
-                <%= budget_to_currency(budget.total_budget) %>
-              </strong>
-            </h6>
-          </div>
-        <% end %>
-
-        <% unless current_order.projects_rule? %>
-          <div class="text-left mt-4 text-lg font-bold">
-            <h6 class="h6">
-              <%= t(".assigned") %>
-              <div class="total-budget inline-block">
-                <%= render partial: "order_total_budget" %>
-              </div>
-            </h6>
+          <div class="budget-summary__total text-left my-2" data-total-allocation="<%= current_order.available_allocation %>" data-total-budget="<%= budget.total_budget %>">
+            <p class="text-md"><%= t(".total_budget", budget: budget_to_currency(budget.total_budget)).html_safe %></p>
           </div>
         <% end %>
 

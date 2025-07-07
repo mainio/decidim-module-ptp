@@ -46,9 +46,9 @@
   <%= link_to resource_path, class: "#{card_class} card__highlight" do %>
     <div class="card__highlight-text md:w-[70%] p-0">
       <div class="max-[391px]:pb-1.5 p-4">
-        <h3 class="h3 text-secondary inline-block align-middle">
+        <p class="h3 text-secondary inline-block align-middle">
           <%= decidim_escape_translated(title) %>
-        </h3>
+        </p>
         <% if voted? %>
           <%= icon "check-double-line", class: "inline-block align-middle fill-success ml-2 h-[1.5em] w-[1.5em]" %>
         <% end %>
