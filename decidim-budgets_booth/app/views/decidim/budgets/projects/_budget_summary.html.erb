@@ -1,6 +1,6 @@
 <% if voting_mode? %>
-  <div class="card budget-summary flex items-center" data-progress-reference data-safe-url="<%= budget_url(budget) %>">
-    <div class="card__content my-8 flex flex-col space-y-4 text-left w-4/6">
+  <div class="card budget-summary flex" data-progress-reference data-safe-url="<%= budget_url(budget) %>">
+    <div class="card__content my-2 flex flex-col space-y-4 one-col text-left xl:my-8">
       <h1 class="h1">
         <%= t(".choose_budget", budget_title: translated_attribute(budget.title)) %>
       </h1>
@@ -9,23 +9,25 @@
       </p>
     </div>
 
-    <div class="vote-progress-container p-4 w-4/6 z-50">
-      <div class="vote-progress-content mx-auto w-full max-w-6xl">
-        <% if current_order.projects_rule? %>
-          <div class="budget-summary__total text-left text-lg" data-total-allocation="<%= current_order.available_allocation %>">
-            <span class="mini-title text-md">
-              <%= t(".total_projects", max_projects: current_order.maximum_projects).html_safe %>
-            </span>
-          </div>
-        <% else %>
-          <div class="budget-summary__total text-left my-2" data-total-allocation="<%= current_order.available_allocation %>" data-total-budget="<%= budget.total_budget %>">
-            <p class="text-md"><%= t(".total_budget", budget: budget_to_currency(budget.total_budget)).html_safe %></p>
-          </div>
-        <% end %>
+    <div class="vote-progress-container">
+      <div class="vote-progress-content">
+        <div class="progress-background px-4">
+          <% if current_order.projects_rule? %>
+            <div class="budget-summary__total" data-total-allocation="<%= current_order.available_allocation %>">
+              <span class="mini-title text-md">
+                <%= t(".total_projects", max_projects: current_order.maximum_projects).html_safe %>
+              </span>
+            </div>
+          <% else %>
+            <div class="budget-summary__total text-left my-2" data-total-allocation="<%= current_order.available_allocation %>" data-total-budget="<%= budget.total_budget %>">
+              <p class="text-md"><%= t(".total_budget", budget: budget_to_currency(budget.total_budget)).html_safe %></p>
+            </div>
+          <% end %>
 
-        <%= render partial: "order_selected_projects" %>
+          <%= render partial: "order_selected_projects" %>
 
-        <%= render partial: "order_progress" %>
+          <%= render partial: "order_progress" %>
+        </div>
       </div>
     </div>
 

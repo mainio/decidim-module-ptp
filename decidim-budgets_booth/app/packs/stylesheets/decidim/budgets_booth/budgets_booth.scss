@@ -50,10 +50,6 @@
   @apply mr-0;
 }
 
-.budget-summary__progressbox--fixed{
-  @apply pt-2 pr-8 pb-4 pl-8 md:py-4 md:px-16;
-}
-
 .spaced-bottom{
   @apply mb-[0.3rem];
 }
@@ -131,10 +127,18 @@
 
 .budget-summary {
   @apply text-center;
+
+  &__progressbox {
+    @apply flex flex-col gap-2 pb-2 xl:gap-4 xl:flex-row xl:justify-between;
+  }
+}
+
+.progress-ready-button {
+  @apply button button__lg w-full flex flex-row items-center justify-center gap-2 button__secondary xl:w-fit;
 }
 
 .budget-list__item {
-  @apply flex flex-col border lg:w-full lg:flex-row lg:justify-between;
+  @apply flex flex-col border w-full lg:flex-row lg:justify-between;
 
   .explore-link {
     @apply w-full lg:w-48 bg-[#f2fcfd];
@@ -145,12 +149,8 @@
   }
 }
 
-.progressbox-fixed-wrapper {
-  @apply bg-[#f2fcfd];
-}
-
 .budget__card__prevote {
-  @apply flex flex-row justify-between lg:space-y-2 lg:block;
+  @apply flex flex-col sm:flex-row sm:justify-between lg:space-y-2 lg:block;
 
   .budget__card__highlight-prevote__header {
     @apply flex flex-col items-center space-y-2;
@@ -209,8 +209,16 @@
   }
 }
 
-.vote-progress-container {
+.progress-background {
   @apply bg-[#f2fcfd];
+}
+
+.vote-progress-container {
+  @apply z-50;
+}
+
+.vote-progress-content {
+  @apply mx-auto w-full one-col;
 }
 
 .budget-summary__selected-item > div:nth-child(1) {
@@ -253,7 +261,7 @@
     }
 
     .budget__card__highlight-vote {
-      @apply bg-[#f2fcfd] p-0 mt-0 bg-[#f2fcfd] w-full flex flex-row justify-between xl:block xl:w-3/12 xl:text-center;
+      @apply bg-[#f2fcfd] p-0 mt-0 bg-[#f2fcfd] w-full flex flex-col sm:flex-row sm:justify-between xl:block xl:w-3/12 xl:text-center;
 
       &__header {
         @apply text-center;
@@ -300,8 +308,12 @@
   }
 }
 
+.budget-progress {
+  @apply relative bg-gray-3 w-full flex items-center xl:w-5/6;
+}
+
 .progress-meter.budget-progress__meter {
-  @apply bg-[#58a491];
+  @apply bg-[#58a491] h-full flex items-center justify-center;
 
   > span {
     @apply text-black;
@@ -309,18 +321,16 @@
 }
 
 .progress-meter-text.progress-meter-text--right {
-  @apply max-[380px]:hidden 2xl:right-1/4 2xl:pr-24 2xl:absolute;
+  @apply right-4 absolute;
 
   &--fixed {
     @apply max-[380px]:hidden 2xl:right-1/4 2xl:pr-20 2xl:absolute;
   }
 }
 
-.budget-summary__progressbox--fixed {
-  @apply p-0;
-}
-
 .budget-summary__selected {
+  @apply flex flex-col items-center justify-center sm:flex-row xl:gap-6 xl:justify-start;
+
   h6 {
     @apply text-[--primary];
   }
@@ -338,6 +348,10 @@
   &-number {
     @apply text-2xl;
   }
+}
+
+.budget-summary__total {
+  @apply text-center text-lg my-2 xl:text-left;
 }
 
 // Success image for status -view

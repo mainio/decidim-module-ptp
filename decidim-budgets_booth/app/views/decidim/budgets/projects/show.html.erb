@@ -56,7 +56,7 @@ edit_link(
   <% end %>
 
   <%= render layout: "layouts/decidim/shared/layout_item" do %>
-    <div class="row w-full mx-4 space-y-8 lg:mx-0">
+    <div class="row w-full space-y-8 lg:mx-0">
       <div class="row columns m-bottom projects-link">
         <%= link_to budget_projects_path(budget), class: "link js-back-to-list flex" do %>
           <%= icon "arrow-left-s-line", class: "icon--small h-6 w-6 pt-1", role: "img", "aria-hidden": true %>
@@ -76,8 +76,14 @@ edit_link(
         <%= cell("decidim/linked_resources_for", project, type: :proposals, link_name: "included_proposals") %>
         <%= cell("decidim/linked_resources_for", project, type: :results, link_name: "included_projects") %>
       </div>
-      <%= comments_for project, polymorphic: [project.budget] %>
     </div>
+
+    <% content_for :item_footer do %>
+      <%= comments_for project, polymorphic: [project.budget] %>
+      <ul class="metadata__container layout-main__section" data-metadata-footer>
+        <%= content_tag :li, resource_reference(project), class: "metadata__item" %>
+      </ul>
+    <% end %>
   <% end %>
 
   <%= render partial: "decidim/shared/share_modal" %>
