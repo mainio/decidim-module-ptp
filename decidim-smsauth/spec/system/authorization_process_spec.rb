@@ -53,7 +53,7 @@ describe "AuthorizationProcess" do
       sign_in user, scope: :user
       visit decidim.account_path
       click_on "Authorization"
-      find(".h5.text-secondary", text: "SMS").click
+      find(".h5.text-[--primary]", text: "SMS").click
     end
 
     it_behaves_like "phone authorization process"

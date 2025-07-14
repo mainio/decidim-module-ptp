@@ -1,7 +1,7 @@
 <% if voting_mode? %>
   <div class="card budget-summary flex" data-progress-reference data-safe-url="<%= budget_url(budget) %>">
     <div class="card__content my-2 flex flex-col space-y-4 one-col text-left xl:my-8">
-      <h1 class="h1">
+      <h1 class="h2 md:h1">
         <%= t(".choose_budget", budget_title: translated_attribute(budget.title)) %>
       </h1>
       <p class="text-md">

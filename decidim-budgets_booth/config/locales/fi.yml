@@ -54,7 +54,9 @@ fi:
         remove_from_vote: Poista äänestäsi
       projects:
         budget_confirm:
+          confirm: Vahvista ääni
           is_this_correct: Onko tämä oikein?
+          title: Vahvistä äänesi
         budget_summary:
           back_to_budgets: Näytä kaikki budjetit
           cancel_voting: Poistu äänestyksestä
@@ -89,8 +91,8 @@ fi:
             finish_description: Olet jo aloittanut tämän budjetin äänestyksen. Haluaisitko viimeistellä äänesi?
             finish_voting: Viimeistele äänestys
             result_voted: Tarkasta äänesi
-            start_description: Voit selata hankkeita tutustuaksesi niihin. Aloittaaksesi äänestyksen, paina "Aloita äänestys" -painiketta.
-            start_voting: Aloita äänestys
+            start_description: Voit selata hankkeita tutustuaksesi niihin. Aloittaaksesi äänestyksen, paina "Aloita alueen äänestys" -painiketta.
+            start_voting: Aloita alueen äänestys
             title: Tervetuloa äänestämään!
           ready: Olen valmis
           total_budget: "Alueen kokonaisbudjetti: %{amount}"
@@ -106,7 +108,7 @@ fi:
           pre_vote:
             continue_voting: Jatka äänestystä
             introduction: Haluatko äänestää tätä hanketta?
-            start_voting: Aloita äänestys
+            start_voting: Aloita alueen äänestys
         selected_projects_modal:
           assigned: "Budjettia jäljellä: "
           choices: Valintasi ääneesi

@@ -18,6 +18,13 @@ edit_link(
 <%= cell("decidim/budgets/limit_announcement", budget) %>
 
 <main class="voting-wrapper">
+  <div class="projects-link">
+    <%= link_to budget_projects_path(budget), class: "link js-back-to-list flex" do %>
+      <%= icon "arrow-left-s-line", class: "icon--small h-6 w-6 pt-1 fill-[--primary]", role: "img", "aria-hidden": true %>
+      <%= t("view_all_projects", scope: "decidim.budgets.projects.show") %>
+    <% end %>
+  </div>
+
   <div class="row columns">
     <% if voting_mode? %>
       <%= render partial: "budget_summary", locals: { include_heading: true } %>
@@ -27,7 +34,7 @@ edit_link(
   <% content_for :aside do %>
     <div class="card extra project-info flex justify-center items-center">
       <div class="card__content flex flex-col items-center w-full space-y-2">
-        <div class="m-bottom flex flex-col space-y-2">
+        <div class="m-bottom flex flex-col space-y-3">
           <span class="definition-data__title"><%= t("budget", scope: "decidim.budgets.projects.show") %></span>
           <span class="definition-data__number"><%= budget_to_currency project.budget_amount %></span>
         </div>
@@ -40,6 +47,7 @@ edit_link(
           <span class="text-wrap text-center text-lg mb-4"><%= t("introduction", scope: "decidim.budgets.projects.show.pre_vote") %></span>
           <%= link_to budget_voting_index_path(select_project: project.id), class: "button button__lg button__secondary prevote-start-button" do %>
             <span class="text-wrap"><%= progress?(budget) ? t("continue_voting", scope: "decidim.budgets.projects.show.pre_vote") : t("start_voting", scope: "decidim.budgets.projects.show.pre_vote") %></span>
+            <%= icon "arrow-right-line" %>
           <% end %>
         <% else %>
           <%= cell("decidim/budgets/project_voted_hint", project, text_medium: true, class: "success text-m display-block margin-top-1") if current_order_checked_out? && voted_for?(project) %>
@@ -57,14 +65,8 @@ edit_link(
 
   <%= render layout: "layouts/decidim/shared/layout_item" do %>
     <div class="row w-full space-y-8 lg:mx-0">
-      <div class="row columns m-bottom projects-link">
-        <%= link_to budget_projects_path(budget), class: "link js-back-to-list flex" do %>
-          <%= icon "arrow-left-s-line", class: "icon--small h-6 w-6 pt-1", role: "img", "aria-hidden": true %>
-          <%= t("view_all_projects", scope: "decidim.budgets.projects.show") %>
-        <% end %>
-      </div>
-      <div id="project" class="columns section view-side mediumlarge-4 mediumlarge-push-8 large-3 large-push-9 flex justify-between my-8">
-        <h1 class="h1"><%= translated_attribute project.title %></h1>
+      <div id="project" class="columns section view-side mediumlarge-4 mediumlarge-push-8 large-3 large-push-9 flex justify-between">
+        <h1 class="h2 md:h1"><%= translated_attribute project.title %></h1>
       </div>
       <div class="columns mediumlarge-8 mediumlarge-pull-4 space-y-8">
         <div class="section space-y-8">

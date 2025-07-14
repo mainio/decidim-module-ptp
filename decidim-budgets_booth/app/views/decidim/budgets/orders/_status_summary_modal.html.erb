@@ -2,7 +2,7 @@
   <% if current_order.present? %>
     <div data-dialog-container>
       <%= icon "check-double-line" %>
-      <h3 class="h3" id="dialog-title-budget-confirm" data-dialog-title>
+      <h3 class="h2" id="dialog-title-budget-confirm" data-dialog-title>
         <%= post_vote ? t(".votes") : t(".title") %>
       </h3>
       <div class="my-8">
@@ -10,11 +10,11 @@
           <h4 class="h4 mb-4"><%= translated_attribute(budget.title) %></h4>
           <ul class="status-summary__selected-list divide-y border w-full">
             <% current_order.projects.each do |project| %>
-              <li class="status-summary__selected-item h-12 flex">
-                <div class="pl-6 h-12 w-4/6 border-r text-center flex items-center justify-start font-bold text-xl">
+              <li class="status-summary__selected-item py-1 space-y-1 flex flex-col md:space-y-0 md:py-0 md:flex-row">
+                <div class="pl-2 w-4/6 text-center flex items-center justify-start font-bold text-md md:text-xl md:pl-6 md:border-r">
                   <%= translated_attribute(project.title) %>
                 </div>
-                <div class="h-12 w-2/6 text-center flex items-center justify-center text-xl">
+                <div class="pl-2 w-2/6 flex items-center text-md md:text-xl md:justify-center md:pl-0 md:text-center">
                   <strong class="status-summary__selected-number">
                     <%= budget_to_currency project.budget_amount %>
                   </strong>
@@ -40,7 +40,7 @@
           </span>
         <% end %>
       <% end %>
-      <button class="button button__sm md:button__lg button__transparent-secondary rounded-none" data-dialog-close="status-summary">
+      <button class="button button__lg md:button__lg button__transparent-secondary rounded-none" data-dialog-close="status-summary">
         <%= t(".close") %>
       </button>
     </div>

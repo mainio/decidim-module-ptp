@@ -10,7 +10,7 @@
       </div>
     <% else %>
       <div class="card__content budget-summary__selected">
-        <div class="text-left text-lg font-bold flex gap-2 items-center">
+        <div class="text-left text-sm font-bold flex gap-2 items-center md:text-lg">
           <p>
             <%= t(".assigned") %>
             <div class="total-budget inline-block">
@@ -19,8 +19,8 @@
           </p>
         </div>
         <button class="flex gap-2 items-center" data-dialog-open="selected-projects">
-          <p class="text-lg font-bold"> <%= t(".show_choices") %> </p>
-          <%= icon("menu-line", class:"icon--small w-6 h-6", aria_label: t(".view"), role: "img") %>
+          <p class="text-sm font-bold md:text-lg"> <%= t(".show_choices") %> </p>
+          <%= icon("menu-line", class:"icon--small w-4 h-4 md:w-6 md:h-6", aria_label: t(".view"), role: "img") %>
         </button>
       </div>
     <% end %>

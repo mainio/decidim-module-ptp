@@ -1,7 +1,7 @@
 <% if voting_mode? %>
   <div id="project-<%= model.id %>-item" class="budget-list__item">
     <div class= "p-4 cursor-pointer" data-dialog-open="project-modal-<%= model.id %>">
-      <h3 class="h3 text-secondary inline-block align-middle">
+      <h3 class="text-[22px] font-bio text-[--primary] inline-block align-middle md:h3">
         <%= decidim_escape_translated(title) %>
       </h3>
       <%= translated_attribute project.description %>
@@ -28,7 +28,7 @@
   <%= link_to resource_path, class: "w-full" do %>
     <div id="project-<%= model.id %>-item" class="budget-list__item">
       <div class= "p-4">
-        <h3 class="h3 text-secondary inline-block align-middle">
+        <h3 class="h3 text-[--primary] inline-block align-middle">
           <%= decidim_escape_translated(title) %>
         </h3>
         <%= translated_attribute project.description %>

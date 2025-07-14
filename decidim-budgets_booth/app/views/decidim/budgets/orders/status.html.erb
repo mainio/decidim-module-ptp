@@ -7,7 +7,7 @@
       </svg>
     </div>
 
-    <h1 class="h1 inline-block mt-12 mb-4">
+    <h1 class="h2 inline-block mt-12 mb-4 md:h1">
       <%= t("title", scope: "decidim.budgets.orders.status", budget: translated_attribute(current_order.budget.title)) %>
     </h1>
 
@@ -29,8 +29,8 @@
     </button>
   </div>
 
-  <div class="form__wrapper-block flex-col-reverse md:flex-row justify-center gap-12 border-t-0">
-    <%= button_to decidim.destroy_user_session_path, method: :delete, class: "button button__lg button__transparent-secondary w-full" do %>
+  <div class="form__wrapper-block flex-col md:flex-row justify-center gap-6 border-t-0">
+    <%= button_to decidim.destroy_user_session_path, method: :delete, class: "button button__lg button__transparent-secondary w-full status-logout" do %>
       <%= t(".log_out") %>
       <%= icon("logout-box-r-line") %>
     <% end %>

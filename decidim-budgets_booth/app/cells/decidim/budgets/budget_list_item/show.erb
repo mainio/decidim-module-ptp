@@ -44,9 +44,9 @@
   </div>
 <% else %>
   <%= link_to resource_path, class: "#{card_class} card__highlight" do %>
-    <div class="card__highlight-text md:w-[70%] p-0">
-      <div class="max-[391px]:pb-1.5 p-4">
-        <p class="h3 text-secondary inline-block align-middle">
+    <div class="card__highlight-text md:w-[70%]">
+      <div class="max-[391px]:pb-1.5">
+        <p class="text-[--primary] inline-block font-bio text-[22px] align-middle md:h3">
           <%= decidim_escape_translated(title) %>
         </p>
         <% if voted? %>
@@ -59,7 +59,7 @@
         <% end %>
       </div>
       <% if voted? %>
-        <div class="divide-x-2 divide-gray-3 px-4 pt-2">
+        <div class="divide-x-2 divide-gray-3 pt-2">
           <%= render :projects_count %>
         </div>
       <% end %>

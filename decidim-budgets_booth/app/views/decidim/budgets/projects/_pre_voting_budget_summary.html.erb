@@ -1,7 +1,7 @@
 <div class="card budget-summary pre-voting-budget-summary" data-progress-reference data-safe-url="<%= budget_url(budget) %>">
-  <div class="card__content mb-4 px-4 lg:px-0">
+  <div class="card__content mb-4 px-4 space-y-4 lg:px-0">
     <% if current_order_checked_out? %>
-      <h1 class="h1">
+      <h1 class="h2 md:h1">
         <%= translated_attribute(budget.title) %>
       </h1>
       <p class="my-4">

@@ -1,7 +1,7 @@
 <%= decidim_modal id: "selected-projects" do %>
   <div class="flex flex-col gap-6 mb-6">
     <h2 class="h2"><%= t(".choices") %></h2>
-    <h3 class="text-[28px] font-bold"><%= translated_attribute(budget.title) %></h3>
+    <h3 class="text-[24px] font-bold md:text-[28px]"><%= translated_attribute(budget.title) %></h3>
     <p id="current-choices"><%= t(".current_choices") %></p>
     <% if current_order.projects_rule? %>
       <strong class="h6 pr-6">
@@ -9,7 +9,7 @@
         <span id="choices-remaining" data-max-projects="<%= current_order.maximum_projects %>"><%= current_order.maximum_projects - current_order.projects.size %></span>
       </strong>
     <% else %>
-      <p class="text-lg font-bold flex gap-2">
+      <p class="text-md font-bold flex gap-2 md:text-lg">
         <%= t(".assigned") %>
         <span id="budget-remaining"><%= budget_to_currency(budget.total_budget - current_order&.total_budget.to_f) %></span>
       </p>
@@ -19,30 +19,33 @@
   <div id="selected-projects-container" data-dialog-container>
     <ul class="budget-summary__selected-list divide-y border">
       <% current_order.projects.each do |project| %>
-        <li id="selected-project-<%= project.id %>" class="budget-summary__selected-item h-12 flex justify-center items-center" data-cost="<%= project.budget_amount %>">
-          <div class="border-r pl-2 text-center flex items-center justify-start font-bold text-xl">
+        <li id="selected-project-<%= project.id %>" class="budget-summary__selected-item flex flex-col md:justify-center md:items-center md:flex-row" data-cost="<%= project.budget_amount %>">
+          <div class="flex items-center justify-start pl-2 font-bold text-xl md:text-center md:border-r">
             <%= translated_attribute(project.title) %>
           </div>
-          <div class="border-r text-center flex items-center justify-center text-lg">
-            <strong class="budget-summary__selected-number">
-              <%= budget_to_currency project.budget_amount %>
-            </strong>
-          </div>
-          <% unless current_order_checked_out? %>
-            <div class="flex justify-center items-center">
-              <%= button_to budget_order_line_item_path(project_id: project), method: :delete, remote: true, data: { disable: true }, form: { style: "display: inline" }, class: "h-8 w-full flex button button__xs button__transparent-secondary rounded-none lg:button__lg" do %>
-                <span class="hidden lg:inline"><%= t(".remove") %></span>
-                <%= icon("delete-bin-line", aria_label: t("decidim.budgets.projects.order_selected_projects.remove"), role: "img") %>
-              <% end %>
+
+          <div class="flex justify-between px-2 md:w-3/6">
+            <div class="text-center flex items-center justify-center text-lg md:border-r">
+              <strong class="budget-summary__selected-number">
+                <%= budget_to_currency project.budget_amount %>
+              </strong>
             </div>
-          <% end %>
+            <% unless current_order_checked_out? %>
+              <div class="flex justify-center items-center">
+                <%= button_to budget_order_line_item_path(project_id: project), method: :delete, remote: true, data: { disable: true }, form: { style: "display: inline" }, class: "h-8 w-full flex button button__xs button__transparent-secondary rounded-none lg:button__lg" do %>
+                  <span><%= t(".remove") %></span>
+                  <%= icon("delete-bin-line", aria_label: t("decidim.budgets.projects.order_selected_projects.remove"), role: "img") %>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
         </li>
       <% end %>
     </ul>
   </div>
 
   <div data-dialog-actions>
-    <button type="button" class="button button__lg button__secondary text-lg" data-dialog-close="selected-projects">
+    <button type="button" class="button button__lg button__secondary text-md md:text-lg" data-dialog-close="selected-projects">
       <%= t(".continue") %>
       <%= icon("arrow-right-line", class: "h-6 w-6") %>
     </button>

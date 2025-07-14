@@ -134,23 +134,23 @@
 }
 
 .progress-ready-button {
-  @apply button button__lg w-full flex flex-row items-center justify-center gap-2 button__secondary xl:w-fit;
+  @apply button button__lg w-full flex flex-row items-center justify-center gap-2 button__secondary font-bold text-md md:text-lg xl:w-fit;
 }
 
 .budget-list__item {
   @apply flex flex-col border w-full lg:flex-row lg:justify-between;
 
   .explore-link {
-    @apply w-full lg:w-48 bg-[#f2fcfd];
+    @apply w-full lg:w-52 bg-[#f2fcfd] lg:flex-shrink-0;
   }
 
   .selected-project {
-    @apply w-full lg:w-48 bg-[#e1fae8];
+    @apply w-full lg:w-52 bg-[#e1fae8] lg:flex-shrink-0;
   }
 }
 
 .budget__card__prevote {
-  @apply flex flex-col sm:flex-row sm:justify-between lg:space-y-2 lg:block;
+  @apply flex flex-row justify-between lg:space-y-2 lg:block;
 
   .budget__card__highlight-prevote__header {
     @apply flex flex-col items-center space-y-2;
@@ -165,7 +165,7 @@
   }
 
   .budget__card__prevote-explore-button {
-    @apply mt-2 text-lg h-10 ;
+    @apply text-lg lg:mt-2;
 
     &-container {
       @apply flex justify-center items-center;
@@ -194,7 +194,11 @@
 }
 
 .projects-link {
-  @apply text-xl my-4 w-3/6 font-semibold text-[--primary];
+  @apply container grid grid-cols-12 text-xl font-semibold text-[--primary] pt-2;
+
+  a {
+    @apply col-start-1 col-span-full xl:col-start-2;
+  }
 }
 
 .project-info {
@@ -225,9 +229,9 @@
   @apply w-6/12 h-12;
 }
 
-.budget-summary__selected-item > div:nth-child(2),
-.budget-summary__selected-item > div:nth-child(3) {
-  @apply w-3/12 h-12;
+.budget-summary__selected-item > div > div:nth-child(1),
+.budget-summary__selected-item > div > div:nth-child(2) {
+  @apply h-12 md:w-3/6;
 }
 
 .project-vote-button-container {
@@ -238,7 +242,7 @@
   @apply col-span-2 col-start-1;
 
   .budget-confirm__selected-number {
-    @apply text-2xl;
+    @apply font-bold text-lg md:text-2xl;
   }
 }
 
@@ -252,16 +256,12 @@
   .card__highlight {
     @apply flex flex-col space-y-10 rounded-none ring-2 hover:ring-background xl:space-y-0 xl:flex-row;
 
-    &-text {
-      @apply mt-8;
-    }
-
     > :not([hidden]) ~ :not([hidden]) {
-      @apply max-[391px]:mt-0 max-[496px]:mt-2.5 p-2 mt-10 lg:mt-0;
+      @apply max-[391px]:mt-0 max-[496px]:mt-2.5 p-4 mt-10 lg:mt-0;
     }
 
     .budget__card__highlight-vote {
-      @apply bg-[#f2fcfd] p-0 mt-0 bg-[#f2fcfd] w-full flex flex-col sm:flex-row sm:justify-between xl:block xl:w-3/12 xl:text-center;
+      @apply bg-[#f2fcfd] p-0 mt-0 bg-[#f2fcfd] w-full flex flex-row justify-between xl:block xl:w-3/12 xl:text-center;
 
       &__header {
         @apply text-center;
@@ -276,7 +276,7 @@
       }
 
       &__button {
-        @apply text-xl mt-0;
+        @apply font-bold text-lg mt-0 md:text-xl;
 
         &.button__secondary:hover {
           svg {
@@ -300,7 +300,7 @@
   }
 
   .card__highlight-text {
-    @apply gap-0;
+    @apply gap-0 pb-[18px] p-4;
   }
 
   a {
@@ -329,7 +329,7 @@
 }
 
 .budget-summary__selected {
-  @apply flex flex-col items-center justify-center sm:flex-row xl:gap-6 xl:justify-start;
+  @apply flex items-center justify-between xl:gap-6 xl:justify-start;
 
   h6 {
     @apply text-[--primary];
@@ -346,7 +346,7 @@
   }
 
   &-number {
-    @apply text-2xl;
+    @apply text-lg md:text-2xl;
   }
 }
 
@@ -362,6 +362,11 @@
   width: 150px;
   height: 150px;
   margin: auto;
+
+  @media (max-width: 768px) {
+    width: 100px;
+    height: 100px;
+  }
 
   .animation-success__checkmark {
     width: 100%;
@@ -442,5 +447,13 @@
 .card.extra.project-info {
   span.success {
     @apply flex items-center text-lg;
+  }
+}
+
+.form__wrapper {
+  &-block {
+    .status-logout {
+      @apply only:[&_*]:ml-0;
+    }
   }
 }
