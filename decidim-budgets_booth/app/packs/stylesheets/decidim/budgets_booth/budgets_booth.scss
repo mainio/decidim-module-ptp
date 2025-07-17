@@ -54,16 +54,6 @@
   @apply mb-[0.3rem];
 }
 
-.budget-list{
-  &__item{
-    @apply mb-8 block md:mb-0 md:block border-background;
-  }
-
-  &__data{
-    @apply justify-center;
-  }
-}
-
 .flex-column{
   @apply flex-col md:flex-col;
 }
@@ -134,18 +124,32 @@
 }
 
 .progress-ready-button {
-  @apply button button__lg w-full flex flex-row items-center justify-center gap-2 button__secondary font-bold text-md md:text-lg xl:w-fit;
+  @apply button button__lg w-full h-12 flex flex-row items-center justify-center gap-2 button__secondary font-bold text-md md:text-lg xl:w-fit;
 }
 
-.budget-list__item {
-  @apply flex flex-col border w-full lg:flex-row lg:justify-between;
+.budget-list {
+  a {
+    @apply hover:no-underline;
 
-  .explore-link {
-    @apply w-full lg:w-52 bg-[#f2fcfd] lg:flex-shrink-0;
+    :hover h3 {
+      @apply underline;
+    }
   }
 
-  .selected-project {
-    @apply w-full lg:w-52 bg-[#e1fae8] lg:flex-shrink-0;
+  &__data {
+    @apply justify-center;
+  }
+
+  &__item {
+    @apply mb-8 border-background flex flex-col border w-full md:mb-0 lg:flex-row lg:justify-between;
+
+    .explore-link {
+      @apply w-full lg:w-52 bg-[#f2fcfd] lg:flex-shrink-0;
+    }
+
+    .selected-project {
+      @apply w-full lg:w-52 bg-[#e1fae8] lg:flex-shrink-0;
+    }
   }
 }
 
@@ -153,7 +157,7 @@
   @apply flex flex-row justify-between lg:space-y-2 lg:block;
 
   .budget__card__highlight-prevote__header {
-    @apply flex flex-col items-center space-y-2;
+    @apply flex flex-col items-start space-y-2 lg:items-center;
 
     .budget__card__highlight-prevote__text {
       @apply text-md;
@@ -194,7 +198,7 @@
 }
 
 .projects-link {
-  @apply container grid grid-cols-12 text-xl font-semibold text-[--primary] pt-2;
+  @apply container grid grid-cols-12 text-xl font-semibold text-[--primary] pt-6;
 
   a {
     @apply col-start-1 col-span-full xl:col-start-2;
@@ -218,20 +222,24 @@
 }
 
 .vote-progress-container {
-  @apply z-50;
+  @apply z-50 max-[767px]:bg-[#f2fcfd];
 }
 
 .vote-progress-content {
-  @apply mx-auto w-full one-col;
+  @apply mx-auto w-full container grid grid-cols-1 py-5;
+}
+
+.no-top {
+  @apply pt-0;
 }
 
 .budget-summary__selected-item > div:nth-child(1) {
-  @apply w-6/12 h-12;
+  @apply w-3/6;
 }
 
 .budget-summary__selected-item > div > div:nth-child(1),
 .budget-summary__selected-item > div > div:nth-child(2) {
-  @apply h-12 md:w-3/6;
+  @apply md:w-3/6;
 }
 
 .project-vote-button-container {
@@ -253,22 +261,24 @@
 #budgets.card__list-list {
   @apply w-full mx-auto xl:space-y-8 xl:mb-0 xl:w-3/5;
 
+  a {
+    :hover p {
+      @apply underline;
+    }
+  }
+
   .card__highlight {
-    @apply flex flex-col space-y-10 rounded-none ring-2 hover:ring-background xl:space-y-0 xl:flex-row;
+    @apply flex flex-col space-y-10 rounded-none ring-2 hover:no-underline hover:ring-background lg:space-y-0 lg:flex-row;
 
     > :not([hidden]) ~ :not([hidden]) {
       @apply max-[391px]:mt-0 max-[496px]:mt-2.5 p-4 mt-10 lg:mt-0;
     }
 
     .budget__card__highlight-vote {
-      @apply bg-[#f2fcfd] p-0 mt-0 bg-[#f2fcfd] w-full flex flex-row justify-between xl:block xl:w-3/12 xl:text-center;
-
-      &__header {
-        @apply text-center;
-      }
+      @apply bg-[#f2fcfd] p-0 mt-0 bg-[#f2fcfd] w-full flex flex-row justify-between lg:block lg:w-3/12 lg:text-center;
 
       &__text {
-        @apply text-md text-black mb-2.5 mx-auto;
+        @apply text-md text-black mb-2.5 lg:mx-auto;
       }
 
       &__number {
@@ -276,7 +286,7 @@
       }
 
       &__button {
-        @apply font-bold text-lg mt-0 md:text-xl;
+        @apply font-bold text-lg py-2.5 mt-4 md:text-xl;
 
         &.button__secondary:hover {
           svg {
@@ -309,7 +319,7 @@
 }
 
 .budget-progress {
-  @apply relative bg-gray-3 w-full flex items-center xl:w-5/6;
+  @apply relative h-12 bg-gray-3 w-full flex items-center xl:w-5/6;
 }
 
 .progress-meter.budget-progress__meter {
@@ -329,7 +339,7 @@
 }
 
 .budget-summary__selected {
-  @apply flex items-center justify-between xl:gap-6 xl:justify-start;
+  @apply flex items-center justify-between md:justify-start xl:gap-6 xl:justify-start;
 
   h6 {
     @apply text-[--primary];
@@ -455,5 +465,21 @@
     .status-logout {
       @apply only:[&_*]:ml-0;
     }
+  }
+}
+
+#status-summary {
+  #status-summary-content {
+    [data-dialog-actions] {
+      a > svg {
+        @apply mb-0;
+      }
+    }
+  }
+}
+
+.voting-wrapper {
+  .layout-item__aside {
+    @apply w-max;
   }
 }

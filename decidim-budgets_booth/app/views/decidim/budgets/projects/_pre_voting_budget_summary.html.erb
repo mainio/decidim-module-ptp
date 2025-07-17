@@ -1,5 +1,5 @@
 <div class="card budget-summary pre-voting-budget-summary" data-progress-reference data-safe-url="<%= budget_url(budget) %>">
-  <div class="card__content mb-4 px-4 space-y-4 lg:px-0">
+  <div class="card__content mb-4 p-5 space-y-4 lg:px-0">
     <% if current_order_checked_out? %>
       <h1 class="h2 md:h1">
         <%= translated_attribute(budget.title) %>
@@ -18,7 +18,7 @@
         <%= translated_attribute(budget.title) %>
       </h1>
       <p class="my-4 h5"><%= t(".total_budget", amount: budget_to_currency(budget.total_budget)) %></p>
-      <p class="inline-block text-center text-xl lg:w-[480px]">
+      <p class="inline-block text-xl text-left lg:text-center lg:w-4/6">
         <%= description_text %>
         <div class="flex flex-col mt-4 space-y-4 lg:flex-row lg:justify-center lg:items-center lg:gap-4 lg:space-y-0">
           <button id="show-projects" class="button button__lg button__transparent-secondary"><%= t(".browse") %></button>

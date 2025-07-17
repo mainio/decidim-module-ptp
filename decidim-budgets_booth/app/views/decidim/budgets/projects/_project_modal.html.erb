@@ -1,5 +1,5 @@
 <%= decidim_modal id: "project-modal-#{project.id}" do %>
-  <div class="exit-notification-label ml-2 mb-6">
+  <div class="exit-notification-label mb-6">
     <h2 id="exit-notification-label" class="h2"><%= decidim_sanitize(translated_attribute(project.title)) %></h2>
   </div>
 
@@ -22,6 +22,6 @@
   </div>
 
   <div data-dialog-actions class="w-10">
-    <button data-dialog-close="project-modal-<%= project.id %>" class="button button__lg button__transparent-secondary"><%= t(".close_project") %></button>
+    <button data-dialog-close="project-modal-<%= project.id %>" class="button button__lg button__transparent-secondary text-sm md:text-lg"><%= t(".close_project") %></button>
   </div>
 <% end %>

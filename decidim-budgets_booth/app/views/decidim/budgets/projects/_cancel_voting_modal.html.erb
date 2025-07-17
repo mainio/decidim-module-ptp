@@ -9,7 +9,7 @@
     </div>
   </div>
   <div data-dialog-actions>
-    <%= link_to t(".exit"), voting_booth_forced? ? cancel_redirect_path : budgets_path, id: "exit-notification-link", class: "button button__lg button__transparent-secondary text-md md:text-lg" %>
+    <%= link_to t(".exit"), voting_booth_forced? ? cancel_redirect_path : budgets_path, id: "exit-notification-link", class: "button button__lg button__transparent-secondary text-sm md:text-lg" %>
     <button class="button button__lg button__secondary text-md md:text-lg" data-dialog-close="cancel-voting" type="button">
       <%= t(".continue") %>
     </button>

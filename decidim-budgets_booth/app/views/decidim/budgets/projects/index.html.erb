@@ -3,7 +3,7 @@
 <% cell("decidim/budgets/limit_announcement", budget) %>
 
 <main class="voting-wrapper <%="margin-top-3" if voting_booth_forced? %>">
-  <div class="row columns">
+  <div class="row columns mb-10">
     <% if voting_finished? %>
       <h2 class="heading2">
         <%= t("decidim.budgets.projects.projects_for", name: translated_attribute(budget.title)) %>
@@ -14,8 +14,8 @@
     <% end %>
   </div>
 
-  <div class="row column voting-rules one-col">
-    <% if budgets.count > 1 && !voting_mode? %>
+  <% if budgets.count > 1 && !voting_mode? %>
+    <div class="row column voting-rules one-col">
       <div class="row">
         <div class="columns medium-8 large-9">
           <%= button_to(decidim_budgets.budgets_path, class: "link m-bottom flex", method: :get) do %>
@@ -24,10 +24,9 @@
           <% end %>
         </div>
       </div>
-    <% end %>
-  </div>
-
-  <div class="row columns one-col mx-auto mt-4 py-6">
+    </div>
+  <% end %>
+  <div class="row columns one-col mx-auto">
     <%= render partial: "count" %>
   </div>
 

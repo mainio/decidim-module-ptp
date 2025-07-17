@@ -3,9 +3,7 @@ $(() => {
   const spacer = document.querySelector(".progress-spacer");
   const summary = document.querySelector(".budget-summary__total");
   const selectedProjects = document.getElementById("order-selected-projects");
-  const budgetProgress = document.querySelector(".budget-progress");
-  const progressMeter = document.querySelector(".progress-meter");
-  const progressReady = document.querySelector(".progress-ready-button");
+  const progressContent = document.querySelector(".vote-progress-content");
   let sticky = false;
 
   const checkProgressPosition = () => {
@@ -16,6 +14,7 @@ $(() => {
       const height = progressElement.offsetHeight;
 
       progressElement.classList.add("w-full", "fixed", "top-0", "progress-background");
+      progressContent.classList.add("no-top");
       selectedProjects.classList.remove("my-4");
       selectedProjects.classList.add("my-2");
       summary.classList.add("hidden");
@@ -23,7 +22,8 @@ $(() => {
       sticky = true;
     } else if (spacerTop > 0 && sticky) {
       progressElement.classList.remove("w-full", "fixed", "top-0", "progress-background");
-      selectedProjects.classList.add("my-4")
+      progressContent.classList.remove("no-top");
+      selectedProjects.classList.add("my-4");
       selectedProjects.classList.remove("my-2");
       summary.classList.remove("hidden");
       spacer.style.height = "0px";

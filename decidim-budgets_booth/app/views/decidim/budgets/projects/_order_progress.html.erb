@@ -1,6 +1,6 @@
 <div id="order-progress">
   <div class="budget-summary__progressbox" data-current-allocation="<%= current_order ? current_order.total : 0 %>" data-progress-reference>
-    <div class="progress budget-progress h-12" role="progressbar" aria-valuenow="<%= current_order_budget_percent %>" aria-valuetext="<%= current_order_budget_percent %>%" aria-valuemin="0" aria-valuemax="100" aria-label="Voting limit">
+    <div class="progress budget-progress" role="progressbar" aria-valuenow="<%= current_order_budget_percent %>" aria-valuetext="<%= current_order_budget_percent %>%" aria-valuemin="0" aria-valuemax="100" aria-label="Voting limit">
       <span class="progress-meter-text progress-meter-text--right h6"><%= current_order_budget_percent %>%</span>
       <!--Change width and text dynamically.-->
       <div class="progress-meter budget-progress__meter" style="width: <%= current_order_budget_percent %>%">

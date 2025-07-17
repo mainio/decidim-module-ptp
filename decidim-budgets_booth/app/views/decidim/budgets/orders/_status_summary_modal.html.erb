@@ -1,29 +1,30 @@
 <%= decidim_modal id: "status-summary", class:"verification-modal" do %>
   <% if current_order.present? %>
     <div data-dialog-container>
-      <%= icon "check-double-line" %>
-      <h3 class="h2" id="dialog-title-budget-confirm" data-dialog-title>
-        <%= post_vote ? t(".votes") : t(".title") %>
-      </h3>
-      <div class="my-8">
-        <% if current_order.present? %>
-          <h4 class="h4 mb-4"><%= translated_attribute(budget.title) %></h4>
-          <ul class="status-summary__selected-list divide-y border w-full">
-            <% current_order.projects.each do |project| %>
-              <li class="status-summary__selected-item py-1 space-y-1 flex flex-col md:space-y-0 md:py-0 md:flex-row">
-                <div class="pl-2 w-4/6 text-center flex items-center justify-start font-bold text-md md:text-xl md:pl-6 md:border-r">
-                  <%= translated_attribute(project.title) %>
-                </div>
-                <div class="pl-2 w-2/6 flex items-center text-md md:text-xl md:justify-center md:pl-0 md:text-center">
-                  <strong class="status-summary__selected-number">
-                    <%= budget_to_currency project.budget_amount %>
-                  </strong>
-                </div>
-              </li>
-            <% end %>
-          </ul>
-        <% end %>
+      <div class="mb-6">
+        <%= icon "check-double-line" %>
+        <h3 class="h2" id="dialog-title-budget-confirm" data-dialog-title>
+          <%= post_vote ? t(".votes") : t(".title") %>
+        </h3>
       </div>
+
+      <% if current_order.present? %>
+        <h4 class="h4 mb-4"><%= translated_attribute(budget.title) %></h4>
+        <ul class="status-summary__selected-list divide-y border w-full">
+          <% current_order.projects.each do |project| %>
+            <li class="status-summary__selected-item space-y-1 p-4 flex flex-col md:p-0 md:space-y-0 md:flex-row">
+              <div class="w-4/6 text-center flex items-center justify-start font-bold text-md md:p-4 md:text-xl md:border-r">
+                <%= translated_attribute(project.title) %>
+              </div>
+              <div class="w-2/6 flex font-bold items-center text-md md:p-4 md:text-xl md:justify-center md:text-center">
+                <p class="status-summary__selected-number">
+                  <%= budget_to_currency project.budget_amount %>
+                </p>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
     </div>
 
     <div data-dialog-actions>
@@ -31,16 +32,17 @@
         <%= link_to(
           budget_order_path(budget),
           method: :delete,
-          class: "pl-4",
+          class: "button button__lg button__secondary text-sm md:text-lg",
           data: { confirm: t(:are_you_sure, scope: "decidim.budgets.projects.budget_summary") }
         ) do %>
-          <%= icon "delete-bin-line", class: "inline-block align-middle text-gray fill-current" %>
-          <span class="inline-block align-middle underline text-alert">
+          <span class="inline-block">
             <%= t("cancel_order", scope: "decidim.budgets.projects.budget_summary") %>
           </span>
+          <%= icon "delete-bin-line", class: "inline-block fill-white" %>
         <% end %>
       <% end %>
-      <button class="button button__lg md:button__lg button__transparent-secondary rounded-none" data-dialog-close="status-summary">
+
+      <button class="button button__lg md:button__lg button__transparent-secondary text-sm md:text-lg" data-dialog-close="status-summary">
         <%= t(".close") %>
       </button>
     </div>

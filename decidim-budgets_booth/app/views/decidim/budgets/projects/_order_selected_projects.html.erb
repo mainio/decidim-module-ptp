@@ -1,9 +1,8 @@
 <div class="my-4" id="order-selected-projects">
-  <% if current_order&.projects&.any? %>
     <% if current_order.projects_rule? %>
       <div class="card__content budget-summary__selected">
+        <strong class="h6 pr-6"><%= t(".choices") %><%= current_order.maximum_projects - current_order.projects.size %></strong>
         <button class="flex gap-2 items-center" data-dialog-open="selected-projects">
-          <strong class="h6 pr-6"><%= t(".choices") %><%= current_order.maximum_projects - current_order.projects.size %></strong>
           <p class="h6"> <%= t(".show_choices") %> </p>
           <%= icon("menu-line", class:"icon--small", aria_label: t(".view"), role: "img") %>
         </button>
@@ -24,5 +23,4 @@
         </button>
       </div>
     <% end %>
-  <% end %>
 </div>

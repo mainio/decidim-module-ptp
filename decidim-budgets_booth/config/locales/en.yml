@@ -117,6 +117,7 @@ en:
             continue_voting: Continue voting
             introduction: Want to vote this project?
             start_voting: Start voting
+          view_all_projects: View all votable proposals
         selected_projects_modal:
           assigned: "Budget left: "
           choices: Your selection for the vote

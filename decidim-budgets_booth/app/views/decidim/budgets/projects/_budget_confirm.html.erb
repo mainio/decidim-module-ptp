@@ -11,11 +11,11 @@
           <p class="mb-4 text-md"><%= t(".description") %></p>
           <ul class="budget-confirm__selected-list divide-y border w-full">
             <% current_order.projects.each do |project| %>
-              <li class="budget-confirm__selected-item space-y-2 pl-2 py-2 flex flex-col md:py-0 md:space-y-0 md:pl-0 md:flex-row">
-                <div class="w-4/6 flex items-center justify-start font-bold text-lg md:text-center md:text-xl md:pl-6 md:border-r">
+              <li class="budget-confirm__selected-item space-y-2 p-4 flex flex-col md:space-y-0 md:p-0 md:flex-row">
+                <div class="w-4/6 flex items-center justify-start font-bold text-lg md:p-4 md:text-center md:text-xl md:border-r">
                   <%= translated_attribute(project.title) %>
                 </div>
-                <div class="w-2/6 flex items-center md:justify-center md:text-center">
+                <div class="w-2/6 flex items-center md:p-4 md:justify-center md:text-center">
                   <strong class="budget-confirm__selected-number">
                     <%= budget_to_currency project.budget_amount %>
                   </strong>
@@ -29,11 +29,11 @@
 
     <div data-dialog-actions>
 
-      <button class="button button__lg button__transparent-secondary text-md rounded-none sm:text-lg" data-dialog-close="budget-confirm">
+      <button class="button button__lg button__transparent-secondary text-sm sm:text-lg" data-dialog-close="budget-confirm">
         <%= t("cancel", scope: "decidim.budgets.projects.budget_confirm") %>
       </button>
 
-      <%= button_to checkout_budget_order_path(budget), class: "button button__lg button__secondary rounded-none text-md sm:text-lg", data: { disable: true } do %>
+      <%= button_to checkout_budget_order_path(budget), class: "button button__lg button__secondary text-sm sm:text-lg", data: { disable: true } do %>
         <span>
           <%= t("confirm", scope: "decidim.budgets.projects.budget_confirm") %>
         </span>
