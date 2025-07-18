@@ -50,10 +50,10 @@ describe "VotingIndexPage" do
       visit_budget(first_budget)
     end
 
-    it "redirects the user" do
-      expect(page).to have_current_path("/")
+    it "redirects the user to the budgets page" do
+      expect(page).to have_current_path(decidim_budgets.budget_projects_path(first_budget))
       within_flash_messages do
-        expect(page).to have_content "You are not allowed to perform this action."
+        expect(page).to have_content "You have already voted for this budget."
       end
     end
   end
@@ -84,21 +84,22 @@ describe "VotingIndexPage" do
       end
 
       it "updates budget summary" do
-        within ".budget-summary__progressbar-marks" do
+        within ".budget-summary__total" do
           expect(page).to have_content("€100,000")
         end
-        expect(page).to have_content("Assigned\n€25,000")
+        expect(page).to have_content("Budget left:\n€75,000")
         within "#projects form.new_filter[data-filters]" do
           expect(page).to have_css("span", text: "Added")
           expect(page).to have_css("span", text: "1")
         end
 
-        within page.all(".budget-list .project-item")[1] do
-          second_project_title = find("div.card__list-title").text
-          click_on second_project_title
-        end
+        page.all(".budget-list .budget-list__item")[1].click
+        # within page.all(".budget-list .budget-list__item")[1] do
+        # second_project_title = find("div[data-dialog-open^='project-modal-']")
+        # click_on second_project_title
+        # end
 
-        second_modal_id = page.all(".budget-list .project-item")[1][:id].gsub(/\D/, "")
+        second_modal_id = page.all(".budget-list .budget-list__item")[1][:id].gsub(/\D/, "")
         expect(page).to have_css("#project-modal-#{second_modal_id}")
 
         within "#project-modal-#{second_modal_id}" do
@@ -113,12 +114,12 @@ describe "VotingIndexPage" do
           expect(page).to have_css("span", text: "2")
         end
 
-        within page.all(".budget-list .project-item")[0] do
+        within page.all(".budget-list .budget-list__item")[0] do
           first_project_title = find("div.card__list-title").text
           click_on first_project_title
         end
 
-        first_modal_id = page.all(".budget-list .project-item")[0][:id].gsub(/\D/, "")
+        first_modal_id = page.all(".budget-list .budget-list__item")[0][:id].gsub(/\D/, "")
         expect(page).to have_css("#project-modal-#{first_modal_id}")
 
         within "#project-modal-#{first_modal_id}" do
@@ -177,7 +178,7 @@ describe "VotingIndexPage" do
 
         within "#projects" do
           expect(page).to have_css(".budget-list .budget-list__item", count: 1)
-          expect(page).to have_content(translated(project.title))
+          expect(page).to have_content(decidim_sanitize(translated(project.title)))
         end
       end
 
@@ -189,14 +190,14 @@ describe "VotingIndexPage" do
 
         within "#panel-dropdown-menu-scope" do
           uncheck "All"
-          label = find("label", text: translated(first_budget.scope.name))
+          label = find("label", text: decidim_sanitize(translated(first_budget.scope.name)))
           checkbox = label.find('input[type="checkbox"]')
           checkbox.check
         end
 
         within "#projects" do
           expect(page).to have_css(".budget-list .budget-list__item", count: 1)
-          expect(page).to have_content(translated(project.title))
+          expect(page).to have_content(decidim_sanitize(translated(project.title)))
         end
       end
 
@@ -230,8 +231,8 @@ describe "VotingIndexPage" do
         end
 
         it "does not show the success message by default" do
-          expect(page).to have_no_selector("#thanks-message")
-          expect(page).to have_current_path(decidim_budgets.budgets_path)
+          expect(page).to have_content("Your vote for #{decidim_sanitize(translated(first_budget.title))} has been registered. You can continue voting in other budgets or log out.")
+          expect(page).to have_current_path(status_budget_order_path(first_budget))
         end
       end
 
@@ -290,7 +291,7 @@ describe "VotingIndexPage" do
             expect(page).to have_content("You successfully completed your votes")
             expect(page).to have_content("Completed voting dummy text")
           end
-          expect(page).to have_current_path(decidim_budgets.budgets_path)
+          expect(page).to have_current_path(decidim_budgets.status_budget_order_path(first_budget))
         end
       end
     end
@@ -326,7 +327,7 @@ describe "VotingIndexPage" do
         end
 
         it "shows the modal" do
-          expect(page).to have_current_path(main_component_path(surveys_component))
+          expect(page).to have_current_path(decidim_budgets.status_budget_order_path(budgets.last))
           expect(page).to have_css("#vote-completed")
           within "#vote-completed" do
             expect(page).to have_content("You successfully completed your votes")
@@ -351,7 +352,7 @@ describe "VotingIndexPage" do
         end
 
         it "shows the modal" do
-          expect(page).to have_current_path(main_component_path(surveys_component))
+          expect(page).to have_current_path(decidim_budgets.status_budget_order_path(budgets.last))
 
           expect(page).to have_css("#vote-completed")
           within "#vote-completed" do
@@ -377,12 +378,12 @@ describe "VotingIndexPage" do
         expect(page).to have_content("Maximum budget exceeded")
         click_on "OK"
 
-        within page.all(".budget-list .project-item")[1] do
+        within page.all(".budget-list .budget-list__item")[1] do
           second_project_title = find("div.card__list-title").text
           click_on second_project_title
         end
 
-        second_modal_id = page.all(".budget-list .project-item")[1][:id].gsub(/\D/, "")
+        second_modal_id = page.all(".budget-list .budget-list__item")[1][:id].gsub(/\D/, "")
         expect(page).to have_css("#project-modal-#{second_modal_id}")
 
         within "#project-modal-#{second_modal_id}" do
@@ -444,8 +445,8 @@ describe "VotingIndexPage" do
 
         it "does not show complete description by default" do
           within("#project-#{project.id}-item") do
-            expect(page).to have_content(translated(project.title))
-            expect(page).to have_content(translated(project.description)[0..15])
+            expect(page).to have_content(decidim_sanitize(translated(project.title)))
+            expect(page).to have_content(decidim_sanitize(translated(project.description))[0..15])
             expect(page).to have_content(/.*\.{3}$/)
           end
         end
@@ -459,10 +460,10 @@ describe "VotingIndexPage" do
 
         it "does not show complete description by default" do
           within("#project-#{project.id}-item") do
-            expect(page).to have_no_button("button", text: translated(project.title))
+            expect(page).to have_no_button("button", text: decidim_sanitize(translated(project.title)))
             expect(page).to have_no_button("Read more")
             expect(page).to have_no_content(/.*\.{3}$/)
-            expect(page).to have_content(translated(project.description))
+            expect(page).to have_content(decidim_sanitize(translated(project.description)))
           end
         end
       end
@@ -491,8 +492,7 @@ describe "VotingIndexPage" do
 
   def non_zipcode_vote_budget!
     find(".project-vote-button", match: :first).click
-    click_on "I understand how to vote"
-    click_on "Vote budget"
+    click_on "I am ready"
     click_on "Confirm"
   end
 end
