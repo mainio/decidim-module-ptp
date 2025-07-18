@@ -1,3 +1,13 @@
+<div class="budget__list--header">
+  <div>
+    <%= render partial: "addition_selector" %>
+  </div>
+
+  <div class="collection-sort-controls">
+    <%= render partial: "order" %>
+  </div>
+</div>
+
 <div class="budget-list flex flex-col items-center space-y-8">
   <%= render partial: "projects_list", locals: { project: } %>
 </div>
