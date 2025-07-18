@@ -1,16 +1,4 @@
 <% if voting_open? && voting_booth_forced? %>
-  <% unless voted_all_budgets? %>
-    <div class="row margin-top-2">
-      <div class="columns medium-8 large-9">
-        <%= button_to cancel_redirect_path, class: "link margin-bottom-3", method: :get, data: {
-            confirm: t("actions.cancel_voting", scope: "decidim.budgets.budgets")
-          } do %>
-          <%= icon "arrow-left-line", class: "icon--small", role: "img", "aria-hidden": true %>
-          <%= t("cancel_voting", scope: "decidim.budgets.budgets.index") %>
-        <% end %>
-      </div>
-    </div>
-  <% end %>
   <div class="row">
     <div class="columns medium-7 mediumlarge-8">
       <div class="section">

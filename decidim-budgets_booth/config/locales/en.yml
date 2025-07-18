@@ -75,14 +75,20 @@ en:
         index:
           back_to_budgets: Back to budgets
         order_progress:
+          assigned: "Assigned: "
+          choices: "Choices left: "
           ready: I am ready
+          show_choices: Show selection
           total_budget: 'Total budget: '
-          vote: Vote
           total_projects: "Total projects: "
+          view: View
+          vote: Vote
         order_selected_projects:
           assigned: "Budget left: "
+          choices: "Choices left: "
           view: View
           remove: Remove
+          show_choices: Show selection
         order_progress_summary_content:
           total_budget: Total budget
         pre_voting_budget_summary:
@@ -106,6 +112,9 @@ en:
           total_budget: "Total budget: %{amount}"
         project:
           you_voted: You voted for this
+        project_budget_button:
+          add: Choose
+          added: Remove
         project_modal:
           budget_amount: 'Budget: '
           cancel: Cancel
@@ -125,6 +134,7 @@ en:
           current_choices: You have chosen the following proposals for your vote.
           continue: Continue voting
           no_selection: You have no chosen proposals.
+          remove: Remove
       user_data:
         error:
           only_letters: Only letters and digits are allowed.

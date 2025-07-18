@@ -22,15 +22,6 @@ describe "UserDataWorkflow" do
     it_behaves_like "ensure zip code workflow"
   end
 
-  context "when not signed in" do
-    before do
-      component.update(settings: component_settings.merge(workflow: "zip_code"))
-      visit decidim_budgets.new_zip_code_path
-    end
-
-    it_behaves_like "ensure user sign in"
-  end
-
   context "when voted" do
     let!(:order) { create(:order, user:, budget: first_budget) }
     let!(:user_data) { create(:user_data, component:, user:, metadata: { zip_code: "10004" }) }

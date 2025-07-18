@@ -74,14 +74,20 @@ fi:
         index:
           back_to_budgets: Takaisin kaikkiin budjetteihin
         order_progress:
+          assigned: "Käytetty: "
+          choices: "Valintoja jäljellä: "
           ready: Olen valmis
+          show_choices: Näytä valinnat
           total_budget: 'Kokonaisbudjetti: '
-          vote: Äänestä
           total_projects: "Projektien määrä: "
+          view: Katso
+          vote: Äänestä
         order_selected_projects:
           assigned: "Budjettia jäljellä: "
+          choices: "Valintoja jäljellä: "
           view: Katso
           remove: Poista
+          show_choices: Näytä valinnat
         pre_voting_budget_summary:
           are_you_sure: Haluatko varmasti poistaa äänesi?
           browse: Selaa äänestettäviä ehdotuksia
@@ -99,6 +105,9 @@ fi:
           total_budget: "Alueen kokonaisbudjetti: %{amount}"
         project:
           you_voted: Äänestit tätä
+        project_budget_button:
+          add: Valitse
+          added: Poista valinta
         project_modal:
           budget_amount: 'Budjetti: '
           cancel: Peruuta
@@ -118,6 +127,7 @@ fi:
           current_choices: Olet valinnut seuraavat äänestettävät ehdotukset ääneesi.
           continue: Jatka äänestystä
           no_selection: Et ole vielä valinnut yhtään äänestettävää ehdotusta.
+          remove: Poista valinta
       user_data:
         error:
           only_letters: Vain kirjaimet ja numerot ovat sallittuja.

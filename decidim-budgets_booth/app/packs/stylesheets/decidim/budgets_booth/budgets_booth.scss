@@ -259,7 +259,7 @@
 }
 
 #budgets.card__list-list {
-  @apply w-full mx-auto xl:space-y-8 xl:mb-0 xl:w-3/5;
+  @apply w-full mx-auto xl:space-y-8 xl:mb-0 lg:w-3/5;
 
   a {
     :hover p {
@@ -275,7 +275,7 @@
     }
 
     .budget__card__highlight-vote {
-      @apply bg-[#f2fcfd] p-0 mt-0 bg-[#f2fcfd] w-full flex flex-row justify-between lg:block lg:w-3/12 lg:text-center;
+      @apply bg-[#f2fcfd] p-0 mt-0 bg-[#f2fcfd] w-full flex flex-row justify-between lg:block lg:w-4/12 lg:text-center;
 
       &__text {
         @apply text-md text-black mb-2.5 lg:mx-auto;
@@ -480,6 +480,6 @@
 
 .voting-wrapper {
   .layout-item__aside {
-    @apply w-max;
+    @apply w-4/6 mx-auto lg:mx-0 lg:w-max lg:col-end-13 lg:col-span-3 xl:col-end-13 xl:col-span-3;
   }
 }

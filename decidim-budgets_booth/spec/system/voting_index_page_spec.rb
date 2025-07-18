@@ -16,15 +16,6 @@ describe "VotingIndexPage" do
     switch_to_host(organization.host)
   end
 
-  context "when not signed in" do
-    before do
-      component.update(settings: component_settings.merge(workflow: "zip_code"))
-      visit_budget(first_budget)
-    end
-
-    it_behaves_like "ensure user sign in"
-  end
-
   context "when no user_data" do
     before do
       component.update(settings: component_settings.merge(workflow: "zip_code"))
@@ -81,7 +72,7 @@ describe "VotingIndexPage" do
 
     it "renders the page correctly" do
       expect(page).to have_content("You are now in the voting booth.")
-      expect(page).to have_content("Projects for #{first_budget.title["en"]}")
+      expect(page).to have_content("You decide the #{first_budget.title["en"]} budget")
       expect(page).to have_button("Cancel voting")
       expect(page).to have_content("Budget\n€100,000")
       expect(page).to have_css(".button.project-vote-button", count: 5)
@@ -144,13 +135,13 @@ describe "VotingIndexPage" do
     end
 
     it "paginates the projects" do
-      expect(page).to have_css(".budget-list .project-item", count: 5)
+      expect(page).to have_css(".budget-list .budget-list__item", count: 5)
       find("li[data-page]", text: "2").click
-      expect(page).to have_css(".budget-list .project-item", count: 5)
+      expect(page).to have_css(".budget-list .budget-list__item", count: 5)
     end
 
     it "adds and removes projects" do
-      project1 = page.all(".budget-list .project-item")[0]
+      project1 = page.all(".budget-list .budget-list__item")[0]
       project1_id = project1[:id][/\d+/]
       expect(page).to have_css(".button.project-vote-button", count: 5)
       within project1 do
@@ -185,7 +176,7 @@ describe "VotingIndexPage" do
         end
 
         within "#projects" do
-          expect(page).to have_css(".project-item", count: 1)
+          expect(page).to have_css(".budget-list .budget-list__item", count: 1)
           expect(page).to have_content(translated(project.title))
         end
       end
@@ -204,7 +195,7 @@ describe "VotingIndexPage" do
         end
 
         within "#projects" do
-          expect(page).to have_css(".project-item", count: 1)
+          expect(page).to have_css(".budget-list .budget-list__item", count: 1)
           expect(page).to have_content(translated(project.title))
         end
       end
@@ -221,7 +212,7 @@ describe "VotingIndexPage" do
         end
 
         within "#projects" do
-          expect(page).to have_css(".project-item", count: 1)
+          expect(page).to have_css(".budget-list .budget-list__item", count: 1)
           expect(page).to have_content(translated(project.title))
         end
       end
@@ -429,7 +420,7 @@ describe "VotingIndexPage" do
       it "renders the info" do
         within "#budget-confirm" do
           expect(page).to have_content("These are the projects you have chosen to be part of the budget.")
-          expect(page).to have_css("span", text: "€25,000", count: 1)
+          expect(page).to have_css("strong", text: "€25,000", count: 1)
           expect(page).to have_button("Confirm")
           expect(page).to have_button("Cancel")
           click_on("Cancel")

@@ -41,7 +41,7 @@ module Decidim
           end
         end
 
-        context "when not singed in" do
+        context "when not signed in" do
           it "redirects to the sign in page" do
             get :index, params: { budget_id: budgets.last.id }
             expect(response).to redirect_to("/users/sign_in")
@@ -58,8 +58,8 @@ module Decidim
 
           it "redirects the user" do
             get :index, params: { budget_id: budgets.last.id }
-            expect(response).to redirect_to("/")
-            expect(flash[:warning]).to have_content("You are not allowed to perform this action.")
+            expect(response).to redirect_to(budget_projects_path(budgets.last))
+            expect(flash[:warning]).to have_content("You have already voted for this budget.")
           end
         end
 

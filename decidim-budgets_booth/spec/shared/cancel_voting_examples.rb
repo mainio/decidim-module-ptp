@@ -6,14 +6,14 @@ shared_examples "cancel voting" do
   end
 
   it "redirects the user to root" do
-    find(".voting-rules [data-dialog-open='cancel-voting']", match: :first).click
+    find(".voting-booth [data-dialog-open='cancel-voting']", match: :first).click
     within "#cancel-voting" do
       expect(page).to have_content "Are you sure you don't want to cast your vote?"
       expect(page).to have_button("Continue voting")
       expect(page).to have_css("a.button.hollow.expanded", text: "I don't want to vote right now")
       click_on "Continue voting"
     end
-    find(".voting-rules [data-dialog-open='cancel-voting']", match: :first).click
+    find(".voting-booth [data-dialog-open='cancel-voting']", match: :first).click
     within "#cancel-voting" do
       click_on "I don't want to vote right now"
     end
@@ -27,14 +27,14 @@ shared_examples "cancel voting" do
     end
 
     it "redirects to the correct location" do
-      find(".voting-rules [data-dialog-open='cancel-voting']", match: :first).click
+      find(".voting-booth [data-dialog-open='cancel-voting']", match: :first).click
       within "#cancel-voting" do
         expect(page).to have_content "Are you sure you don't want to cast your vote?"
         expect(page).to have_button("Continue voting")
         expect(page).to have_css("a.button.hollow.expanded", text: "I don't want to vote right now")
         click_on "Continue voting"
       end
-      find(".voting-rules [data-dialog-open='cancel-voting']", match: :first).click
+      find(".voting-booth [data-dialog-open='cancel-voting']", match: :first).click
       within "#cancel-voting" do
         click_on "I don't want to vote right now"
       end

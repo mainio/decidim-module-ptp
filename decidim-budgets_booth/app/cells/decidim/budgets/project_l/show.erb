@@ -4,7 +4,7 @@
       <h3 class="text-[22px] font-bio text-[--primary] inline-block align-middle md:h3">
         <%= decidim_escape_translated(title) %>
       </h3>
-      <%= translated_attribute project.description %>
+      <%= decidim_sanitize(translated_attribute(project.description)) %>
     </div>
 
     <div class="<%= voting_mode? && resource_added? ? "selected-project" : "explore-link" %> p-4">
@@ -31,7 +31,7 @@
         <h3 class="h3 text-[--primary] inline-block align-middle">
           <%= decidim_escape_translated(title) %>
         </h3>
-        <%= translated_attribute project.description %>
+        <%= decidim_sanitize(translated_attribute(project.description)) %>
       </div>
 
       <div class="<%= voting_mode? && resource_added? ? "selected-project" : "explore-link" %> p-4">
