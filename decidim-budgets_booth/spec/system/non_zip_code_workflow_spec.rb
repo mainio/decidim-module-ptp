@@ -25,7 +25,7 @@ describe "NonZipCodeWorkflow" do
     context "when not voting" do
       before do
         visit decidim_budgets.budgets_path
-        find(".card--list__item .h3", text: translated(budget.title)).click
+        find(".card--list__item", text: translated_attribute(budget.title)).click
       end
 
       it_behaves_like "filtering projects" do
@@ -35,9 +35,9 @@ describe "NonZipCodeWorkflow" do
       end
 
       it "explores the budgets" do
-        expect(page).to have_content("Projects for")
-        expect(page).to have_content("Start adding projects")
-        expect(page).to have_no_content("Back to budgets")
+        expect(page).to have_content("2 projects")
+        expect(page).to have_content("Back to budgets")
+        expect(page).to have_button("Start voting")
       end
 
       context "when ordering by highest cost" do
@@ -63,9 +63,6 @@ describe "NonZipCodeWorkflow" do
 
         it "sends the user to the sign in page" do
           expect(page).to have_current_path "/users/sign_in"
-          within_flash_messages do
-            expect(page).to have_content "You need to login first."
-          end
         end
       end
 
@@ -81,29 +78,22 @@ describe "NonZipCodeWorkflow" do
         end
 
         it "adds and removes projects" do
-          expect(page).to have_css(".button.project-vote-button", count: 2)
+          expect(page).to have_css(".project-vote-button", count: 2)
 
           within "#project-#{project_one.id}-item" do
             find(".button.project-vote-button", match: :first).click
           end
-          expect(page).to have_css(".button.project-vote-button", exact_text: "Add", count: 1, visible: :visible)
-          expect(page).to have_css(".button.project-vote-button", text: "Added", count: 1, visible: :visible)
-          within "#voting-help" do
-            find("[data-dialog-close='voting-help']", match: :first).click
-          end
-          within "#project-#{project_two.id}-item" do
-            header = page.all("button")[0].text
-            first_project_title = find("div.card__list-title").text
-            click_on first_project_title
-            expect(page).to have_content(header)
-          end
-          within "#project-modal-#{project_two.id}" do
-            find(".button.project-vote-button").click
-            expect(page).to have_css(".button.project-vote-button", text: "Added", count: 1, visible: :visible)
+          expect(page).to have_css(".button.project-vote-button", text: "Choose", count: 1, visible: :visible)
+          expect(page).to have_css(".button.project-vote-button", text: "Remove", count: 1, visible: :visible)
 
-            find(".button.project-vote-button").click
-            expect(page).to have_css(".button.project-vote-button", exact_text: "Add", count: 1, visible: :visible)
-          end
+          find(".button.project-vote-button", text: "Choose").click
+
+          expect(page).to have_css(".button.project-vote-button", text: "Remove", count: 2, visible: :visible)
+
+          find(".button.project-vote-button", text: "Remove", match: :first).click
+
+          expect(page).to have_css(".button.project-vote-button", text: "Choose", count: 1, visible: :visible)
+          expect(page).to have_css(".button.project-vote-button", text: "Remove", count: 1, visible: :visible)
         end
 
         context "when full-text is enabled" do
@@ -142,7 +132,7 @@ describe "NonZipCodeWorkflow" do
           end
         end
 
-        describe "popups" do
+        describe "when voting" do
           let!(:second_budget) { create(:budget, component:, total_budget: 100_000) }
           let!(:second_budgets_project) { create(:project, budget: second_budget, budget_amount: 75_000) }
 
@@ -150,67 +140,7 @@ describe "NonZipCodeWorkflow" do
             sign_in user
           end
 
-          it "shows how to vote message by default" do
-            visit decidim_budgets.budget_voting_index_path(budget)
-            find(".button.project-vote-button", match: :first).click
-
-            expect(page).to have_css("div#voting-help")
-            within "div#voting-help" do
-              expect(page).to have_content("Your vote has not been cast.")
-              expect(page).to have_css("svg", count: 3)
-              expect(page).to have_content("I understand how to vote")
-            end
-          end
-
-          describe "thanks popup" do
-            context "when default" do
-              before do
-                component.update!(settings: component_settings.merge(vote_success_content: { en: "<p>Some dummy text</p>" }))
-                refresh
-              end
-
-              it "sets the text message with svg image by default" do
-                vote_for_this(budget)
-                expect(page).to have_css("div#thanks-message", count: 1)
-
-                within "#thanks-message" do
-                  expect(page).to have_content("Thank you for voting!")
-                  expect(page).to have_css("svg", count: 1)
-                  expect(page).to have_button("Continue")
-                end
-              end
-            end
-
-            context "when vote_success_content is nil" do
-              before do
-                vote_for_this(budget)
-              end
-
-              it "does not show popup" do
-                expect(page).to have_current_path(decidim_budgets.budgets_path)
-                expect(page).to have_no_css("div#thanks-message")
-              end
-            end
-
-            context "when the current_workflow sets not to show thanks message image" do
-              before do
-                allow_any_instance_of(Decidim::Budgets::Workflows::All).to receive(:hide_image_in_popup?).and_return(true) # rubocop:disable RSpec/AnyInstance
-                component.update!(settings: component_settings.merge(vote_success_content: { en: "<p>Some dummy text</p>" }))
-              end
-
-              it "sets the text message without svg image" do
-                vote_for_this(budget)
-
-                within "#thanks-message" do
-                  expect(page).to have_content("Thank you for voting!")
-                  expect(page).to have_no_css("svg")
-                  expect(page).to have_button("Continue")
-                end
-              end
-            end
-          end
-
-          describe "complete all votes popup" do
+          describe "complete voting" do
             context "when maximum_budgets_to_vote_on is set to zero" do
               let!(:order) { create(:order, user:, budget: second_budget) }
 
@@ -220,22 +150,18 @@ describe "NonZipCodeWorkflow" do
                 order.save
               end
 
-              it "does not show the popup when vote_completed_content is nil" do
+              it "shows a default completion text when vote_completed_content is nil" do
                 vote_for_this(budget)
 
-                expect(page).to have_content("Voted")
-                expect(page).to have_no_css("div#vote-completed")
+                expect(page).to have_content("Your vote for #{translated_attribute(budget.title)} has been registered. You can continue voting in other budgets or log out.")
               end
 
-              it "shows the popup with the text when the popup text is set" do
+              it "shows the completion text that is set to vote_completed_content" do
                 component.update!(settings: component_settings.merge(vote_completed_content: { en: "<p>Some dummy text</p>" }))
                 vote_for_this(budget)
 
-                expect(page).to have_css("div#vote-completed", count: 1)
-                within "div#vote-completed" do
-                  expect(page).to have_content("You successfully completed your votes")
-                  expect(page).to have_content("Some dummy text")
-                end
+                expect(page).to have_content("You successfully completed your votes")
+                expect(page).to have_content("Some dummy text")
               end
             end
 
@@ -247,10 +173,9 @@ describe "NonZipCodeWorkflow" do
               it "shows the completed message" do
                 vote_for_this(budget)
                 expect(page).to have_css("div#vote-completed", count: 1)
-                within "div#vote-completed" do
-                  expect(page).to have_content("You successfully completed your votes")
-                  expect(page).to have_content("Some dummy text")
-                end
+
+                expect(page).to have_content("You successfully completed your votes")
+                expect(page).to have_content("Some dummy text")
               end
             end
           end
@@ -272,7 +197,8 @@ describe "NonZipCodeWorkflow" do
 
       it "redirects the user to projects list" do
         expect(page).to have_current_path(decidim_budgets.budget_projects_path(budget))
-        expect(page).to have_button("Add", count: 2)
+        expect(page).to have_button("Start voting")
+        expect(page).to have_css(".budget-list__item", count: 2)
       end
     end
   end
@@ -281,8 +207,7 @@ describe "NonZipCodeWorkflow" do
 
   def vote_for_this(_budget)
     page.all(".button.project-vote-button").each(&:click)
-    find("[data-dialog-close='voting-help']", match: :first).click
-    click_on "Vote budget"
+    click_on "I am ready"
     click_on "Confirm"
   end
 end

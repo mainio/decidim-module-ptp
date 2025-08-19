@@ -12,8 +12,8 @@ shared_examples "filtering projects" do
       end
 
       within "#projects" do
-        expect(page).to have_css(".project-item", count: 1)
-        expect(page).to have_content(translated(project.title))
+        expect(page).to have_css(".budget-list__item", count: 1)
+        expect(page).to have_content(decidim_html_escape(translated(project.title)))
       end
     end
 
@@ -30,8 +30,8 @@ shared_examples "filtering projects" do
       end
 
       within "#projects" do
-        expect(page).to have_css(".project-item", count: 1)
-        expect(page).to have_content(translated(project.title))
+        expect(page).to have_css(".budget-list__item", count: 1)
+        expect(page).to have_content(decidim_html_escape(translated(project.title)))
       end
     end
 
@@ -47,8 +47,8 @@ shared_examples "filtering projects" do
       end
 
       within "#projects" do
-        expect(page).to have_css(".project-item", count: 1)
-        expect(page).to have_content(translated(project.title))
+        expect(page).to have_css(".budget-list__item", count: 1)
+        expect(page).to have_content(decidim_html_escape(translated(project.title)))
       end
     end
   end
