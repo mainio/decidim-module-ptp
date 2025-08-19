@@ -110,6 +110,30 @@ describe "VotingIndexPage" do
           expect(page).to have_css("span", text: "1")
         end
       end
+
+      context "when selected projects updated" do
+        it "updates budget summary" do
+          within "#projects" do
+            expect(page).to have_css(".project-vote-button", text: "Remove", count: 1)
+          end
+
+          find('button[data-dialog-open="selected-projects"]').click
+          expect(page).to have_css("#selected-projects")
+
+          within "#selected-projects" do
+            expect(page).to have_css(".h2", text: "Your selection for the vote")
+            expect(page).to have_css("#current-choices")
+
+            click_on "Remove"
+            expect(page).to have_content("You have no chosen proposals")
+            find('button[data-dialog-close="selected-projects"]', match: :first).click
+          end
+
+          within "#projects" do
+            expect(page).to have_no_css(".project-vote-button", text: "Remove")
+          end
+        end
+      end
     end
 
     it "paginates the projects" do
