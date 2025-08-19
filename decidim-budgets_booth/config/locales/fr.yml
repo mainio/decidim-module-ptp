@@ -19,6 +19,7 @@ fr:
           cancel_voting: Annuler le vote
           login_before_access: Veuillez d'abord vous identifier.
           not_allowed: Vous n'êtes pas autorisé à effectuer cette opération.
+          voted: You have already voted for this budget.
       budgets_header:
         based_on_zip_code: Basé sur votre code postal - %{zip_code}.
         change_it_here: Modifiez-le ici
@@ -27,7 +28,14 @@ fr:
       budgets_list:
         no_budgets_found: Aucun budget n'a été trouvé en fonction de votre code ZIP. Vous pouvez changer votre code ZIP si ce n'est pas correct, ou vous pouvez rechercher à nouveau plus tard.
         vote: Afficher
+        voting_possible: "You can still vote in these budgets:"
+        voted: "You have already voted in these budgets:"
       orders:
+        status:
+          continue_voting: Continue voting
+          title: "You have voted %{budget} successfully"
+          return: Return to budgets
+          votes_info: Your vote for %{budget_name} has been registered. You can continue voting in other budgets or log out.
         modal:
           assigned: 'Affecté : '
           close: Fermer la fenêtre
@@ -35,17 +43,12 @@ fr:
           ok: OK
           title: Votre vote dans %{budget_title}
           total_budget: 'Budget total : '
-      partials:
-        voting_help_modal:
-          confirm: C'est compris!
-          step1: Choisir le projet
-          step2: Confirmez votre vote
-          step3: Voter
-          subtitle: Vous devez confirmer votre vote pour qu'il soit compté dans le résultat final.
-          title: Le vote n'a pas été confirmé.
-      project_list_item:
-        ordered_item: Ce point est ajouté à votre vote.
-        read_more: En savoir plus
+        status_summary_modal:
+          title: Picked proposals
+          votes: Your votes
+          close: Sulje
+      project_l:
+        explore: Open
       project_vote_button:
         add_to_vote: Ajouter au vote
         remove_from_vote: Supprimer du vote
@@ -57,6 +60,8 @@ fr:
           cancel_voting: Annuler le vote
           choose_budget: Vous décidez du budget
           choose_description: Choisissez les projets que vous aimez et votez à la fin.
+          total_budget: 'You can allocate %{budget} to different proposals. First choose the proposals to vote from the list below. After selection, press the "I am ready" -button.'
+          total_projects: "Total projects: "
         cancel_voting_modal:
           continue: Continuer le vote
           description: Si vous annulez votre vote, cela ne sera pas pris en compte pour le résultat final. Afin de faire compter votre vote, veuillez revenir en arrière pour le finaliser et le confirmer.
@@ -66,11 +71,25 @@ fr:
         index:
           back_to_budgets: Retour aux budgets
         order_progress:
+          assigned: "Assigned: "
+          choices: "Choices left: "
           ready: Confirmer mon vote
+          show_choices: Show selection
           total_budget: 'Budget total: '
+          total_projects: "Total projects: "
+          view: View
           vote: Vote
+        order_selected_projects:
+          assigned: "Budget left: "
+          choices: "Choices left: "
+          view: View
+          remove: Remove
+          show_choices: Show selection
+        order_progress_summary_content:
+          total_budget: Total budget
         pre_voting_budget_summary:
           are_you_sure: Êtes-vous sûr de vouloir annuler votre vote ?
+          browse: Browse proposals
           cancel_order: Annuler le vote
           pre_vote:
             casted_description: Vous avez précédemment voté dans ce budget. Si vous voulez revoir ce que vous avez voté, cliquez sur le bouton "Revoir votre vote". Vous pouvez aussi %{cancel_link} et recommencer.
@@ -82,8 +101,12 @@ fr:
             start_voting: Commencer à voter
             title: Bienvenue au vote!
           ready: Confirmer mon vote
+          total_budget: "Total budget: %{amount}"
         project:
           you_voted: Vous avez voté pour
+        project_budget_button:
+          add: Choose
+          added: Remove
         project_modal:
           budget_amount: 'Budget : '
           cancel: Annuler
@@ -95,6 +118,15 @@ fr:
             continue_voting: Continuer le vote
             introduction: Vous voulez voter pour ce projet ?
             start_voting: Commencer à voter
+          view_all_projects: View all votable proposals
+        selected_projects_modal:
+          assigned: "Budget left: "
+          choices: Your selection for the vote
+          choices_remaining: "Valintoja jäljellä: "
+          current_choices: You have chosen the following proposals for your vote.
+          continue: Continue voting
+          no_selection: You have no chosen proposals.
+          remove: Remove
       user_data:
         error:
           only_letters: Seules les lettres et les chiffres sont autorisés.
@@ -120,10 +152,6 @@ fr:
           not_open_warning: Le vote n'est pas autorisé.
         index:
           sign_in_first: Vous devez vous connecter pour commencer à voter.
-        thanks_message_modal:
-          close: Fermer
-          continue: Continuer
-          title: Merci pour votre vote!
         vote_completed_modal:
           close: Fermer
           continue: Continuer
@@ -139,15 +167,25 @@ fr:
           global:
             maximum_budgets_to_vote_on: Nombre maximum de budgets sur lesquels l'utilisateur peut voter (0 par défaut, ce qui signifie que l'utilisateur peut voter sur tous les budgets disponibles)
             show_full_description_on_listing_page: Afficher les descriptions complètes des projets sur la page de liste et désactiver la popup de détails
-            vote_cancel_url: URL pour rediriger l'utilisateur lors de l'annulation du vote (par défaut vers le chemin principal)
+            vote_cancel_url: URL to redirect user when canceling voting (default to the root path)
             vote_completed_content: Texte de popup après avoir voté dans tous les budgets disponibles
             vote_success_content: Texte popup après chaque vote
             vote_success_url: URL pour rediriger l'utilisateur après le vote sur tous les budgets disponibles (liste des budgets par défaut)
             voting_terms: Conditions générales à afficher lorsque l'utilisateur souhaite entrer son code postal
             workflow_choices:
               zip_code: 'Vote basé sur le code postal : permet aux participants de voter sur les budgets correspondant à leur code postal.'
+    shared:
+      filters:
+        search: Search
+        search_bar: Search
+        search_placeholder: Search
   layouts:
     decidim:
+      shared:
+        layout_center:
+          selected_projects: Show choices
+          view: View
+          log_out: Log out
       budgets:
         voting_notification:
           notification: Vous êtes dans la cabine de vote.
