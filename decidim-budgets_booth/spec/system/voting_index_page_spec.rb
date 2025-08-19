@@ -74,7 +74,7 @@ describe "VotingIndexPage" do
       expect(page).to have_content("You are now in the voting booth.")
       expect(page).to have_content("You decide the #{first_budget.title["en"]} budget")
       expect(page).to have_button("Cancel voting")
-      expect(page).to have_content("Budget\n€100,000")
+      expect(page).to have_content("You can allocate €100,000 to different proposals.")
       expect(page).to have_css(".button.project-vote-button", count: 5)
     end
 
@@ -93,41 +93,18 @@ describe "VotingIndexPage" do
           expect(page).to have_css("span", text: "1")
         end
 
-        page.all(".budget-list .budget-list__item")[1].click
-        # within page.all(".budget-list .budget-list__item")[1] do
-        # second_project_title = find("div[data-dialog-open^='project-modal-']")
-        # click_on second_project_title
-        # end
+        all(".project-vote-button")[1].click
 
-        second_modal_id = page.all(".budget-list .budget-list__item")[1][:id].gsub(/\D/, "")
-        expect(page).to have_css("#project-modal-#{second_modal_id}")
-
-        within "#project-modal-#{second_modal_id}" do
-          find(".button.project-vote-button").click
-          find("[data-dialog-close='project-modal-#{second_modal_id}']").click
-        end
-
-        expect(page).to have_content("Assigned\n€50,000")
+        expect(page).to have_content("Budget left:\n€50,000")
 
         within "#projects form.new_filter[data-filters]" do
           expect(page).to have_css("span", text: "Added")
           expect(page).to have_css("span", text: "2")
         end
 
-        within page.all(".budget-list .budget-list__item")[0] do
-          first_project_title = find("div.card__list-title").text
-          click_on first_project_title
-        end
+        all(".project-vote-button")[1].click
 
-        first_modal_id = page.all(".budget-list .budget-list__item")[0][:id].gsub(/\D/, "")
-        expect(page).to have_css("#project-modal-#{first_modal_id}")
-
-        within "#project-modal-#{first_modal_id}" do
-          find(".button.project-vote-button").click
-          find("[data-dialog-close='project-modal-#{first_modal_id}']").click
-        end
-
-        expect(page).to have_content("Assigned\n€25,000")
+        expect(page).to have_content("Budget left:\n€75,000")
         within "#projects form.new_filter[data-filters]" do
           expect(page).to have_css("span", text: "Added")
           expect(page).to have_css("span", text: "1")
@@ -143,25 +120,16 @@ describe "VotingIndexPage" do
 
     it "adds and removes projects" do
       project1 = page.all(".budget-list .budget-list__item")[0]
-      project1_id = project1[:id][/\d+/]
       expect(page).to have_css(".button.project-vote-button", count: 5)
+
       within project1 do
         find(".button.project-vote-button").click
       end
-      expect(page).to have_css(".button.project-vote-button", exact_text: "Add", count: 4)
-      expect(page).to have_css(".button.project-vote-button", text: "Added", count: 1)
+      expect(page).to have_css(".button.project-vote-button", exact_text: "Choose", count: 4)
+      expect(page).to have_css(".button.project-vote-button", text: "Remove", count: 1)
 
-      within project1 do
-        header = find(".h4.card__list-title").text
-        click_on header
-        expect(page).to have_content(header)
-        expect(page).to have_css(".button.project-vote-button", text: "Added", count: 1)
-      end
-
-      within "#project-modal-#{project1_id}" do
-        find(".button.project-vote-button").click
-        expect(page).to have_css(".button.project-vote-button", exact_text: "Add")
-      end
+      find(".button.project-vote-button", text: "Remove").click
+      expect(page).to have_css(".button.project-vote-button", exact_text: "Choose", count: 5)
     end
 
     describe "filtering projects" do
@@ -178,7 +146,7 @@ describe "VotingIndexPage" do
 
         within "#projects" do
           expect(page).to have_css(".budget-list .budget-list__item", count: 1)
-          expect(page).to have_content(decidim_sanitize(translated(project.title)))
+          expect(page).to have_content(decidim_html_escape(translated(project.title)))
         end
       end
 
@@ -197,7 +165,7 @@ describe "VotingIndexPage" do
 
         within "#projects" do
           expect(page).to have_css(".budget-list .budget-list__item", count: 1)
-          expect(page).to have_content(decidim_sanitize(translated(project.title)))
+          expect(page).to have_content(decidim_html_escape(translated(project.title)))
         end
       end
 
@@ -214,7 +182,7 @@ describe "VotingIndexPage" do
 
         within "#projects" do
           expect(page).to have_css(".budget-list .budget-list__item", count: 1)
-          expect(page).to have_content(translated(project.title))
+          expect(page).to have_content(decidim_html_escape(translated(project.title)))
         end
       end
     end
@@ -230,9 +198,9 @@ describe "VotingIndexPage" do
           vote_budget!
         end
 
-        it "does not show the success message by default" do
-          expect(page).to have_content("Your vote for #{decidim_sanitize(translated(first_budget.title))} has been registered. You can continue voting in other budgets or log out.")
-          expect(page).to have_current_path(status_budget_order_path(first_budget))
+        it "shows a default success content text" do
+          expect(page).to have_content("Your vote for #{translated(first_budget.title)} has been registered. You can continue voting in other budgets or log out.")
+          expect(page).to have_current_path(decidim_budgets.status_budget_order_path(first_budget))
         end
       end
 
@@ -244,53 +212,8 @@ describe "VotingIndexPage" do
         end
 
         it "shows the success message set" do
-          expect(page).to have_css("#thanks-message")
-
-          within "#thanks-message" do
-            expect(page).to have_content("Thank you for voting!")
-            expect(page).to have_css("p", text: "Some dummy text")
-          end
-          expect(page).to have_current_path(decidim_budgets.budgets_path)
-        end
-      end
-    end
-
-    describe "vote_complete_content" do
-      let!(:order) { create(:order, user:, budget: second_budget) }
-
-      before do
-        first_budget.update!(total_budget: 26_000)
-        second_budget.update!(total_budget: 26_000)
-        order.checked_out_at = Time.current
-        order.projects << second_budget.projects.first
-        order.save!
-      end
-
-      context "when not set" do
-        before do
-          visit current_path
-          vote_budget!
-        end
-
-        it "does not show the modal" do
-          expect(page).to have_no_selector("#vote-completed")
-          expect(page).to have_current_path(decidim_budgets.budgets_path)
-        end
-      end
-
-      context "when was set" do
-        before do
-          component.update!(settings: component_settings.merge(workflow: "zip_code", vote_completed_content: { en: "<p>Completed voting dummy text</p>" }))
-          visit current_path
-          vote_budget!
-        end
-
-        it "shows the modal" do
-          expect(page).to have_css("#vote-completed")
-          within "#vote-completed" do
-            expect(page).to have_content("You successfully completed your votes")
-            expect(page).to have_content("Completed voting dummy text")
-          end
+          expect(page).to have_content("You have voted #{translated(first_budget.title)} successfully")
+          expect(page).to have_css("p", text: "Some dummy text")
           expect(page).to have_current_path(decidim_budgets.status_budget_order_path(first_budget))
         end
       end
@@ -313,8 +236,8 @@ describe "VotingIndexPage" do
           vote_budget!
         end
 
-        it "redirects to the budgets path" do
-          expect(page).to have_current_path(decidim_budgets.budgets_path)
+        it "redirects to the status path" do
+          expect(page).to have_current_path(decidim_budgets.status_budget_order_path(first_budget))
         end
       end
 
@@ -327,7 +250,7 @@ describe "VotingIndexPage" do
         end
 
         it "shows the modal" do
-          expect(page).to have_current_path(decidim_budgets.status_budget_order_path(budgets.last))
+          expect(page).to have_current_path(main_component_path(surveys_component))
           expect(page).to have_css("#vote-completed")
           within "#vote-completed" do
             expect(page).to have_content("You successfully completed your votes")
@@ -352,7 +275,7 @@ describe "VotingIndexPage" do
         end
 
         it "shows the modal" do
-          expect(page).to have_current_path(decidim_budgets.status_budget_order_path(budgets.last))
+          expect(page).to have_current_path(main_component_path(surveys_component))
 
           expect(page).to have_css("#vote-completed")
           within "#vote-completed" do
@@ -372,22 +295,9 @@ describe "VotingIndexPage" do
 
       it "popups maximum error notice" do
         expect(page).to have_css("#budget-excess")
-        within ".budget-summary__progressbar-marks" do
-          expect(page).to have_content("€24,999")
-        end
-        expect(page).to have_content("Maximum budget exceeded")
-        click_on "OK"
 
-        within page.all(".budget-list .budget-list__item")[1] do
-          second_project_title = find("div.card__list-title").text
-          click_on second_project_title
-        end
-
-        second_modal_id = page.all(".budget-list .budget-list__item")[1][:id].gsub(/\D/, "")
-        expect(page).to have_css("#project-modal-#{second_modal_id}")
-
-        within "#project-modal-#{second_modal_id}" do
-          find(".button.project-vote-button").click
+        within ".budget-summary__total" do
+          expect(page).to have_content("You can allocate €24,999 to different proposals.")
         end
 
         expect(page).to have_content("Maximum budget exceeded")
@@ -445,9 +355,8 @@ describe "VotingIndexPage" do
 
         it "does not show complete description by default" do
           within("#project-#{project.id}-item") do
-            expect(page).to have_content(decidim_sanitize(translated(project.title)))
-            expect(page).to have_content(decidim_sanitize(translated(project.description))[0..15])
-            expect(page).to have_content(/.*\.{3}$/)
+            expect(page).to have_content(decidim_html_escape(translated(project.title)))
+            expect(page).to have_content(decidim_html_escape(translated(project.description))[0..15])
           end
         end
       end

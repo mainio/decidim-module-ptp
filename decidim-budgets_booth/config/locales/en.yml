@@ -36,8 +36,7 @@ en:
           continue_voting: Continue voting
           title: "You have voted %{budget} successfully"
           return: Return to budgets
-          votes_info:
-            one: Your vote for %{budget_name} has been registered. You can continue voting in other budgets or log out.
+          votes_info: Your vote for %{budget_name} has been registered. You can continue voting in other budgets or log out.
         modal:
           assigned: 'Assigned: '
           close: Close window

@@ -15,6 +15,6 @@ shared_examples "ordering projects by selected option" do |selected_option|
       expect(page).to have_css("a.font-bold", text: selected_option)
     end
 
-    expect(page).to have_css("#projects .budget-list .project-item:first-child", text: translated(first_project.title))
+    expect(page).to have_css("#projects .budget-list .budget-list__item:first-child", text: decidim_html_escape(translated(first_project.title)))
   end
 end

@@ -49,7 +49,7 @@ module Decidim
             session[:booth_voted_component] = current_component.id
           end
 
-          redirect_to status_budget_order_path(budget)
+          redirect_to success_redirect_path
         end
 
         def reset_workflow

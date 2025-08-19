@@ -11,7 +11,7 @@
       <%= t("title", scope: "decidim.budgets.orders.status", budget: translated_attribute(current_order.budget.title)) %>
     </h1>
 
-    <% if vote_success_content %>
+    <% if vote_success_content.present? %>
       <p class="text-md"><%= vote_success_content %></p>
     <% else %>
       <p class="text-md"><%= t(

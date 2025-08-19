@@ -63,6 +63,7 @@ describe "BudgetsView" do
             it "renders the budgets page and budgets" do
               expect(page).to have_current_path(decidim_budgets.budgets_path)
               expect(page).to have_content "You are now in the voting booth."
+
               within "#budgets" do
                 expect(page).to have_css(".card.card--list.budget-list", count: 2)
                 expect(page).to have_css("a", text: "More info", count: 2)
@@ -73,14 +74,18 @@ describe "BudgetsView" do
                 expect(page).to have_content(decidim_sanitize(translated(first_budget.title)))
                 expect(page).to have_content(decidim_sanitize(translated(second_budget.title)))
               end
+
               expect(page).to have_no_css(".callout.warning.font-customizer")
-              expect(page).to have_button("Cancel voting")
-              click_on "Cancel voting"
-              expect(page).to have_css("#confirm-modal")
-              within "#confirm-modal" do
-                expect(page).to have_content("Are you sure you want to exit the voting booth?")
-                click_on "OK"
+
+              find(".voting-booth-banner [data-dialog-open='cancel-voting']").click
+
+              expect(page).to have_css("#cancel-voting")
+
+              within "#cancel-voting" do
+                expect(page).to have_content("Are you sure you don't want to cast your vote?")
+                click_on "I don't want to vote right now"
               end
+
               expect(page).to have_link(href: "/")
             end
 
@@ -110,10 +115,12 @@ describe "BudgetsView" do
               it "redirects to correct url" do
                 expect(page).to have_button("Cancel voting")
                 click_on "Cancel voting"
-                within "#confirm-modal" do
-                  expect(page).to have_content("Are you sure you want to exit the voting booth?")
-                  click_on "OK"
+
+                within "#cancel-voting" do
+                  expect(page).to have_content("Are you sure you don't want to cast your vote?")
+                  click_on "I don't want to vote right now"
                 end
+
                 expect(page).to have_current_path(main_component_path(surveys_component))
               end
             end

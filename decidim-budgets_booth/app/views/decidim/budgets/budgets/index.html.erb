@@ -21,3 +21,5 @@
     <%= render partial: "decidim/budgets/orders/modal", locals: {budget: budget, projects: budget.projects } if voted_this?(budget) %>
   <% end %>
 </div>
+
+<%= render partial: "decidim/budgets/projects/cancel_voting_modal" if controller.send(:determine_layout) == "decidim/budgets/voting_layout" %>

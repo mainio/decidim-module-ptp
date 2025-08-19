@@ -78,7 +78,7 @@ module Decidim
       # This configuration option can be set in component settings, the dfault url when the user has voted on all budgets
       # is budgets path
       def success_redirect_path
-        component_settings.try(:vote_success_url).presence || decidim_budgets.budgets_path
+        component_settings.try(:vote_success_url).presence || status_budget_order_path(budget)
       end
 
       # This configuration option can be set in component settings, the dfault url when the user cancels voting is the root path.
