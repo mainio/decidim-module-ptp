@@ -39,7 +39,7 @@ fi:
         modal:
           assigned: 'Käytetty: '
           close: Sulje ikkuna
-          description: Olet valinnut nämä hankkeet osaksi budjettia.
+          description: Olet valinnut nämä äänestettävät ehdotukset osaksi budjettia.
           ok: OK
           title: Äänesi alueella %{budget_title}
           total_budget: 'Kokonaisbudjetti: '
@@ -62,7 +62,7 @@ fi:
           cancel_order: Poista äänesi
           cancel_voting: Poistu äänestyksestä
           choose_budget: Voit päättää budjetista alueella %{budget_title}
-          choose_description: Valitse sellaiset hankkeet, joista pidät ja anna äänesi sen jälkeen.
+          choose_description: Valitse sellaiset äänestettävät ehdotukset, joista pidät ja anna äänesi sen jälkeen.
           total_budget: 'Sinulla on käytettävissäsi <strong>%{budget}</strong>. Valitse ensin äänestettävät ehdotukset alla olevasta listasta. Valintojen jälkeen, paina "Olen valmis" -painiketta.'
           total_projects: "Projektien määrä: "
         cancel_voting_modal:
@@ -98,7 +98,7 @@ fi:
             finish_description: Olet jo aloittanut tämän budjetin äänestyksen. Haluaisitko viimeistellä äänesi?
             finish_voting: Viimeistele äänestys
             result_voted: Tarkasta äänesi
-            start_description: Voit selata hankkeita tutustuaksesi niihin. Aloittaaksesi äänestyksen, paina "Aloita alueen äänestys" -painiketta.
+            start_description: Voit selata äänestettäviä ehdotuksia tutustuaksesi niihin. Aloittaaksesi äänestyksen, paina "Aloita alueen äänestys" -painiketta.
             start_voting: Aloita alueen äänestys
             title: Tervetuloa äänestämään!
           ready: Olen valmis
@@ -117,7 +117,7 @@ fi:
         show:
           pre_vote:
             continue_voting: Jatka äänestystä
-            introduction: Haluatko äänestää tätä hanketta?
+            introduction: Haluatko äänestää tätä ehdotusta?
             start_voting: Aloita alueen äänestys
           view_all_projects: Näytä muut äänestettävät ehdotukset
         selected_projects_modal:
@@ -160,14 +160,14 @@ fi:
         voted_summary_modal:
           continue: Jatka
           label: Sulje
-          list_description: Valitsit nämä hankkeet.
+          list_description: Valitsit nämä äänestettävät ehdotukset.
           title: Äänesi
     components:
       budgets:
         settings:
           global:
             maximum_budgets_to_vote_on: Budjettien maksimimäärä, joissa käyttäjät voivat äänestää (oletusarvo on 0, mikä tarkoittaa, että käyttäjä voi äänestää kaikissa budjeteissa)
-            show_full_description_on_listing_page: Näytä hankkeiden kuvaukset kokonaan listaussivulla ja poista lisätietoikkuna käytöstä
+            show_full_description_on_listing_page: Näytä äänestettävien ehdotusten kuvaukset kokonaan listaussivulla ja poista lisätietoikkuna käytöstä
             vote_cancel_url: URL-osoite, johon käyttäjät ohjataan poistuessa äänestyskopista kesken äänestyksen (oletuksena palvelun etusivu)
             vote_completed_content: Ponnahdusikkunan teksti käyttäjän äänestettyä kaikissa budjeteissa
             vote_success_content: Ponnahdusikkunan teksti jokaisen äänen jälkeen

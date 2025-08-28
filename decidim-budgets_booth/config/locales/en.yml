@@ -40,7 +40,7 @@ en:
         modal:
           assigned: 'Assigned: '
           close: Close window
-          description: These are the projects you have chosen to be part of the budget.
+          description: These are the proposals you have chosen to be part of the budget.
           ok: OK
           title: Your vote in %{budget_title}
           total_budget: 'Total budget: '
@@ -60,10 +60,10 @@ en:
           back_to_budgets: Show all budgets
           cancel_voting: Cancel voting
           choose_budget: You decide the %{budget_title} budget
-          choose_description: Choose the projects you like and cast your vote at the
+          choose_description: Choose the proposals you like and cast your vote at the
             end.
           total_budget: 'You can allocate %{budget} to different proposals. First choose the proposals to vote from the list below. After selection, press the "I am ready" -button.'
-          total_projects: "Total projects: "
+          total_projects: "Total proposals: "
         cancel_voting_modal:
           continue: Continue voting
           description: If you cancel your vote, it will not be count for the final
@@ -79,7 +79,7 @@ en:
           ready: I am ready
           show_choices: Show selection
           total_budget: 'Total budget: '
-          total_projects: "Total projects: "
+          total_projects: "Total proposals: "
           view: View
           vote: Vote
         order_selected_projects:
@@ -103,7 +103,7 @@ en:
               you like to finish your vote?
             finish_voting: Finish voting
             result_voted: Review your vote
-            start_description: You can browse to the projects to get yourself familiar
+            start_description: You can browse to the proposals to get yourself familiar
               with them. In order to start voting, click the "Start voting" button.
             start_voting: Start voting
             title: Welcome to the vote!
@@ -123,8 +123,8 @@ en:
         show:
           pre_vote:
             continue_voting: Continue voting
-            introduction: Want to vote this project?
-            start_voting: Start voting
+            introduction: Want to vote this proposal?
+            start_voting: Start voting on this area
           view_all_projects: View all votable proposals
         selected_projects_modal:
           assigned: "Budget left: "
@@ -171,7 +171,7 @@ en:
         voted_summary_modal:
           continue: Continue
           label: Close
-          list_description: These are the projects you picked.
+          list_description: These are the proposals you picked.
           title: Your vote
     components:
       budgets:
@@ -179,7 +179,7 @@ en:
           global:
             maximum_budgets_to_vote_on: Maximum number of budgets that user can vote
               on (default is 0, which means user can vote on all available budgets)
-            show_full_description_on_listing_page: Show full project descriptions
+            show_full_description_on_listing_page: Show full proposal descriptions
               on the listing page and disable the details popup
             vote_cancel_url: URL to redirect user when canceling voting (default
               to the root path)
