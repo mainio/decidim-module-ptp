@@ -201,7 +201,7 @@
   @apply container grid grid-cols-12 text-xl font-semibold text-[--primary] pt-6;
 
   a {
-    @apply col-start-1 col-span-full xl:col-start-2;
+    @apply col-span-full;
   }
 }
 
@@ -214,6 +214,10 @@
 
   .definition-data__number {
     @apply font-bold text-[28px] mb-4;
+  }
+
+  span.success {
+    @apply flex items-center text-lg;
   }
 }
 
@@ -283,22 +287,6 @@
 
       &__number {
         @apply font-bold text-black text-[28px];
-      }
-
-      &__button {
-        @apply font-bold text-lg py-2.5 mt-4 md:text-xl;
-
-        &.button__secondary:hover {
-          svg {
-            @apply fill-white;
-          };
-        }
-
-        &.button__transparent-secondary:hover {
-          svg {
-            @apply fill-[--primary];
-          }
-        }
       }
     }
   }
@@ -454,12 +442,6 @@
   }
 }
 
-.card.extra.project-info {
-  span.success {
-    @apply flex items-center text-lg;
-  }
-}
-
 .form__wrapper {
   &-block {
     .status-logout {
@@ -480,6 +462,6 @@
 
 .voting-wrapper {
   .layout-item__aside {
-    @apply w-4/6 mx-auto lg:mx-0 lg:w-max lg:col-end-13 lg:col-span-3 xl:col-end-13 xl:col-span-3;
+    @apply lg:col-end-13 lg:col-span-3;
   }
 }

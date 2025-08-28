@@ -32,9 +32,9 @@ edit_link(
   </div>
 
   <% content_for :aside do %>
-    <div class="card extra project-info flex justify-center items-center">
-      <div class="card__content flex flex-col items-center w-full space-y-2 p-2">
-        <div class="m-bottom flex flex-col space-y-3">
+    <div class="layout-aside__section layout-aside__buttons flex justify-center items-center project-info">
+      <div class="record-action-container card__content">
+        <div class="m-bottom flex flex-col space-y-3 mb-4 text-center">
           <span class="definition-data__title"><%= t("budget", scope: "decidim.budgets.projects.show") %></span>
           <span class="definition-data__number"><%= budget_to_currency project.budget_amount %></span>
         </div>
@@ -55,7 +55,7 @@ edit_link(
       </div>
     </div>
 
-    <div class="border-t w-full mt-4">
+    <div class="layout-aside__section layout-aside__buttons action-divider">
       <div class="record-action-container">
         <%= cell "decidim/share_button", nil, default_classes: false %>
         <%= cell "decidim/comments_button", nil %>
