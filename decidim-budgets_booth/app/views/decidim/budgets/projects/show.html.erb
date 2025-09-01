@@ -63,7 +63,7 @@ edit_link(
     </div>
   <% end %>
 
-  <%= render layout: "layouts/decidim/shared/layout_item" do %>
+  <%= render layout: "layouts/decidim/shared/layout_item", locals: { main_enabled: false } do %>
     <div class="row w-full space-y-8 lg:mx-0">
       <div id="project" class="columns section view-side mediumlarge-4 mediumlarge-push-8 large-3 large-push-9 flex justify-between">
         <h1 class="h2 md:h1"><%= translated_attribute project.title %></h1>
