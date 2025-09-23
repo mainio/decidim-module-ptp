@@ -58,6 +58,7 @@ fi:
           is_this_correct: Onko tämä oikein?
           title: Vahvista äänesi
         budget_summary:
+          are_you_sure: Haluatko varmasti poistaa äänesi?
           back_to_budgets: Näytä kaikki budjetit
           cancel_order: Poista äänesi
           cancel_voting: Poistu äänestyksestä

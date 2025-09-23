@@ -57,6 +57,7 @@ en:
         budget_confirm:
           is_this_correct: Is this correct?
         budget_summary:
+          are_you_sure: Are you sure you want to delete your vote?
           back_to_budgets: Show all budgets
           cancel_voting: Cancel voting
           choose_budget: You decide the %{budget_title} budget
