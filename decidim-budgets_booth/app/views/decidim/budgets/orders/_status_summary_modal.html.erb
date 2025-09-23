@@ -28,6 +28,10 @@
     </div>
 
     <div data-dialog-actions>
+      <button class="button button__lg md:button__lg button__transparent-secondary text-sm md:text-lg" data-dialog-close="status-summary">
+        <%= t(".close") %>
+      </button>
+
       <% if post_vote %>
         <%= link_to(
           budget_order_path(budget),
@@ -41,10 +45,6 @@
           <%= icon "delete-bin-line", class: "inline-block fill-white" %>
         <% end %>
       <% end %>
-
-      <button class="button button__lg md:button__lg button__transparent-secondary text-sm md:text-lg" data-dialog-close="status-summary">
-        <%= t(".close") %>
-      </button>
     </div>
   <% end %>
 <% end %>
