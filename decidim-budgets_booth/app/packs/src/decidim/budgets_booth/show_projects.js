@@ -1,6 +1,6 @@
 $(() => {
   const showProjectsButton = document.getElementById("show-projects");
-  const projectsCount = document.getElementById("projects-count");
+  const projectCount = document.getElementById("project-count");
   const statusModal = window.Decidim.currentDialogs["status-summary"];
   const statusTrigger = document.getElementById("trigger-status");
 
@@ -12,7 +12,7 @@ $(() => {
     showProjectsButton.addEventListener("click", (ev) => {
       ev.preventDefault();
 
-      projectsCount.scrollIntoView({
+      projectCount.scrollIntoView({
         behavior: "smooth",
         block: "start"
       });

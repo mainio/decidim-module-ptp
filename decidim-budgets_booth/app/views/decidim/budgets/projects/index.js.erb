@@ -1,11 +1,12 @@
 var $projects = $('#projects');
 var $projectCount = $('#project-count');
+var $orderDropdown = $('#order-dropdown');
 var $orderFilterInput = $('.order_filter');
 
 $projects.html('<%= j(render partial: "projects").strip.html_safe %>');
 $projectCount.html('<%= j(render partial: "count").strip.html_safe %>');
+$orderDropdown.html('<%= j(render partial: "order").strip.html_safe %>');
 $orderFilterInput.val('<%= order %>');
 
-var $dropdownMenu = $('.dropdown.menu', $projects);
-$dropdownMenu.foundation();
-$projects.foundation();
+document.dispatchEvent(new CustomEvent("ajax:loaded", { detail: $projects[0] }));
+

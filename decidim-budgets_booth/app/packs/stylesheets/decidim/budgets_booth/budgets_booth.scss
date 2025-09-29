@@ -127,6 +127,10 @@
   @apply button button__lg w-full h-12 flex flex-row items-center justify-center gap-2 button__secondary font-bold text-md md:text-lg xl:w-fit;
 }
 
+.budget__list--header {
+  @apply flex justify-end items-center mx-3.5;
+}
+
 .budget-list {
   a {
     @apply hover:no-underline;

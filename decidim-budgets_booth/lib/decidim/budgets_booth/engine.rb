@@ -43,6 +43,14 @@ module Decidim
         Cell::ViewModel.view_paths << File.expand_path("#{Decidim::BudgetsBooth::Engine.root}/app/views") # for partials
       end
 
+      initializer "decidim_budgets_booth.view_priority", after: "decidim_simple_ui.view_priority" do
+        ActiveSupport.on_load(:action_controller) do
+          booth_views = Decidim::BudgetsBooth::Engine.root.join("app", "views")
+
+          prepend_view_path(booth_views) if Decidim.module_installed?(:simple_ui)
+        end
+      end
+
       initializer "decidim_budgets_booth.add_customizations", after: "decidim.action_controller" do
         config.to_prepare do
           # Helper extensions

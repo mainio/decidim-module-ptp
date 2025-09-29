@@ -26,8 +26,14 @@
       </div>
     </div>
   <% end %>
-  <div class="row columns one-col mx-auto">
+  <div class="row columns double-col mx-auto">
     <%= render partial: "count" %>
+
+    <div class="budget__list--header">
+      <div class="collection-sort-controls">
+        <%= render partial: "order" %>
+      </div>
+    </div>
   </div>
 
   <div class="double-col_off mx-auto mb-6 lg:flex lg:justify-between lg:gap-10">
