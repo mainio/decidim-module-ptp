@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "decidim/budgets"
+
 module Decidim
   module BudgetsBooth
     module Workflows
