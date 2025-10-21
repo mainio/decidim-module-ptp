@@ -6,6 +6,17 @@ fi:
         budgets:
           edit:
             images: Kuvat
+        imports:
+          help:
+            paper_orders_count: "Tiedoston pitää sisältää seuraavanlaiset sarakkeet: 'project_id' (kertoo projektin id:n), 'project_title' (kertoo projektin otsikon) ja 'number_of_votes' (kertoo paperiäänien määrän)."
+          label:
+            paper_orders_count: Tuo paperiäänien määrä
+          resources:
+            paper_orders_count:
+              one: Projekti
+              other: Projektit
+          title:
+            paper_orders_count: Tuo paperiäänien määrä
       budget_list_item:
         current_phase: 'Käynnissä oleva vaihe: %{phase}'
         more_info: Lisätietoja

@@ -2,6 +2,7 @@
 
 require "rails"
 require "decidim/core"
+require "decidim/budgets_booth/import"
 
 module Decidim
   module BudgetsBooth
@@ -108,6 +109,14 @@ module Decidim
             Decidim::BudgetsBooth::LineItemsControllerExtensions
           )
 
+          Decidim::Budgets::Admin::ProjectsController.include(
+            Decidim::BudgetsBooth::Admin::ProjectsControllerExtensions
+          )
+
+          Decidim::Budgets::Admin::BudgetsController.include(
+            Decidim::BudgetsBooth::Admin::BudgetsControllerExtensions
+          )
+
           # Commands extensions
           Decidim::Budgets::Admin::CreateBudget.include(
             Decidim::BudgetsBooth::CreateBudgetExtensions
@@ -133,11 +142,29 @@ module Decidim
           Decidim::Budgets::Order.include(
             Decidim::BudgetsBooth::OrderExtensions
           )
+          Decidim::Budgets::Project.include(
+            Decidim::BudgetsBooth::ProjectExtensions
+          )
 
           # Forms extensions
           Decidim::Budgets::Admin::BudgetForm.include(
             Decidim::BudgetsBooth::BudgetFormExtensions
           )
+        end
+      end
+
+      initializer "budgets_booth.component_override" do
+        Decidim.component_registry.find(:budgets).tap do |component|
+          component.imports :paper_orders_count do |imports|
+            imports.messages do |msg|
+              msg.set(:resource_name) { |count: 1| I18n.t("decidim.budgets.admin.imports.resources.paper_orders_count", count: count) }
+              msg.set(:title) { I18n.t("decidim.budgets.admin.imports.title.paper_orders_count") }
+              msg.set(:label) { I18n.t("decidim.budgets.admin.imports.label.paper_orders_count") }
+              msg.set(:help) { I18n.t("decidim.budgets.admin.imports.help.paper_orders_count") }
+            end
+
+            imports.creator Decidim::BudgetsBooth::Import::PaperOrdersCountCreator
+          end
         end
       end
 

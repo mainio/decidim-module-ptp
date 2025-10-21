@@ -6,6 +6,17 @@ en:
         budgets:
           edit:
             images: Images
+        imports:
+          help:
+            paper_orders_count: "The import document should contain the following columns: 'project_id' (with the project's id), 'project_title' (with the project's title) and 'number_of_votes' (with the number of new votes for the project that should be imported)."
+          label:
+            paper_orders_count: Import paper orders count
+          resources:
+            paper_orders_count:
+              one: Project
+              other: Projects
+          title:
+            paper_orders_count: Import votes from paper ballots
       budget_list_item:
         current_phase: 'Current phase: %{phase}'
         more_info: More info
