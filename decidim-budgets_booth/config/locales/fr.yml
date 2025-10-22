@@ -6,6 +6,17 @@ fr:
         budgets:
           edit:
             images: Images
+        imports:
+          help:
+            paper_orders_count: "The import document should contain the following columns: 'project_id' (with the project's id), 'project_title' (with the project's title) and 'number_of_votes' (with the number of new votes for the project that should be imported)."
+          label:
+            paper_orders_count: Import paper orders count
+          resources:
+            paper_orders_count:
+              one: Project
+              other: Projects
+          title:
+            paper_orders_count: Import votes from paper ballots
       budget_list_item:
         current_phase: 'Phase actuelle : %{phase}'
         more_info: Plus d'informations
@@ -39,7 +50,7 @@ fr:
         modal:
           assigned: 'Affecté : '
           close: Fermer la fenêtre
-          description: Voici les projets que vous avez choisis pour le budget.
+          description: These are the proposals you have chosen to be part of the budget.
           ok: OK
           title: Votre vote dans %{budget_title}
           total_budget: 'Budget total : '
@@ -56,12 +67,13 @@ fr:
         budget_confirm:
           is_this_correct: Est-ce correct ?
         budget_summary:
+          are_you_sure: Are you sure you want to delete your vote?
           back_to_budgets: Afficher tous les budgets
           cancel_voting: Annuler le vote
           choose_budget: Vous décidez du budget
-          choose_description: Choisissez les projets que vous aimez et votez à la fin.
+          choose_description: Choose the proposals you like and cast your vote at the end.
           total_budget: 'You can allocate %{budget} to different proposals. First choose the proposals to vote from the list below. After selection, press the "I am ready" -button.'
-          total_projects: "Total projects: "
+          total_projects: "Total proposals: "
         cancel_voting_modal:
           continue: Continuer le vote
           description: Si vous annulez votre vote, cela ne sera pas pris en compte pour le résultat final. Afin de faire compter votre vote, veuillez revenir en arrière pour le finaliser et le confirmer.
@@ -76,7 +88,7 @@ fr:
           ready: Confirmer mon vote
           show_choices: Show selection
           total_budget: 'Budget total: '
-          total_projects: "Total projects: "
+          total_projects: "Total proposals: "
           view: View
           vote: Vote
         order_selected_projects:
@@ -97,7 +109,7 @@ fr:
             finish_description: Vous avez déjà commencé à voter dans ce budget. Voulez-vous terminer votre vote ?
             finish_voting: Terminer le vote
             result_voted: Revoir votre vote
-            start_description: Vous pouvez naviguer les projets pour vous familiariser avec eux. Pour commencer à voter, cliquez sur le bouton "Commencer à voter".
+            start_description: You can browse to the proposals to get yourself familiar with them. In order to start voting, click the "Start voting" button.
             start_voting: Commencer à voter
             title: Bienvenue au vote!
           ready: Confirmer mon vote
@@ -116,8 +128,8 @@ fr:
         show:
           pre_vote:
             continue_voting: Continuer le vote
-            introduction: Vous voulez voter pour ce projet ?
-            start_voting: Commencer à voter
+            introduction: Want to vote this proposal?
+            start_voting: Start voting on this area
           view_all_projects: View all votable proposals
         selected_projects_modal:
           assigned: "Budget left: "
@@ -159,14 +171,14 @@ fr:
         voted_summary_modal:
           continue: Continuer
           label: Fermer
-          list_description: Voici les projets que vous avez sélectionnés.
+          list_description: These are the proposals you picked.
           title: Votre vote
     components:
       budgets:
         settings:
           global:
             maximum_budgets_to_vote_on: Nombre maximum de budgets sur lesquels l'utilisateur peut voter (0 par défaut, ce qui signifie que l'utilisateur peut voter sur tous les budgets disponibles)
-            show_full_description_on_listing_page: Afficher les descriptions complètes des projets sur la page de liste et désactiver la popup de détails
+            show_full_description_on_listing_page: Show full proposal descriptions on the listing page and disable the details popup
             vote_cancel_url: URL to redirect user when canceling voting (default to the root path)
             vote_completed_content: Texte de popup après avoir voté dans tous les budgets disponibles
             vote_success_content: Texte popup après chaque vote
