@@ -6,6 +6,17 @@ fi:
         budgets:
           edit:
             images: Kuvat
+        imports:
+          help:
+            paper_orders_count: "The import document should contain the following columns: 'project_id' (with the project's id), 'project_title' (with the project's title) and 'number_of_votes' (with the number of new votes for the project that should be imported)."
+          label:
+            paper_orders_count: Import paper orders count
+          resources:
+            paper_orders_count:
+              one: Project
+              other: Projects
+          title:
+            paper_orders_count: Import votes from paper ballots
       budget_list_item:
         current_phase: 'Käynnissä oleva vaihe: %{phase}'
         more_info: Lisätietoja
@@ -39,7 +50,7 @@ fi:
         modal:
           assigned: 'Käytetty: '
           close: Sulje ikkuna
-          description: Olet valinnut nämä hankkeet osaksi budjettia.
+          description: These are the proposals you have chosen to be part of the budget.
           ok: OK
           title: Äänesi alueella %{budget_title}
           total_budget: 'Kokonaisbudjetti: '
@@ -56,12 +67,13 @@ fi:
         budget_confirm:
           is_this_correct: Onko tämä oikein?
         budget_summary:
+          are_you_sure: Are you sure you want to delete your vote?
           back_to_budgets: Näytä kaikki budjetit
           cancel_voting: Poistu äänestyksestä
           choose_budget: Voit päättää budjetista alueella %{budget_title}
-          choose_description: Valitse sellaiset hankkeet, joista pidät ja anna äänesi sen jälkeen.
+          choose_description: Choose the proposals you like and cast your vote at the end.
           total_budget: 'You can allocate %{budget} to different proposals. First choose the proposals to vote from the list below. After selection, press the "I am ready" -button.'
-          total_projects: "Total projects: "
+          total_projects: "Total proposals: "
         cancel_voting_modal:
           continue: Jatka äänestystä
           description: Jos poistut äänestyksestä, ääntäsi ei lasketa lopulliseen tulokseen. Jos haluat äänesi vaikuttavan lopputulokseen, palaa takaisin äänestämään.
@@ -76,7 +88,7 @@ fi:
           ready: Olen valmis
           show_choices: Show selection
           total_budget: 'Kokonaisbudjetti: '
-          total_projects: "Total projects: "
+          total_projects: "Total proposals: "
           view: View
           vote: Äänestä
         order_selected_projects:
@@ -97,7 +109,7 @@ fi:
             finish_description: Olet jo aloittanut tämän budjetin äänestyksen. Haluaisitko viimeistellä äänesi?
             finish_voting: Viimeistele äänestys
             result_voted: Tarkasta äänesi
-            start_description: Voit selata hankkeita tutustuaksesi niihin. Aloittaaksesi äänestyksen, paina "Aloita äänestys" -painiketta.
+            start_description: You can browse to the proposals to get yourself familiar with them. In order to start voting, click the "Start voting" button.
             start_voting: Aloita äänestys
             title: Tervetuloa äänestämään!
           ready: Olen valmis
@@ -116,8 +128,8 @@ fi:
         show:
           pre_vote:
             continue_voting: Jatka äänestystä
-            introduction: Haluatko äänestää tätä hanketta?
-            start_voting: Aloita äänestys
+            introduction: Want to vote this proposal?
+            start_voting: Start voting on this area
           view_all_projects: View all votable proposals
         selected_projects_modal:
           assigned: "Budget left: "
@@ -159,14 +171,14 @@ fi:
         voted_summary_modal:
           continue: Jatka
           label: Sulje
-          list_description: Valitsit nämä hankkeet.
+          list_description: These are the proposals you picked.
           title: Äänesi
     components:
       budgets:
         settings:
           global:
             maximum_budgets_to_vote_on: Budjettien maksimimäärä, joissa käyttäjät voivat äänestää (oletusarvo on 0, mikä tarkoittaa, että käyttäjä voi äänestää kaikissa budjeteissa)
-            show_full_description_on_listing_page: Näytä hankkeiden kuvaukset kokonaan listaussivulla ja poista lisätietoikkuna käytöstä
+            show_full_description_on_listing_page: Show full proposal descriptions on the listing page and disable the details popup
             vote_cancel_url: URL to redirect user when canceling voting (default to the root path)
             vote_completed_content: Ponnahdusikkunan teksti käyttäjän äänestettyä kaikissa budjeteissa
             vote_success_content: Ponnahdusikkunan teksti jokaisen äänen jälkeen
