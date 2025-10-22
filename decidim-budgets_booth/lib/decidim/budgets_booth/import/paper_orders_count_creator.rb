@@ -20,7 +20,7 @@ module Decidim
 
         def resource
           @resource ||= begin
-            project = Decidim::Budgets::Project.find_by(id:)
+            project = Decidim::Budgets::Project.find(id)
             project.update!(
               paper_orders_count: votes
             )
