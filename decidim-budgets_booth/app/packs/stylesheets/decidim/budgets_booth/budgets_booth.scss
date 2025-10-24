@@ -149,6 +149,29 @@
 
     .explore-link {
       @apply w-full lg:w-52 bg-[#f2fcfd] lg:flex-shrink-0;
+
+      .button.is-hover,
+      .button.is-focus,
+      .button:not([disabled]):not([class*=button__text]):not(label):hover,
+      .button:not([disabled]):not([class*=button__text]):not(label):focus {
+        @apply bg-none;
+
+        &.button__transparent-secondary {
+          @apply text-white bg-[--primary];
+
+          svg {
+            @apply fill-white;
+          }
+        }
+
+        &.button__secondary {
+          @apply text-[--primary] bg-white border-[--primary];
+
+          svg {
+            @apply fill-[--primary];
+          }
+        }
+      }
     }
 
     .selected-project {
