@@ -80,6 +80,8 @@ fr:
           exit: Je ne veux pas voter pour le moment
           label: Quitter le vote
           title: Êtes-vous certain de vouloir annuler votre vote ?
+        count:
+          projects_count: "%{count} Votable proposals"
         index:
           back_to_budgets: Retour aux budgets
         order_progress:
