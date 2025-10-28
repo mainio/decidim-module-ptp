@@ -84,7 +84,7 @@ fi:
           label: Poistu äänestyksestä
           title: Haluatko varmasti lopettaa äänestyksen?
         count:
-          projects_count: "%{count} Äänestettävää ehdotusta"
+          projects_count: "%{count} äänestettävää ehdotusta"
         index:
           back_to_budgets: Takaisin kaikkiin budjetteihin
         order_progress:

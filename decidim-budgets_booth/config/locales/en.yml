@@ -84,7 +84,7 @@ en:
           label: Exit voting
           title: Are you sure you don't want to cast your vote?
         count:
-          projects_count: "%{count} Votable proposals"
+          projects_count: "%{count} votable proposals"
         index:
           back_to_budgets: Back to budgets
         order_progress:
