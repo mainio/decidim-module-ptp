@@ -27,12 +27,19 @@ module Decidim
       end
 
       def description_text
-        key = if current_workflow.vote_allowed?(budget) && progress?(budget)
+        return strip_tags(translated_attribute(budget.description)) if strip_tags(translated_attribute(budget.description)).present? && !vote_in_progress?
+
+        key = if vote_in_progress?
                 :finish_description
               else
                 :start_description
               end
+
         t(key, scope: i18n_scope)
+      end
+
+      def vote_in_progress?
+        current_workflow.vote_allowed?(budget) && progress?(budget)
       end
 
       def budgets_count
