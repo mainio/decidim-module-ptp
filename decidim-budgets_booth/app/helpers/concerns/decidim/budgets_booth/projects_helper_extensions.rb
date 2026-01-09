@@ -51,6 +51,14 @@ module Decidim
         t(key, scope: i18n_scope)
       end
 
+      def missing_authorization_text
+        custom_text = translated_attribute(component_settings.missing_authorization_message)
+
+        return custom_text unless custom_text == ""
+
+        t("missing_authorization_message_html", scope: "decidim.budgets.projects.pre_voting_budget_summary.pre_vote")
+      end
+
       def budgets_count
         Decidim::Budgets::Budget.where(component: current_component).count
       end

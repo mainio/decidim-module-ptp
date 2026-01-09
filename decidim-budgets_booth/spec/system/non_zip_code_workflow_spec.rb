@@ -20,6 +20,7 @@ describe "Non zip code workflow", type: :system do
 
     before do
       switch_to_host(organization.host)
+      sign_in user
     end
 
     context "when not voting" do
@@ -73,6 +74,9 @@ describe "Non zip code workflow", type: :system do
     context "when entering voting" do
       context "when use is not signed_in" do
         before do
+          visit decidim.root_path
+          find(".topbar__dropmenu.topbar__user__logged").click
+          click_on "Sign out"
           visit decidim_budgets.budget_voting_index_path(budget)
         end
 
@@ -86,7 +90,6 @@ describe "Non zip code workflow", type: :system do
 
       context "when authorized" do
         before do
-          sign_in user
           visit decidim_budgets.budget_voting_index_path(budget)
         end
 
@@ -156,10 +159,6 @@ describe "Non zip code workflow", type: :system do
         describe "popups" do
           let!(:second_budget) { create(:budget, component: component, total_budget: 100_000) }
           let!(:second_budgets_project) { create(:project, budget: second_budget, budget_amount: 75_000) }
-
-          before do
-            sign_in user
-          end
 
           it "shows how to vote message by default" do
             visit decidim_budgets.budget_voting_index_path(budget)
@@ -262,6 +261,28 @@ describe "Non zip code workflow", type: :system do
                 end
               end
             end
+          end
+        end
+      end
+
+      context "when not authorized" do
+        before do
+          visit decidim_budgets.budgets_path
+          find(".topbar__dropmenu.topbar__user__logged").click
+          click_on "Sign out"
+          click_link "Show", match: :first
+        end
+
+        it "budget page gives a default missing authorization message" do
+          expect(page).to have_content("You are missing the right to vote")
+          expect(page).to have_content("Voting requires user authentication, without authentication voting is prohibited.")
+        end
+
+        context "when missing authorization message has been set in the admin dashboard" do
+          let!(:component_settings) { { workflow: "all", missing_authorization_message: { en: "You are not allowed to vote because of missing authorization." } } }
+
+          it "budget page gives a custom missing authorization message" do
+            expect(page).to have_content("You are not allowed to vote because of missing authorization.")
           end
         end
       end

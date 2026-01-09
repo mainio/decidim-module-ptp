@@ -86,6 +86,9 @@ en:
             finish_description: You have already started voting in this budget. Would
               you like to finish your vote?
             finish_voting: Finish voting
+            missing_authorization_message_html: |
+              <h2 class="heading3">You are missing the right to vote</h2>
+              <p>Voting requires user authentication, without authentication voting is prohibited.</p>
             result_voted: Review your vote
             start_description: You can browse to the projects to get yourself familiar
               with them. In order to start voting, click the "Start voting" button.
@@ -154,6 +157,8 @@ en:
           global:
             maximum_budgets_to_vote_on: Maximum number of budgets that user can vote
               on (default is 0, which means user can vote on all available budgets)
+            missing_authorization_message: Message that will be displayed to users who
+              are missing authorization to vote
             show_full_description_on_listing_page: Show full project descriptions
               on the listing page and disable the details popup
             vote_cancel_url: URL to redirect user when canceling voting (defaullt

@@ -80,6 +80,9 @@ fi:
             casted_title: Kiitos äänestäsi
             finish_description: Olet jo aloittanut tämän budjetin äänestyksen. Haluaisitko viimeistellä äänesi?
             finish_voting: Viimeistele äänestys
+            missing_authorization_message_html: |
+              <h2 class="heading3">Sinulta puuttuu oikeudet äänestämiseen</h2>
+              <p>Äänestämiseen vaaditaan käyttäjän vahvistus, ennen vahvistamista äänestäminen ei ole mahdollista.</p>
             result_voted: Tarkasta äänesi
             start_description: Voit selata hankkeita tutustuaksesi niihin. Aloittaaksesi äänestyksen, paina "Aloita äänestys" -painiketta.
             start_voting: Aloita äänestys
@@ -141,6 +144,7 @@ fi:
         settings:
           global:
             maximum_budgets_to_vote_on: Budjettien maksimimäärä, joissa käyttäjät voivat äänestää (oletusarvo on 0, mikä tarkoittaa, että käyttäjä voi äänestää kaikissa budjeteissa)
+            missing_authorization_message: Viesti käyttäjille joilla ei ole oikeuksia äänestää
             show_full_description_on_listing_page: Näytä hankkeiden kuvaukset kokonaan listaussivulla ja poista lisätietoikkuna käytöstä
             vote_cancel_url: URL-osoite, johon käyttäjät ohjataan poistuessa äänestyskopista kesken äänestyksen (oletuksena palvelun etusivu)
             vote_completed_content: Ponnahdusikkunan teksti käyttäjän äänestettyä kaikissa budjeteissa

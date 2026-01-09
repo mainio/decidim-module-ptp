@@ -11,13 +11,17 @@
         <%= link_to(t(".pre_vote.result_voted"), decidim_budgets.budget_order_path(budget), class: "button hollow button--sc pull-right", remote: true) %>
       </div>
     <% else %>
-      <h2 class="heading3">
-        <%= t(".pre_vote.title") %>
-      </h2>
-      <p>
-        <%= description_text %>
-        <%= button_to vote_text, budget_voting_index_path, class: "button hollow button--sc pull-right", method: :get, disabled: !voting_open? %>
-      </p>
+      <% if can_have_order? %>
+        <h2 class="heading3">
+          <%= t(".pre_vote.title") %>
+        </h2>
+        <p>
+          <%= description_text %>
+          <%= button_to vote_text, budget_voting_index_path, class: "button hollow button--sc pull-right", method: :get, disabled: !voting_open? %>
+        </p>
+      <% else %>
+        <%= sanitize(translated_attribute(missing_authorization_text)) %>
+      <% end %>
     <% end %>
   </div>
 </div>
