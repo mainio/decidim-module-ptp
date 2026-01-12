@@ -142,6 +142,7 @@ module Decidim
           settings.attribute :vote_cancel_url, type: :string
           settings.attribute :show_full_description_on_listing_page, type: :boolean, default: false
           settings.attribute :missing_authorization_message, type: :text, translated: true, editor: true
+          settings.attribute :enable_categories_filter, type: :boolean, default: false
         end
       end
 

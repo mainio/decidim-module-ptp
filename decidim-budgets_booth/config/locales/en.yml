@@ -155,6 +155,7 @@ en:
       budgets:
         settings:
           global:
+            enable_categories_filter: Enable "Categories" -filter
             maximum_budgets_to_vote_on: Maximum number of budgets that user can vote
               on (default is 0, which means user can vote on all available budgets)
             missing_authorization_message: Message that will be displayed to users who

@@ -143,6 +143,7 @@ fi:
       budgets:
         settings:
           global:
+            enable_categories_filter: Salli "Aihepiirit" -suodattimen käyttö
             maximum_budgets_to_vote_on: Budjettien maksimimäärä, joissa käyttäjät voivat äänestää (oletusarvo on 0, mikä tarkoittaa, että käyttäjä voi äänestää kaikissa budjeteissa)
             missing_authorization_message: Viesti käyttäjille joilla ei ole oikeuksia äänestää
             show_full_description_on_listing_page: Näytä hankkeiden kuvaukset kokonaan listaussivulla ja poista lisätietoikkuna käytöstä
