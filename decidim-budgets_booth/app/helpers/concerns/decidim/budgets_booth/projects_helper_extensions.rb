@@ -52,9 +52,11 @@ module Decidim
       end
 
       def missing_authorization_text
-        custom_text = translated_attribute(component_settings.missing_authorization_message)
+        authorization_texts = component_settings.missing_authorization_message || {}
 
-        return custom_text unless custom_text == ""
+        translation = authorization_texts[I18n.locale.to_s]
+
+        return translation if translation.present?
 
         t("missing_authorization_message_html", scope: "decidim.budgets.projects.pre_voting_budget_summary.pre_vote")
       end
