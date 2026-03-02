@@ -1,6 +1,6 @@
 /* css for decidim_budgets_booth */
 
-#voting-help {
+#voting-help{
   .voting-help-item{
     @apply my-4 md:my-0;
 
@@ -51,7 +51,7 @@
 }
 
 .spaced-bottom{
-  @apply mb-[0.3rem];
+  @apply mb-[.3rem];
 }
 
 .flex-column{
@@ -115,285 +115,285 @@
   @apply font-bold mt-4;
 }
 
-.budget-summary {
+.budget-summary{
   @apply text-center;
 
-  &__progressbox {
+  &__progressbox{
     @apply flex flex-col gap-2 pb-2 xl:gap-4 xl:flex-row xl:justify-between;
   }
 }
 
-.progress-ready-button {
+.progress-ready-button{
   @apply button button__lg w-full h-12 flex flex-row items-center justify-center gap-2 button__secondary font-bold text-md md:text-lg xl:w-fit;
 }
 
-.budget__list--header {
+.budget__list--header{
   @apply flex justify-end items-center mx-3.5;
 }
 
-.budget-list {
-  a {
+.budget-list{
+  a{
     @apply hover:no-underline;
 
-    :hover h3 {
+    :hover h3{
       @apply underline;
     }
   }
 
-  &__data {
+  &__data{
     @apply justify-center;
   }
 
-  &__item {
+  &__item{
     @apply mb-8 border-background flex flex-col border w-full md:mb-0 lg:flex-row lg:justify-between;
 
-    .explore-link {
+    .explore-link{
       @apply w-full lg:w-52 bg-[#f2fcfd] lg:flex-shrink-0;
 
       .button.is-hover,
       .button.is-focus,
       .button:not([disabled]):not([class*=button__text]):not(label):hover,
-      .button:not([disabled]):not([class*=button__text]):not(label):focus {
+      .button:not([disabled]):not([class*=button__text]):not(label):focus{
         @apply bg-none;
 
-        &.button__transparent-secondary {
+        &.button__transparent-secondary{
           @apply text-white bg-[--primary];
 
-          svg {
+          svg{
             @apply fill-white;
           }
         }
 
-        &.button__secondary {
+        &.button__secondary{
           @apply text-[--primary] bg-white border-[--primary];
 
-          svg {
+          svg{
             @apply fill-[--primary];
           }
         }
       }
     }
 
-    .selected-project {
+    .selected-project{
       @apply w-full lg:w-52 bg-[#e1fae8] lg:flex-shrink-0;
     }
   }
 }
 
-.budget__card__prevote {
+.budget__card__prevote{
   @apply flex flex-row justify-between lg:space-y-2 lg:block;
 
-  .budget__card__highlight-prevote__header {
+  .budget__card__highlight-prevote__header{
     @apply flex flex-col items-start space-y-2 lg:items-center;
 
-    .budget__card__highlight-prevote__text {
+    .budget__card__highlight-prevote__text{
       @apply text-md;
     }
 
-    .budget__card__highlight-prevote__number {
+    .budget__card__highlight-prevote__number{
       @apply font-bold text-[28px];
     }
   }
 
-  .budget__card__prevote-explore-button {
+  .budget__card__prevote-explore-button{
     @apply text-lg lg:mt-2;
 
-    &-container {
+    &-container{
       @apply flex justify-center items-center;
     }
   }
 }
 
-.pre-voting-budget-summary {
+.pre-voting-budget-summary{
   @apply py-4 bg-[#f2fcfd];
 }
 
-.collection-sort-controls {
+.collection-sort-controls{
   @apply flex items-start;
 }
 
-.voting-rules {
+.voting-rules{
   @apply text-xl my-4 w-4/6 mx-auto;
 
-  .link {
+  .link{
     @apply text-lg font-semibold text-[--primary];
   }
 
-  svg {
+  svg{
     @apply pt-0 fill-[--primary];
   }
 }
 
-.projects-link {
+.projects-link{
   @apply container grid grid-cols-12 text-xl font-semibold text-[--primary] pt-6;
 
-  a {
+  a{
     @apply col-span-full;
   }
 }
 
-.project-info {
+.project-info{
   @apply h-min py-4 bg-[#f2fcfd];
 
-  .definition-data__title {
+  .definition-data__title{
     @apply text-md text-center;
   }
 
-  .definition-data__number {
+  .definition-data__number{
     @apply font-bold text-[28px] mb-4;
   }
 
-  span.success {
+  span.success{
     @apply flex items-center text-lg;
   }
 }
 
-.progress-background {
+.progress-background{
   @apply bg-[#f2fcfd];
 }
 
-.vote-progress-container {
+.vote-progress-container{
   @apply z-50 max-[767px]:bg-[#f2fcfd];
 }
 
-.vote-progress-content {
+.vote-progress-content{
   @apply mx-auto w-full container grid grid-cols-1 py-5;
 }
 
-.no-top {
+.no-top{
   @apply pt-0;
 }
 
-.budget-summary__selected-item > div:nth-child(1) {
+.budget-summary__selected-item > div:nth-child(1){
   @apply w-3/6;
 }
 
 .budget-summary__selected-item > div > div:nth-child(1),
-.budget-summary__selected-item > div > div:nth-child(2) {
+.budget-summary__selected-item > div > div:nth-child(2){
   @apply md:w-3/6;
 }
 
-.project-vote-button-container {
+.project-vote-button-container{
   @apply fill-[--primary];
 }
 
-#budget-confirm[data-dialog] [data-dialog-container] > :last-child {
+#budget-confirm[data-dialog] [data-dialog-container] > :last-child{
   @apply col-span-2 col-start-1;
 
-  .budget-confirm__selected-number {
+  .budget-confirm__selected-number{
     @apply font-bold text-lg md:text-3xl;
   }
 }
 
-.start-vote-button {
+.start-vote-button{
   @apply w-full lg:w-fit;
 }
 
-#budgets.card__list-list {
+#budgets.card__list-list{
   @apply w-full mx-auto xl:space-y-8 xl:mb-0 lg:w-3/5;
 
-  a {
-    :hover p {
+  a{
+    :hover p{
       @apply underline;
     }
   }
 
-  .card__highlight {
+  .card__highlight{
     @apply flex flex-col space-y-10 rounded-none ring-2 hover:no-underline hover:ring-background lg:space-y-0 lg:flex-row;
 
-    > :not([hidden]) ~ :not([hidden]) {
+    > :not([hidden]) ~ :not([hidden]){
       @apply max-[391px]:mt-0 max-[496px]:mt-2.5 p-4 mt-10 lg:mt-0;
     }
 
-    .budget__card__highlight-vote {
+    .budget__card__highlight-vote{
       @apply bg-[#f2fcfd] p-0 mt-0 bg-[#f2fcfd] w-full flex flex-row justify-between lg:block lg:w-4/12 lg:text-center;
 
-      &__text {
+      &__text{
         @apply text-md text-black mb-2.5 lg:mx-auto;
       }
 
-      &__number {
+      &__number{
         @apply font-bold text-black text-[28px];
       }
     }
   }
 }
 
-#voted-budgets {
-  .budget__card__highlight-vote {
+#voted-budgets{
+  .budget__card__highlight-vote{
     @apply mt-0;
   }
 
-  .card__highlight-text {
+  .card__highlight-text{
     @apply gap-0 pb-[18px] p-4;
   }
 
-  a {
+  a{
     @apply pb-0;
   }
 }
 
-.budget-progress {
+.budget-progress{
   @apply relative h-12 bg-gray-3 w-full flex items-center xl:w-5/6;
 }
 
-.progress-meter.budget-progress__meter {
+.progress-meter.budget-progress__meter{
   @apply bg-[#58a491] h-full flex items-center justify-center;
 
-  > span {
+  > span{
     @apply text-black;
   }
 }
 
-.progress-meter-text.progress-meter-text--right {
+.progress-meter-text.progress-meter-text--right{
   @apply right-4 absolute;
 
-  &--fixed {
+  &--fixed{
     @apply max-[380px]:hidden 2xl:right-1/4 2xl:pr-20 2xl:absolute;
   }
 }
 
-.budget-summary__selected {
+.budget-summary__selected{
   @apply flex items-center justify-between md:justify-start xl:gap-6 xl:justify-start;
 
-  h6 {
+  h6{
     @apply text-[--primary];
   }
 
-  svg {
+  svg{
     @apply fill-[--primary];
   }
 
-  button {
-    p {
+  button{
+    p{
       @apply text-[--primary];
     }
   }
 
-  &-number {
+  &-number{
     @apply text-lg md:text-2xl;
   }
 }
 
-.budget-summary__total {
+.budget-summary__total{
   @apply text-center text-lg my-2 xl:text-left;
 }
 
 // Success image for status -view
 
-.success-image {
+.success-image{
   --success: #4a8d7c;
 
   width: 150px;
   height: 150px;
   margin: auto;
 
-  @media (max-width: 768px) {
+  @media (max-width: 768px){
     width: 100px;
     height: 100px;
   }
 
-  .animation-success__checkmark {
+  .animation-success__checkmark{
     width: 100%;
     height: 100%;
     border-radius: 50%;
@@ -410,7 +410,7 @@
     margin: 0 auto;
   }
 
-  .animation-success__checkmark__circle {
+  .animation-success__checkmark__circle{
     stroke-dasharray: 166;
     stroke-dashoffset: 166;
     stroke-width: 5;
@@ -420,75 +420,75 @@
     animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
   }
 
-  .animation-success__checkmark__check {
+  .animation-success__checkmark__check{
     transform-origin: 50% 50%;
     stroke-dasharray: 48;
     stroke-dashoffset: 48;
     animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
   }
 
-  @keyframes stroke {
-    100% {
+  @keyframes stroke{
+    100%{
       stroke-dashoffset: 0;
     }
   }
 
-  @keyframes scale {
+  @keyframes scale{
     0%,
-    100% {
+    100%{
       transform: none;
     }
 
-    50% {
+    50%{
       transform: scale3d(1.1, 1.1, 1);
     }
   }
 
-  @keyframes fill {
-    100% {
+  @keyframes fill{
+    100%{
       box-shadow: inset 0 0 0 30 var(--success);
     }
   }
 }
 
-.status-choices {
+.status-choices{
   @apply flex justify-center items-center pb-10 text-2xl font-bold text-[--primary];
 
-  svg {
+  svg{
     @apply fill-[--primary] h-6 w-6 mt-0;
   }
 }
 
-.filter {
-  label {
+.filter{
+  label{
     @apply flex items-center gap-2;
 
-    [id^="dropdown-title-with_any_category_"] {
+    [id^="dropdown-title-with_any_category_"]{
       @apply truncate max-w-[120px] block;
     }
   }
 }
 
-.form__wrapper {
-  &-block {
-    .status-logout {
+.form__wrapper{
+  &-block{
+    .status-logout{
       @apply only:[&_*]:ml-0;
     }
   }
 }
 
-#status-summary {
-  #status-summary-content {
-    [data-dialog-actions] {
-      a > svg {
+#status-summary{
+  #status-summary-content{
+    [data-dialog-actions]{
+      a > svg{
         @apply mb-0;
       }
     }
   }
 }
 
-.voting-wrapper {
-  .layout-item__aside {
+.voting-wrapper{
+  .layout-item__aside{
     @apply lg:col-end-13 lg:col-span-3;
   }
 }
