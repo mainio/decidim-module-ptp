@@ -66,6 +66,7 @@ fi:
       projects:
         budget_confirm:
           confirm: Vahvista ääni
+          description: Olet valinnut nämä äänestettävät ehdotukset osaksi budjettia.
           is_this_correct: Onko tämä oikein?
           title: Vahvista äänesi
         budget_summary:

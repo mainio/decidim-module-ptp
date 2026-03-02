@@ -66,6 +66,7 @@ en:
         remove_from_vote: Remove from vote
       projects:
         budget_confirm:
+          description: These are the proposals you have chosen to be part of the budget.
           is_this_correct: Is this correct?
         budget_summary:
           are_you_sure: Are you sure you want to delete your vote?
