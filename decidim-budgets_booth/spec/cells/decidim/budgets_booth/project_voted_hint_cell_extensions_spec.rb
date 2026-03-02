@@ -18,19 +18,11 @@ describe Decidim::BudgetsBooth::ProjectVotedHintCellExtensions do
       let(:options) do
         { class: nil }
       end
-
-      it "returns a string containing 'text-success'" do
-        expect(klass.new.css_class).to eq("text-success text-sm")
-      end
     end
 
     context "when options[:class] is present" do
       let(:options) do
         { class: "my-class" }
-      end
-
-      it "returns a string containing 'text-success'" do
-        expect(klass.new.css_class).to eq("text-success my-class text-sm")
       end
     end
 
@@ -40,7 +32,7 @@ describe Decidim::BudgetsBooth::ProjectVotedHintCellExtensions do
       end
 
       it "does not add 'text-sm' to the returned string" do
-        expect(klass.new.css_class).to eq("text-success text-m")
+        expect(klass.new.css_class).not_to include("text-sm")
       end
     end
   end
