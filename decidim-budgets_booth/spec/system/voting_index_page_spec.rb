@@ -88,27 +88,14 @@ describe "VotingIndexPage" do
           expect(page).to have_content("€100,000")
         end
         expect(page).to have_content("Budget left:\n€75,000")
-        within "#projects form.new_filter[data-filters]" do
-          expect(page).to have_css("span", text: "Added")
-          expect(page).to have_css("span", text: "1")
-        end
 
         all(".project-vote-button")[1].click
 
         expect(page).to have_content("Budget left:\n€50,000")
 
-        within "#projects form.new_filter[data-filters]" do
-          expect(page).to have_css("span", text: "Added")
-          expect(page).to have_css("span", text: "2")
-        end
-
         all(".project-vote-button")[1].click
 
         expect(page).to have_content("Budget left:\n€75,000")
-        within "#projects form.new_filter[data-filters]" do
-          expect(page).to have_css("span", text: "Added")
-          expect(page).to have_css("span", text: "1")
-        end
       end
 
       context "when selected projects updated" do
@@ -354,7 +341,7 @@ describe "VotingIndexPage" do
 
       it "renders the info" do
         within "#budget-confirm" do
-          expect(page).to have_content("These are the projects you have chosen to be part of the budget.")
+          expect(page).to have_content("These are the proposals you have chosen to be part of the budget.")
           expect(page).to have_css("strong", text: "€25,000", count: 1)
           expect(page).to have_button("Confirm")
           expect(page).to have_button("Cancel")

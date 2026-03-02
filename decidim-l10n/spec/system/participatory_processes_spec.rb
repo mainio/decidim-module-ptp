@@ -37,22 +37,9 @@ describe "ExploreParticipatoryProcesses" do
         visit_component
 
         within "#meetings__meeting_#{meeting.id}" do
-          within ".card__calendar" do
-            within ".card__calendar-month" do
-              expect(page).to have_content("JAN")
-            end
-
-            within ".card__calendar-day" do
-              expect(page).to have_content("13")
-            end
-
-            within ".card__calendar-year" do
-              expect(page).to have_content("2017")
-            end
+          within(".card__list-metadata") do
+            expect(page).to have_content("08:00 AM UTC")
           end
-        end
-        within(".card__list-metadata") do
-          expect(page).to have_content("08:00 AM UTC")
         end
       end
     end

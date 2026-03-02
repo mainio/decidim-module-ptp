@@ -10,7 +10,7 @@ shared_examples "ordering projects by selected option" do |selected_option|
   end
 
   it "lists the projects ordered by selected option" do
-    within "#projects #dropdown-menu-order" do
+    within ".collection-sort-controls #dropdown-menu-order" do
       expect(page).to have_css("a.font-normal", text: "Random order")
       expect(page).to have_css("a.font-bold", text: selected_option)
     end
