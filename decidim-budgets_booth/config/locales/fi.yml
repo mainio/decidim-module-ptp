@@ -65,6 +65,7 @@ fi:
         remove_from_vote: Poista äänestäsi
       projects:
         budget_confirm:
+          description: These are the proposals you have chosen to be part of the budget.
           is_this_correct: Onko tämä oikein?
         budget_summary:
           are_you_sure: Are you sure you want to delete your vote?
@@ -81,7 +82,7 @@ fi:
           label: Poistu äänestyksestä
           title: Haluatko varmasti lopettaa äänestyksen?
         count:
-          projects_count: "%{count} Votable proposals"
+          projects_count: "%{count} votable proposals"
         index:
           back_to_budgets: Takaisin kaikkiin budjetteihin
         order_progress:
