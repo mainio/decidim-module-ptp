@@ -20,7 +20,7 @@ const initializeProjects = () => {
     if ($currentTarget.attr("disabled")) {
       cancelEvent(event);
     } else if (($currentTarget.attr("data-add") === "true") && ((currentAllocation + projectAllocation) > totalAllocation)) {
-      Object.keys(window.Decidim.currentDialogs).forEach(dialogKey => {
+      Object.keys(window.Decidim.currentDialogs).forEach((dialogKey) => {
         if (dialogKey.startsWith("project-modal-")) {
           let dialog = window.Decidim.currentDialogs[dialogKey];
           if (dialog.isOpen) {

@@ -4,7 +4,9 @@ $(() => {
       event.preventDefault();
 
       const projectItem = event.target.closest(".project-item");
-      if (!projectItem) return;
+      if (!projectItem) {
+        return
+      };
 
       const projectId = projectItem.id.replace("project-", "").replace("-item", "");
 
