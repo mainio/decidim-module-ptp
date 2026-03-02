@@ -65,6 +65,7 @@ fr:
         remove_from_vote: Supprimer du vote
       projects:
         budget_confirm:
+          description: These are the proposals you have chosen to be part of the budget.
           is_this_correct: Est-ce correct ?
         budget_summary:
           are_you_sure: Are you sure you want to delete your vote?
@@ -81,7 +82,7 @@ fr:
           label: Quitter le vote
           title: Êtes-vous certain de vouloir annuler votre vote ?
         count:
-          projects_count: "%{count} Votable proposals"
+          projects_count: "%{count} votable proposals"
         index:
           back_to_budgets: Retour aux budgets
         order_progress:
