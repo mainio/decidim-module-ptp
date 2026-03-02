@@ -168,7 +168,7 @@ module Decidim
         Decidim.component_registry.find(:budgets).tap do |component|
           component.imports :paper_orders_count do |imports|
             imports.messages do |msg|
-              msg.set(:resource_name) { |count: 1| I18n.t("decidim.budgets.admin.imports.resources.paper_orders_count", count: count) }
+              msg.set(:resource_name) { |count: 1| I18n.t("decidim.budgets.admin.imports.resources.paper_orders_count", count:) }
               msg.set(:title) { I18n.t("decidim.budgets.admin.imports.title.paper_orders_count") }
               msg.set(:label) { I18n.t("decidim.budgets.admin.imports.label.paper_orders_count") }
               msg.set(:help) { I18n.t("decidim.budgets.admin.imports.help.paper_orders_count") }

@@ -14,18 +14,6 @@ describe Decidim::BudgetsBooth::ProjectVotedHintCellExtensions do
   end
 
   describe "#css_class" do
-    context "when options[:class] is not present" do
-      let(:options) do
-        { class: nil }
-      end
-    end
-
-    context "when options[:class] is present" do
-      let(:options) do
-        { class: "my-class" }
-      end
-    end
-
     context "when options[:class] includes 'text-m'" do
       let(:options) do
         { class: "text-m" }
