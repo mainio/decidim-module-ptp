@@ -53,13 +53,19 @@ describe "AuthenticationWithPhoneNumber" do
             expect(page).to have_content("Phone number successfully verified.")
           end
           fill_in "Your name", with: "Dummy name"
-          click_on "Sign up"
+          within ".register-form.new_user" do
+            click_on "Create an account"
+          end
+
           click_on "Check and continue"
           within_flash_messages do
             expect(page).to have_content("An error occured, please try again")
           end
           check "I agree to the Terms of Service"
-          click_on "Sign up"
+          within ".register-form.new_user" do
+            click_on "Create an account"
+          end
+
           expect(page).to have_current_path decidim_verifications.authorizations_path
           within_flash_messages do
             expect(page).to have_content("You have successfully registered and authorized")
@@ -73,21 +79,27 @@ describe "AuthenticationWithPhoneNumber" do
         end
       end
 
-      context "when provide email addrss" do
+      context "when email address provided" do
         let!(:user) { create(:user, organization:, email: "someone@test.net") }
 
         it "checks its uniqueness" do
           fill_in "Your name", with: "Dummy name"
           fill_in "Your email", with: "someone@test.net"
           check "I agree to the Terms of Service"
-          click_on "Sign up"
+          within ".register-form.new_user" do
+            click_on "Create an account"
+          end
+
           click_on "Check and continue"
           within_flash_messages do
             expect(page).to have_content("An error occured, please try again")
           end
           expect(page).to have_content(/has already been taken/)
           fill_in "Your email", with: "another_email@nowhere.net"
-          click_on "Sign up"
+          within ".register-form.new_user" do
+            click_on "Create an account"
+          end
+
           expect(page).to have_current_path decidim_verifications.authorizations_path
           within_flash_messages do
             expect(page).to have_content("You have successfully registered and authorized")

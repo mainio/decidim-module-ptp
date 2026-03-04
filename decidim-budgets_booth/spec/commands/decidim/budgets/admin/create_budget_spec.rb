@@ -30,6 +30,7 @@ describe Decidim::Budgets::Admin::CreateBudget do
       current_user: user,
       main_image:,
       current_component:,
+      component: current_component,
       current_organization: organization
     )
   end
