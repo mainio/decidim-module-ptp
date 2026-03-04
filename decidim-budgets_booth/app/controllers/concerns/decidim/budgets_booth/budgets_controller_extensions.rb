@@ -33,7 +33,7 @@ module Decidim
         end
 
         def layout
-          current_participatory_space_manifest.context(current_participatory_space_context).layout
+          "decidim/application"
         end
       end
     end

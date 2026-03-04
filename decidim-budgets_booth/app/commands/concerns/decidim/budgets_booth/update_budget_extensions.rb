@@ -7,25 +7,8 @@ module Decidim
       include ::Decidim::AttachmentAttributesMethods
 
       included do
-        private
-
-        def update_budget!
-          attributes = {
-            scope: form.scope,
-            title: form.title,
-            weight: form.weight,
-            description: form.description,
-            total_budget: form.total_budget
-          }.merge(
-            attachment_attributes(:main_image)
-          )
-
-          Decidim.traceability.update!(
-            budget,
-            form.current_user,
-            attributes,
-            visibility: "all"
-          )
+        def attributes
+          super.merge(attachment_attributes(:main_image))
         end
       end
     end
