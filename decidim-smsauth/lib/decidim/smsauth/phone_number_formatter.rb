@@ -13,7 +13,7 @@ module Decidim
       end
 
       def phone_country_code
-        "+#{ISO3166::Country.find_country_by_alpha2(iso_country_code).country_code}"
+        "+#{ISO3166::Country.find_country_by_alpha2(iso_country_code).country_code}" unless iso_country_code.nil?
       end
 
       private
