@@ -493,3 +493,7 @@
     @apply lg:col-end-13 lg:col-span-3;
   }
 }
+
+.selected_project-tag{
+  @apply rounded;
+}
