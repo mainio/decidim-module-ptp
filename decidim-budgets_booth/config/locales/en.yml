@@ -124,6 +124,7 @@ en:
             title: Welcome to the vote!
           ready: I am ready
           total_budget: "Total budget: %{amount}"
+          voting_finished: The voting has finished!
         project:
           you_voted: You voted for this
         project_budget_button:
