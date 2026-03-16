@@ -118,6 +118,7 @@ fi:
             title: Tervetuloa äänestämään!
           ready: Olen valmis
           total_budget: "Alueen kokonaisbudjetti: %{amount}"
+          voting_finished: Äänestys on päättynyt!
         project:
           you_voted: Äänestit tätä
         project_budget_button:

@@ -34,10 +34,7 @@
     <div class="progress-spacer"></div>
   </div>
 <% else %>
-  <% if current_order_checked_out? %>
-    <%= render partial: "pre_voting_budget_summary" %>
-  <% else %>
-    <%= render partial: "pre_voting_budget_summary" %>
-  <% end %>
+  <%= render partial: "pre_voting_budget_summary" %>
 <% end %>
+
 <%= render partial: "budget_confirm" %>
