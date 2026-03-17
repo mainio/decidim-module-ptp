@@ -15,10 +15,6 @@ module Decidim
           model.component.current_settings.show_votes?
         end
 
-        def votes_count
-          model.confirmed_orders_count
-        end
-
         def selected?
           model.selected?
         end

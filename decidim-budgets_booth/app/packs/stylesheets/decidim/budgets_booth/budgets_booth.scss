@@ -497,3 +497,7 @@
 .selected_project-tag{
   @apply rounded;
 }
+
+.votes__count-aside{
+  @apply text-center text-xl font-semibold border-t border-b py-2 border-black;
+}
