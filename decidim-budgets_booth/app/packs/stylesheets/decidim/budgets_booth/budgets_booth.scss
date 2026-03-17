@@ -187,11 +187,11 @@
     @apply flex flex-col items-start space-y-2 lg:items-center;
 
     .budget__card__highlight-prevote__text{
-      @apply text-md;
+      @apply text-md max-w-[150px] truncate;
     }
 
     .budget__card__highlight-prevote__number{
-      @apply font-bold text-[28px];
+      @apply font-bold text-[28px] max-w-[150px] truncate;
     }
   }
 
