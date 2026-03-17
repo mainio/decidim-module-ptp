@@ -315,6 +315,10 @@
       &__number{
         @apply font-bold text-black text-[28px];
       }
+
+      &__header{
+        @apply truncate;
+      }
     }
   }
 }
