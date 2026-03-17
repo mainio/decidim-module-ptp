@@ -501,3 +501,11 @@
 .votes__count-aside{
   @apply text-center text-xl font-semibold border-t border-b py-2 border-black;
 }
+
+.voted-block{
+  @apply flex;
+
+  svg{
+    @apply mt-[3px];
+  }
+}

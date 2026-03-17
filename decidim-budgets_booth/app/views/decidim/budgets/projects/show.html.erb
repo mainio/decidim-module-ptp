@@ -42,7 +42,7 @@ edit_link(
         <%= cell("decidim/budgets/project_votes_count", project, layout: :one_line, class: "display-block votes__count-aside") %>
 
         <% if voting_finished? %>
-          <%= cell("decidim/budgets/project_voted_hint", project, class: "display-block") %>
+          <%= cell("decidim/budgets/project_voted_hint", project, class: "display-block voted-block") %>
         <% elsif voting_open? && !current_order_checked_out? %>
           <span class="text-wrap text-center text-lg mb-4"><%= t("introduction", scope: "decidim.budgets.projects.show.pre_vote") %></span>
           <%= link_to budget_voting_index_path(select_project: project.id), class: "button button__lg button__secondary prevote-start-button" do %>
