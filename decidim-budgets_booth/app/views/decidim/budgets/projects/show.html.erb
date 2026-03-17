@@ -39,7 +39,7 @@ edit_link(
           <span class="definition-data__number"><%= budget_to_currency project.budget_amount %></span>
         </div>
 
-        <%= cell("decidim/budgets/project_votes_count", project, layout: :one_line, class: "display-block") %>
+        <%= cell("decidim/budgets/project_votes_count", project, layout: :one_line, class: "display-block votes__count-aside") %>
 
         <% if voting_finished? %>
           <%= cell("decidim/budgets/project_voted_hint", project, class: "display-block") %>

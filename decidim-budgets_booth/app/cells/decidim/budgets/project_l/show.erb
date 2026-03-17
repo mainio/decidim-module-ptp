@@ -10,10 +10,7 @@
 
       <div class="mt-auto gap-4 flex">
         <% if show_votes? %>
-          <span class="flex items-center space-x-1 fill-gray-2 text-gray-2 text-lg">
-            <%= votes_count %>
-            <%= t("decidim.budgets.projects.project.votes", count: votes_count) %>
-          </span>
+          <%= cell("decidim/budgets/project_votes_count", project, layout: :one_line, class: "display-block card__list-text") %>
         <% end %>
       </div>
     </div>
@@ -54,10 +51,7 @@
           <% end %>
 
           <% if show_votes? %>
-            <span class="flex items-center space-x-1 fill-gray-2 text-gray-2 text-lg">
-              <%= votes_count %>
-              <%= t("decidim.budgets.projects.project.votes", count: votes_count) %>
-            </span>
+            <%= cell("decidim/budgets/project_votes_count", project, layout: :one_line, class: "display-block card__list-text") %>
           <% end %>
         </div>
       </div>
