@@ -1,11 +1,20 @@
 <% if voting_mode? %>
   <div id="project-<%= model.id %>-item" class="budget-list__item">
-    <div class= "p-4 cursor-pointer" data-dialog-open="project-modal-<%= model.id %>">
+    <div class= "p-4 cursor-pointer flex flex-col" data-dialog-open="project-modal-<%= model.id %>">
       <p class="text-[22px] font-bio text-[--primary] inline-block align-middle md:h3">
         <%= decidim_escape_translated(title) %>
       </p>
       <div class="card__list-text ">
         <%= decidim_sanitize_editor(translated_attribute(project.description)) %>
+      </div>
+
+      <div class="mt-auto gap-4 flex">
+        <% if show_votes? %>
+          <span class="flex items-center space-x-1 fill-gray-2 text-gray-2 text-lg">
+            <%= votes_count %>
+            <%= t("decidim.budgets.projects.project.votes", count: votes_count) %>
+          </span>
+        <% end %>
       </div>
     </div>
 
