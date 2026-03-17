@@ -317,7 +317,7 @@
       }
 
       &__header{
-        @apply truncate;
+        @apply truncate max-w-[150px];
       }
     }
   }
