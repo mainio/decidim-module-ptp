@@ -306,7 +306,7 @@
     }
 
     .budget__card__highlight-vote{
-      @apply bg-[#f2fcfd] p-0 mt-0 bg-[#f2fcfd] w-full flex flex-row justify-between lg:block lg:w-4/12 lg:text-center;
+      @apply bg-[#f2fcfd] p-0 mt-0 bg-[#f2fcfd] w-full flex flex-row justify-between lg:flex-col lg:items-center lg:w-4/12 lg:text-center;
 
       &__text{
         @apply text-md text-black mb-2.5 lg:mx-auto;
