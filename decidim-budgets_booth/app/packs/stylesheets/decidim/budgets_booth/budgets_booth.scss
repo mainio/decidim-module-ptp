@@ -204,6 +204,22 @@
   }
 }
 
+.budget__card__vote{
+  @apply flex flex-row justify-between lg:space-y-2 lg:block;
+
+  .budget__card__highlight-vote__header{
+    @apply flex flex-col items-start space-y-2 lg:items-center;
+
+    .budget__card__highlight-vote__text{
+      @apply text-md max-w-[150px] truncate;
+    }
+
+    .budget__card__highlight-vote__number{
+      @apply font-bold text-[28px] max-w-[150px] max-h-[38px] truncate;
+    }
+  }
+}
+
 .pre-voting-budget-summary{
   @apply py-4 bg-[#f2fcfd];
 }
