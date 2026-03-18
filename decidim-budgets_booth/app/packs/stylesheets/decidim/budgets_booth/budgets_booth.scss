@@ -191,7 +191,7 @@
     }
 
     .budget__card__highlight-prevote__number{
-      @apply font-bold text-[28px] max-w-[150px] truncate;
+      @apply font-bold text-[28px] max-w-[150px] h-[26px] truncate;
     }
   }
 
@@ -313,7 +313,7 @@
       }
 
       &__number{
-        @apply font-bold text-black text-[28px];
+        @apply font-bold text-black text-[28px] h-[26px];
       }
 
       &__header{
