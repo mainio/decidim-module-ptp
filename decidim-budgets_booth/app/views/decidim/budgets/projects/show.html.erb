@@ -39,7 +39,7 @@ edit_link(
           <span class="definition-data__number"><%= budget_to_currency project.budget_amount %></span>
         </div>
 
-        <%= cell("decidim/budgets/project_votes_count", project, layout: :one_line, class: "display-block votes__count-aside") %>
+        <%= cell("decidim/budgets/project_votes_count", project, layout: :one_line, class: "display-block text-center") %>
 
         <% if voting_finished? %>
           <%= cell("decidim/budgets/project_voted_hint", project, class: "display-block voted-block") %>
@@ -50,7 +50,7 @@ edit_link(
             <%= icon "arrow-right-line" %>
           <% end %>
         <% else %>
-          <%= cell("decidim/budgets/project_voted_hint", project, text_medium: true, class: "success text-m display-block margin-top-1") if current_order_checked_out? && voted_for?(project) %>
+          <%= cell("decidim/budgets/project_voted_hint", project, class: "display-block voted-block") if current_order_checked_out? && voted_for?(project) %>
         <% end %>
       </div>
     </div>
