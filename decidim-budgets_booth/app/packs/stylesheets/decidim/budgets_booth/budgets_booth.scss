@@ -527,9 +527,9 @@
 }
 
 .voted-tag{
-  @apply flex justify-center top-0.5 relative;
+  @apply flex justify-center top-.5 relative;
 
   svg{
-    @apply mt-0.5;
+    @apply mt-.5;
   }
 }
