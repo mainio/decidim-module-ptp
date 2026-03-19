@@ -527,9 +527,11 @@
 }
 
 .voted-tag{
-  @apply flex justify-center top-.5 relative;
+  // stylelint-disable-next-line number-leading-zero
+  @apply flex justify-center top-0.5 relative;
 
   svg{
-    @apply mt-.5;
+    // stylelint-disable-next-line number-leading-zero
+    @apply mt-0.5;
   }
 }
