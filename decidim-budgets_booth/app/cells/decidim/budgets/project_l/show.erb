@@ -12,6 +12,8 @@
         <% if show_votes? %>
           <%= cell("decidim/budgets/project_votes_count", project, layout: :one_line, class: "display-block card__list-text") %>
         <% end %>
+
+        <%= cell("decidim/budgets/project_voted_hint", project, class: "display-block card__list-text voted-tag") %>
       </div>
     </div>
 
@@ -53,6 +55,8 @@
           <% if show_votes? %>
             <%= cell("decidim/budgets/project_votes_count", project, layout: :one_line, class: "display-block card__list-text") %>
           <% end %>
+
+          <%= cell("decidim/budgets/project_voted_hint", project, class: "display-block card__list-text voted-tag") %>
         </div>
       </div>
 

@@ -525,3 +525,11 @@
     @apply mt-[3px];
   }
 }
+
+.voted-tag{
+  @apply flex justify-center top-0.5 relative;
+
+  svg{
+    @apply mt-0.5;
+  }
+}
