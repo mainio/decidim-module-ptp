@@ -36,24 +36,32 @@
     </div>
   <% end %>
 <% else %>
-  <div id="budgets" class="card__list-list">
-    <% if budgets.where.not(id: voted.map(&:id)).exists? %>
-      <% if voted? %>
-        <p class="h6"><%= t(".voting_possible") %></p>
+  <% if voting_finished? %>
+    <div id="budgets" class="card__list-list">
+      <% budgets.each do |budget| %>
+        <%= cell("decidim/budgets/budget_list_item", budget) %>
+      <% end %>
+    </div>
+  <% else %>
+    <div id="budgets" class="card__list-list">
+      <% if budgets.where.not(id: voted.map(&:id)).exists? %>
+        <% if voted? %>
+          <p class="h6"><%= t(".voting_possible") %></p>
+        <% end %>
+
+        <%= render :card_list %>
       <% end %>
 
-      <%= render :card_list %>
-    <% end %>
-
-    <% if !voting_finished? && voted? %>
-      <p class="h6"><%= t(".voted") %></p>
-      <div id="voted-budgets" class="card__list-list">
-        <% voted.each do |budget| %>
-          <%= cell("decidim/budgets/budget_list_item", budget) %>
-        <% end %>
-      </div>
-    <% end %>
-  </div>
+      <% if !voting_finished? && voted? %>
+        <p class="h6"><%= t(".voted") %></p>
+        <div id="voted-budgets" class="card__list-list">
+          <% voted.each do |budget| %>
+            <%= cell("decidim/budgets/budget_list_item", budget) %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 
   <%= decidim_paginate budget_paginate %>
 <% end %>
