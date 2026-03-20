@@ -75,8 +75,6 @@ edit_link(
           <%= cell "decidim/budgets/project_tags", project, context: { extra_classes: ["tags--project"] } %>
         </div>
         <%= attachments_for project %>
-        <%= cell("decidim/linked_resources_for", project, type: :proposals, link_name: "included_proposals") %>
-        <%= cell("decidim/linked_resources_for", project, type: :results, link_name: "included_projects") %>
       </div>
     </div>
 
