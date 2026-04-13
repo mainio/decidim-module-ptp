@@ -21,7 +21,7 @@
       <p class="inline-block text-xl text-left lg:text-center lg:w-4/6">
         <% if voting_open? %>
           <%= description_text %>
-        <% else %>
+        <% elsif voting_finished? %>
           <%= t(".voting_finished") %>
         <% end %>
         <div class="flex flex-col mt-4 space-y-4 lg:flex-row lg:justify-center lg:items-center lg:gap-4 lg:space-y-0">
