@@ -15,6 +15,10 @@ edit_link(
 <%= append_javascript_pack_tag "decidim_budgets" %>
 <%= append_stylesheet_pack_tag "decidim_budgets" %>
 
+<div class="row column one-col">
+  <%= render partial: "decidim/shared/component_announcement" %>
+</div>
+
 <%= cell("decidim/budgets/limit_announcement", budget) %>
 
 <main class="voting-wrapper">

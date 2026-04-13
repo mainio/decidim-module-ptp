@@ -1,4 +1,8 @@
-<%= render partial: "decidim/shared/component_announcement" %>
+<% unless voting_mode? %>
+  <div class="row column one-col">
+    <%= render partial: "decidim/shared/component_announcement" %>
+  </div>
+<% end %>
 
 <% cell("decidim/budgets/limit_announcement", budget) %>
 
