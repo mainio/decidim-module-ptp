@@ -2,9 +2,11 @@
 <%= append_javascript_pack_tag "decidim_budgets" %>
 <%= append_stylesheet_pack_tag "decidim_budgets", media: "all" %>
 
-<div class="one-col">
+<aside class="row column one-col" aria-label="Announcement">
   <%= render partial: "decidim/shared/component_announcement" %>
+</aside>
 
+<div class="one-col">
   <% if current_workflow.budgets.empty? %>
     <%= cell("decidim/announcement", t("empty", scope: "decidim.budgets.budgets_list")) %>
   <% end %>
