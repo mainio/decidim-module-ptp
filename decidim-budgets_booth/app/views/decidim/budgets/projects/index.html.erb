@@ -1,12 +1,12 @@
-<% unless voting_mode? %>
-  <div class="row column one-col">
-    <%= render partial: "decidim/shared/component_announcement" %>
-  </div>
-<% end %>
-
 <% cell("decidim/budgets/limit_announcement", budget) %>
 
 <main class="voting-wrapper <%="margin-top-3" if voting_booth_forced? %>">
+  <% unless voting_mode? %>
+    <div class="row column one-col">
+      <%= render partial: "decidim/shared/component_announcement" %>
+    </div>
+  <% end %>
+
   <div class="row columns mb-10">
     <%= render partial: "budget_summary" %>
 
