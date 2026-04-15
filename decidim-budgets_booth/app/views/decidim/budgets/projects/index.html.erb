@@ -1,12 +1,12 @@
 <% cell("decidim/budgets/limit_announcement", budget) %>
 
-<main class="voting-wrapper <%="margin-top-3" if voting_booth_forced? %>">
-  <% unless voting_mode? %>
-    <div class="row column one-col">
-      <%= render partial: "decidim/shared/component_announcement" %>
-    </div>
-  <% end %>
+<% unless voting_mode? %>
+  <aside class="row column one-col" aria-label="Announcement">
+    <%= render partial: "decidim/shared/component_announcement" %>
+  </aside>
+<% end %>
 
+<main class="voting-wrapper <%="margin-top-3" if voting_booth_forced? %>">
   <div class="row columns mb-10">
     <%= render partial: "budget_summary" %>
 

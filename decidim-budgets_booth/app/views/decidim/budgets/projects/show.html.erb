@@ -17,11 +17,11 @@ edit_link(
 
 <%= cell("decidim/budgets/limit_announcement", budget) %>
 
-<main class="voting-wrapper">
-  <div class="row column one-col">
-    <%= render partial: "decidim/shared/component_announcement" %>
-  </div>
+<aside class="row column one-col" aria-label="Announcement">
+  <%= render partial: "decidim/shared/component_announcement" %>
+</aside>
 
+<main class="voting-wrapper">
   <div class="projects-link">
     <%= link_to budget_projects_path(budget), class: "link js-back-to-list flex" do %>
       <%= icon "arrow-left-s-line", class: "icon--small h-6 w-6 pt-1 fill-[--primary]", role: "img", "aria-hidden": true %>
