@@ -14,7 +14,7 @@ module Decidim
         end
 
         def voted?(model)
-          return unless current_user && model.orders.pluck(:decidim_user_id).include?(current_user.id)
+          return false unless current_user && model.orders.pluck(:decidim_user_id).include?(current_user.id)
 
           content_tag :span, safe_join(hint), class: css_class
         end
