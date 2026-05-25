@@ -4,7 +4,8 @@
       <h1 class="h2 md:h1">
         <%= translated_attribute(budget.title) %>
       </h1>
-      <p class="my-4">
+      <p class="my-4 text-xl">
+        <span class="block mb-4"><%= strip_tags(translated_attribute(budget.description)) %></span>
         <%= raw t(".pre_vote.casted_description", cancel_link: link_to(t(".cancel_order"), budget_order_path(return_to: "budget"), method: :delete, class: "cancel-order", data: { confirm: t(".are_you_sure") })) %>
       </p>
       <% if session.delete(:show_status) %>
@@ -19,21 +20,20 @@
       </h1>
       <p class="my-4 h5"><%= t(".total_budget", amount: budget_to_currency(budget.total_budget)) %></p>
       <p class="inline-block text-xl text-left lg:text-center lg:w-4/6">
-        <% if voting_open? %>
-          <%= description_text %>
-        <% elsif voting_finished? %>
-          <%= t(".voting_finished") %>
+        <% if voting_open? && vote_in_progress? %>
+          <span class="block mb-4"><%= strip_tags(translated_attribute(budget.description)) %></span>
         <% end %>
-        <div class="flex flex-col mt-4 space-y-4 lg:flex-row lg:justify-center lg:items-center lg:gap-4 lg:space-y-0">
-          <button id="show-projects" class="button button__lg button__transparent-secondary"><%= t(".browse") %></button>
-          <% if voting_open? %>
-            <%= button_to budget_voting_index_path, class: "button button__lg button__secondary start-vote-button", method: :get, disabled: !voting_open? do %>
-              <%= vote_text %>
-              <%= icon "arrow-right-line", class:"pt-1 h-6 w-6" %>
-            <% end %>
-          <% end %>
-        </div>
+        <%= description_text %>
       </p>
+      <div class="flex flex-col mt-4 space-y-4 lg:flex-row lg:justify-center lg:items-center lg:gap-4 lg:space-y-0">
+        <button id="show-projects" class="button button__lg button__transparent-secondary"><%= t(".browse") %></button>
+        <% if voting_open? %>
+          <%= button_to budget_voting_index_path, class: "button button__lg button__secondary start-vote-button", method: :get, disabled: !voting_open? do %>
+            <%= vote_text %>
+            <%= icon "arrow-right-line", class:"pt-1 h-6 w-6" %>
+          <% end %>
+        <% end %>
+      </div>
     <% end %>
   </div>
 </div>

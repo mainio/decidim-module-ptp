@@ -86,6 +86,9 @@ fi:
           title: Haluatko varmasti lopettaa äänestyksen?
         count:
           projects_count: "%{count} äänestettävää ehdotusta"
+        filters:
+          status_values:
+            selected: Valittu toteutukseen
         index:
           back_to_budgets: Takaisin kaikkiin budjetteihin
         order_progress:
@@ -113,6 +116,7 @@ fi:
             finish_description: Olet jo aloittanut tämän budjetin äänestyksen. Haluaisitko viimeistellä äänesi?
             finish_voting: Viimeistele äänestys
             result_voted: Tarkasta äänesi
+            pre_vote_start_description: Voit selata äänestettäviä ehdotuksia tutustuaksesi niihin.
             start_description: Voit selata äänestettäviä ehdotuksia tutustuaksesi niihin. Aloittaaksesi äänestyksen, paina "Aloita alueen äänestys" -painiketta.
             start_voting: Aloita alueen äänestys
             title: Tervetuloa äänestämään!
@@ -120,6 +124,7 @@ fi:
           total_budget: "Alueen kokonaisbudjetti: %{amount}"
           voting_finished: Äänestys on päättynyt!
         project:
+          selected: Valittu toteutukseen
           you_voted: Äänestit tätä
         project_budget_button:
           add: Valitse
