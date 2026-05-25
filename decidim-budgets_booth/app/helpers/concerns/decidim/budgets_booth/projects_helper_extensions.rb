@@ -27,15 +27,19 @@ module Decidim
       end
 
       def description_text
-        return strip_tags(translated_attribute(budget.description)) if strip_tags(translated_attribute(budget.description)).present? && !vote_in_progress?
+        budget_description = strip_tags(translated_attribute(budget.description))
 
-        key = if vote_in_progress?
-                :finish_description
-              else
-                :start_description
-              end
-
-        t(key, scope: i18n_scope)
+        if voting_finished?
+          budget_description.present? ? budget_description : t("decidim.budgets.projects.pre_voting_budget_summary.voting_finished")
+        elsif voting_open?
+          if vote_in_progress?
+            t(:finish_description, scope: i18n_scope)
+          else
+            budget_description.present? ? budget_description : t(:start_description, scope: i18n_scope)
+          end
+        else
+          budget_description.present? ? budget_description : t(:pre_vote_start_description, scope: i18n_scope)
+        end
       end
 
       def vote_in_progress?
