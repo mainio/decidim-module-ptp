@@ -89,6 +89,7 @@ fi:
         filters:
           status_values:
             selected: Valittu toteutukseen
+            not_selected: Ei valittu toteutukseen
         index:
           back_to_budgets: Takaisin kaikkiin budjetteihin
         order_progress:
