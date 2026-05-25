@@ -30,15 +30,15 @@ module Decidim
         budget_description = strip_tags(translated_attribute(budget.description))
 
         if voting_finished?
-          budget_description.present? ? budget_description : t("decidim.budgets.projects.pre_voting_budget_summary.voting_finished")
+          (budget_description.presence || t("decidim.budgets.projects.pre_voting_budget_summary.voting_finished"))
         elsif voting_open?
           if vote_in_progress?
             t(:finish_description, scope: i18n_scope)
           else
-            budget_description.present? ? budget_description : t(:start_description, scope: i18n_scope)
+            (budget_description.presence || t(:start_description, scope: i18n_scope))
           end
         else
-          budget_description.present? ? budget_description : t(:pre_vote_start_description, scope: i18n_scope)
+          (budget_description.presence || t(:pre_vote_start_description, scope: i18n_scope))
         end
       end
 
