@@ -30,21 +30,25 @@ module Decidim
         budget_description = style_description_text
 
         if voting_finished?
-          (budget_description.presence || t("decidim.budgets.projects.pre_voting_budget_summary.voting_finished"))
+          budget_description.presence || "<p class='inline-block text-xl text-left lg:text-center lg:w-4/6'>#{t("decidim.budgets.projects.pre_voting_budget_summary.voting_finished")}</p>"
         elsif voting_open?
           if vote_in_progress?
-            t(:finish_description, scope: i18n_scope)
+            content = [budget_description.presence, "<p class='inline-block text-xl text-left lg:text-center lg:w-4/6'>#{t(:finish_description, scope: i18n_scope)}</p>"].compact.join
+            content
+          elsif current_order_checked_out?
+            content = [budget_description.presence, "<p class='inline-block text-xl text-left lg:text-center lg:w-4/6'>#{t('.pre_vote.casted_description', cancel_link: link_to(t('.cancel_order'), budget_order_path(return_to: 'budget'), method: :delete, class: 'cancel-order', data: { confirm: t('.are_you_sure') }))}</p>"].compact.join
+            content
           else
-            (budget_description.presence || t(:start_description, scope: i18n_scope))
+            budget_description.presence || "<p class='inline-block text-xl text-left lg:text-center lg:w-4/6'>#{t(:start_description, scope: i18n_scope)}</p>"
           end
         else
-          (budget_description.presence || t(:pre_vote_start_description, scope: i18n_scope))
+          budget_description.presence || "<p class='inline-block text-xl text-left lg:text-center lg:w-4/6'>#{t(:pre_vote_start_description, scope: i18n_scope)}</p>"
         end
       end
 
       def style_description_text
         budget_description = translated_attribute(budget.description)
-        return if budget_description.blank?
+        return if strip_tags(budget_description).blank?
 
         doc = Nokogiri::HTML::DocumentFragment.parse(budget_description)
         doc.css("p").each { |p| p["class"] = "inline-block text-xl text-left lg:text-center lg:w-4/6" }
