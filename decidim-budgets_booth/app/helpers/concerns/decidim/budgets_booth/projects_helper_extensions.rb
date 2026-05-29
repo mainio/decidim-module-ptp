@@ -30,14 +30,23 @@ module Decidim
         budget_description = style_description_text
 
         if voting_finished?
-          budget_description.presence || "<p class='inline-block text-xl text-left lg:text-center lg:w-4/6'>#{t("decidim.budgets.projects.pre_voting_budget_summary.voting_finished")}</p>"
+          budget_description.presence ||
+            "<p class='inline-block text-xl text-left lg:text-center lg:w-4/6'>#{t("decidim.budgets.projects.pre_voting_budget_summary.voting_finished")}</p>"
         elsif voting_open?
           if vote_in_progress?
-            content = [budget_description.presence, "<p class='inline-block text-xl text-left lg:text-center lg:w-4/6'>#{t(:finish_description, scope: i18n_scope)}</p>"].compact.join
-            content
+            [budget_description.presence, "<p class=\"inline-block text-xl text-left lg:text-center lg:w-4/6\">#{t(:finish_description, scope: i18n_scope)}</p>"].compact.join
           elsif current_order_checked_out?
-            content = [budget_description.presence, "<p class='inline-block text-xl text-left lg:text-center lg:w-4/6'>#{t('.pre_vote.casted_description', cancel_link: link_to(t('.cancel_order'), budget_order_path(return_to: 'budget'), method: :delete, class: 'cancel-order', data: { confirm: t('.are_you_sure') }))}</p>"].compact.join
-            content
+            [
+              budget_description.presence,
+              "<p class=\"inline-block text-xl text-left lg:text-center lg:w-4/6\">
+                #{t(".pre_vote.casted_description",
+                    cancel_link: link_to(t(".cancel_order"), budget_order_path(return_to: "budget"),
+                                         method: :delete,
+                                         class: "cancel-order",
+                                         data: { confirm: t(".are_you_sure") }))
+                }
+              </p>"
+            ].compact.join
           else
             budget_description.presence || "<p class='inline-block text-xl text-left lg:text-center lg:w-4/6'>#{t(:start_description, scope: i18n_scope)}</p>"
           end
