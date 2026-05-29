@@ -27,7 +27,7 @@ module Decidim
       end
 
       def description_text
-        budget_description = strip_tags(translated_attribute(budget.description))
+        budget_description = style_description_text
 
         if voting_finished?
           (budget_description.presence || t("decidim.budgets.projects.pre_voting_budget_summary.voting_finished"))
@@ -40,6 +40,17 @@ module Decidim
         else
           (budget_description.presence || t(:pre_vote_start_description, scope: i18n_scope))
         end
+      end
+
+      def style_description_text
+        budget_description = translated_attribute(budget.description)
+        return if budget_description.blank?
+
+        doc = Nokogiri::HTML::DocumentFragment.parse(budget_description)
+        doc.css("p").each { |p| p["class"] = "inline-block text-xl text-left lg:text-center lg:w-4/6" }
+        doc.css("a").each { |a| a["class"] = "text-[--primary] font-semibold underline" }
+
+        doc.to_html
       end
 
       def vote_in_progress?
