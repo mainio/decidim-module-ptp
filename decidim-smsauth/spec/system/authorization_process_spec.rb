@@ -23,7 +23,7 @@ describe "AuthorizationProcess" do
     visit "/users/sign_in"
     expect(page).to have_css(".login__omniauth-button.button--sms", text: "SMS")
     within ".login__omniauth-separator" do
-      expect(page).to have_content "Or"
+      expect(page).to have_content "or"
     end
     expect(page).to have_content("Sign in with Email")
   end
