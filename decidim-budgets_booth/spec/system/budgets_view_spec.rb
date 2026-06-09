@@ -99,8 +99,12 @@ describe "BudgetsView" do
 
               it "renders callout message" do
                 expect(page).to have_css(".callout.warning.font-customizer")
-                within ".callout.warning.font-customizer" do
-                  expect(page).to have_content(translated(landing_page_content))
+                within ".columns.medium-5.mediumlarge-4" do
+                  within ".callout.warning.font-customizer" do
+                    within ".rich-text-display" do
+                      expect(page).to have_content(translated(landing_page_content))
+                    end
+                  end
                 end
               end
             end
