@@ -21,7 +21,7 @@ describe "AuthorizationProcess" do
 
   it "Adds the sms login method to authorization methods" do
     visit "/users/sign_in"
-    expect(page).to have_css(".login__omniauth-button.button--sms", text: "SMS")
+    expect(page).to have_css(".login__omniauth-button.login__omniauth-button--sms", text: "Log in with SMS")
     within ".login__omniauth-separator" do
       expect(page).to have_content "or"
     end
