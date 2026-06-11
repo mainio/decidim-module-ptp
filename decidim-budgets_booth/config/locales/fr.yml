@@ -128,7 +128,6 @@ fr:
           cancel: Annuler
           category: 'Catégorie : '
           close_project: Fermer
-          scope: 'Portée : '
         show:
           pre_vote:
             continue_voting: Continuer le vote
