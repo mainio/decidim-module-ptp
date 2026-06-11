@@ -135,7 +135,6 @@ en:
           cancel: Cancel
           category: 'Category: '
           close_project: Close
-          scope: 'Scope: '
         show:
           pre_vote:
             continue_voting: Continue voting
