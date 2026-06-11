@@ -3,13 +3,14 @@
 require "spec_helper"
 
 describe "VotingIndexPage" do
-  include_context "with scoped budgets"
+  include_context "with taxonomied budgets"
 
   let(:projects_count) { 10 }
   let(:decidim_budgets) { Decidim::EngineRouter.main_proxy(component) }
   let(:user) { create(:user, :confirmed, organization:) }
   let(:first_budget) { budgets.first }
   let(:second_budget) { budgets.second }
+  let(:third_budget) { budgets.last }
   let(:active_step_id) { component.participatory_space.active_step.id }
 
   before do
@@ -144,7 +145,6 @@ describe "VotingIndexPage" do
     end
 
     describe "filtering projects" do
-      let!(:categories) { create_list(:category, 3, participatory_space: component.participatory_space) }
       let(:current_projects) { first_budget.projects }
 
       it "allows searching by text" do
@@ -161,15 +161,15 @@ describe "VotingIndexPage" do
         end
       end
 
-      it "allows filtering by scope" do
+      it "allows filtering by taxonomy" do
         project = current_projects.first
-        project.scope = first_budget.scope
+        project.taxonomies = first_budget.taxonomies
         project.save
         visit current_path
 
-        within "#panel-dropdown-menu-scope" do
+        within "[id^='panel-dropdown-menu-taxonomy']" do
           uncheck "All"
-          label = find("label", text: decidim_sanitize(translated(first_budget.scope.name)))
+          label = find("label", text: translated(first_budget.taxonomies.first.name))
           checkbox = label.find('input[type="checkbox"]')
           checkbox.check
         end
@@ -180,20 +180,22 @@ describe "VotingIndexPage" do
         end
       end
 
-      it "allows filtering by category" do
+      it "filters correctly" do
         project = current_projects.first
-        category = categories.first
-        project.category = category
+        project.taxonomies = second_budget.taxonomies
         project.save
-
         visit current_path
-        within "#dropdown-menu-filters" do
-          check("filter[with_any_category][]", option: category.id)
+
+        within "[id^='panel-dropdown-menu-taxonomy']" do
+          uncheck "All"
+          label = find("label", text: translated(third_budget.taxonomies.first.name))
+          checkbox = label.find('input[type="checkbox"]')
+          checkbox.check
         end
 
         within "#projects" do
-          expect(page).to have_css(".budget-list .budget-list__item", count: 1)
-          expect(page).to have_content(decidim_html_escape(translated(project.title)))
+          expect(page).to have_css(".budget-list .budget-list__item", count: 0)
+          expect(page).to have_no_content(decidim_html_escape(translated(project.title)))
         end
       end
     end

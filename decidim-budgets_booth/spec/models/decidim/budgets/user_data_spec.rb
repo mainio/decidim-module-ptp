@@ -9,7 +9,7 @@ describe Decidim::Budgets::UserData do
   let!(:user_data) { create(:user_data, component:, user:, metadata: { zip_code: "12345" }) }
 
   shared_examples "fetched through the scope manager" do
-    let(:scope_manager) { Decidim::BudgetsBooth::ScopeManager.new(component) }
+    let(:scope_manager) { Decidim::BudgetsBooth::TaxonomyManager.new(component) }
 
     describe "#create" do
       it "clears the cache" do

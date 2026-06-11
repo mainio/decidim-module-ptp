@@ -2,13 +2,26 @@
 
 shared_examples "filtering projects" do
   let!(:project) { projects.first }
-  let!(:categories) { create_list(:category, 3, participatory_space: current_component.participatory_space) }
+  let(:root_taxonomy) { create(:taxonomy, organization:) }
+  let!(:subtaxonomies) { create_list(:taxonomy, 3, parent: root_taxonomy, organization:) }
+  let!(:taxonomy_filter) do
+    create(:taxonomy_filter, root_taxonomy:).tap do |filter|
+      subtaxonomies.each do |subtaxonomy|
+        create(:taxonomy_filter_item, taxonomy_filter: filter, taxonomy_item: subtaxonomy)
+      end
+    end
+  end
+
+  before do
+    current_component.update!(settings: current_component.settings.to_h.merge(taxonomy_filters: [taxonomy_filter.id]))
+  end
+
   context "when filtering" do
     it "allows searching by text" do
       within ".filter-search" do
         fill_in "filter[search_text_cont]", with: translated(project.title)
 
-        find('button[aria-label="Search"]').click
+        find('button[aria-label="Search among Projects"]').click
       end
 
       within "#projects" do
@@ -17,33 +30,15 @@ shared_examples "filtering projects" do
       end
     end
 
-    it "allows filtering by scope" do
-      scope = create(:scope, organization: current_component.organization)
-      project.scope = scope
+    it "allows filtering by taxonomy" do
+      taxonomy = subtaxonomies.first
+      project.taxonomies = [taxonomy]
       project.save
 
       visit_budget
-
-      within "#panel-dropdown-menu-scope" do
+      within "[id^='panel-dropdown-menu-taxonomy']" do
         uncheck "All"
-        check translated(scope.name)
-      end
-
-      within "#projects" do
-        expect(page).to have_css(".budget-list__item", count: 1)
-        expect(page).to have_content(decidim_html_escape(translated(project.title)))
-      end
-    end
-
-    it "allows filtering by category" do
-      category = categories.first
-      project.category = category
-      project.save
-
-      visit_budget
-      within "#panel-dropdown-menu-category" do
-        uncheck "All"
-        find(:css, "input[type='checkbox'][value='#{category.id}']").set(true)
+        find(:css, "input[type='checkbox'][value='#{subtaxonomies.first.id}']").set(true)
       end
 
       within "#projects" do

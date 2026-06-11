@@ -3,7 +3,7 @@
 require "spec_helper"
 
 describe "UserDataWorkflow" do
-  include_context "with scoped budgets"
+  include_context "with taxonomied budgets"
 
   let(:projects_count) { 4 }
   let(:decidim_budgets) { Decidim::EngineRouter.main_proxy(component) }
