@@ -2,57 +2,60 @@
 
 module Decidim
   module BudgetsBooth
-    class ScopeManager
-      attr_reader :component, :top_scope
+    class TaxonomyManager
+      attr_reader :component, :top_taxonomy
 
       class << self
-        # This method allows storing the scopes mappings locally so that they do
+        # This method allows storing the taxonomies mappings locally so that they do
         # not have to be re-fetched for the multiple instances of the
-        # ScopeManager class.
-        def scopes_mapping_for(scope)
-          scopes_mapping_cache[scope.id] ||= Rails.cache.fetch(
-            cache_key(scope.cache_key_with_version),
-            expires_in: 1.hour
-          ) { generate_scopes_mapping_for(scope) }
+        # TaxonomyManager class.
+        def taxonomies_mapping_for(taxonomies)
+          Array(taxonomies).each_with_object({}) do |taxonomy, hash|
+            hash[taxonomy.id] = taxonomies_mapping_cache[taxonomy.id] ||= Rails.cache.fetch(
+              cache_key(taxonomy.cache_key_with_version),
+              expires_in: 1.hour
+            ) { generate_taxonomies_mapping_for(taxonomy) }
+          end
         end
 
         # Allow clearing the cache, useful for the specs.
         def clear_cache!
-          scopes_mapping_cache.keys.each do |id|
-            scope = Decidim::Scope.find(id)
-            Rails.cache.delete(cache_key(scope.cache_key_with_version))
+          taxonomies_mapping_cache.keys.each do |id|
+            taxonomy = Decidim::Taxonomy.find(id)
+
+            Rails.cache.delete(cache_key(taxonomy.cache_key_with_version))
           rescue ActiveRecord::RecordNotFound
             # If the record was not found, cache key cannot be regenerated, so
             # deleting the old cache record can be omitted.
           end
-          @scopes_mapping_cache = {}
+          @taxonomies_mapping_cache = {}
         end
 
         private
 
         def cache_key_prefix
-          "decidim/budgets_booth/scopes_mapping"
+          "decidim/budgets_booth/taxonomies_mapping"
         end
 
         def cache_key(key)
           "#{cache_key_prefix}/#{key}"
         end
 
-        # Stores the local cache of the scopes mappings.
-        def scopes_mapping_cache
-          @scopes_mapping_cache ||= {}
+        # Stores the local cache of the taxonomies mappings.
+        def taxonomies_mapping_cache
+          @taxonomies_mapping_cache ||= {}
         end
 
-        # Generates the scopes mapping for the given top-level scope.
-        def generate_scopes_mapping_for(scope)
-          locale = scope.organization.default_locale
-          table = Decidim::Scope.table_name
+        # Generates the taxonomies mapping for the given top-level taxonomy.
+        def generate_taxonomies_mapping_for(taxonomy)
+          locale = taxonomy.organization.default_locale
+          table = Decidim::Taxonomy.table_name
           connection = ActiveRecord::Base.connection
           columns = "id, parent_id, code, name->>#{connection.quote(locale)} AS name"
-          topquery = "SELECT %columns% FROM #{table} WHERE parent_id = #{connection.quote(scope.id)}"
+          topquery = "SELECT %columns% FROM #{table} WHERE parent_id = #{connection.quote(taxonomy.id)}"
           queries = []
 
-          # Maximum of 3 levels below the top scope:
+          # Maximum of 3 levels below the top taxonomy:
           #   Boroughs -> Neighborhoods -> Postal codes
           #
           # The postal codes are defined at the deepest level regardless of the
@@ -68,15 +71,15 @@ module Decidim
           # lowest depth needs to be processed first.
           result = connection.select_all("#{queries.join(" UNION ALL ")} ORDER BY depth, name").to_a
 
-          zip_codes_hash(scope, result)
+          zip_codes_hash(taxonomy, result)
         end
 
         # Converts the multi-level query results into a flat hash which has the
-        # scope IDs as keys and their related ZIP codes as values. This approach
-        # allows quickly fetching the ZIP codes for each scope.
-        def zip_codes_hash(parent_scope, result)
+        # taxonomy IDs as keys and their related ZIP codes as values. This approach
+        # allows quickly fetching the ZIP codes for each taxonomy.
+        def zip_codes_hash(parent_taxonomy, result)
           max_depth = result.pluck("depth").max
-          parents = { parent_scope.id => [] }
+          parents = { parent_taxonomy.id => [] }
 
           {}.tap do |mapping|
             result.each do |item|
@@ -112,17 +115,22 @@ module Decidim
 
       def initialize(component)
         @component = component
-        @top_scope = component.scope
+        @top_taxonomy = component.available_root_taxonomies
       end
 
       def zip_codes_for(resource)
-        return [] unless top_scope
+        return [] unless top_taxonomy
 
-        scope = scope_for(resource)
-        return [] if scope.blank?
-        return scopes_mapping.values.flatten.uniq if scope == top_scope
+        taxonomies = taxonomies_for(resource)
+        return [] if taxonomies.blank?
 
-        scopes_mapping[scope.id]&.uniq || []
+        taxonomies.flat_map do |taxonomy|
+          if top_taxonomy.include?(taxonomy)
+            taxonomies_mapping.values.flat_map(&:values).flatten
+          else
+            taxonomies_mapping.values.flat_map { |map| map[taxonomy.id] }.compact
+          end
+        end.uniq
       end
 
       def user_zip_code(user)
@@ -142,14 +150,14 @@ module Decidim
         user_data&.metadata || {}
       end
 
-      def scope_for(resource)
-        return resource if resource.is_a?(Decidim::Scope)
+      def taxonomies_for(resource)
+        return [resource] if resource.is_a?(Decidim::Taxonomy)
 
-        resource.scope
+        resource.taxonomies.select { |t| top_taxonomy.include?(t) || top_taxonomy.include?(t.parent) }
       end
 
-      def scopes_mapping
-        self.class.scopes_mapping_for(top_scope)
+      def taxonomies_mapping
+        self.class.taxonomies_mapping_for(top_taxonomy)
       end
     end
   end

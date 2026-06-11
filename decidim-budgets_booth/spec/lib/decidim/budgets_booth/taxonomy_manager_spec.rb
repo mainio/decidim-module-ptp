@@ -2,18 +2,32 @@
 
 require "spec_helper"
 
-describe Decidim::BudgetsBooth::ScopeManager do
+describe Decidim::BudgetsBooth::TaxonomyManager do
   subject { described_class.new(component) }
 
   let(:organization) { create(:organization) }
   let(:component) { create(:budgets_component, settings: component_settings, organization:) }
-  let(:component_settings) { { scopes_enabled: true, scope_id: parent_scope.id } }
 
   describe "#zip_codes_for" do
-    include_context "with scopes"
+    include_context "with taxonomies"
 
-    let!(:first_budget) { create(:budget, component:, scope: parent_scope) }
-    let!(:second_budget) { create(:budget, component:, scope: subscopes.first) }
+    let(:taxonomy_filter) do
+      create(:taxonomy_filter, root_taxonomy:).tap do |filter|
+        subtaxonomies.each do |subtaxonomy|
+          create(:taxonomy_filter_item, taxonomy_filter: filter, taxonomy_item: subtaxonomy)
+        end
+      end
+    end
+
+    let(:component_settings) { { taxonomy_filters: [taxonomy_filter.id] } }
+
+    let!(:first_budget) do
+      create(:budget, component:).tap { |budget| budget.taxonomies << subtaxonomies }
+    end
+
+    let!(:second_budget) do
+      create(:budget, component:).tap { |budget| budget.taxonomies << subtaxonomies.first }
+    end
 
     it "returns correct zip_codes" do
       expect(subject.zip_codes_for(first_budget)).to match_array(
@@ -28,14 +42,13 @@ describe Decidim::BudgetsBooth::ScopeManager do
       # in the query performance.
       self.use_transactional_tests = false
 
-      let(:parent_scope) { city }
-      let!(:city) { create(:scope, organization:) }
-      let!(:boroughs) { create_list(:scope, 10, parent: city, organization:) }
+      let(:root_taxonomy) { create(:taxonomy, organization:) }
+      let!(:boroughs) { create_list(:taxonomy, 10, parent: root_taxonomy, organization:) }
       let!(:neighborhoods) do
         [].tap do |list|
           boroughs.each do |parent|
             5.times do
-              list << create(:scope, parent:, organization:)
+              list << create(:taxonomy, parent:, organization:)
             end
           end
         end
@@ -46,7 +59,7 @@ describe Decidim::BudgetsBooth::ScopeManager do
         neighborhoods.each_with_index do |neighborhood, i|
           20.times do |j|
             postal = "#{(i + 1).to_s.rjust(2, "0")}#{j.to_s.rjust(3, "0")}"
-            create(:scope, code: "#{i}_#{postal}", name: { en: postal }, parent: neighborhood)
+            create(:taxonomy, code: "#{i}_#{postal}", name: { en: postal }, parent: neighborhood)
           end
         end
       end
@@ -66,17 +79,17 @@ describe Decidim::BudgetsBooth::ScopeManager do
 
       it "performs fairly" do
         time_start = Time.zone.now
-        expect(subject.zip_codes_for(city).count).to eq(1000)
+        expect(subject.zip_codes_for(root_taxonomy).count).to eq(1000)
         expect(Time.zone.now - time_start).to be < 0.1
       end
     end
   end
 
   describe "#user_zip_code" do
-    let(:parent_scope) { create(:scope, organization:) }
+    let(:component_settings) { {} }
 
     context "when user does not exist" do
-      it "returns flase" do
+      it "returns false" do
         expect(subject.user_zip_code(nil)).to be_falsey
       end
     end
@@ -140,7 +153,7 @@ describe Decidim::BudgetsBooth::ScopeManager do
 
         pid = Process.fork do
           subcomp = Decidim::Component.find(component.id)
-          subsm = Decidim::BudgetsBooth::ScopeManager.new(subcomp)
+          subsm = Decidim::BudgetsBooth::TaxonomyManager.new(subcomp)
           expect(subsm.user_zip_code(user)).to eq("12345")
           sleep 5
           expect(subsm.user_zip_code(user)).to eq("67890")
