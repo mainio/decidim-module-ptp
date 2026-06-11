@@ -59,7 +59,7 @@ module Decidim
         budget_description = translated_attribute(budget.description)
         return if strip_tags(budget_description).blank?
 
-        doc = Nokogiri::HTML::DocumentFragment.parse(budget_description)
+        doc = Nokogiri::HTML::DocumentFragment.parse(decidim_sanitize(budget_description))
         doc.css("p").each { |p| p["class"] = "inline-block text-xl text-left lg:text-center lg:w-4/6" }
         doc.css("a").each { |a| a["class"] = "text-[--primary] font-semibold underline" }
 
