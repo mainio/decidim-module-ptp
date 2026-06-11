@@ -147,8 +147,8 @@ module Decidim
           Decidim::Component.include(
             Decidim::BudgetsBooth::ComponentExtensions
           )
-          Decidim::Scope.include(
-            Decidim::BudgetsBooth::ScopeExtensions
+          Decidim::Taxonomy.include(
+            Decidim::BudgetsBooth::TaxonomyExtensions
           )
           Decidim::Budgets::Order.include(
             Decidim::BudgetsBooth::OrderExtensions
