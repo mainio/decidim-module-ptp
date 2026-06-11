@@ -9,18 +9,15 @@ describe "ExploreMeetings", :slow do
   let(:start_time) { Time.zone.local(2017, 1, 13, 8, 0, 0) }
   let(:end_time) { Time.zone.local(2017, 12, 20, 15, 0, 0) }
   let!(:meeting) { create(:meeting, :not_official, :published, component:, start_time:, end_time:) }
-
-  # before do
-  #   # Required for the link to be pointing to the correct URL with the server
-  #   # port since the server port is not defined for the test environment.
-  #   # allow(ActionMailer::Base).to receive(:default_url_options).and_return(port: Capybara.server_port)
-  #   # component_scope = create :scope, parent: participatory_process.scope
-  #   # component_settings = component["settings"]["global"].merge!(scopes_enabled: true, scope_id: component_scope.id)
-  #   # component.update!(settings: component_settings)
-  # end
+  let(:coordinates) { [meeting.latitude, meeting.longitude] }
 
   before do
     component.update!(settings: { maps_enabled: false })
+    stub_request(:get, Regexp.new(Decidim.maps.fetch(:static).fetch(:url))).to_return(body: "")
+    stub_geocoding_coordinates(coordinates)
+    # Required for the link to be pointing to the correct URL with the server
+    # port since the server port is not defined for the test environment.
+    allow(ActionMailer::Base).to receive(:default_url_options).and_return(port: Capybara.server_port)
   end
 
   describe "index" do

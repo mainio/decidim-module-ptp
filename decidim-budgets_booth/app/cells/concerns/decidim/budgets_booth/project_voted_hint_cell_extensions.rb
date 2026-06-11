@@ -10,7 +10,7 @@ module Decidim
           return voted?(model) unless controller.respond_to?(:voted_for?)
           return unless voted_for?(model)
 
-          content_tag :span, safe_join(hint), class: css_class
+          content_tag :span, hint, class: css_class
         end
 
         def voted?(model)

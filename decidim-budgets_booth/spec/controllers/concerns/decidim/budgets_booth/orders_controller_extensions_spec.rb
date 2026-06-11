@@ -9,7 +9,7 @@ describe Decidim::BudgetsBooth::OrdersControllerExtensions do
 
   routes { Decidim::Budgets::Engine.routes }
 
-  include_context "with scoped budgets"
+  include_context "with taxonomied budgets"
 
   let(:user) { create(:user, :confirmed, organization:) }
   let(:component) { create(:budgets_component, settings: component_settings.merge(workflow: "zip_code"), organization:) }

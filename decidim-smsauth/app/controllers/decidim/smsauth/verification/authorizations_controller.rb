@@ -68,7 +68,7 @@ module Decidim
         def update
           enforce_permission_to(:update, :authorization, authorization:)
 
-          @form = ConfirmationForm.from_params(params)
+          @form = ConfirmationForm.from_params(params.merge(user: current_user))
           ::Decidim::Verifications::ConfirmUserAuthorization.call(authorization, @form, session) do
             on(:ok) do
               update_current_user!

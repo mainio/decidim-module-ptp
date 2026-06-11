@@ -7,7 +7,7 @@ module Decidim
     describe UserDataController do
       routes { Decidim::Budgets::Engine.routes }
 
-      include_context "with scoped budgets"
+      include_context "with taxonomied budgets"
 
       let(:projects_count) { 5 }
       let(:user) { create(:user, :confirmed, organization:) }

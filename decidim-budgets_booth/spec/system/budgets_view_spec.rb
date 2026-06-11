@@ -12,7 +12,7 @@ describe "BudgetsView" do
   end
 
   context "with multiple budgets" do
-    include_context "with scoped budgets"
+    include_context "with taxonomied budgets"
 
     context "when not signed in" do
       before { visit decidim_budgets.budgets_path }
@@ -56,6 +56,7 @@ describe "BudgetsView" do
             let(:landing_page_content) { Decidim::Faker::Localized.sentence(word_count: 5) }
 
             before do
+              Decidim::BudgetsBooth::TaxonomyManager.clear_cache!
               user_data.update!(metadata: { zip_code: "10004" })
               visit decidim_budgets.budgets_path
             end
@@ -99,8 +100,12 @@ describe "BudgetsView" do
 
               it "renders callout message" do
                 expect(page).to have_css(".callout.warning.font-customizer")
-                within ".callout.warning.font-customizer" do
-                  expect(page).to have_content(translated(landing_page_content))
+                within ".columns.medium-5.mediumlarge-4" do
+                  within ".callout.warning.font-customizer" do
+                    within ".rich-text-display" do
+                      expect(page).to have_content(translated(landing_page_content))
+                    end
+                  end
                 end
               end
             end
@@ -126,13 +131,20 @@ describe "BudgetsView" do
             end
 
             describe "vote all budgets" do
+              let!(:extra_subtaxonomy) { create(:taxonomy, parent: root_taxonomy, organization:) }
+              let!(:extra_postal) { create(:taxonomy, name: { en: "10004" }, code: "EXTRA_10004", parent: extra_subtaxonomy, organization:) }
+              let!(:extra_taxonomy_filter_item) { create(:taxonomy_filter_item, taxonomy_filter:, taxonomy_item: extra_subtaxonomy) }
+
               # We add another budget to the list of budgets where use is eligible to vote
-              let!(:extra_budget) { create(:budget, component:, scope: extra_scope, total_budget: 100_000) }
-              let!(:extra_scope) { create(:scope, parent: parent_scope, organization:) }
-              let!(:extra_postal) { create(:scope, name: { en: "10004" }, code: "EXTRA_10004", parent: extra_scope, organization:) }
+              let!(:extra_budget) do
+                create(:budget, component:, total_budget: 100_000).tap { |budget| budget.taxonomies << extra_subtaxonomy }
+              end
               let!(:extra_project) { create(:project, budget: extra_budget, budget_amount: 75_000) }
 
               before do
+                first_budget.taxonomies << extra_subtaxonomy
+                second_budget.taxonomies << extra_subtaxonomy
+                Decidim::BudgetsBooth::TaxonomyManager.clear_cache!
                 component.update(settings: component_settings.merge(workflow: "zip_code", vote_threshold_percent: 0))
               end
 

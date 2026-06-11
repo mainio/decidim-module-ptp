@@ -56,13 +56,14 @@ describe Decidim::BudgetsBooth::VotingSupport do
   let!(:order) { create(:order, user:, budget: budgets.first) }
   let!(:second_order) { create(:order, user:, budget: budgets.second) }
 
-  include_context "with scoped budgets"
+  include_context "with taxonomied budgets"
 
   before do
     allow(dummy).to receive(:component).and_return(component)
     allow(dummy).to receive(:user).and_return(user)
     allow(dummy).to receive(:organization).and_return(organization)
     allow(dummy).to receive(:current_settings).and_return(component.current_settings)
+    Decidim::BudgetsBooth::TaxonomyManager.clear_cache!
   end
 
   describe "#voting_enabled?" do

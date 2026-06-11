@@ -48,15 +48,15 @@ module Decidim
       end
 
       def all_zip_codes
-        @all_zip_codes ||= scope_manager.zip_codes_for(current_component)
+        @all_zip_codes ||= budgets.flat_map { |budget| taxonomy_manager.zip_codes_for(budget) }.uniq
       end
 
       def budgets
         @budgets ||= Decidim::Budgets::Budget.where(component: current_component)
       end
 
-      def scope_manager
-        @scope_manager ||= ::Decidim::BudgetsBooth::ScopeManager.new(current_component)
+      def taxonomy_manager
+        @taxonomy_manager ||= ::Decidim::BudgetsBooth::TaxonomyManager.new(current_component)
       end
 
       def invalidate_form

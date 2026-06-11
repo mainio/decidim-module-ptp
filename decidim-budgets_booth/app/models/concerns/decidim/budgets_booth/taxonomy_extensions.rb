@@ -4,7 +4,7 @@ require "active_support/concern"
 
 module Decidim
   module BudgetsBooth
-    module ScopeExtensions
+    module TaxonomyExtensions
       extend ActiveSupport::Concern
 
       included do
@@ -15,7 +15,7 @@ module Decidim
       private
 
       def clear_budgets_booth_cache
-        Decidim::BudgetsBooth::ScopeManager.clear_cache!
+        Decidim::BudgetsBooth::TaxonomyManager.clear_cache!
       end
     end
   end
