@@ -25,7 +25,7 @@ module Decidim
         def vote_allowed?(resource, consider_progress: true) # rubocop:disable Lint/UnusedMethodArgument
           return false if user_zip_code.blank?
 
-          scope_manager.zip_codes_for(resource).include?(user_zip_code)
+          taxonomy_manager.zip_codes_for(resource).include?(user_zip_code)
         end
 
         def budgets
@@ -37,13 +37,13 @@ module Decidim
         end
 
         def user_zip_code
-          @user_zip_code ||= scope_manager.user_zip_code(user)
+          @user_zip_code ||= taxonomy_manager.user_zip_code(user)
         end
 
         private
 
-        def scope_manager
-          @scope_manager ||= ::Decidim::BudgetsBooth::ScopeManager.new(budgets_component)
+        def taxonomy_manager
+          @taxonomy_manager ||= ::Decidim::BudgetsBooth::TaxonomyManager.new(budgets_component)
         end
 
         def projects(budget)

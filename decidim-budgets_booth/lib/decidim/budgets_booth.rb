@@ -8,7 +8,7 @@ module Decidim
   # allows users to create budgets_booth in a participatory space.
   module BudgetsBooth
     autoload :VotingSupport, "decidim/budgets_booth/voting_support"
-    autoload :ScopeManager, "decidim/budgets_booth/scope_manager"
+    autoload :TaxonomyManager, "decidim/budgets_booth/taxonomy_manager"
     include ActiveSupport::Configurable
     # Default configuration digits to generate the zip code.
     config_accessor :zip_code_length do
