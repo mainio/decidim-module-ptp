@@ -128,7 +128,6 @@ fi:
           cancel: Peruuta
           category: 'Aihepiiri: '
           close_project: Sulje
-          scope: 'Teema: '
         show:
           pre_vote:
             continue_voting: Jatka äänestystä
