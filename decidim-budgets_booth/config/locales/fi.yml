@@ -8,15 +8,15 @@ fi:
             images: Kuvat
         imports:
           help:
-            paper_orders_count: "The import document should contain the following columns: 'project_id' (with the project's id), 'project_title' (with the project's title) and 'number_of_votes' (with the number of new votes for the project that should be imported)."
+            paper_orders_count: "Tiedoston pitää sisältää seuraavanlaiset sarakkeet: 'project_id' (kertoo projektin id:n), 'project_title' (kertoo projektin otsikon) ja 'number_of_votes' (kertoo paperiäänien määrän)."
           label:
-            paper_orders_count: Import paper orders count
+            paper_orders_count: Tuo paperiäänien määrä
           resources:
             paper_orders_count:
-              one: Project
-              other: Projects
+              one: Projekti
+              other: Projektit
           title:
-            paper_orders_count: Import votes from paper ballots
+            paper_orders_count: Tuo paperiäänien määrä
       budget_list_item:
         current_phase: 'Käynnissä oleva vaihe: %{phase}'
         more_info: Lisätietoja
@@ -30,7 +30,7 @@ fi:
           cancel_voting: Poistu äänestyksestä
           login_before_access: Sinun täytyy kirjautua sisään ensin.
           not_allowed: Tiliäsi ei ole vahvistettu tämän toiminnon suorittamiseen.
-          voted: You have already voted for this budget.
+          voted: Olet jo äänestänyt tässä budjetissa.
       budgets_header:
         based_on_zip_code: Perustuen postinumeroosi - %{zip_code}.
         change_it_here: Muuta sitä tästä
@@ -39,42 +39,42 @@ fi:
       budgets_list:
         no_budgets_found: Äänestettäviä budjetteja ei löytynyt postinumerollasi. Voit vaihtaa postinumeroasi, jos se on väärin tai voit yrittää myöhemmin uudestaan.
         vote: Näytä
-        voting_possible: "You can still vote in these budgets:"
-        voted: "You have already voted in these budgets:"
+        voting_possible: "Voit äänestää vielä näillä alueilla:"
+        voted: "Olet jo äänestänyt näillä alueilla:"
       orders:
         status:
-          continue_voting: Continue voting
-          title: "You have voted %{budget} successfully"
-          return: Return to budgets
-          votes_info: Your vote for %{budget_name} has been registered. You can continue voting in other budgets or log out.
+          continue_voting: Jatka äänestämistä muilla alueilla
+          title: "Äänestys onnistui alueella %{budget}"
+          return: Palaa aluelistaukseen
+          votes_info: Äänesi on nyt kirjattu alueella %{budget_name}. Voit halutessasi jatkaa äänestystä muilla alueilla tai kirjautua ulos palvelusta.
         modal:
           assigned: 'Käytetty: '
           close: Sulje ikkuna
-          description: These are the proposals you have chosen to be part of the budget.
+          description: Olet valinnut nämä äänestettävät ehdotukset osaksi budjettia.
           ok: OK
           title: Äänesi alueella %{budget_title}
           total_budget: 'Kokonaisbudjetti: '
         status_summary_modal:
-          title: Picked proposals
-          votes: Your votes
+          title: Valitut ehdotukset
+          votes: Äänesi alueella
           close: Sulje
       project_l:
-        explore: Open
+        explore: Tutustu
       project_vote_button:
         add_to_vote: Lisää ääneesi
         remove_from_vote: Poista äänestäsi
       projects:
         budget_confirm:
-          description: These are the proposals you have chosen to be part of the budget.
+          description: Olet valinnut nämä äänestettävät ehdotukset osaksi budjettia.
           is_this_correct: Onko tämä oikein?
         budget_summary:
-          are_you_sure: Are you sure you want to delete your vote?
+          are_you_sure: Haluatko varmasti poistaa äänesi?
           back_to_budgets: Näytä kaikki budjetit
           cancel_voting: Poistu äänestyksestä
           choose_budget: Voit päättää budjetista alueella %{budget_title}
-          choose_description: Choose the proposals you like and cast your vote at the end.
-          total_budget: 'You can allocate %{budget} to different proposals. First choose the proposals to vote from the list below. After selection, press the "I am ready" -button.'
-          total_projects: "Total proposals: "
+          choose_description: Valitse sellaiset äänestettävät ehdotukset, joista pidät ja anna äänesi sen jälkeen.
+          total_budget: 'Sinulla on käytettävissäsi %{budget}. Valitse ensin äänestettävät ehdotukset alla olevasta listasta. Valintojen jälkeen, paina "Olen valmis" -painiketta.'
+          total_projects: "Ehdotusten määrä: "
         cancel_voting_modal:
           continue: Jatka äänestystä
           description: Jos poistut äänestyksestä, ääntäsi ei lasketa lopulliseen tulokseen. Jos haluat äänesi vaikuttavan lopputulokseen, palaa takaisin äänestämään.
@@ -82,29 +82,29 @@ fi:
           label: Poistu äänestyksestä
           title: Haluatko varmasti lopettaa äänestyksen?
         count:
-          projects_count: "%{count} votable proposals"
+          projects_count: "%{count} äänestettävää ehdotusta"
         index:
           back_to_budgets: Takaisin kaikkiin budjetteihin
         order_progress:
-          assigned: "Assigned: "
-          choices: "Choices left: "
+          assigned: "Käytetty: "
+          choices: "Valintoja jäljellä: "
           ready: Olen valmis
-          show_choices: Show selection
+          show_choices: Näytä valinnat
           total_budget: 'Kokonaisbudjetti: '
-          total_projects: "Total proposals: "
-          view: View
+          total_projects: "Ehdotusten määrä: "
+          view: Näytä
           vote: Äänestä
         order_selected_projects:
-          assigned: "Budget left: "
-          choices: "Choices left: "
-          view: View
-          remove: Remove
-          show_choices: Show selection
+          assigned: "Budjettia jäljellä: "
+          choices: "Valintoja jäljellä: "
+          view: Katso
+          remove: Poista
+          show_choices: Näytä valinnat
         order_progress_summary_content:
-          total_budget: Total budget
+          total_budget: Kokonaisbudjetti
         pre_voting_budget_summary:
           are_you_sure: Haluatko varmasti poistaa äänesi?
-          browse: Browse proposals
+          browse: Selaa äänestettäviä ehdotuksia
           cancel_order: poistaa äänesi
           pre_vote:
             casted_description: Olet aikaisemmin äänestänyt tästä budjetista. Jos haluat nähdä, kuinka äänestit, paina "Tarkasta äänesi" -painiketta. Voit myös %{cancel_link} ja aloittaa alusta.
@@ -112,17 +112,17 @@ fi:
             finish_description: Olet jo aloittanut tämän budjetin äänestyksen. Haluaisitko viimeistellä äänesi?
             finish_voting: Viimeistele äänestys
             result_voted: Tarkasta äänesi
-            start_description: You can browse to the proposals to get yourself familiar with them. In order to start voting, click the "Start voting" button.
+            start_description: Voit selata äänestettäviä ehdotuksia tutustuaksesi niihin. Aloittaaksesi äänestyksen, paina "Aloita alueen äänestys" -painiketta.
             start_voting: Aloita äänestys
             title: Tervetuloa äänestämään!
           ready: Olen valmis
-          total_budget: "Total budget: %{amount}"
-          voting_finished: The voting has finished!
+          total_budget: "Alueen kokonaisbudjetti: %{amount}"
+          voting_finished: Äänestys on päättynyt!
         project:
           you_voted: Äänestit tätä
         project_budget_button:
-          add: Choose
-          added: Remove
+          add: Valitse
+          added: Poista valinta
         project_modal:
           budget_amount: 'Budjetti: '
           cancel: Peruuta
@@ -131,17 +131,17 @@ fi:
         show:
           pre_vote:
             continue_voting: Jatka äänestystä
-            introduction: Want to vote this proposal?
-            start_voting: Start voting on this area
-          view_all_projects: View all votable proposals
+            introduction: Haluatko äänestää tätä ehdotusta?
+            start_voting: Aloita alueen äänestys
+          view_all_projects: Näytä muut äänestettävät ehdotukset
         selected_projects_modal:
-          assigned: "Budget left: "
-          choices: Your selection for the vote
+          assigned: "Budjettia jäljellä: "
+          choices: Valinnat ääneesi
           choices_remaining: "Valintoja jäljellä: "
-          current_choices: You have chosen the following proposals for your vote.
-          continue: Continue voting
-          no_selection: You have no chosen proposals.
-          remove: Remove
+          current_choices: Olet valinnut seuraavat äänestettävät ehdotukset ääneesi.
+          continue: Jatka äänestystä
+          no_selection: Et ole vielä valinnut yhtään äänestettävää ehdotusta.
+          remove: Poista valinta
       user_data:
         error:
           only_letters: Vain kirjaimet ja numerot ovat sallittuja.
@@ -174,15 +174,15 @@ fi:
         voted_summary_modal:
           continue: Jatka
           label: Sulje
-          list_description: These are the proposals you picked.
+          list_description: Valitsit nämä äänestettävät ehdotukset.
           title: Äänesi
     components:
       budgets:
         settings:
           global:
             maximum_budgets_to_vote_on: Budjettien maksimimäärä, joissa käyttäjät voivat äänestää (oletusarvo on 0, mikä tarkoittaa, että käyttäjä voi äänestää kaikissa budjeteissa)
-            show_full_description_on_listing_page: Show full proposal descriptions on the listing page and disable the details popup
-            vote_cancel_url: URL to redirect user when canceling voting (default to the root path)
+            show_full_description_on_listing_page: Näytä äänestettävien ehdotusten kuvaukset kokonaan listaussivulla ja poista lisätietoikkuna käytöstä
+            vote_cancel_url: URL-osoite, johon käyttäjät ohjataan poistuessa äänestyskopista kesken äänestyksen (oletuksena palvelun etusivu)
             vote_completed_content: Ponnahdusikkunan teksti käyttäjän äänestettyä kaikissa budjeteissa
             vote_success_content: Ponnahdusikkunan teksti jokaisen äänen jälkeen
             vote_success_url: URL-osoite, johon käyttäjä ohjataan äänestettyään kaikissa budjeteissa (oletuksena budjettien listaussivu)
@@ -191,16 +191,16 @@ fi:
               zip_code: 'Äänestä postinumeron perusteella: mahdollistaa äänestyksen budjeteissa, jotka täsmäävät käyttäjän postinumeron kanssa.'
     shared:
       filters:
-        search: Search
-        search_bar: Search
-        search_placeholder: Search
+        search: Hakusana
+        search_bar: Hae
+        search_placeholder: Kirjoita hakusana
   layouts:
     decidim:
       shared:
         layout_center:
-          selected_projects: Show choices
-          view: View
-          log_out: Log out
+          selected_projects: Näytä valinnat
+          view: Katso
+          log_out: Kirjaudu ulos
       budgets:
         voting_notification:
           notification: Olet nyt äänestyskopissa.
