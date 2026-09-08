@@ -53,7 +53,7 @@ module Decidim
 
         def order
           return unless current_order
-          return unless current_order.checked_out_at.present?
+          return if current_order.checked_out_at.blank?
 
           current_order
         end
