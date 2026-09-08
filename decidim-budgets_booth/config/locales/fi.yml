@@ -73,7 +73,7 @@ fi:
         budget_summary:
           are_you_sure: Haluatko varmasti poistaa äänesi?
           back_to_budgets: Näytä kaikki alueet
-          cancel_order: delete your vote
+          cancel_order: poistaa äänesi
           cancel_voting: Poistu äänestyksestä
           choose_budget: Voit päättää budjetista alueella %{budget_title}
           choose_description: Valitse sellaiset äänestettävät ehdotukset, joista pidät ja anna äänesi sen jälkeen.
