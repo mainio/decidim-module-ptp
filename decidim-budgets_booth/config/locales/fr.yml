@@ -65,15 +65,15 @@ fr:
         remove_from_vote: Supprimer du vote
       projects:
         budget_confirm:
-          cancel: Cancel
-          confirm: Confirm vote
+          cancel: Annuler
+          confirm: Confirmer le vote
           description: Voici les propositions que vous avez choisies pour faire partie du budget.
           is_this_correct: Est-ce correct ?
-          title: Confirm your vote
+          title: Confirmer votre vote
         budget_summary:
           are_you_sure: Êtes-vous sûr de vouloir supprimer votre vote ?
           back_to_budgets: Afficher toutes les zones
-          cancel_order: Delete your vote
+          cancel_order: Supprimer votre vote
           cancel_voting: Annuler le vote
           choose_budget: Vous décidez du budget
           choose_description: Choisissez les propositions que vous aimez et votez par la suite.
@@ -89,8 +89,8 @@ fr:
           projects_count: "%{count} propositions"
         filters:
           status_values:
-            selected: Selected for implementation
-            not_selected: Not selected for implementation
+            selected: Sélectionné pour l'implémentation
+            not_selected: Non sélectionné pour l'implémentation
         index:
           back_to_budgets: Afficher toutes les zones
         order_progress:
@@ -120,7 +120,7 @@ fr:
             finish_description: Vous avez déjà commencé à voter dans ce budget. Voulez-vous terminer votre vote ?
             finish_voting: Terminer le vote
             result_voted: Revoir votre vote
-            pre_vote_start_description: You can browse the votable proposals to learn more about them.
+            pre_vote_start_description: Vous pouvez parcourir les propositions pour en savoir plus à leur sujet.
             start_description: Vous pouvez naviguer vers les projets pour vous familiariser avec eux. Pour commencer à voter, cliquez sur le bouton "Commencer à voter".
             start_voting: Commencer à voter
             title: Bienvenue au vote!
@@ -128,7 +128,7 @@ fr:
           total_budget: "Budget total pour la zone : %{amount}"
           voting_finished: Le vote est terminé !
         project:
-          selected: Selected for implementation
+          selected: Sélectionné pour l'implémentation
           you_voted: Vous avez voté pour
         project_budget_button:
           add: Choisir
