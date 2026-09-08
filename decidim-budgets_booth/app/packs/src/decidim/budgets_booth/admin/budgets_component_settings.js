@@ -12,26 +12,28 @@ $(() => {
 
   const helpTranslations = {
     en: {
-      landing_page_help_text: "This setting only applies when there are multiple budgets.",
-      terms_help_text: 'This setting only applies when "Vote based on ZIP code" -workflow is selected.'
+      "landing_page_help_text": "This setting only applies when there are multiple budgets.",
+      "terms_help_text": 'This setting only applies when "Vote based on ZIP code" -workflow is selected.'
     },
     fi: {
-      landing_page_help_text: "Tämä asetus vaatii useamman budjetin toimiakseen.",
-      terms_help_text: 'Tämä asetus vaatii "Äänestä postinumeron perusteella" -asetuksen toimiakseen.'
+      "landing_page_help_text": "Tämä asetus vaatii useamman budjetin toimiakseen.",
+      "terms_help_text": 'Tämä asetus vaatii "Äänestä postinumeron perusteella" -asetuksen toimiakseen.'
     }
   }
 
-  if (!landingLabels || !termsLabel) { return; }
+  if (!landingLabels || !termsLabel) {
+    return;
+  }
 
   const landingHelpText =
     helpTranslations[language]?.landing_page_help_text ||
-    helpTranslations["en"]?.landing_page_help_text;
+    helpTranslations.en?.landing_page_help_text;
 
   const termsHelpText =
     helpTranslations[language]?.terms_help_text ||
-    helpTranslations["en"]?.terms_help_text;
+    helpTranslations.en?.terms_help_text;
 
-  landingLabels.forEach(label => {
+  landingLabels.forEach((label) => {
     const labelRow = label.closest("div.label--tabs");
 
     if (labelRow.nextElementSibling?.classList.contains("help-text")) {
