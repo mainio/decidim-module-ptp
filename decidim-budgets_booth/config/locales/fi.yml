@@ -30,7 +30,7 @@ fi:
           cancel_voting: Poistu äänestyksestä
           login_before_access: Sinun täytyy kirjautua sisään ensin.
           not_allowed: Tiliäsi ei ole vahvistettu tämän toiminnon suorittamiseen.
-          voted: You have already voted on this area.
+          voted: Olet jo äänestänyt tällä alueella.
       budgets_header:
         based_on_zip_code: Perustuen postinumeroosi - %{zip_code}.
         change_it_here: Muuta sitä tästä
@@ -39,41 +39,41 @@ fi:
       budgets_list:
         no_budgets_found: Äänestettäviä budjetteja ei löytynyt postinumerollasi. Voit vaihtaa postinumeroasi, jos se on väärin tai voit yrittää myöhemmin uudestaan.
         vote: Näytä
-        voting_possible: "You can still vote on these areas:"
-        voted: "You have already voted on these areas:"
+        voting_possible: "Voit äänestää vielä näillä alueilla:"
+        voted: "Olet jo äänestänyt näillä alueilla:"
       orders:
         status:
-          continue_voting: Continue voting on other areas
-          title: "You have successfully voted on %{budget}"
-          return: Return to list of areas
-          votes_info: Your vote for %{budget_name} has been registered. You can continue voting on other areas or log out.
+          continue_voting: Jatka äänestämistä muilla alueilla
+          title: "Äänestys onnistui alueella %{budget}"
+          return: Palaa aluelistaukseen
+          votes_info: Äänesi on nyt kirjattu alueella %{budget_name}. Voit halutessasi jatkaa äänestystä muilla alueilla tai kirjautua ulos palvelusta.
         modal:
           assigned: 'Käytetty: '
           close: Sulje ikkuna
-          description: These are the votable proposals you have chosen to be part of the budget.
+          description: Olet valinnut nämä äänestettävät ehdotukset osaksi budjettia.
           ok: OK
           title: Äänesi alueella %{budget_title}
           total_budget: 'Kokonaisbudjetti: '
         status_summary_modal:
           title: Valitut ehdotukset
-          votes: Your votes on this area
-          close: Close
+          votes: Äänesi alueella
+          close: Sulje
       project_l:
-        explore: Explore
+        explore: Tutustu
       project_vote_button:
         add_to_vote: Lisää ääneesi
         remove_from_vote: Poista äänestäsi
       projects:
         budget_confirm:
-          description: These are the votable proposals you have chosen to be part of the budget.
+          description: Olet valinnut nämä äänestettävät ehdotukset osaksi budjettia.
           is_this_correct: Onko tämä oikein?
         budget_summary:
           are_you_sure: Haluatko varmasti poistaa äänesi?
-          back_to_budgets: Show all areas
+          back_to_budgets: Näytä kaikki alueet
           cancel_voting: Poistu äänestyksestä
           choose_budget: Voit päättää budjetista alueella %{budget_title}
-          choose_description: Choose the votable proposals you like and cast your after that end.
-          total_budget: 'You can allocate %{budget}. First choose the votable proposals to vote from the list below. After making your selections, press the "I am ready" button.'
+          choose_description: Choose the votable proposals you like and cast your after that.
+          total_budget: 'Sinulla on käytettävissäsi %{budget}. Valitse ensin äänestettävät ehdotukset alla olevasta listasta. Valintojen jälkeen, paina "Olen valmis" -painiketta.'
           total_projects: "Ehdotusten määrä: "
         cancel_voting_modal:
           continue: Jatka äänestystä
@@ -84,12 +84,12 @@ fi:
         count:
           projects_count: "%{count} äänestettävää ehdotusta"
         index:
-          back_to_budgets: Back to all areas
+          back_to_budgets: Show all areas
         order_progress:
           assigned: "Käytetty: "
           choices: "Valintoja jäljellä: "
           ready: Olen valmis
-          show_choices: Show choices
+          show_choices: Näytä valinnat
           total_budget: 'Kokonaisbudjetti: '
           total_projects: "Ehdotusten määrä: "
           view: Näytä
@@ -98,31 +98,31 @@ fi:
           assigned: "Budjettia jäljellä: "
           choices: "Valintoja jäljellä: "
           view: Katso
-          remove: Remove selection
-          show_choices: Show choices
+          remove: Poista valinta
+          show_choices: Näytä valinnat
         order_progress_summary_content:
           total_budget: Kokonaisbudjetti
         pre_voting_budget_summary:
           are_you_sure: Haluatko varmasti poistaa äänesi?
-          browse: Browse votable proposals
+          browse: Selaa äänestettäviä ehdotuksia
           cancel_order: poistaa äänesi
           pre_vote:
-            casted_description: You have previously voted on this area. If you want to see what you voted, click "Review your vote" button. You can also %{cancel_link} and start again.
+            casted_description: Olet aikaisemmin äänestänyt tällä alueella. Jos haluat nähdä, kuinka äänestit, paina "Tarkasta äänesi" -painiketta. Voit myös %{cancel_link} ja aloittaa alusta.
             casted_title: Kiitos äänestäsi
-            finish_description: You have already started voting on this area. Would you like to finish your vote?
+            finish_description: Olet jo aloittanut tämän alueen äänestyksen. Haluaisitko viimeistellä äänesi?
             finish_voting: Viimeistele äänestys
             result_voted: Tarkasta äänesi
-            start_description: You can browse to the votable proposals learn more about them. In order to start voting, click the "Start voting" button.
+            start_description: You can browse the votable proposals learn more about them. In order to start voting, click the "Start voting" button.
             start_voting: Aloita äänestys
             title: Tervetuloa äänestämään!
           ready: Olen valmis
-          total_budget: "Total budget for the area: %{amount}"
+          total_budget: "Alueen kokonaisbudjetti: %{amount}"
           voting_finished: Äänestys on päättynyt!
         project:
           you_voted: Äänestit tätä
         project_budget_button:
           add: Valitse
-          added: Remove selection
+          added: Poista valinta
         project_modal:
           budget_amount: 'Budjetti: '
           cancel: Peruuta
@@ -133,15 +133,15 @@ fi:
             continue_voting: Jatka äänestystä
             introduction: Haluatko äänestää tätä ehdotusta?
             start_voting: Aloita alueen äänestys
-          view_all_projects: Show other votable proposals
+          view_all_projects: Näytä muut äänestettävät ehdotukset
         selected_projects_modal:
           assigned: "Budjettia jäljellä: "
           choices: Valinnat ääneesi
           choices_remaining: "Valintoja jäljellä: "
-          current_choices: You have chosen the following votable proposals for your vote.
+          current_choices: Olet valinnut seuraavat äänestettävät ehdotukset ääneesi.
           continue: Jatka äänestystä
-          no_selection: You have not yet chosen any votable proposals.
-          remove: Remove selection
+          no_selection: Et ole vielä valinnut yhtään äänestettävää ehdotusta.
+          remove: Poista valinta
       user_data:
         error:
           only_letters: Vain kirjaimet ja numerot ovat sallittuja.
@@ -174,7 +174,7 @@ fi:
         voted_summary_modal:
           continue: Jatka
           label: Sulje
-          list_description: These are the votable proposals you picked.
+          list_description: Valitsit nämä äänestettävät ehdotukset.
           title: Äänesi
     components:
       budgets:
@@ -191,9 +191,9 @@ fi:
               zip_code: 'Äänestä postinumeron perusteella: mahdollistaa äänestyksen budjeteissa, jotka täsmäävät käyttäjän postinumeron kanssa.'
     shared:
       filters:
-        search: Keyword
+        search: Hakusana
         search_bar: Hae
-        search_placeholder: Write keyword
+        search_placeholder: Kirjoita hakusana
   layouts:
     decidim:
       shared:
