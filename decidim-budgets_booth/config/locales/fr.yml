@@ -72,7 +72,7 @@ fr:
           back_to_budgets: Show all areas
           cancel_voting: Annuler le vote
           choose_budget: Vous décidez du budget
-          choose_description: Choose the votable proposals you like and cast your after that end.
+          choose_description: Choose the votable proposals you like and cast your after that.
           total_budget: 'You can allocate %{budget}. First choose the votable proposals to vote from the list below. After making your selections, press the "I am ready" button.'
           total_projects: "Total proposals: "
         cancel_voting_modal:
@@ -84,7 +84,7 @@ fr:
         count:
           projects_count: "%{count} votable proposals"
         index:
-          back_to_budgets: Back to all areas
+          back_to_budgets: Show all areas
         order_progress:
           assigned: "Assigned: "
           choices: "Choices left: "
@@ -112,7 +112,7 @@ fr:
             finish_description: You have already started voting on this area. Would you like to finish your vote?
             finish_voting: Terminer le vote
             result_voted: Revoir votre vote
-            start_description: You can browse to the votable proposals learn more about them. In order to start voting, click the "Start voting" button.
+            start_description: You can browse the votable proposals learn more about them. In order to start voting, click the "Start voting" button.
             start_voting: Commencer à voter
             title: Bienvenue au vote!
           ready: Confirmer mon vote
