@@ -36,7 +36,7 @@ describe "NonZipCodeWorkflow" do
 
       it "explores the budgets" do
         expect(page).to have_content("2 votable proposals")
-        expect(page).to have_content("Back to all areas")
+        expect(page).to have_content("Show all areas")
         expect(page).to have_button("Start voting")
       end
 
