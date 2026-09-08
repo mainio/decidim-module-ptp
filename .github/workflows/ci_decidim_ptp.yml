@@ -22,10 +22,12 @@ jobs:
       fail-fast: false
       matrix:
         module:
-          - decidim-module-budgets_booth
-          - decidim-module-l10n
-          - decidim-module-sms-twilio
-          - decidim-module-smsauth
+          - decidim-budgets_booth
+          - decidim-l10n
+          - decidim-sms-twilio
+          - decidim-smsauth
     name: Tests
     uses: mainio/gha-decidim-module/.github/workflows/ci_rspec.yml@main
+    with:
+      test-folder: ${{ matrix.module }}
     secrets: inherit
