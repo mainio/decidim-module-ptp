@@ -28,4 +28,6 @@ jobs:
           - decidim-smsauth
     name: Tests
     uses: mainio/gha-decidim-module/.github/workflows/ci_rspec.yml@main
+    with:
+      test-folder: ${{ matrix.module }}
     secrets: inherit
