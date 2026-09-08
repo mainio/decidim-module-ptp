@@ -50,7 +50,7 @@ fi:
         modal:
           assigned: 'Käytetty: '
           close: Sulje ikkuna
-          description: Olet valinnut nämä äänestettävät ehdotukset osaksi budjettia.
+          description: These are the votable proposals you have chosen to the budget.
           ok: OK
           title: Äänesi alueella %{budget_title}
           total_budget: 'Kokonaisbudjetti: '
@@ -67,7 +67,7 @@ fi:
         budget_confirm:
           cancel: Peruuta
           confirm: Vahvista ääni
-          description: Olet valinnut nämä äänestettävät ehdotukset osaksi budjettia.
+          description: These are the votable proposals you have chosen to the budget.
           is_this_correct: Onko tämä oikein?
           title: Vahvista äänesi
         budget_summary:
@@ -147,7 +147,7 @@ fi:
         selected_projects_modal:
           assigned: "Budjettia jäljellä: "
           choices: Valinnat ääneesi
-          choices_remaining: "Valintoja jäljellä: "
+          choices_remaining: "Choices left: "
           current_choices: Olet valinnut seuraavat äänestettävät ehdotukset ääneesi.
           continue: Jatka äänestystä
           no_selection: Et ole vielä valinnut yhtään äänestettävää ehdotusta.
