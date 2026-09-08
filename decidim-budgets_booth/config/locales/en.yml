@@ -117,7 +117,7 @@ en:
               you like to finish your vote?
             finish_voting: Finish voting
             result_voted: Review your vote
-            start_description: You can browse the votable proposals learn more about
+            start_description: You can browse the votable proposals to learn more about
               them. In order to start voting, click the "Start voting" button.
             start_voting: Start voting
             title: Welcome to the vote!
