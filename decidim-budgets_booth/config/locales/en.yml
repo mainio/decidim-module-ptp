@@ -30,7 +30,7 @@ en:
           cancel_voting: Cancel voting
           login_before_access: You need to login first.
           not_allowed: You are not allowed to perform this action.
-          voted: You have already voted for this budget.
+          voted: You have already voted on this area.
       budgets_header:
         based_on_zip_code: Based on your ZIP code - %{zip_code}.
         change_it_here: Change it here
@@ -40,42 +40,42 @@ en:
         no_budgets_found: No budgets were found based on your ZIP code. You can change
           your ZIP code if it's not correct, or you can search again later.
         vote: Show
-        voting_possible: "You can still vote in these budgets:"
-        voted: "You have already voted in these budgets:"
+        voting_possible: "You can still vote on these areas:"
+        voted: "You have already voted on these areas:"
       orders:
         status:
-          continue_voting: Continue voting
-          title: "You have voted %{budget} successfully"
-          return: Return to budgets
-          votes_info: Your vote for %{budget_name} has been registered. You can continue voting in other budgets or log out.
+          continue_voting: Continue voting on other areas
+          title: "You have successfully voted on %{budget}"
+          return: Return to list of areas
+          votes_info: Your vote for %{budget_name} has been registered. You can continue voting on other areas or log out.
         modal:
           assigned: 'Assigned: '
           close: Close window
-          description: These are the proposals you have chosen to be part of the budget.
+          description: These are the votable proposals you have chosen to be part of the budget.
           ok: OK
           title: Your vote in %{budget_title}
           total_budget: 'Total budget: '
         status_summary_modal:
           title: Picked proposals
-          votes: Your votes
-          close: Sulje
+          votes: Your votes on this area
+          close: Close
       project_l:
-        explore: Open
+        explore: Explore
       project_vote_button:
         add_to_vote: Add to your vote
         remove_from_vote: Remove from vote
       projects:
         budget_confirm:
-          description: These are the proposals you have chosen to be part of the budget.
+          description: These are the votable proposals you have chosen to be part of the budget.
           is_this_correct: Is this correct?
         budget_summary:
           are_you_sure: Are you sure you want to delete your vote?
-          back_to_budgets: Show all budgets
+          back_to_budgets: Show all areas
           cancel_voting: Cancel voting
           choose_budget: You decide the %{budget_title} budget
-          choose_description: Choose the proposals you like and cast your vote at the
+          choose_description: Choose the votable proposals you like and cast your after that
             end.
-          total_budget: 'You can allocate %{budget} to different proposals. First choose the proposals to vote from the list below. After selection, press the "I am ready" -button.'
+          total_budget: 'You can allocate %{budget}. First choose the votable proposals to vote from the list below. After making your selections, press the "I am ready" button.'
           total_projects: "Total proposals: "
         cancel_voting_modal:
           continue: Continue voting
@@ -87,12 +87,12 @@ en:
         count:
           projects_count: "%{count} votable proposals"
         index:
-          back_to_budgets: Back to budgets
+          back_to_budgets: Back to all areas
         order_progress:
           assigned: "Assigned: "
           choices: "Choices left: "
           ready: I am ready
-          show_choices: Show selection
+          show_choices: Show choices
           total_budget: 'Total budget: '
           total_projects: "Total proposals: "
           view: View
@@ -101,35 +101,35 @@ en:
           assigned: "Budget left: "
           choices: "Choices left: "
           view: View
-          remove: Remove
-          show_choices: Show selection
+          remove: Remove selection
+          show_choices: Show choices
         order_progress_summary_content:
           total_budget: Total budget
         pre_voting_budget_summary:
           are_you_sure: Are you sure you want to delete your vote?
-          browse: Browse proposals
+          browse: Browse votable proposals
           cancel_order: Cancel your vote
           pre_vote:
-            casted_description: You have previously voted in this budget. If you want
+            casted_description: You have previously voted on this area. If you want
               to see what you voted, click "Review your vote" button. You can also
               %{cancel_link} and start again.
             casted_title: Thank you for your voting
-            finish_description: You have already started voting in this budget. Would
+            finish_description: You have already started voting on this area. Would
               you like to finish your vote?
             finish_voting: Finish voting
             result_voted: Review your vote
-            start_description: You can browse to the proposals to get yourself familiar
-              with them. In order to start voting, click the "Start voting" button.
+            start_description: You can browse to the votable proposals learn more about
+              them. In order to start voting, click the "Start voting" button.
             start_voting: Start voting
             title: Welcome to the vote!
           ready: I am ready
-          total_budget: "Total budget: %{amount}"
+          total_budget: "Total budget for the area: %{amount}"
           voting_finished: The voting has finished!
         project:
           you_voted: You voted for this
         project_budget_button:
           add: Choose
-          added: Remove
+          added: Remove selection
         project_modal:
           budget_amount: 'Budget: '
           cancel: Cancel
@@ -140,15 +140,15 @@ en:
             continue_voting: Continue voting
             introduction: Want to vote this proposal?
             start_voting: Start voting on this area
-          view_all_projects: View all votable proposals
+          view_all_projects: Show other votable proposals
         selected_projects_modal:
           assigned: "Budget left: "
           choices: Your selection for the vote
           choices_remaining: "Valintoja jäljellä: "
-          current_choices: You have chosen the following proposals for your vote.
+          current_choices: You have chosen the following votable proposals for your vote.
           continue: Continue voting
-          no_selection: You have no chosen proposals.
-          remove: Remove
+          no_selection: You have not yet chosen any votable proposals.
+          remove: Remove selection
       user_data:
         error:
           only_letters: Only letters and digits are allowed.
@@ -186,7 +186,7 @@ en:
         voted_summary_modal:
           continue: Continue
           label: Close
-          list_description: These are the proposals you picked.
+          list_description: These are the votable proposals you picked.
           title: Your vote
     components:
       budgets:
@@ -209,9 +209,9 @@ en:
                 matching their entered ZIP code.'
     shared:
       filters:
-        search: Search
+        search: Keyword
         search_bar: Search
-        search_placeholder: Search
+        search_placeholder: Write keyword
   layouts:
     decidim:
       shared:
