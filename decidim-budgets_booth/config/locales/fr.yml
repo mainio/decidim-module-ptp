@@ -73,7 +73,7 @@ fr:
         budget_summary:
           are_you_sure: Êtes-vous sûr de vouloir supprimer votre vote ?
           back_to_budgets: Afficher toutes les zones
-          cancel_order: delete your vote
+          cancel_order: supprimer votre vote
           cancel_voting: Annuler le vote
           choose_budget: Vous décidez du budget
           choose_description: Choisissez les propositions que vous aimez et votez par la suite.
