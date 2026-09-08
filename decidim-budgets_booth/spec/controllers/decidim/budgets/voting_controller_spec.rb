@@ -59,7 +59,7 @@ module Decidim
           it "redirects the user" do
             get :index, params: { budget_id: budgets.last.id }
             expect(response).to redirect_to(budget_projects_path(budgets.last))
-            expect(flash[:warning]).to have_content("You have already voted for this budget.")
+            expect(flash[:warning]).to have_content("You have already voted on this area.")
           end
         end
 
