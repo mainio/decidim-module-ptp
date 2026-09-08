@@ -87,7 +87,7 @@ describe "BudgetsView" do
                 click_on "I don't want to vote right now"
               end
 
-              expect(page).to have_link(href: "/")
+              expect(page).to have_current_path("/", ignore_query: true)
             end
 
             context "with landing page content" do
@@ -183,7 +183,7 @@ describe "BudgetsView" do
                 project = order.projects.first
                 within "#budget-votes-#{first_budget.id}" do
                   expect(page).to have_content("Your vote in #{decidim_sanitize(translated(first_budget.title))}")
-                  expect(page).to have_content("These are the proposals you have chosen to be part of the budget.")
+                  expect(page).to have_content("These are the votable proposals you have chosen to be part of the budget.")
                   expect(page).to have_content(decidim_sanitize(translated(project.title)))
                   click_on "OK"
                 end

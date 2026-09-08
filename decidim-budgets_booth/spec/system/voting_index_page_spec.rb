@@ -54,7 +54,7 @@ describe "VotingIndexPage" do
     it "redirects the user to the budgets page" do
       expect(page).to have_current_path(decidim_budgets.budget_projects_path(first_budget))
       within_flash_messages do
-        expect(page).to have_content "You have already voted for this budget."
+        expect(page).to have_content "You have already voted on this area."
       end
     end
   end
@@ -75,7 +75,7 @@ describe "VotingIndexPage" do
       expect(page).to have_content("You are now in the voting booth.")
       expect(page).to have_content("You decide the #{first_budget.title["en"]} budget")
       expect(page).to have_button("Cancel voting")
-      expect(page).to have_content("You can allocate €100,000 to different proposals.")
+      expect(page).to have_content("You can allocate €100,000.")
       expect(page).to have_css(".button.project-vote-button", count: 5)
     end
 
@@ -102,7 +102,7 @@ describe "VotingIndexPage" do
       context "when selected projects updated" do
         it "updates budget summary" do
           within "#projects" do
-            expect(page).to have_css(".project-vote-button", text: "Remove", count: 1)
+            expect(page).to have_css(".project-vote-button", text: "Remove selection", count: 1)
           end
 
           find('button[data-dialog-open="selected-projects"]').click
@@ -113,12 +113,12 @@ describe "VotingIndexPage" do
             expect(page).to have_css("#current-choices")
 
             click_on "Remove"
-            expect(page).to have_content("You have no chosen proposals")
+            expect(page).to have_content("You have not yet chosen any votable proposals.")
             find('button[data-dialog-close="selected-projects"]', match: :first).click
           end
 
           within "#projects" do
-            expect(page).to have_no_css(".project-vote-button", text: "Remove")
+            expect(page).to have_no_css(".project-vote-button", text: "Remove selection")
           end
         end
       end
@@ -212,7 +212,7 @@ describe "VotingIndexPage" do
         end
 
         it "shows a default success content text" do
-          expect(page).to have_content("Your vote for #{translated(first_budget.title)} has been registered. You can continue voting in other budgets or log out.")
+          expect(page).to have_content("Your vote for #{translated(first_budget.title)} has been registered. You can continue voting on other areas or log out.")
           expect(page).to have_current_path(decidim_budgets.status_budget_order_path(first_budget))
         end
       end
@@ -225,7 +225,7 @@ describe "VotingIndexPage" do
         end
 
         it "shows the success message set" do
-          expect(page).to have_content("You have voted #{translated(first_budget.title)} successfully")
+          expect(page).to have_content("You have successfully voted on #{translated(first_budget.title)}")
           expect(page).to have_css("p", text: "Some dummy text")
           expect(page).to have_current_path(decidim_budgets.status_budget_order_path(first_budget))
         end
@@ -310,7 +310,7 @@ describe "VotingIndexPage" do
         expect(page).to have_css("#budget-excess")
 
         within ".budget-summary__total" do
-          expect(page).to have_content("You can allocate €24,999 to different proposals.")
+          expect(page).to have_content("You can allocate €24,999.")
         end
 
         expect(page).to have_content("Maximum budget exceeded")
@@ -343,7 +343,7 @@ describe "VotingIndexPage" do
 
       it "renders the info" do
         within "#budget-confirm" do
-          expect(page).to have_content("These are the proposals you have chosen to be part of the budget.")
+          expect(page).to have_content("These are the votable proposals you have chosen to be part of the budget.")
           expect(page).to have_css("strong", text: "€25,000", count: 1)
           expect(page).to have_button("Confirm")
           expect(page).to have_button("Cancel")

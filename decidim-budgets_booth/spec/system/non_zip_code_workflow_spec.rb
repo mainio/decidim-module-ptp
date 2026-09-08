@@ -36,7 +36,7 @@ describe "NonZipCodeWorkflow" do
 
       it "explores the budgets" do
         expect(page).to have_content("2 votable proposals")
-        expect(page).to have_content("Back to budgets")
+        expect(page).to have_content("Back to all areas")
         expect(page).to have_button("Start voting")
       end
 
@@ -153,7 +153,7 @@ describe "NonZipCodeWorkflow" do
               it "shows a default completion text when vote_completed_content is nil" do
                 vote_for_this(budget)
 
-                expect(page).to have_content("Your vote for #{translated_attribute(budget.title)} has been registered. You can continue voting in other budgets or log out.")
+                expect(page).to have_content("Your vote for #{translated_attribute(budget.title)} has been registered. You can continue voting on other areas or log out.")
               end
 
               it "shows the completion text that is set to vote_completed_content" do

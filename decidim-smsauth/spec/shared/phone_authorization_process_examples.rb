@@ -11,10 +11,10 @@ shared_examples "phone authorization process" do
       end
       fill_in "Phone number", with: "45887874"
       click_on "Send code via SMS"
-      expect(Decidim::Authorization.where(user:).count).to eq(1)
       within_flash_messages do
         expect(page).to have_content(/Thanks! We have sent an SMS to your phone./)
       end
+      expect(Decidim::Authorization.where(user:).count).to eq(1)
       expect(page).to have_content("Introduce the verification code you received")
       click_on("Resend code")
       within_flash_messages do
