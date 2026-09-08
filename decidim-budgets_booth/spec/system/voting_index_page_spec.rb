@@ -343,7 +343,7 @@ describe "VotingIndexPage" do
 
       it "renders the info" do
         within "#budget-confirm" do
-          expect(page).to have_content("These are the votable proposals you have chosen to be part of the budget.")
+          expect(page).to have_content("These are the votable proposals you have chosen to the budget.")
           expect(page).to have_css("strong", text: "€25,000", count: 1)
           expect(page).to have_button("Confirm")
           expect(page).to have_button("Cancel")

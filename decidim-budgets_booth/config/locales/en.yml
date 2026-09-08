@@ -51,7 +51,7 @@ en:
         modal:
           assigned: 'Assigned: '
           close: Close window
-          description: These are the votable proposals you have chosen to be part of the budget.
+          description: These are the votable proposals you have chosen to the budget.
           ok: OK
           title: Your vote in %{budget_title}
           total_budget: 'Total budget: '
@@ -68,7 +68,7 @@ en:
         budget_confirm:
           cancel: Cancel
           confirm: Confirm vote
-          description: These are the votable proposals you have chosen to be part of the budget.
+          description: These are the votable proposals you have chosen to the budget.
           is_this_correct: Is this correct?
           title: Confirm your vote
         budget_summary:
@@ -153,7 +153,7 @@ en:
         selected_projects_modal:
           assigned: "Budget left: "
           choices: Your selection for the vote
-          choices_remaining: "Valintoja jäljellä: "
+          choices_remaining: "Choices left: "
           current_choices: You have chosen the following votable proposals for your vote.
           continue: Continue voting
           no_selection: You have not yet chosen any votable proposals.
