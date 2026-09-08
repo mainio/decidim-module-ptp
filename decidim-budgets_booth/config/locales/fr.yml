@@ -6,76 +6,133 @@ fr:
         budgets:
           edit:
             images: Images
+        imports:
+          help:
+            paper_orders_count: "Le document d'importation doit contenir les colonnes suivantes : 'project_id' (avec l'id du projet), 'project_title' (avec le titre du projet) et 'number_of_votes' (avec le nombre de nouveaux votes pour le projet à importer)."
+          label:
+            paper_orders_count: Importer le nombre de votes papier
+          resources:
+            paper_orders_count:
+              one: Projet
+              other: Projets
+          title:
+            paper_orders_count: Importer des votes à partir de bulletins papier
       budget_list_item:
-        current_phase: 'Current phase: %{phase}'
-        more_info: More info
-        show_my_vote: Show my vote
-        take_part: Take part
+        current_phase: 'Phase actuelle : %{phase}'
+        more_info: Plus d'informations
+        show_my_vote: Afficher mon vote
+        take_part: Participer
       budgets:
         actions:
-          cancel_voting: Are you sure you want to exit the voting booth?
-          cancel_zip_code: Are you sure you want to exit?
+          cancel_voting: Êtes-vous sûr de vouloir quitter la cabine de vote ?
+          cancel_zip_code: Êtes-vous sûr de vouloir quitter ?
         index:
-          cancel_voting: Cancel voting
-          login_before_access: You need to login first.
-          not_allowed: You are not allowed to perform this action.
+          cancel_voting: Annuler le vote
+          login_before_access: Veuillez d'abord vous identifier.
+          not_allowed: Vous n'êtes pas autorisé à effectuer cette opération.
+          voted: Vous avez déjà voté sur cette zone.
       budgets_header:
-        based_on_zip_code: Based on your ZIP code - %{zip_code}.
-        change_it_here: Change it here
-        not_right_one: Not the right one? %{link}
-        title: 'Ballots available to you'
+        based_on_zip_code: Basé sur votre code postal - %{zip_code}.
+        change_it_here: Modifiez-le ici
+        not_right_one: Pas le bon ? %{link}
+        title: 'Emplacements disponibles pour vous'
       budgets_list:
-        no_budgets_found: No budgets were found based on your ZIP code. You can change your ZIP code if it's not correct, or you can search again later.
+        no_budgets_found: Aucun budget n'a été trouvé en fonction de votre code ZIP. Vous pouvez changer votre code ZIP si ce n'est pas correct, ou vous pouvez rechercher à nouveau plus tard.
         vote: Afficher
+        voting_possible: "Vous pouvez encore voter sur ces zones :"
+        voted: "Vous avez déjà voté sur ces zones :"
       orders:
+        status:
+          continue_voting: Continuer à voter sur d'autres zones
+          title: "Vous avez voté avec succès sur %{budget}"
+          return: Retour à la liste des zones
+          votes_info: Votre vote pour %{budget_name} a été enregistré. Vous pouvez continuer à voter sur d'autres zones ou vous déconnecter.
         modal:
-          assigned: 'Assigned: '
-          close: Close window
-          description: These are the projects you have chosen to be part of the budget.
+          assigned: 'Affecté : '
+          close: Fermer la fenêtre
+          description: Voici les projets que vous avez choisis pour le budget.
           ok: OK
-          title: Your vote in %{budget_title}
-          total_budget: 'Total budget: '
-      project_list_item:
-        ordered_item: This item is added to the your vote.
-        read_more: En savoir plus
+          title: Votre vote dans %{budget_title}
+          total_budget: 'Budget total : '
+        status_summary_modal:
+          title: Propositions choisies
+          votes: Vos votes sur cette zone
+          close: Fermer
+      project_l:
+        explore: Explorez
       project_vote_button:
         add_to_vote: Ajouter au vote
         remove_from_vote: Supprimer du vote
       projects:
         budget_confirm:
-          is_this_correct: Is this correct?
+          cancel: Annuler
+          confirm: Confirmer le vote
+          description: Voici les propositions que vous avez choisies pour faire partie du budget.
+          is_this_correct: Est-ce correct ?
+          title: Confirmer votre vote
         budget_summary:
-          back_to_budgets: Show all budgets
+          are_you_sure: Êtes-vous sûr de vouloir supprimer votre vote ?
+          back_to_budgets: Afficher toutes les zones
+          cancel_order: supprimer votre vote
           cancel_voting: Annuler le vote
           choose_budget: Vous décidez du budget
-          choose_description: Choisissez les projets que vous aimez et votez à la fin.
+          choose_description: Choisissez les propositions que vous aimez et votez par la suite.
+          total_budget: 'Vous pouvez allouer %{budget}. Choisissez d''abord les propositions pour voter dans la liste ci-dessous. Après avoir fait vos sélections, appuyez sur le bouton "Je suis prêt".'
+          total_projects: "Total des propositions : "
         cancel_voting_modal:
           continue: Continuer le vote
           description: Si vous annulez votre vote, cela ne sera pas pris en compte pour le résultat final. Afin de faire compter votre vote, veuillez revenir en arrière pour le finaliser et le confirmer.
           exit: Je ne veux pas voter pour le moment
           label: Quitter le vote
           title: Êtes-vous certain de vouloir annuler votre vote ?
+        count:
+          projects_count: "%{count} propositions"
+        filters:
+          status_values:
+            selected: Sélectionné pour l'implémentation
+            not_selected: Non sélectionné pour l'implémentation
         index:
-          back_to_budgets: Retour aux budgets
+          back_to_budgets: Afficher toutes les zones
         order_progress:
-          ready: I am ready
+          assigned: "Affecté : "
+          choices: "Choix restants : "
+          ready: Confirmer mon vote
+          show_choices: Afficher les choix
           total_budget: 'Budget total: '
+          total_projects: "Total des propositions : "
+          view: Afficher
           vote: Vote
+        order_selected_projects:
+          assigned: "Budget restant : "
+          choices: "Choix restants : "
+          view: Afficher
+          remove: Supprimer la sélection
+          show_choices: Afficher les choix
+        order_progress_summary_content:
+          total_budget: Budget total
         pre_voting_budget_summary:
           are_you_sure: Êtes-vous sûr de vouloir annuler votre vote ?
+          browse: Consultez les propositions
           cancel_order: Annuler le vote
           pre_vote:
-            casted_description: Vous avez précédemment voté dans ce budget. Si vous voulez revoir ce que vous avez voté, cliquez sur le bouton "Revoir votre vote". Vous pouvez aussi %{cancel_link} et recommencer.
-            casted_title: Thank you for your voting
+            casted_description: Vous avez précédemment voté dans ce budget. Si vous voulez voir ce que vous avez voté, cliquez sur le bouton "Revoir votre vote". Vous pouvez aussi %{cancel_link} et recommencer.
+            casted_title: Merci pour votre vote
             finish_description: Vous avez déjà commencé à voter dans ce budget. Voulez-vous terminer votre vote ?
             finish_voting: Terminer le vote
             result_voted: Revoir votre vote
-            start_description: Vous pouvez naviguer les projets pour vous familiariser avec eux. Pour commencer à voter, cliquez sur le bouton "Commencer à voter".
+            pre_vote_start_description: Vous pouvez parcourir les propositions pour en savoir plus à leur sujet.
+            start_description: Vous pouvez naviguer vers les projets pour vous familiariser avec eux. Pour commencer à voter, cliquez sur le bouton "Commencer à voter".
             start_voting: Commencer à voter
             title: Bienvenue au vote!
-          ready: I am ready
+          ready: Confirmer mon vote
+          total_budget: "Budget total pour la zone : %{amount}"
+          voting_finished: Le vote est terminé !
         project:
+          selected: Sélectionné pour l'implémentation
           you_voted: Vous avez voté pour
+        project_budget_button:
+          add: Choisir
+          added: Supprimer la sélection
         project_modal:
           budget_amount: 'Budget : '
           cancel: Annuler
@@ -84,57 +141,76 @@ fr:
         show:
           pre_vote:
             continue_voting: Continuer le vote
-            introduction: Vous voulez voter pour ce projet ?
-            start_voting: Commencer à voter
+            introduction: Vous voulez voter pour cette proposition ?
+            start_voting: Vos votes sur cette zone
+          view_all_projects: Consultez les propositions
+        selected_projects_modal:
+          assigned: "Budget restant : "
+          choices: Votre sélection pour le vote
+          choices_remaining: "Choix restants : "
+          current_choices: Vous avez choisi les propositions suivantes pour votre vote.
+          continue: Continuer le vote
+          no_selection: Vous n'avez pas encore choisi de proposition.
+          remove: Supprimer la sélection
       user_data:
         error:
-          only_letters: Only letters and digits are allowed.
-          unknown: There was an error. Please try again.
-          zip_code_empty: ZIP code format is not correct.
-          zip_code_included: The ZIP code you provided is not part of the areas that are eligible for voting. Make sure you have entered the correct ZIP code and try again.
+          only_letters: Seules les lettres et les chiffres sont autorisés.
+          unknown: Une erreur est survenue. Veuillez réessayer.
+          zip_code_empty: Le format du code postal est incorrect.
+          zip_code_included: Le code postal que vous avez fourni ne fait pas partie des zones qui sont admissibles au vote. Assurez-vous que vous avez entré le code postal correct et réessayez.
         new:
-          affirm_statements: By checking this box, I affirm that these stamenets are true, and that I  meet the voting eligibility requirements.
-          cancel: Cancel
-          change_zip_code_after_vote: You can not change your ZIP code after started voting. Delete all of your votes first.
-          description: Please provide your ZIP code to find your Participatory Budgeting ballots.
+          affirm_statements: En cochant cette case, j'affirme que ces points sont vrais et que je respecte les critères d'éligibilité au vote.
+          cancel: Annuler
+          change_zip_code_after_vote: Vous ne pouvez pas modifier votre code postal après avoir commencé à voter. Supprimez tous vos votes d'abord.
+          description: Veuillez fournir votre code ZIP pour trouver vos bulletins budgétaires participatifs.
           inputs:
-            one: First digit
-            other: digit %{count}
-          must_be_accepted: must be accepted
-          submit: Find my ballots
-          title: ZIP code
-          voting_ended: You can not set your ZIP code when the voting is not open.
-          welcome: Welcome to the <br><strong>%{organization} Participatory Budgeting!</strong>
-        success: You have successfully registered your ZIP code.
+            one: Premier chiffre
+            other: chiffre %{count}
+          must_be_accepted: doit être accepté(e)
+          submit: Trouver mes bulletins
+          title: Code postal
+          voting_ended: Vous ne pouvez pas définir votre code ZIP tant que le vote n'est pas ouvert.
+          welcome: Bienvenue au <br><strong>Budget Participatif de %{organization}!</strong>
+        success: Votre code postal a été enregistré avec succès.
       voting:
         general:
           not_open_warning: Le vote n'est pas autorisé.
         index:
           sign_in_first: Vous devez vous connecter pour commencer à voter.
         vote_completed_modal:
-          close: Close
-          continue: Continue
-          title: You successfully completed your votes
+          close: Fermer
+          continue: Continuer
+          title: Vous avez complété vos votes avec succès
         voted_summary_modal:
           continue: Continuer
           label: Fermer
-          list_description: Voici les projets que vous avez sélectionnés.
+          list_description: Voici les propositions que vous avez choisies.
           title: Votre vote
     components:
       budgets:
         settings:
           global:
-            maximum_budgets_to_vote_on: Maximum number of budgets that user can vote on (default is 0, which means user can vote on all available budgets)
-            show_full_description_on_listing_page: Show full project descriptions on the listing page and disable the details popup
-            vote_cancel_url: URL to redirect user when canceling voting (defaullt to the root path)
-            vote_completed_content: Popup text after voting in all available budgets
-            vote_success_content: Popup text after each vote
-            vote_success_url: URL to redirect user after voting on all available budgets (default is budgets list)
-            voting_terms: Terms and conditions to be shown when user wants to enter their ZIP code
+            maximum_budgets_to_vote_on: Nombre maximum de budgets sur lesquels l'utilisateur peut voter (0 par défaut, ce qui signifie que l'utilisateur peut voter sur tous les budgets disponibles)
+            show_full_description_on_listing_page: Afficher les descriptions complètes des propositions sur la page de liste et désactiver la fenêtre de détails
+            vote_cancel_url: URL pour rediriger l'utilisateur lors de l'annulation du vote (par défaut vers le chemin principal)
+            vote_completed_content: Texte de popup après avoir voté dans tous les budgets disponibles
+            vote_success_content: Texte popup après chaque vote
+            vote_success_url: URL pour rediriger l'utilisateur après le vote sur tous les budgets disponibles (liste des budgets par défaut)
+            voting_terms: Conditions générales à afficher lorsque l'utilisateur souhaite entrer son code postal
             workflow_choices:
-              zip_code: 'Vote based on ZIP code: allows participants to vote on budgets matching their entered ZIP code.'
+              zip_code: 'Vote basé sur le code postal : permet aux participants de voter sur les budgets correspondant à leur code postal.'
+    shared:
+      filters:
+        search: Mot-clé
+        search_bar: Rechercher
+        search_placeholder: Écrire un mot-clé
   layouts:
     decidim:
+      shared:
+        layout_center:
+          selected_projects: Afficher les choix
+          view: Afficher
+          log_out: Déconnexion
       budgets:
         voting_notification:
           notification: Vous êtes dans la cabine de vote.
