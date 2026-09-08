@@ -66,11 +66,15 @@ en:
         remove_from_vote: Remove from vote
       projects:
         budget_confirm:
+          cancel: Cancel
+          confirm: Confirm vote
           description: These are the votable proposals you have chosen to be part of the budget.
           is_this_correct: Is this correct?
+          title: Confirm your vote
         budget_summary:
           are_you_sure: Are you sure you want to delete your vote?
           back_to_budgets: Show all areas
+          cancel_order: Delete your vote
           cancel_voting: Cancel voting
           choose_budget: You decide the %{budget_title} budget
           choose_description: Choose the votable proposals you like and cast your vote after that.
@@ -85,6 +89,10 @@ en:
           title: Are you sure you don't want to cast your vote?
         count:
           projects_count: "%{count} votable proposals"
+        filters:
+          status_values:
+            selected: Selected for implementation
+            not_selected: Not selected for implementation
         index:
           back_to_budgets: Show all areas
         order_progress:
@@ -117,6 +125,7 @@ en:
               you like to finish your vote?
             finish_voting: Finish voting
             result_voted: Review your vote
+            pre_vote_start_description: You can browse the votable proposals to learn more about them.
             start_description: You can browse the votable proposals to learn more about
               them. In order to start voting, click the "Start voting" button.
             start_voting: Start voting
@@ -125,6 +134,7 @@ en:
           total_budget: "Total budget for the area: %{amount}"
           voting_finished: The voting has finished!
         project:
+          selected: Selected for implementation
           you_voted: You voted for this
         project_budget_button:
           add: Choose
