@@ -50,7 +50,7 @@ fr:
         modal:
           assigned: 'Affecté : '
           close: Fermer la fenêtre
-          description: Voici les projets que vous avez choisis pour le budget.
+          description: These are the votable proposals you have chosen to the budget.
           ok: OK
           title: Votre vote dans %{budget_title}
           total_budget: 'Budget total : '
@@ -67,7 +67,7 @@ fr:
         budget_confirm:
           cancel: Annuler
           confirm: Confirmer le vote
-          description: Voici les propositions que vous avez choisies pour faire partie du budget.
+          description: These are the votable proposals you have chosen to the budget.
           is_this_correct: Est-ce correct ?
           title: Confirmer votre vote
         budget_summary:
@@ -147,7 +147,7 @@ fr:
         selected_projects_modal:
           assigned: "Budget restant : "
           choices: Votre sélection pour le vote
-          choices_remaining: "Choix restants : "
+          choices_remaining: "Choices left: "
           current_choices: Vous avez choisi les propositions suivantes pour votre vote.
           continue: Continuer le vote
           no_selection: Vous n'avez pas encore choisi de proposition.
