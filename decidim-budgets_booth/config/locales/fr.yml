@@ -112,7 +112,7 @@ fr:
             finish_description: You have already started voting on this area. Would you like to finish your vote?
             finish_voting: Terminer le vote
             result_voted: Revoir votre vote
-            start_description: You can browse the votable proposals learn more about them. In order to start voting, click the "Start voting" button.
+            start_description: You can browse the votable proposals to learn more about them. In order to start voting, click the "Start voting" button.
             start_voting: Commencer à voter
             title: Bienvenue au vote!
           ready: Confirmer mon vote
